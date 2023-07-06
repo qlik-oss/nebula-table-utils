@@ -1,0 +1,17 @@
+.cache/
+.yarn/
+dist/
+core/esm/
+.DS_Store
+*.html
+sn-pivot-table-ext
+coverage
+node_modules
+mashup-example
+yarn.lock
+test-report
+api-specifications
+CHANGELOG.md
+src/locale/all.json
+test/rendering/artifacts
+.vscode/
