@@ -1,0 +1,6 @@
+{
+  "extends": "./tsconfig.base.json",
+  "files": ["types.d.ts"],
+  "include": ["src"],
+  "exclude": ["node_modules", "dist", "src/__storybook__", "src/**/__tests__"]
+}

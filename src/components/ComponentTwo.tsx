@@ -6,7 +6,7 @@ const ComponentTwo = () => {
   const handleClick = () => setState(state + 10);
   return (
     <div>
-      Hi there from #2nd test component --- <button onClick={handleClick}>STATE:</button> {state}
+      Component #02 --- <button onClick={handleClick}>STATE:</button> {state}
       <hr />
       <Shared />
     </div>
