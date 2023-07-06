@@ -1,0 +1,12 @@
+*.log
+.cache
+.DS_Store
+.idea
+.npmrc
+
+node_modules/
+dist/
+coverage/
+test/rendering/artifacts
+test/rendering/test-report
+test/rendering/state.json
