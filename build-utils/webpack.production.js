@@ -8,12 +8,16 @@ module.exports = () => ({
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: '[name].js',
-    chunkFilename: '[name]/index.chunk.js',
+    chunkFilename: '[name].chunk.js',
     publicPath: '',
     library: {
-      type: 'commonjs',
+      type: 'umd',
     },
   },
+
+  // experiments: {
+  //   outputModule: true,
+  // },
 
   externals: {
     react: 'react',
