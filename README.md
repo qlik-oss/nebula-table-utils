@@ -3,17 +3,20 @@
 This repo will hold shared Components, hooks and util functions between sn-table and sn-pivot-table.
 
 
-
 PRESERVE REACT IMPORTS ON MODULES
 https://stackoverflow.com/questions/72644994/prettier-removes-react-import-on-pressing-save-button-ctrl-s-how-to-fix
 
 
 
-SO FAR WORKING SOLUTION 
 
-linking sn-pivot table and sn-table react -> to use the react instance from table-common since making sure what ever project using react (and creating it's own instance) points to one single instance that comes from source of shared repo
+# Local development
+1. Make sure you run `chmod +x on ./build-copy.sh` first
+2. Create a `.env.local` file in root of your project
+3. Add an env variable called `PVT_NODE_MODULES_DIR` assign it to the `node_modules` folder of pivot table in your local machine, relative to the root directory of this repository.
+```
+PVT_NODE_MODULES_DIR="../PIVOT_TABLE/node_modules"
+```
 
-in this case shared repo is table-common So for local development what ever project using table-common should point to that react instance!
+4. now if you run `yarn build:watch`, whatever change you make into this directory will be copied to the node_modules of your local pivot table project. 
 
-### why not table-repo's react points to host projects react instance? 
-because in that case if you want to test samoultaniously with both repos (sn-table + sn-pivot-table) it will fail to manage react instances
+**NOTE:** Pls keep in mind that this is a temporary solution, we will fix this as soon as we can
