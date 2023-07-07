@@ -3,8 +3,11 @@
 
 yarn build:prod
 
-rm -rf ../030__Qlik_oss__sn-pivot-table/node_modules/@qlik-oss/table-common
 
-mkdir ../030__Qlik_oss__sn-pivot-table/node_modules/@qlik-oss/table-common
+export $(grep -v '^#' .env.local | xargs)
 
-cp -r ./dist/ ../030__Qlik_oss__sn-pivot-table/node_modules/@qlik-oss/table-common
+PKG_PLACEMENT_DIR="@qlik-oss/nebula-table-utils";
+
+rm -rf "${PVT_NODE_MODULES_DIR}/${PKG_PLACEMENT_DIR}";
+mkdir "${PVT_NODE_MODULES_DIR}/${PKG_PLACEMENT_DIR}";
+cp -r ./dist/ "${PVT_NODE_MODULES_DIR}/${PKG_PLACEMENT_DIR}";
