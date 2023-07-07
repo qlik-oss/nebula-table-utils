@@ -1,8 +1,10 @@
 {
   "extends": "@qlik/tsconfig/react.json",
   "compilerOptions": {
-    "noEmit": false,
     "jsx": "react",  // https://stackoverflow.com/questions/72644994/prettier-removes-react-import-on-pressing-save-button-ctrl-s-how-to-fix
+    "noEmit": false,
+    "declaration": true,
+    "outDir": "./dist"
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
   "exclude": ["node_modules", ".github/"]
