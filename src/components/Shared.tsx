@@ -1,5 +1,7 @@
 import React from 'react';
 
-export const Shared = () => {
+const Shared = () => {
   return <div>This is shared</div>;
 };
+
+export default Shared;

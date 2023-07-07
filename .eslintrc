@@ -75,6 +75,12 @@
         "jest/prefer-to-have-length": 1,
         "jest/valid-expect": 2
       }
+    },
+    {
+      "files": ["./src/index.ts"],
+      "rules": {
+        "import/prefer-default-export": 0
+      }
     }
   ]
 }
