@@ -24,6 +24,7 @@
     "clear": "rimraf ./dist/*",
     "build:dev": "npm run clear & webpack-dev-server -- --mode development --progress --hot",
     "build:prod": "rollup -c",
+    "build:prod:copy": "./build-copy.sh",
     "build:prod:analyze": "npm run clear & webpack -- --mode production --progress --env presets.analyze",
     "prettier": "prettier --write './src/**/*.js'",
     "test": "jest",
@@ -64,7 +65,7 @@
   },
   "packageManager": "yarn@1.22.19",
   "peerDependencies": {
-    "react": "^18.2.0",
-    "@nebula.js/stardust": "^4.2.3"
+    "@nebula.js/stardust": "^4.2.3",
+    "react": "^18.2.0"
   }
 }

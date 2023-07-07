@@ -6,6 +6,7 @@ const ComponentTwo = () => {
   const handleClick = () => setState(state + 10);
   return (
     <div>
+      <h2>Comp #02 with change</h2>
       Component #02 --- <button onClick={handleClick}>STATE:</button> {state}
       <hr />
       <Shared />
