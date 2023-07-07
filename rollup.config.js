@@ -9,15 +9,22 @@ import external from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
 import sourcemaps from 'rollup-plugin-sourcemaps';
 import { swc } from 'rollup-plugin-swc3';
+import { visualizer } from 'rollup-plugin-visualizer';
 import pkg from './package.json' assert { type: 'json' };
 
 const EXCLUDED_FILES = [/node_modules/, 'src/**/__tests__', 'src/test'];
 const ENABLE_SOURCE_MAP = process.env.BUILD_SOURCE_MAPS === 'true' || process.env.NODE_ENV === 'development';
 
 const baseConfig = defineConfig({
-  external: ['react', 'react-dom'],
+  external: ['react', 'react-dom', '@nebula.js/stardust'],
   plugins: [
     ...(ENABLE_SOURCE_MAP ? [sourcemaps()] : []),
+    visualizer({
+      filename: './build-report/report.html',
+      open: false,
+      gzipSize: true,
+      brotliSize: true,
+    }),
     postcss(),
     json(),
     /**
