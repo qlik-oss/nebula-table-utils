@@ -1,6 +1,5 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-// const CompressionWebpackPlugin = require('compression-webpack-plugin');
 // const TerserWebpackPlugin = require('terser-webpack-plugin');
 
 module.exports = () => ({
@@ -26,7 +25,6 @@ module.exports = () => ({
   optimization: {
     minimize: true,
     minimizer: [
-      // TODO:
       // new TerserWebpackPlugin(),
     ],
     splitChunks: {
