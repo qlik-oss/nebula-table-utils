@@ -4,20 +4,20 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // const TerserWebpackPlugin = require('terser-webpack-plugin');
 
 module.exports = () => ({
-  devtool: 'source-map',
+  // devtool: 'source-map',
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: '[name].js',
     chunkFilename: '[name].chunk.js',
     publicPath: '',
     library: {
-      type: 'umd',
+      type: 'module',
     },
   },
 
-  // experiments: {
-  //   outputModule: true,
-  // },
+  experiments: {
+    outputModule: true,
+  },
 
   externals: {
     react: 'react',
