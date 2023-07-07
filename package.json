@@ -24,7 +24,7 @@
     "clear": "rimraf ./dist/*",
     "build:dev": "npm run clear & webpack-dev-server -- --mode development --progress --hot",
     "build:prod": "rollup -c",
-    "build:watch": "./build-copy.sh",
+    "build:watch": "nodemon --exec ./build-copy.sh",
     "build:prod:analyze": "npm run clear & webpack -- --mode production --progress --env presets.analyze",
     "prettier": "prettier --write './src/**/*.js'",
     "test": "jest",
