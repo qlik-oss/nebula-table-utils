@@ -1,36 +1,35 @@
 const glob = require('glob');
 const path = require('path');
 
+const getAssetkey = (name) => {
+  // preserve the assetName "${path.basename(previousValue, path.extname(previousValue))}"
+  let assetName = path.basename(name, path.extname(name));
+  // but add the folder path name before it -> so get the folder name first
+  let folderPath = path.dirname(name).replace('./src/', '');
+  let key = `${folderPath}/${assetName}`;
+
+  // if it is root file of entire pkg, replace it with index
+  // since it does not have any folder path
+  if (key === './src/index') key = 'index';
+
+  return key;
+};
+
 function extractEntryFiles() {
-  return glob.sync('./src/**/*.{ts,tsx}').reduce((previousValue, currentValue, currentIndex, array) => {
-    if (typeof previousValue === 'string') {
-      // TODO:
-      // preserve the key "${path.basename(previousValue, path.extname(previousValue))}"
-      // but add the folder name before it -> so get the folder name first
-      let prevAssetName = path.basename(previousValue, path.extname(previousValue));
-      let prevKeyFolderName = path.dirname(previousValue).replace('./src/', '');
-      let prevKey = `${prevKeyFolderName}/${prevAssetName}`;
-
-      let currAssetName = path.basename(currentValue, path.extname(currentValue));
-      let currKeyFolderName = path.dirname(currentValue).replace('./src/', '');
-      let currKey = `${currKeyFolderName}/${currAssetName}`;
-
-      if (prevKey === './src/index') prevKey = 'index';
-      if (currKey === './src/index') currKey = 'index';
+  return glob.sync('./src/**/*.{ts,tsx}').reduce((prevVal, currVal) => {
+    if (typeof prevVal === 'string') {
+      let prevKey = getAssetkey(prevVal);
+      let currKey = getAssetkey(currVal);
 
       return {
-        [prevKey]: previousValue,
-        [currKey]: currentValue,
+        [prevKey]: prevVal,
+        [currKey]: currVal,
       };
     } else {
-      let currAssetName = path.basename(currentValue, path.extname(currentValue));
-      let currKeyFolderName = path.dirname(currentValue).replace('./src/', '');
-      let currKey = `${currKeyFolderName}/${currAssetName}`;
-
-      if (currKey === './src/index') currKey = 'index';
+      let currKey = getAssetkey(currVal);
       return {
-        ...previousValue,
-        [currKey]: currentValue,
+        ...prevVal,
+        [currKey]: currVal,
       };
     }
   });

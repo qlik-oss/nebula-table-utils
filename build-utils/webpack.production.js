@@ -4,7 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // const TerserWebpackPlugin = require('terser-webpack-plugin');
 
 module.exports = () => ({
-  // devtool: 'source-map',
+  devtool: 'hidden-source-map',
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: '[name].js',
