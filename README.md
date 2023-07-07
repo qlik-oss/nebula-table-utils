@@ -1,4 +1,4 @@
-# Table Common
+# Nebula Table utils
 
 This repo will hold shared Components, hooks and util functions between sn-table and sn-pivot-table.
 
