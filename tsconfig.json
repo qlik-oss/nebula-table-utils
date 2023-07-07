@@ -1,9 +1,7 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    // additional options
-    // "noEmit": false,
-    // "jsx": "react" // becase we want to preserve react imports in modules
+    // more rules
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
   "exclude": ["node_modules", ".github/"]
