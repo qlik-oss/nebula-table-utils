@@ -32,7 +32,7 @@ jobs:
           cache: yarn
 
       - name: Read pkg.json
-        uses: actions/github-scripts@v6
+        uses: actions/github-script@v6
         id: package
         with:
           script: |
