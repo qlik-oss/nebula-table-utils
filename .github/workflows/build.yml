@@ -75,11 +75,8 @@ jobs:
           fi
 
       - name: Run unit test
-        uses: paambaati/codeclimate-action@v4.0.0
         if: contains(fromJSON(steps.package.outputs.result), 'test:unit')
-        with:
-          # coverageLocations: ${{github.workspace}}/coverage/lcov.info:lcov
-          coverageCommand: yarn test:coverage --ci --reporters="github-actions" --reporters="summary"
+        run: yarn test:coverage --ci --reporters="github-actions" --reporters="summary"
 
       # TODO:
       # make sure to report the bundle analyzer output
