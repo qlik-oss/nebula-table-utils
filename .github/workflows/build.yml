@@ -78,7 +78,7 @@ jobs:
         uses: paambaati/codeclimate-action@v4.0.0
         if: contains(fromJSON(steps.package.outputs.result), 'test:unit')
         with:
-          coverageLocations: ${{github.workspace}}/coverage/lcov.info:lcov
+          # coverageLocations: ${{github.workspace}}/coverage/lcov.info:lcov
           coverageCommand: yarn test:coverage --ci --reporters="github-actions" --reporters="summary"
 
       # TODO:
