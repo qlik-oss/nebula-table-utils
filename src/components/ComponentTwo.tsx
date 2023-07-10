@@ -18,7 +18,7 @@ const ComponentTwo = (args: IComp2Props) => {
       <span data-testid="state-val">{state}</span>
       <hr />
       <Shared />
-      <h1>Added just to trigger ci</h1>
+      <h1>Added just to trigger ci #2</h1>
     </div>
   );
 };
