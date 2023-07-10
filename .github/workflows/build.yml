@@ -1,0 +1,78 @@
+name: "Build"
+
+on:
+  push:
+    branches:
+      - "main"
+      - "release/*"
+  pull_request:
+    branches:
+      - 'main'
+      - 'release/*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      checks: write
+      pull-requests: write
+      contents: write
+      
+    steps:
+      - name: Setup
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: yarn
+        
+      - name: Read pkg.json
+        uses: actions/github-scripts@v6
+        id: package
+        with: 
+          script: |
+            try {
+              const fs = require('fs')
+              const jsonString = fs.readFileSync('./package.json')
+              const pkg = JSON.parse(jsonString)
+              return Object.keys(pkg.scripts)
+            } catch(err) {
+              core.error("Error while reading or parsing the JSON")
+              core.setFailed(err)
+            }
+            
+      - name: Lint
+        if: contains(fromJSON(steps.package.outputs.result), 'lint')
+        run: yarn lint
+        
+      - name: Prettier Format
+        if: contains(fromJSON(steps.package.outputs.result), 'format:check')
+        run: yarn format:check
+        
+      - name: Type check
+        if: contains(fromJSON(steps.package.outputs.result), 'types:check')
+        run: yarn types:check
+        
+      - name: API Spec
+        if: contains(fromJSON(steps.package.outputs.result), 'spec')
+        run: |
+          yarn spec
+          # Fail if the spec command changed any files
+          if [[ -z "$(git status --porcelain)" ]];
+          then
+            exit 0
+          else
+            exit 1
+          fi
+      
+      - name: Run unit tests
+        if: contains(fromJSON(steps.package.outputs.result), 'test:unit')
+        with: 
+          coverageLocations: ${{github.workspace}}/coverage/lcov.info:lcov
+          coverageCommand: yarn test:coverage --ci --reporters="github-actions" --reporters="summary"
+      
+      # TODO: 
+      # make sure to report the bundle analyzer output
+      - name: Build
+        if: contains(fromJSON(steps.package.outputs.result), 'build:prod')
+        run: yarn build:prod
