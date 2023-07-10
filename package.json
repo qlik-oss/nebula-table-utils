@@ -23,12 +23,13 @@
     "build:prod": "npm run clear & webpack -- --mode production --progress",
     "build:watch": "nodemon --exec ./build-utils/build-copy.sh",
     "build:prod:analyze": "npm run clear & webpack -- --mode production --progress --env presets.analyze",
-    "prettier": "prettier --write './src/**/*.js'",
-    "test": "jest",
+    "lint": "eslint src/*",
+    "format:check": "prettier --check '**' --ignore-unknown",
+    "format:write": "prettier --write '**' --ignore-unknown",
+    "types:check": "tsc --noEmit",
+    "test:unit": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "lint": "eslint src/*",
-    "type:check": "tsc --noEmit",
     "prepare": "husky install"
   },
   "devDependencies": {
