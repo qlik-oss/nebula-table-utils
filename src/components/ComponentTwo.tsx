@@ -11,11 +11,11 @@ const ComponentTwo = (args: IComp2Props) => {
   const handleClick = () => setState(state + 10);
   return (
     <div>
-      Hi there from #2nd test component ---{' '}
+      Hi there from #2nd test component ---
       <button onClick={handleClick} type="button">
-        STATE:
-      </button>{' '}
-      {state}
+        add:
+      </button>
+      <span data-testid="state-val">{state}</span>
       <hr />
       <Shared />
     </div>

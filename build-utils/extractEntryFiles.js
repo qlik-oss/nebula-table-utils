@@ -16,7 +16,7 @@ const getAssetkey = (name) => {
 };
 
 function extractEntryFiles() {
-  return glob.sync('./src/**/*.{ts,tsx}').reduce((prevVal, currVal) => {
+  return glob.sync('./src/**/*.{ts,tsx}', { ignore: './src/**/*.{spec,test}.{ts,tsx}' }).reduce((prevVal, currVal) => {
     if (typeof prevVal === 'string') {
       let prevKey = getAssetkey(prevVal);
       let currKey = getAssetkey(currVal);
