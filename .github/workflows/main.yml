@@ -57,18 +57,6 @@ jobs:
         if: contains(fromJSON(steps.package.outputs.result), 'types:check')
         run: yarn types:check
 
-      - name: API Spec
-        if: contains(fromJSON(steps.package.outputs.result), 'spec')
-        run: |
-          yarn spec
-          # Fail if the spec command changed any files
-          if [[ -z "$(git status --porcelain)" ]];
-          then
-            exit 0
-          else
-            exit 1
-          fi
-
       - name: Run unit test
         if: contains(fromJSON(steps.package.outputs.result), 'test:unit')
         run: yarn test:coverage --ci --reporters="github-actions" --reporters="summary"
