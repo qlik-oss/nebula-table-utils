@@ -1,5 +1,5 @@
 const UtilOne = () => {
-  let str = 'UtilOne';
+  const str = 'UtilOne';
   console.log(str);
   return str;
 };

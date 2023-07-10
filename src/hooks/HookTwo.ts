@@ -1,6 +1,6 @@
 const HookTwo = () => {
   console.log('HookTwo');
-  return 'HookTwo'
+  return 'HookTwo';
 };
 
 export default HookTwo;
