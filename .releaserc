@@ -1,5 +1,5 @@
 {
-  "branches": ["main"],
+  "branche": "main",
   "repositoryUrl": "https://github.com/qlik-oss/nebula-table-utils.git",
   "plugins": [
     "@semantic-release/commit-analyzer",
