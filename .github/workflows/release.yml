@@ -14,6 +14,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Install dependencies
+        shell: bash
+        run: yarn install --immutable
+
+      # TODO:
+      # make sure to report the bundle analyzer output
+      - name: Build
+        run: yarn build:prod
+
       - name: Semantic Release
         id: semantic
         uses: cycjimmy/semantic-release-action@v3
