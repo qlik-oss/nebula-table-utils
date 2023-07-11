@@ -26,35 +26,17 @@ jobs:
           node-version: 18
           cache: yarn
 
-      - name: Read pkg.json
-        uses: actions/github-script@v6
-        id: package
-        with:
-          script: |
-            try {
-              const fs = require('fs')
-              const jsonString = fs.readFileSync('./package.json')
-              const pkg = JSON.parse(jsonString)
-              return Object.keys(pkg.scripts)
-            } catch(err) {
-              core.error("Error while reading or parsing the JSON")
-              core.setFailed(err)
-            }
-
       - name: Install dependencies
         shell: bash
         run: yarn install --immutable
 
-      - name: Lint
-        if: contains(fromJSON(steps.package.outputs.result), 'lint')
-        run: yarn lint
-
       - name: Prettier Format
-        if: contains(fromJSON(steps.package.outputs.result), 'format:check')
         run: yarn format:check
 
+      - name: Lint
+        run: yarn lint
+
       - name: Type check
-        if: contains(fromJSON(steps.package.outputs.result), 'types:check')
         run: yarn types:check
 
   unit-test:
@@ -72,27 +54,11 @@ jobs:
           node-version: 18
           cache: yarn
 
-      - name: Read pkg.json
-        uses: actions/github-script@v6
-        id: package
-        with:
-          script: |
-            try {
-              const fs = require('fs')
-              const jsonString = fs.readFileSync('./package.json')
-              const pkg = JSON.parse(jsonString)
-              return Object.keys(pkg.scripts)
-            } catch(err) {
-              core.error("Error while reading or parsing the JSON")
-              core.setFailed(err)
-            }
-
       - name: Install dependencies
         shell: bash
         run: yarn install --immutable
 
       - name: Run unit test
-        if: contains(fromJSON(steps.package.outputs.result), 'test:unit')
         run: yarn test:coverage --ci --reporters="github-actions" --reporters="summary"
 
   build:
@@ -110,21 +76,6 @@ jobs:
           node-version: 18
           cache: yarn
 
-      - name: Read pkg.json
-        uses: actions/github-script@v6
-        id: package
-        with:
-          script: |
-            try {
-              const fs = require('fs')
-              const jsonString = fs.readFileSync('./package.json')
-              const pkg = JSON.parse(jsonString)
-              return Object.keys(pkg.scripts)
-            } catch(err) {
-              core.error("Error while reading or parsing the JSON")
-              core.setFailed(err)
-            }
-
       - name: Install dependencies
         shell: bash
         run: yarn install --immutable
@@ -132,5 +83,4 @@ jobs:
       # TODO:
       # make sure to report the bundle analyzer output
       - name: Build
-        if: contains(fromJSON(steps.package.outputs.result), 'build:prod')
         run: yarn build:prod
