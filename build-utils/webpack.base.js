@@ -21,7 +21,14 @@ module.exports = ({ mode }) => ({
       {
         test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
-        use: 'ts-loader',
+        use: [
+          {
+            loader: 'ts-loader',
+            options: {
+              configFile: 'tsconfig.build.json',
+            },
+          },
+        ],
       },
       {
         test: /\.(js|jsx)$/,
