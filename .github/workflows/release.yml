@@ -22,8 +22,12 @@ jobs:
         id: tokens
         with:
           script: |
-            console.log(">>>>> GITHUB_TOKEN": ${{ secrets.GITHUB_TOKEN }});
-            console.log(">>>>> NPM_TOKEN": ${{ secrets.NPM_TOKEN }});
+            try {
+              console.log(">>>>> GITHUB_TOKEN": ${{ secrets.GITHUB_TOKEN }});
+              console.log(">>>>> NPM_TOKEN": ${{ secrets.NPM_TOKEN }});
+            } catch (e) {
+              console.log("ERROR", {e})
+            }
 
     # - name: Semantic Release
     #   uses: cycjimmy/semantic-release-action@v3
