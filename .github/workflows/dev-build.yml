@@ -56,7 +56,7 @@ jobs:
           git_rev=$(git describe --tags --always --abbrev=0 ${_sha} --match "v[0-9]*.[0-9]*.[0-9]*")
 
           echo "++++++++++++++++";
-          git tag
+          git tag -l | grep "v[0-9]*.[0-9]*.[0-9]*$" | sort -V | tail -1
           git describe --tags --always
           git describe --tags --always --abbrev=7
           git describe --tags --always --abbrev=0 --match "v[0-9]*.[0-9]*.[0-9]*"
