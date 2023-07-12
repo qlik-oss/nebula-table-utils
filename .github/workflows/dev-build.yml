@@ -1,4 +1,4 @@
-name: Publish a Test build of PKG
+name: Dev Build
 
 on:
   issue_comment:
@@ -29,7 +29,7 @@ jobs:
         # Added by khan/pull-request-comment-trigger
         if: steps.check-comment.outputs.triggered == 'true'
 
-      - name: checkout repository
+      - name: Checkout repository
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
@@ -37,7 +37,7 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: 18
           cache: yarn
 
       # TODO:
