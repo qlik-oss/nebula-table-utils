@@ -89,6 +89,8 @@ jobs:
             npm version $VER --no-git-tag-version
           fi
 
+          cat package.json
+
       # - name: Install dependencies
       #   shell: bash
       #   run: yarn install --immutable
