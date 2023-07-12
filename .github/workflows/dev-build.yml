@@ -42,6 +42,13 @@ jobs:
 
       # TODO:
       # build and publish
+      - name: Install dependencies
+        shell: bash
+        run: yarn install --immutable
+
+      - name: Build
+        run: yarn build:prod
+
       - name: Setup access to qlik npm registry
         shell: bash
         run: |
@@ -99,13 +106,6 @@ jobs:
           fi
 
           cat package.json | grep version
-
-      # - name: Install dependencies
-      #   shell: bash
-      #   run: yarn install --immutable
-
-      # - name: Build
-      #   run: yarn build:prod
 
       # - name: Publish
       #   run: |
