@@ -50,13 +50,6 @@ jobs:
           echo "@qlik-oss:registry=https://npm.pkg.github.com/" >> ~/.npmrc
           cat ~/.npmrc
 
-      - name: Install dependencies
-        shell: bash
-        run: yarn install --immutable
-
-      - name: Build
-        run: yarn build:prod
-
       - uses: qlik-oss/ci-tools/action-version@master
 
       # - uses: qlik-trial/qmfe-workflows/actions/publish-npm-integration-build@v1
@@ -66,8 +59,7 @@ jobs:
           set -o pipefail
 
           _sha=${_sha:=$SHA}
-          # Unshallow git repository. Do not fail in case the repository is already unshallowed.
-          git fetch --prune --unshallow || true
+          git fetch --depth=10000
 
           # git-describe - Give an object a human readable name based on an available ref
           # On PR actions/checkout checkouts a merge commit instead of commit sha, git describe
@@ -97,16 +89,23 @@ jobs:
             npm version $VER --no-git-tag-version
           fi
 
-      # - name: Publish
-      #   run: |
-      #     # make sure we have .d.ts files in our package
-      #     DTS=`ls ./dist/** | grep d.ts | wc -l`
-      #     echo "# of *.d.ts files is $DTS"
-      #     if [[ $DTS -eq 0 ]]; then
-      #       echo "Missing *.d.ts files"
-      #       exit 1
-      #     fi
-      #     yarn publish ./dist
+      - name: Install dependencies
+        shell: bash
+        run: yarn install --immutable
+
+      - name: Build
+        run: yarn build:prod
+
+      - name: Publish
+        run: |
+          # make sure we have .d.ts files in our package
+          DTS=`ls ./dist/** | grep d.ts | wc -l`
+          echo "# of *.d.ts files is $DTS"
+          if [[ $DTS -eq 0 ]]; then
+            echo "Missing *.d.ts files"
+            exit 1
+          fi
+          yarn publish ./dist
 
       # # outro
       # - name: Add version value to env
