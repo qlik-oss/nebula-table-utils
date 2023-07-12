@@ -4,6 +4,9 @@
     "@semantic-release/release-notes-generator",
     ["@semantic-release/github", { "assets": "./dist/**" }],
     ["@semantic-release/npm", { "pkgRoot": "./dist", "npmPublish": true }],
-    ["@semantic-release/git", { "assets": ["package.json"] }]
+    ["@semantic-release/git", { 
+      "assets": ["package.json"], 
+      "message": "chore(release): version updated in pkg.json file [skip ci]\n\n"
+    }]
   ]
 }
