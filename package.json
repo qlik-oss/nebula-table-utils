@@ -2,7 +2,7 @@
   "name": "@qlik-oss/nebula-table-utils",
   "license": "MIT",
   "author": "QlikTech International AB",
-  "version": "1.0.1-4.gc91b8f6",
+  "version": "0.0.1",
   "description": "Common Components, Hooks and utils between `sn-table` and `sn-pivot-table` projects",
   "keywords": [
     "sn-table",

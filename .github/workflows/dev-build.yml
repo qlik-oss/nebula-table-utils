@@ -67,6 +67,10 @@ jobs:
           # the actual commit
           git_rev=$(git describe --tags --always --abbrev=7 ${_sha} --match "v[0-9]*.[0-9]*.[0-9]*")
 
+          echo "===============";
+          echo $git_rev;
+          echo "===============";
+
           # If git revision is not an exact semver tag, then bump patch
           # An exact semver does not contain a '-'
           if [[ "$git_rev" == *-* ]]; then
