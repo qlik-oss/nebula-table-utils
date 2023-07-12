@@ -74,10 +74,11 @@ jobs:
           # the actual commit
           git_rev=$(git describe --tags --always --abbrev=7 ${_sha} --match "v[0-9]*.[0-9]*.[0-9]*")
 
-          git describe --tags
+          echo "++++++++++++++++";
           git describe --tags --always
           git describe --tags --always --abbrev=7
           git describe --tags --always --abbrev=7 --match "v[0-9]*.[0-9]*.[0-9]*"
+          echo "++++++++++++++++";
 
           echo "===============";
           echo $SHA;
