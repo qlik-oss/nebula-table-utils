@@ -37,7 +37,7 @@
     "test:unit": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "prepare": "husky install"
+    "prepare": "node -e \"if (process.env.NODE_ENV !== 'production'){process.exit(1)} \" || husky install"
   },
   "devDependencies": {
     "@babel/core": "^7.22.5",
