@@ -37,7 +37,7 @@
     "test:unit": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "prepare": "node -e \"if (process.env.NODE_ENV !== 'production'){process.exit(1)} \" || husky install"
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@babel/core": "^7.22.5",
@@ -49,6 +49,7 @@
     "@qlik/prettier-config": "^0.2.0",
     "@qlik/tsconfig": "^0.1.4",
     "@semantic-release/git": "^10.0.1",
+    "@semantic-release/npm": "^10.0.4",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
