@@ -15,6 +15,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Setup access to qlik npm registry
+        shell: bash
+        run: |
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> ~/.npmrc
+          echo "//npm.pkg.github.com/:always-auth=true" >> ~/.npmrc
+          echo "@qlik-oss:registry=https://npm.pkg.github.com/" >> ~/.npmrc
+          cat ~/.npmrc
+
       - name: Install dependencies
         shell: bash
         run: yarn install --immutable
@@ -22,25 +30,30 @@ jobs:
       - name: Build
         run: yarn build:prod
 
-      - name: Semantic Release
-        id: semantic
-        uses: cycjimmy/semantic-release-action@v3
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          branches: main
-
-      - name: Publish To GitHub Package Registry
-        if: steps.semantic.outputs.new_release_published == 'true'
-        run: npm publish ./dist --ignore-script
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-
-      - name: Check Release Outputs
-        if: steps.semantic.outputs.new_release_published == 'true'
+      - name: Publish
         run: |
-          echo ${{ steps.semantic.outputs.new_release_version }}
-          echo ${{ steps.semantic.outputs.new_release_major_version }}
-          echo ${{ steps.semantic.outputs.new_release_minor_version }}
-          echo ${{ steps.semantic.outputs.new_release_patch_version }}
+          # make sure we have .d.ts files in our package
+          DTS=`ls ./dist/** | grep d.ts | wc -l`
+          echo "# of *.d.ts files is $DTS"
+          if [[ $DTS -eq 0 ]]; then
+            echo "Missing *.d.ts files"
+            exit 1
+          fi
+          yarn publish ./dist
+
+      # - name: Semantic Release
+      #   id: semantic
+      #   uses: cycjimmy/semantic-release-action@v3
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     branches: main
+
+      # - name: Check Release Outputs
+      #   if: steps.semantic.outputs.new_release_published == 'true'
+      #   run: |
+      #     echo ${{ steps.semantic.outputs.new_release_version }}
+      #     echo ${{ steps.semantic.outputs.new_release_major_version }}
+      #     echo ${{ steps.semantic.outputs.new_release_minor_version }}
+      #     echo ${{ steps.semantic.outputs.new_release_patch_version }}
