@@ -18,6 +18,14 @@
     "npm": ">=9",
     "node": ">=18.16.0"
   },
+  "files": [
+    "/components",
+    "/hooks",
+    "/utils",
+    "/*.js",
+    "/*.js.map",
+    "/*.d.ts"
+  ],
   "scripts": {
     "clear": "rimraf ./dist/*",
     "build:prod": "npm run clear & webpack -- --mode production --progress",
