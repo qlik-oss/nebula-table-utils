@@ -55,7 +55,7 @@ jobs:
         run: yarn install --immutable
 
       - name: Build
-        run: yarn build:prod:analyze
+        run: yarn build:prod
 
       - uses: qlik-oss/ci-tools/action-version@master
 
