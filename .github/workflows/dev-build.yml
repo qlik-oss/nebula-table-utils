@@ -40,20 +40,84 @@ jobs:
           node-version: '16'
           cache: yarn
 
-      - uses: qlik-oss/ci-tools/action-version@master
-
       # TODO:
       # build and publish
-
-      - name: Add version value to env
+      - name: Setup access to qlik npm registry
+        shell: bash
         run: |
-          # After publishing, the version should be an integration version
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
-        id: add-version
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> ~/.npmrc
+          echo "//npm.pkg.github.com/:always-auth=true" >> ~/.npmrc
+          echo "@qlik-oss:registry=https://npm.pkg.github.com/" >> ~/.npmrc
+          cat ~/.npmrc
 
-      - name: Comment on the PR with the package version
-        uses: actions-ecosystem/action-create-comment@v1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          body: |
-            :robot: Test Pkg is ready: `${{ steps.add-version.outputs.version }}`
+      - name: Install dependencies
+        shell: bash
+        run: yarn install --immutable
+
+      - name: Build
+        run: yarn build:prod:analyze
+
+      - uses: qlik-oss/ci-tools/action-version@master
+
+      # - uses: qlik-trial/qmfe-workflows/actions/publish-npm-integration-build@v1
+      - name: Generate integration version value
+        shell: bash
+        run: |
+          set -o pipefail
+
+          _sha=${_sha:=$SHA}
+          # Unshallow git repository. Do not fail in case the repository is already unshallowed.
+          git fetch --prune --unshallow || true
+
+          # git-describe - Give an object a human readable name based on an available ref
+          # On PR actions/checkout checkouts a merge commit instead of commit sha, git describe
+          # returns merge commit. To avoid this unpredictable commit sha, we will describe
+          # the actual commit
+          git_rev=$(git describe --tags --abbrev=7 ${_sha} --match "v[0-9]*.[0-9]*.[0-9]*")
+
+          # If git revision is not an exact semver tag, then bump patch
+          # An exact semver does not contain a '-'
+          if [[ "$git_rev" == *-* ]]; then
+            # Transforms 0.0.0-0-g1234abc to 0.0.1-0.g123abc
+            git_rev=$(echo $git_rev | perl -ne 'm/(^v\d+\.\d+\.)(\d+)(.*)(\-g)(.*$)/ && print $1 . int(1+$2) . $3 . ".g" . $5')
+          fi
+          # If no version is returned from git describe, generate one
+          [ -z "$git_rev" ] && git_rev="v0.0.0-0.g${_sha:0:7}"
+
+          # Return Version without v prefix
+          VER=${git_rev#v}
+          # On tag push that matches refs/tags/v*.*.*, use that version regardless of git describe
+          if echo "$GITHUB_REF" | grep -E 'refs/tags/v[0-9]+\.[0-9]+\.[0-9]+$'; then
+              VER=${GITHUB_REF#*/v}
+              RELEASE_TAG="1"
+          fi
+
+          echo "Set version: ${VER}"
+          if (echo $VER | egrep -- '-[0-9a-z.]+$' 1> /dev/null); then
+            npm version $VER --no-git-tag-version
+          fi
+
+      # - name: Publish
+      #   run: |
+      #     # make sure we have .d.ts files in our package
+      #     DTS=`ls ./dist/** | grep d.ts | wc -l`
+      #     echo "# of *.d.ts files is $DTS"
+      #     if [[ $DTS -eq 0 ]]; then
+      #       echo "Missing *.d.ts files"
+      #       exit 1
+      #     fi
+      #     yarn publish ./dist
+
+      # # outro
+      # - name: Add version value to env
+      #   run: |
+      #     # After publishing, the version should be an integration version
+      #     echo "version=$VERSION" >> $GITHUB_OUTPUT
+      #   id: add-version
+
+      # - name: Comment on the PR with the package version
+      #   uses: actions-ecosystem/action-create-comment@v1
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     body: |
+      #       :robot: Test Pkg is ready: `${{ steps.add-version.outputs.version }}`
