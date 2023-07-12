@@ -8,7 +8,7 @@
     ["@semantic-release/npm", { "pkgRoot": "./dist", "npmPublish": true }],
     ["@semantic-release/git", { 
       "assets": ["package.json"], 
-      "message": "chore(release): version updated in pkg.json file [skip ci]\n\n"
+      "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
     }]
   ]
 }
