@@ -49,9 +49,9 @@ module.exports = ({ mode }) => ({
 
     new CopyPlugin({
       patterns: [
-        { from: path.resolve(__dirname, '../package.json') },
-        { from: path.resolve(__dirname, '../README.md') },
-        { from: path.resolve(__dirname, '../LICENSE') },
+        // { from: path.resolve(__dirname, '../package.json') },
+        // { from: path.resolve(__dirname, '../README.md') },
+        // { from: path.resolve(__dirname, '../LICENSE') },
       ],
     }),
 

@@ -18,12 +18,10 @@
     "node": ">=18.16.0"
   },
   "files": [
-    "/components",
-    "/hooks",
-    "/utils",
-    "/*.js",
-    "/*.js.map",
-    "/*.d.ts"
+    "./dist/**",
+    "./README.md",
+    "./LICENSE",
+    "./package.json"
   ],
   "scripts": {
     "clear": "rimraf ./dist/*",
