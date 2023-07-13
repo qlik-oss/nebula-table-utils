@@ -1,6 +1,6 @@
-const path = require('path');
+// const path = require('path');
 const webpack = require('webpack');
-const CopyPlugin = require('copy-webpack-plugin');
+// const CopyPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const extractEntryFiles = require('./extractEntryFiles');
 
@@ -21,7 +21,14 @@ module.exports = ({ mode }) => ({
       {
         test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
-        use: 'ts-loader',
+        use: [
+          {
+            loader: 'ts-loader',
+            options: {
+              configFile: 'tsconfig.build.json',
+            },
+          },
+        ],
       },
       {
         test: /\.(js|jsx)$/,
@@ -40,13 +47,13 @@ module.exports = ({ mode }) => ({
       BUILD_MODE: JSON.stringify(mode),
     }),
 
-    new CopyPlugin({
-      patterns: [
-        { from: path.resolve(__dirname, '../package.json') },
-        { from: path.resolve(__dirname, '../README.md') },
-        { from: path.resolve(__dirname, '../LICENSE') },
-      ],
-    }),
+    // new CopyPlugin({
+    //   patterns: [
+    //     { from: path.resolve(__dirname, '../package.json') },
+    //     { from: path.resolve(__dirname, '../README.md') },
+    //     { from: path.resolve(__dirname, '../LICENSE') },
+    //   ],
+    // }),
 
     new webpack.ProgressPlugin(),
   ],

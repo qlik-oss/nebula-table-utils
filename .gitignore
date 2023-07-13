@@ -2,10 +2,10 @@
 .cache
 .DS_Store
 .idea
-.npmrc
 
 node_modules/
 dist/
+lib/
 coverage/
 test/rendering/artifacts
 test/rendering/test-report
