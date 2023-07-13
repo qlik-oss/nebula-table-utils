@@ -1,6 +1,7 @@
 .cache/
 .yarn/
 dist/
+lib/
 core/esm/
 .DS_Store
 *.html

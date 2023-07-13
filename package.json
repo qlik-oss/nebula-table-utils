@@ -18,10 +18,10 @@
     "node": ">=18.16.0"
   },
   "files": [
-    "./dist/**"
+    "./lib/**"
   ],
   "scripts": {
-    "clear": "rimraf ./dist/*",
+    "clear": "rimraf ./lib/*",
     "build:prod": "npm run clear & webpack -- --mode production --progress",
     "build:watch": "nodemon --exec ./build-utils/build-copy.sh",
     "build:prod:analyze": "npm run clear & webpack -- --mode production --progress --env presets.analyze",
