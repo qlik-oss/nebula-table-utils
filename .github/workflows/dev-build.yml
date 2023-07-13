@@ -62,9 +62,9 @@ jobs:
       # - uses: qlik-trial/qmfe-workflows/actions/publish-npm-integration-build@v1
       - name: Generate integration version value
         shell: bash
-        run: ${{ github.action_path }}/helpers/dev-build.sh
+        run: ${{ github.action_path }}/dev-build.sh
         
-        
+
       # - name: Publish
       #   run: |
       #     # make sure we have .d.ts files in our package
