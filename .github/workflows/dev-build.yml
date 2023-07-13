@@ -80,7 +80,7 @@ jobs:
           fi
 
           mkdir -p ./lib/lib
-          find ./lib -mindepth 1 ! -regex '^./lib/lib'
+          find ./lib -mindepth 1 ! -regex '^./lib/lib' -delete
 
           cp ./package.json ./lib
           cp ./LICENSE ./lib
