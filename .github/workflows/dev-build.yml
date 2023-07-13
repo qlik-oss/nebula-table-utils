@@ -63,8 +63,8 @@ jobs:
       - name: Generate integration version value
         shell: bash
         run: |
-          chmod +x ${GITHUB_WORKSPACE}/.github/scripts/dev-build.sh
-          ${GITHUB_WORKSPACE}/.github/scripts/dev-build.sh
+          chmod +x ${{ github.workspace  }}/.github/scripts/dev-build.sh
+          bash ${{ github.workspace  }}/.github/scripts/dev-build.sh
         
 
       # - name: Publish
