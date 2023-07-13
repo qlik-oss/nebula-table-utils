@@ -19,8 +19,8 @@
   },
   "files": [
     "./lib/**",
-    "!./lib/bundle-analyzer-report.html",
-    "!./lib/bundle-analyzer-stats.json"
+    "!**/bundle-analyzer-report.html",
+    "!**/bundle-analyzer-stats.json"
   ],
   "scripts": {
     "clear": "rimraf ./lib/*",
