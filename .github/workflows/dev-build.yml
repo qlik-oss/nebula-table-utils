@@ -3,6 +3,7 @@ name: Dev Build
 on:
   issue_comment:
     types: [created]
+  workflow_dispatch:
 
 jobs:
   dev-build:
@@ -42,12 +43,12 @@ jobs:
 
       # TODO:
       # build and publish
-      # - name: Install dependencies
-      #   shell: bash
-      #   run: yarn install --immutable
+      - name: Install dependencies
+        shell: bash
+        run: yarn install --immutable
 
-      # - name: Build
-      #   run: yarn build:prod
+      - name: Build
+        run: yarn build:prod
 
       - name: Setup access to qlik npm registry
         shell: bash
@@ -72,9 +73,16 @@ jobs:
           # On PR actions/checkout checkouts a merge commit instead of commit sha, git describe
           # returns merge commit. To avoid this unpredictable commit sha, we will describe
           # the actual commit
-          git_rev=$(git tag -l | grep "v[0-9]*.[0-9]*.[0-9]*$" | sort -V | tail -1)
+          git_rev=$(git describe --tags --always --abbrev=0 ${_sha} --match "v[0-9]*.[0-9]*.[0-9]*")
+
+          echo "++++++++++++++++";
+          git describe --tags --always
+          git describe --tags --always --abbrev=7
+          git describe --tags --always --abbrev=0 --match "v[0-9]*.[0-9]*.[0-9]*"
+          echo "++++++++++++++++";
 
           echo "===============";
+          echo $SHA;
           echo $git_rev;
           echo "===============";
 
