@@ -63,8 +63,6 @@ jobs:
       - name: Generate integration version value
         shell: bash
         run: |
-          pwd
-          ls -a
           chmod +x ${GITHUB_WORKSPACE}/.github/scripts/dev-build.sh
           bash ${GITHUB_WORKSPACE}/.github/scripts/dev-build.sh
         env: 
