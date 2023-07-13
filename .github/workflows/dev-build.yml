@@ -67,6 +67,8 @@ jobs:
           ls -a
           chmod +x ${GITHUB_WORKSPACE}/.github/scripts/dev-build.sh
           bash ${GITHUB_WORKSPACE}/.github/scripts/dev-build.sh
+        env: 
+          BRANCH_NAME: ${{ steps.comment-branch.outputs.head_ref }}
         
 
       # - name: Publish

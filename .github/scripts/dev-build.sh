@@ -2,7 +2,7 @@
 
 set -o pipefail
 
-echo "branch name: ${{ steps.comment-branch.outputs.head_ref }}";
+echo "branch name: $BRANCH_NAME";
 _sha=${_sha:=$SHA}
 git fetch --depth=10000
 
