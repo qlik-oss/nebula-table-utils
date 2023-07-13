@@ -10,7 +10,7 @@ git fetch --depth=10000
 # On PR actions/checkout checkouts a merge commit instead of commit sha, git describe
 # returns merge commit. To avoid this unpredictable commit sha, we will describe
 # the actual commit
-git_rev=$(git describe --tags --always --abbrev=0 ${_sha} --match "v[0-9]*.[0-9]*.[0-9]*")
+git_rev=$(git describe --tags --always --abbrev=7 ${_sha} --match "v[0-9]*.[0-9]*.[0-9]*")
 
 echo "++++++++++++++++";
 git describe --tags --always
