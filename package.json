@@ -18,7 +18,9 @@
     "node": ">=18.16.0"
   },
   "files": [
-    "./lib/**"
+    "./lib/**",
+    "!./lib/bundle-analyzer-report.html",
+    "!./lib/bundle-analyzer-stats.json"
   ],
   "scripts": {
     "clear": "rimraf ./lib/*",

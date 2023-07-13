@@ -7,7 +7,8 @@ module.exports = () => ({
       reportTitle: 'Prod build bundle report',
       defaultSizes: 'stat',
       generateStatsFile: true,
-      reportFilename: 'Bundle-analyzer-report.html',
+      reportFilename: 'bundle-analyzer-report.html',
+      statsFilename: 'bundle-analyzer-stats.json',
     }),
   ],
 });
