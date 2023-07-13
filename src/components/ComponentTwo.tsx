@@ -19,6 +19,7 @@ const ComponentTwo = (args: IComp2Props) => {
       <hr />
       <Shared />
       <h1>Added just to trigger ci #7</h1>
+      <h2 style={{ color: 'red' }}>OBVIOUS CHANGE OF MY PR</h2>
     </div>
   );
 };
