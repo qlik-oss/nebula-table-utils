@@ -9,7 +9,7 @@
     "sn-pivot-table",
     "common"
   ],
-  "main": "dist/index.js",
+  "main": "index.js",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
@@ -18,10 +18,12 @@
     "node": ">=18.16.0"
   },
   "files": [
-    "./dist/**",
-    "./README.md",
-    "./LICENSE",
-    "./package.json"
+    "/components",
+    "/hooks",
+    "/utils",
+    "/*.js",
+    "/*.js.map",
+    "/*.d.ts"
   ],
   "scripts": {
     "clear": "rimraf ./dist/*",

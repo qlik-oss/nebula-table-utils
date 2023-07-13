@@ -6,8 +6,6 @@
       "assets": ["./dist/Bundle-analyzer-report.html", "./dist/stats.json"] 
     }],
     ["@semantic-release/npm", { "npmPublish": true }],
-    ["@semantic-release/git", { 
-      "assets": ["package.json"]
-    }]
+    ["@semantic-release/git", { "assets": ["package.json"] }]
   ]
 }
