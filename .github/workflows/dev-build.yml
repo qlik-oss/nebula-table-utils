@@ -65,8 +65,8 @@ jobs:
         run: |
           pwd
           ls -a
-          chmod +x ${GITHUB_WORKSPACE}/scripts/dev-build.sh
-          bash ${GITHUB_WORKSPACE}/scripts/dev-build.sh
+          chmod +x ${GITHUB_WORKSPACE}/.github/scripts/dev-build.sh
+          bash ${GITHUB_WORKSPACE}/.github/scripts/dev-build.sh
         
 
       # - name: Publish
