@@ -65,6 +65,7 @@ jobs:
         run: |
           set -o pipefail
 
+          echo "branch name: ${{ steps.comment-branch.outputs.head_ref }}";
           _sha=${_sha:=$SHA}
           git fetch --depth=10000
 
