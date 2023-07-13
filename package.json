@@ -9,7 +9,7 @@
     "sn-pivot-table",
     "common"
   ],
-  "main": "index.js",
+  "main": "lib/index.js",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
