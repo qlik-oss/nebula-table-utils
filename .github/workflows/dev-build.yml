@@ -62,7 +62,9 @@ jobs:
       # - uses: qlik-trial/qmfe-workflows/actions/publish-npm-integration-build@v1
       - name: Generate integration version value
         shell: bash
-        run: ${{ github.action_path }}/dev-build.sh
+        run: |
+          chmod +x ${GITHUB_WORKSPACE}/.github/scripts/dev-build.sh
+          ${GITHUB_WORKSPACE}/.github/scripts/dev-build.sh
         
 
       # - name: Publish
