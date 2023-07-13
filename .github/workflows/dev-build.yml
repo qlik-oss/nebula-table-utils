@@ -64,7 +64,7 @@ jobs:
         shell: bash
         run: |
           pwd
-          ls
+          ls -a 
           chmod +x ${GITHUB_WORKSPACE}/scripts/dev-build.sh
           bash ${GITHUB_WORKSPACE}/scripts/dev-build.sh
         
