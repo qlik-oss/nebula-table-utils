@@ -78,8 +78,10 @@ jobs:
             echo "Missing *.d.ts files"
             exit 1
           fi
-          
-          mv -p ./lib/* ./lib/lib/
+
+          mkdir -p ./lib/lib
+          find ./lib -mindepth 1 ! -regex '^./lib/lib'
+
           cp ./package.json ./lib
           cp ./LICENSE ./lib
           cp ./README.md ./lib
