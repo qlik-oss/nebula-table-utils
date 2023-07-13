@@ -79,8 +79,13 @@ jobs:
             exit 1
           fi
 
-          mkdir -p ./lib/lib
-          find ./lib -mindepth 1 ! -regex '^./lib/lib' -delete
+          
+          mkdir __temp__
+          mv lib/* __temp__
+          rm -rf lib
+          mkdir -p lib/lib
+          mv __temp__/* ./lib/lib
+          rm -rf __temp__
 
           cp ./package.json ./lib
           cp ./LICENSE ./lib
