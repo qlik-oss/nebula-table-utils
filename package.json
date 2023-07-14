@@ -10,7 +10,7 @@
     "common"
   ],
   "type": "module",
-  "main": "index.js",
+  "main": "dist/index.js",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
@@ -19,7 +19,11 @@
     "node": ">=18.16.0"
   },
   "files": [
-    "./dist/**",
+    "/components",
+    "/hooks",
+    "/utils",
+    "/*.js",
+    "/*.d.ts",
     "!**/bundle-analyzer-report.html"
   ],
   "scripts": {
