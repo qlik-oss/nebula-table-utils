@@ -1,10 +1,7 @@
 {
-  "extends": "@qlik/tsconfig/react.json",
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "jsx": "react",
-    "noEmit": false,
-    "declaration": true,
-    "outDir": "./lib"
+    // more rules
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
   "exclude": ["node_modules", ".github/"]

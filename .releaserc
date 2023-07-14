@@ -3,7 +3,7 @@
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
     ["@semantic-release/github", { 
-      "assets": ["./lib/bundle-analyzer-report.html", "./lib/bundle-analyzer-stats.json"] 
+      "assets": ["./build-reports/bundle-analyzer-report.html"] 
     }],
     ["@semantic-release/npm", { "npmPublish": true }],
     ["@semantic-release/git", { "assets": ["package.json"] }]

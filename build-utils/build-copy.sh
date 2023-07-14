@@ -33,7 +33,7 @@ handleCopy() {
     fi
     
     mkdir -p $PKG_PATH;
-    cp -r ./lib/ $PKG_PATH;
+    cp -r ./dist/ $PKG_PATH;
 
     
     echo "${GREEN}${BOLD}✅ UPDATED ${NAME} WITH LATES CHANGES IN 'nebula-table-utils'${NO_BOLD}${NO_COLOR}";

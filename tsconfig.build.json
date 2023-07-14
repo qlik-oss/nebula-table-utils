@@ -1,4 +1,6 @@
 {
-  "extends": "./tsconfig",
-  "exclude": ["node_modules", ".github/", "**/__tests__/**"]
+  "extends": "./tsconfig.base.json",
+  "files": ["types.d.ts"],
+  "include": ["src"],
+  "exclude": ["node_modules", "lib", "src/__storybook__", "src/**/__tests__"]
 }
