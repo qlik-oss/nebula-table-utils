@@ -8,6 +8,14 @@ if [[ $DTS -eq 0 ]]; then
   exit 1
 fi
 
+# move everything into /lib/lib based on pkg structure
+mkdir __temp__
+mv lib/* __temp__
+rm -rf lib
+mkdir -p lib/lib
+mv __temp__/* ./lib/lib
+rm -rf __temp__
+
 cp ./package.json ./lib
 cp ./LICENSE ./lib
 cp ./README.md ./lib
