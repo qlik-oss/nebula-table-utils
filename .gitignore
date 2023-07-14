@@ -6,6 +6,7 @@
 node_modules/
 dist/
 lib/
+build-reports/
 coverage/
 test/rendering/artifacts
 test/rendering/test-report
