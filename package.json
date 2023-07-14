@@ -19,11 +19,7 @@
     "node": ">=18.16.0"
   },
   "files": [
-    "/components",
-    "/hooks",
-    "/utils",
-    "/*.js",
-    "/*.d.ts",
+    "./dist/**",
     "!**/bundle-analyzer-report.html"
   ],
   "scripts": {
