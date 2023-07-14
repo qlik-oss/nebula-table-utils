@@ -47,9 +47,9 @@ const baseConfig = defineConfig({
     }),
     copy({
       targets: [
-        { src: 'package.json', dest: 'dist' },
-        { src: 'README.md', dest: 'dist' },
-        { src: 'LICENSE', dest: 'dist' },
+        { src: 'package.json', dest: 'lib' },
+        { src: 'README.md', dest: 'lib' },
+        { src: 'LICENSE', dest: 'lib' },
       ],
     }),
     commonjs(),
@@ -64,15 +64,15 @@ export default defineConfig([
   {
     input: 'src/index.ts',
     output: [
-      { file: pkg.main, file: "dist/index.js", format: 'cjs', sourcemap: ENABLE_SOURCE_MAP },
-      { file: pkg.module, file: "dist/index.js", format: 'es', sourcemap: ENABLE_SOURCE_MAP },
+      { file: pkg.main, file: "lib/index.js", format: 'cjs', sourcemap: ENABLE_SOURCE_MAP },
+      { file: pkg.module, file: "lib/index.js", format: 'es', sourcemap: ENABLE_SOURCE_MAP },
     ],
     ...baseConfig,
   },
   {
     input: ['src/**/*.(ts|tsx)', '!src/index.ts', '!src/**/__tests__', '!src/__storybook__'],
     output: {
-      dir: 'dist',
+      dir: 'lib',
       exports: 'auto',
       format: 'es',
       sourcemap: ENABLE_SOURCE_MAP,
