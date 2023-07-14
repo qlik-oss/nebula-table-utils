@@ -52,7 +52,11 @@ jobs:
         env: 
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: qlik-oss/ci-tools/action-version@master
+      - name: Version Info
+        shell: bash
+        run: bash ${GITHUB_WORKSPACE}/.github/scripts/get-version-info.sh
+
+      # - uses: qlik-oss/ci-tools/action-version@master
 
       - name: Generate package version value
         shell: bash
