@@ -26,7 +26,6 @@ jobs:
         id: comment-branch
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-        # Added by khan/pull-request-comment-trigger
         if: steps.check-comment.outputs.triggered == 'true'
 
       - name: Checkout repository
@@ -49,30 +48,29 @@ jobs:
 
       - name: Setup access to qlik npm registry
         shell: bash
-        run: |
-          # chmod +x ${GITHUB_WORKSPACE}/.github/scripts/create-npmrc.sh
-          bash ${GITHUB_WORKSPACE}/.github/scripts/create-npmrc.sh
+        run: bash ${GITHUB_WORKSPACE}/.github/scripts/create-npmrc.sh
         env: 
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: qlik-oss/ci-tools/action-version@master
+      - name: Version Info
+        shell: bash
+        run: bash ${GITHUB_WORKSPACE}/.github/scripts/get-version-info.sh
+
+      # - uses: qlik-oss/ci-tools/action-version@master
 
       - name: Generate package version value
         shell: bash
-        run: |
-          bash ${GITHUB_WORKSPACE}/.github/scripts/generate-pkg-version.sh
+        run: bash ${GITHUB_WORKSPACE}/.github/scripts/generate-pkg-version.sh
         env: 
           BRANCH_NAME: ${{ steps.comment-branch.outputs.head_ref }}
         
 
       - name: Publish
-        run: |
-          bash ${GITHUB_WORKSPACE}/.github/scripts/publish-script.sh
+        run: bash ${GITHUB_WORKSPACE}/.github/scripts/publish-script.sh
 
       - name: Add version value to env
-        run: |
-          # After publishing, the version should be an integration version
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
+        # After publishing, the version should be an integration version
+        run: echo "version=$VERSION" >> $GITHUB_OUTPUT
         id: add-version
 
       - name: Comment on the PR with the package version
