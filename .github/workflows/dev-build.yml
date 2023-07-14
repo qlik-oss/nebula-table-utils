@@ -40,8 +40,6 @@ jobs:
           node-version: 18
           cache: yarn
 
-      # TODO:
-      # build and publish
       - name: Install dependencies
         shell: bash
         run: yarn install --immutable
@@ -52,56 +50,36 @@ jobs:
       - name: Setup access to qlik npm registry
         shell: bash
         run: |
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> ~/.npmrc
-          echo "//npm.pkg.github.com/:always-auth=true" >> ~/.npmrc
-          echo "@qlik-oss:registry=https://npm.pkg.github.com/" >> ~/.npmrc
-          cat ~/.npmrc
+          chmod +x ${GITHUB_WORKSPACE}/.github/scripts/create-npmrc.sh
+          bash ${GITHUB_WORKSPACE}/.github/scripts/create-npmrc.sh
+        env: 
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: qlik-oss/ci-tools/action-version@master
 
-      # - uses: qlik-trial/qmfe-workflows/actions/publish-npm-integration-build@v1
-      - name: Generate integration version value
+      - name: Generate package version value
         shell: bash
         run: |
-          chmod +x ${GITHUB_WORKSPACE}/.github/scripts/dev-build.sh
-          bash ${GITHUB_WORKSPACE}/.github/scripts/dev-build.sh
+          chmod +x ${GITHUB_WORKSPACE}/.github/scripts/generate-pkg-version.sh
+          bash ${GITHUB_WORKSPACE}/.github/scripts/generate-pkg-version.sh
         env: 
           BRANCH_NAME: ${{ steps.comment-branch.outputs.head_ref }}
         
 
       - name: Publish
         run: |
-          # make sure we have .d.ts files in our package
-          DTS=`ls ./lib/** | grep d.ts | wc -l`
-          echo "# of *.d.ts files is $DTS"
-          if [[ $DTS -eq 0 ]]; then
-            echo "Missing *.d.ts files"
-            exit 1
-          fi
+          chmod +x ${GITHUB_WORKSPACE}/.github/scripts/publis-script.sh
+          bash ${GITHUB_WORKSPACE}/.github/scripts/publis-script.sh
 
-          
-          mkdir __temp__
-          mv lib/* __temp__
-          rm -rf lib
-          mkdir -p lib/lib
-          mv __temp__/* ./lib/lib
-          rm -rf __temp__
+      - name: Add version value to env
+        run: |
+          # After publishing, the version should be an integration version
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+        id: add-version
 
-          cp ./package.json ./lib
-          cp ./LICENSE ./lib
-          cp ./README.md ./lib
-          yarn publish ./lib --ignore-scripts
-
-      # # outro
-      # - name: Add version value to env
-      #   run: |
-      #     # After publishing, the version should be an integration version
-      #     echo "version=$VERSION" >> $GITHUB_OUTPUT
-      #   id: add-version
-
-      # - name: Comment on the PR with the package version
-      #   uses: actions-ecosystem/action-create-comment@v1
-      #   with:
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      #     body: |
-      #       :robot: Test Pkg is ready: `${{ steps.add-version.outputs.version }}`
+      - name: Comment on the PR with the package version
+        uses: actions-ecosystem/action-create-comment@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          body: |
+            :package: Snapshot build is ready: `${{ steps.add-version.outputs.version }}`
