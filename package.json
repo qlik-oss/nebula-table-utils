@@ -21,6 +21,9 @@
   "files": [
     "./lib/**",
     "!**/bundle-analyzer-report.html",
+    "!**/README.md",
+    "!**/LICENSE",
+    "!**/package.json",
     "./README.md",
     "./LICENSE",
     "./package.json"
