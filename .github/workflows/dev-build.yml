@@ -26,7 +26,6 @@ jobs:
         id: comment-branch
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-        # Added by khan/pull-request-comment-trigger
         if: steps.check-comment.outputs.triggered == 'true'
 
       - name: Checkout repository
@@ -66,9 +65,8 @@ jobs:
         run: bash ${GITHUB_WORKSPACE}/.github/scripts/publish-script.sh
 
       - name: Add version value to env
-        run: |
-          # After publishing, the version should be an integration version
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
+        # After publishing, the version should be an integration version
+        run: echo "version=$VERSION" >> $GITHUB_OUTPUT
         id: add-version
 
       - name: Comment on the PR with the package version
