@@ -80,7 +80,5 @@ jobs:
         shell: bash
         run: yarn install --immutable
 
-      # TODO:
-      # make sure to report the bundle analyzer output
       - name: Build
         run: yarn build:prod
