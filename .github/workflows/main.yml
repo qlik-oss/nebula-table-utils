@@ -56,7 +56,7 @@ jobs:
 
       - name: Install dependencies
         shell: bash
-        run: yarn install --immutable
+        run: yarn install
 
       - name: Run unit test
         run: yarn test:coverage --ci --reporters="github-actions" --reporters="summary"
