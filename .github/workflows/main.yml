@@ -31,7 +31,7 @@ jobs:
 
       - name: Install dependencies
         shell: bash
-        run: pnpm install --immutable
+        run: pnpm install
 
       - name: Prettier Format
         run: pnpm format:check
@@ -65,7 +65,7 @@ jobs:
         run: pnpm install
 
       - name: Run unit test
-        run: pnpm test:coverage --ci --reporters="github-actions" --reporters="summary"
+        run: pnpm test:coverage -- --ci --reporters="github-actions" --reporters="summary"
 
   build:
     runs-on: ubuntu-latest
@@ -87,7 +87,7 @@ jobs:
 
       - name: Install dependencies
         shell: bash
-        run: pnpm install --immutable
+        run: pnpm install
 
       - name: Build
         run: pnpm build:prod
