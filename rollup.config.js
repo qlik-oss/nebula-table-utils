@@ -65,7 +65,7 @@ export default defineConfig([
     input: 'src/index.ts',
     output: [
       { file: pkg.main, file: "lib/index.js", format: 'cjs', sourcemap: ENABLE_SOURCE_MAP },
-      { file: pkg.module, file: "lib/index.js", format: 'es', sourcemap: ENABLE_SOURCE_MAP },
+      { file: pkg.module, file: "lib/index.es.js", format: 'es', sourcemap: ENABLE_SOURCE_MAP },
     ],
     ...baseConfig,
   },
