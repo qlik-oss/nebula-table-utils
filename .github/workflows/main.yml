@@ -65,7 +65,7 @@ jobs:
         run: pnpm install
 
       - name: Run unit test
-        run: pnpm test:coverage -- --ci --reporters="github-actions" --reporters="summary"
+        run: pnpm test:coverage
 
   build:
     runs-on: ubuntu-latest
