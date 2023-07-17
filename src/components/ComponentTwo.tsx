@@ -18,6 +18,9 @@ const ComponentTwo = (args: IComp2Props) => {
       <span data-testid="state-val">{state}</span>
       <hr />
       <Shared />
+      <div style={{ margin: '2rem', padding: '2rem', border: '10px dashed springgreen' }}>
+        <h2>THE CHANGE OF MY PR #3</h2>
+      </div>
     </div>
   );
 };
