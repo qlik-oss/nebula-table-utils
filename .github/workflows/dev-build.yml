@@ -34,17 +34,20 @@ jobs:
           fetch-depth: 0
           ref: ${{ steps.comment-branch.outputs.head_ref }}
 
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 6.0.2
+
       - uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: yarn
 
       - name: Install dependencies
         shell: bash
-        run: yarn install --immutable
+        run: pnpm install
 
       - name: Build
-        run: yarn build:prod
+        run: pnpm build:prod
 
       - name: Setup access to qlik npm registry
         shell: bash

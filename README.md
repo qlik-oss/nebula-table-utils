@@ -15,6 +15,6 @@ SN_TABLE_DIR="../SN_TABLE/in/your/machine"
 PV_TABLE_DIR="../PIVOT_TABLE/in/your/machine"
 ```
 
-4. now if you run `yarn build:watch`, whatever change you make into this directory will be copied to the node_modules of your local pivot table project.
+4. now if you run `pnpm build:watch`, whatever change you make into this directory will be copied to the node_modules of your local pivot table project.
 
 **NOTE:** Pls keep in mind that this is a temporary solution, we will fix this as soon as possible.

@@ -21,4 +21,4 @@ cp ./LICENSE ./lib
 cp ./README.md ./lib
 
 # publish
-yarn publish ./lib --ignore-scripts
+pnpm publish ./lib --ignore-scripts

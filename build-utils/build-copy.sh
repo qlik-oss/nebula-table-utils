@@ -1,7 +1,7 @@
 #!/bin/sh 
 
 
-yarn build:prod
+pnpm build:prod
 
 
 export $(grep -v '^#' .env.local | xargs)

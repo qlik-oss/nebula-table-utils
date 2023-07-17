@@ -13,10 +13,10 @@ jobs:
 
       - name: Install dependencies
         shell: bash
-        run: yarn install --immutable
+        run: pnpm install
 
       - name: Build
-        run: yarn build:prod
+        run: pnpm build:prod
 
       - name: Semantic Release
         id: semantic
