@@ -29,7 +29,7 @@
   ],
   "scripts": {
     "clear": "rimraf ./lib/*",
-    "build:prod": "npm run clear & rollup -c",
+    "build:prod": "npm run clear & rollup -c --bundleConfigAsCjs",
     "build:watch": "nodemon --exec ./build-utils/build-copy.sh",
     "lint": "eslint src/*",
     "format:check": "prettier --check './src/**/*.{ts,tsx}' --ignore-unknown",
