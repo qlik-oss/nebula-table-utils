@@ -2,7 +2,6 @@
 module.exports = {
   collectCoverage: true,
   coverageDirectory: 'coverage',
-  // setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   testEnvironment: 'jsdom',
   testRegex: 'src/.+\\.(test|spec)\\.[jt]sx?$',
   transform: {
