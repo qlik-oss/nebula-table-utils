@@ -20,24 +20,27 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 6.0.2
+
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: yarn
 
       - name: Install dependencies
         shell: bash
-        run: yarn install --immutable
+        run: pnpm install --immutable
 
       - name: Prettier Format
-        run: yarn format:check
+        run: pnpm format:check
 
       - name: Lint
-        run: yarn lint
+        run: pnpm lint
 
       - name: Type check
-        run: yarn types:check
+        run: pnpm types:check
 
   unit-test:
     runs-on: ubuntu-latest
@@ -48,18 +51,21 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 6.0.2
+
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: yarn
 
       - name: Install dependencies
         shell: bash
-        run: yarn install
+        run: pnpm install
 
       - name: Run unit test
-        run: yarn test:coverage --ci --reporters="github-actions" --reporters="summary"
+        run: pnpm test:coverage --ci --reporters="github-actions" --reporters="summary"
 
   build:
     runs-on: ubuntu-latest
@@ -70,15 +76,18 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 6.0.2
+
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: yarn
 
       - name: Install dependencies
         shell: bash
-        run: yarn install --immutable
+        run: pnpm install --immutable
 
       - name: Build
-        run: yarn build:prod
+        run: pnpm build:prod
