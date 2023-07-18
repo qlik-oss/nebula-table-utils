@@ -1,1 +1,3 @@
-export { default as useOnPropsChange } from './useOnPropsChange';
+import useOnPropsChange from './useOnPropsChange';
+
+export default useOnPropsChange;
