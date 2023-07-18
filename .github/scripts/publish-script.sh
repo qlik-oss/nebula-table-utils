@@ -21,4 +21,4 @@ cp ./LICENSE ./lib
 cp ./README.md ./lib
 
 # publish
-pnpm publish ./lib --ignore-scripts
+pnpm publish ./lib --ignore-scripts --no-git-checks
