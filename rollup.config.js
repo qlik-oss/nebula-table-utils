@@ -70,7 +70,13 @@ export default defineConfig([
     ...baseConfig,
   },
   {
-    input: ['src/**/*.(ts|tsx)', '!src/index.ts', '!src/**/__tests__', '!src/__storybook__'],
+    input: [
+      'src/**/*.(ts|tsx)', 
+      '!src/index.ts', 
+      '!src/**/__tests__', 
+      '!src/**/*.(test|spec).(ts|tsx)', 
+      '!src/__storybook__'
+    ],
     output: {
       dir: 'lib',
       exports: 'auto',
