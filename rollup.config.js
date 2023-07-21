@@ -16,7 +16,15 @@ const EXCLUDED_FILES = [/node_modules/, 'src/**/__tests__', 'src/test'];
 const ENABLE_SOURCE_MAP = process.env.BUILD_SOURCE_MAPS === 'true' || process.env.NODE_ENV === 'development';
 
 const baseConfig = defineConfig({
-  external: ['react', 'react-dom', '@nebula.js/stardust'],
+  external: [
+    "react", 
+    "react-dom", 
+    "@nebula.js/stardust", 
+    "@mui/material",
+    "@mui/styled-engine-sc",
+    "@emotion/react",
+    "@emotion/styled"
+  ],
   plugins: [
     ...(ENABLE_SOURCE_MAP ? [sourcemaps()] : []),
     visualizer({
