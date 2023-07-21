@@ -52,7 +52,8 @@
         "optionalDependencies": false,
         "peerDependencies": true
       }
-    ]
+    ],
+    "import/prefer-default-export": 1
   },
   "overrides": [
     {
@@ -75,13 +76,6 @@
         "jest/prefer-to-have-length": 1,
         "jest/valid-expect": 0, // TODO: fix this
         "@typescript-eslint/unbound-method": 0 // TODO: fix this
-      }
-    },
-    {
-      "files": ["./src/index.ts", "./src/**/index.ts"],
-      "rules": {
-        "import/prefer-default-export": 0,
-        "no-console": 0
       }
     }
   ]
