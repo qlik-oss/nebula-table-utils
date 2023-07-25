@@ -23,7 +23,9 @@ const baseConfig = defineConfig({
     "@mui/material",
     "@mui/styled-engine-sc",
     "@emotion/react",
-    "@emotion/styled"
+    "@emotion/styled",
+    "@nebula.js/stardust",
+    "@qlik-trial/sprout"
   ],
   plugins: [
     ...(ENABLE_SOURCE_MAP ? [sourcemaps()] : []),

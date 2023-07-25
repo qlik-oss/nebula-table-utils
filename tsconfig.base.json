@@ -17,5 +17,5 @@
     "skipLibCheck": true,
     "preserveSymlinks": true
   },
-  "exclude": ["node_modules", "lib", "dist"]
+  "exclude": ["node_modules", "lib", "dist"],
 }
