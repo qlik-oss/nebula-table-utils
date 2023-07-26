@@ -1,27 +1,40 @@
-import React, { useRef, useState, useMemo, useCallback, useEffect } from 'react';
+import React, { useState, useMemo, useCallback, useEffect } from 'react';
+
 import Menu from '@qlik-trial/sprout/icons/Menu';
+import Descending from '@qlik-trial/sprout/icons/react/Descending';
+import Ascending from '@qlik-trial/sprout/icons/react/Ascending';
+import Search from '@qlik-trial/sprout/icons/react/Search';
+import Selection from '@qlik-trial/sprout/icons/react/Selection';
+import SelectAll from '@qlik-trial/sprout/icons/react/SelectAll';
+import ClearSelections from '@qlik-trial/sprout/icons/react/ClearSelections';
+import SelectPossible from '@qlik-trial/sprout/icons/react/SelectPossible';
+import SelectAlternative from '@qlik-trial/sprout/icons/react/SelectAlternative';
+import SelectExcluded from '@qlik-trial/sprout/icons/react/SelectExcluded';
+import ColumnSize from '@qlik-trial/sprout/icons/react/ColumnSize';
+
 import useFieldSelection from './use-field-selection';
 import RecursiveMenuList from './MenuList/RecursiveMenuList';
 import { Button } from '@mui/material';
 import { HeadCellMenuWrapper } from './styles';
-import { ExtendedLayout, HeadCellMenuProps } from './types';
-import { tuneMenuItemGroups } from './utils';
+import { ExtendedLayout, HeadCellMenuProps, MenuItemGroup } from './types';
 
 const HeadCellMenu = ({
   column,
   tabIndex,
-  menuItemGroups,
   anchorRef,
+  listboxRef,
   embed,
   app,
   model,
-  ariaLabel,
+  translator,
+  isColumnSorted,
+  sortFromMenu,
+  setFocusOnClosetColumnAdjuster,
+  interactions,
+  handleHeadCellMenuKeyDown,
 }: HeadCellMenuProps) => {
   const { headTextAlign, qLibraryId, fieldId } = column;
 
-  // TODO:
-  // this ref should come from table side -> to make it open from beganing of cell
-  const listboxRef = useRef<HTMLDivElement>(null);
   const [openMenuDropdown, setOpenMenuDropdown] = useState(false);
   // TODO;
   // probably dont need this
@@ -61,11 +74,138 @@ const HeadCellMenu = ({
     if (!openMenuDropdown) resetSelectionActionsEnabledStatus();
   }, [openMenuDropdown, resetSelectionActionsEnabledStatus]);
 
+  const menuItemGroups = useMemo<MenuItemGroup[]>(
+    () => [
+      [
+        {
+          id: 1,
+          itemTitle: translator.get('SNTable.MenuItem.SortAscending'),
+          onClick: (evt: React.MouseEvent<HTMLLIElement>) => {
+            sortFromMenu(evt, 'A');
+            setOpenMenuDropdown(false);
+          },
+          icon: <Ascending />,
+          enabled: !isColumnSorted || column.sortDirection !== 'A',
+        },
+        {
+          id: 2,
+          itemTitle: translator.get('SNTable.MenuItem.SortDescending'),
+          onClick: (evt: React.MouseEvent<HTMLLIElement>) => {
+            sortFromMenu(evt, 'D');
+            setOpenMenuDropdown(false);
+          },
+          icon: <Descending />,
+          enabled: !isColumnSorted || column.sortDirection !== 'D',
+        },
+      ],
+      ...(column.isDim && interactions.select
+        ? [
+            // Listbox
+            [
+              {
+                id: 1,
+
+                itemTitle: translator.get('SNTable.MenuItem.Search'),
+                onClick: (evt: React.MouseEvent<HTMLLIElement>) => {
+                  evt.stopPropagation();
+                  setOpenMenuDropdown(false);
+                  setOpenListboxDropdown(true);
+                  embedListbox();
+                },
+                icon: <Search />,
+                enabled: true,
+              },
+            ],
+            // selections
+            [
+              {
+                id: 1,
+                itemTitle: translator.get('SNTable.MenuItem.Selections'),
+                icon: <Selection />,
+                enabled: true,
+                subMenus: [
+                  [
+                    {
+                      id: 1,
+                      itemTitle: translator.get('SNTable.MenuItem.SelectAll'),
+                      onClick: async () => {
+                        setOpenMenuDropdown(false);
+                        await fieldInstance?.selectAll();
+                      },
+                      icon: <SelectAll />,
+                      enabled: selectionActionsEnabledStatus.canSelectAll,
+                    },
+                    {
+                      id: 2,
+                      itemTitle: translator.get('SNTable.MenuItem.SelectPossible'),
+                      onClick: async () => {
+                        setOpenMenuDropdown(false);
+                        await fieldInstance?.selectPossible();
+                      },
+                      icon: <SelectPossible />,
+                      enabled: selectionActionsEnabledStatus.canSelectPossible,
+                    },
+                    {
+                      id: 3,
+                      itemTitle: translator.get('SNTable.MenuItem.SelectAlternative'),
+                      onClick: async () => {
+                        setOpenMenuDropdown(false);
+                        await fieldInstance?.selectAlternative();
+                      },
+                      icon: <SelectAlternative />,
+                      enabled: selectionActionsEnabledStatus.canSelectAlternative,
+                    },
+                    {
+                      id: 4,
+                      itemTitle: translator.get('SNTable.MenuItem.SelectExcluded'),
+                      onClick: async () => {
+                        setOpenMenuDropdown(false);
+                        await fieldInstance?.selectExcluded();
+                      },
+                      icon: <SelectExcluded />,
+                      enabled: selectionActionsEnabledStatus.canSelectExcluded,
+                    },
+                  ],
+                  [
+                    {
+                      id: 1,
+                      itemTitle: translator.get('SNTable.MenuItem.ClearSelections'),
+                      onClick: async () => {
+                        setOpenMenuDropdown(false);
+                        await fieldInstance?.clear();
+                      },
+                      icon: <ClearSelections />,
+                      enabled: selectionActionsEnabledStatus.canClearSelections,
+                    },
+                  ],
+                ],
+              },
+            ],
+          ]
+        : []),
+      // Adjust col size
+      [
+        {
+          id: 1,
+          itemTitle: translator.get('SNTable.MenuItem.AdjustColumnSize'),
+          onClick: (evt: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
+            evt.stopPropagation();
+            evt.preventDefault();
+            setOpenMenuDropdown(false);
+            setFocusOnClosetColumnAdjuster(anchorRef);
+          },
+          icon: <ColumnSize />,
+          enabled: true,
+        },
+      ],
+    ],
+    [translator, isColumnSorted, column.sortDirection, column.isDim, interactions, selectionActionsEnabledStatus]
+  );
+
   return (
     <HeadCellMenuWrapper rightAligned={headTextAlign === 'right'}>
       <Button
         isVisible={true}
-        ref={anchorRef}
         size="small"
         tabIndex={tabIndex}
         id="sn-table-head-menu-button"
@@ -73,39 +213,18 @@ const HeadCellMenu = ({
         aria-expanded={openMenuDropdown ? 'true' : undefined}
         aria-haspopup="true"
         onClick={handleOpenDropdown}
-        aria-label={ariaLabel}
+        aria-label={translator.get('SNTable.Accessibility.ColumnOptions')}
       >
         <Menu />
       </Button>
-      <div ref={listboxRef} />
 
       <RecursiveMenuList
         open={openMenuDropdown}
         anchorEl={anchorRef.current}
         onClose={() => setOpenMenuDropdown(false)}
+        menuGroups={menuItemGroups}
         ariaLabel="sn-table-head-menu-button"
-        menuGroups={tuneMenuItemGroups({
-          menuItemGroups,
-          selectionActionsEnabledStatus,
-          setOpenMenuDropdown,
-
-          // callbacks which needs to run withing library scope
-          sortingCallback: () => {},
-          adsjustColumnSizeCallback: (evt) => {
-            evt.stopPropagation();
-            evt.preventDefault();
-          },
-          searchCallback: (evt) => {
-            evt.stopPropagation();
-            setOpenListboxDropdown(true);
-            embedListbox();
-          },
-          selectAllCallback: async () => await fieldInstance?.selectAll(),
-          selectPossibleCallback: async () => await fieldInstance?.selectPossible(),
-          selectAlternativeCallback: async () => await fieldInstance?.selectAlternative(),
-          selectExcludedCallback: async () => await fieldInstance?.selectExcluded(),
-          clearSelectCallback: async () => await fieldInstance?.clear(),
-        })}
+        handleHeadCellMenuKeyDown={handleHeadCellMenuKeyDown}
       />
     </HeadCellMenuWrapper>
   );

@@ -6,11 +6,13 @@ import MenuGroup from './MenuGroup';
 
 interface MenuItemsProps {
   itemGroups: MenuItemGroup[];
+  isSubMenu?: boolean;
+  handleHeadCellMenuKeyDown: (evt: React.KeyboardEvent<HTMLLIElement>) => void;
 }
 
-const MenuGroupWrapper = ({ itemGroups }: MenuItemsProps) => {
+const MenuGroupWrapper = ({ itemGroups, isSubMenu, handleHeadCellMenuKeyDown }: MenuItemsProps) => {
   return itemGroups.map((group, index) => [
-    MenuGroup({ menuGroup: group }),
+    MenuGroup({ menuGroup: group, isSubMenu, handleHeadCellMenuKeyDown }),
     index < itemGroups.length - 1 ? (
       <StyledDivider data-testid="group-divider" variant="middle" key="divider" />
     ) : undefined,

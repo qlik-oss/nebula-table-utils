@@ -13,6 +13,8 @@ interface RecursiveMenuListProps {
   transformOrigin?: PopoverOrigin; // eslint-disable-line react/require-default-props
   anchorOrigin?: PopoverOrigin; // eslint-disable-line react/require-default-props
   ariaLabel?: string; // eslint-disable-line react/require-default-props
+  isSubMenu?: boolean;
+  handleHeadCellMenuKeyDown: (evt: React.KeyboardEvent<HTMLLIElement>) => void;
 }
 
 const RecursiveMenuList = ({
@@ -23,6 +25,8 @@ const RecursiveMenuList = ({
   menuGroups,
   transformOrigin,
   anchorOrigin,
+  isSubMenu,
+  handleHeadCellMenuKeyDown,
 }: RecursiveMenuListProps) => {
   if (!menuGroups.length) return null;
   return (
@@ -35,7 +39,7 @@ const RecursiveMenuList = ({
       {...(anchorOrigin ? { anchorOrigin } : {})}
       {...(transformOrigin ? { transformOrigin } : {})}
     >
-      {MenuGroupWrapper({ itemGroups: menuGroups })}
+      {MenuGroupWrapper({ itemGroups: menuGroups, isSubMenu, handleHeadCellMenuKeyDown })}
     </Menu>
   );
 };

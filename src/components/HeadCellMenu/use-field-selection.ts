@@ -3,7 +3,7 @@ import { ExtendedLayout, UseFieldSelectionOutput, UseFieldSelectionProps } from 
 
 const SELECTION_ACTIONS_ENABLED_DEFAULT_STATUS: Record<string, boolean> = {
   canSelectAll: false,
-  canClearSelect: false,
+  canClearSelections: false,
   canSelectPossible: false,
   canSelectAlternative: false,
   canSelectExcluded: false,
@@ -33,7 +33,7 @@ const useFieldSelection = ({ column, app }: UseFieldSelectionProps): UseFieldSel
     if (!dimInfo) return;
     setSelectionActionsEnabledStatus({
       canSelectAll: checkStateCountByKey(['qOption', 'qAlternative', 'qExcluded', 'qDeselected'], dimInfo.qStateCounts),
-      canClearSelect: checkStateCountByKey(['qSelected'], dimInfo.qStateCounts),
+      canClearSelections: checkStateCountByKey(['qSelected'], dimInfo.qStateCounts),
       canSelectPossible: checkStateCountByKey(['qOption'], dimInfo.qStateCounts),
       canSelectAlternative: checkStateCountByKey(['qAlternative'], dimInfo.qStateCounts),
       canSelectExcluded: checkStateCountByKey(['qAlternative', 'qExcluded'], dimInfo.qStateCounts),

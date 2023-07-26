@@ -2,7 +2,7 @@
 import React, { useState, useRef } from 'react';
 import Typography from '@mui/material/Typography';
 import ArrowRight from '@qlik-trial/sprout/icons/react/ArrowRight';
-import { HeadCellMenuItem, MenuItemGroup } from '../types';
+import { ExtendedHeadCellMenuItem, HeadCellMenuItem, MenuItemGroup } from '../types';
 import { StyledMenuItem, StyledListItemIcon, StyledMenuItemLabel } from '../styles';
 import RecursiveMenuList from './RecursiveMenuList';
 // import { handleHeadCellMenuKeyDown } from '../../../utils/handle-keyboard';
@@ -28,7 +28,17 @@ export const interceptClickOnMenuItems = (menuGroups: MenuItemGroup[], cache: Su
 type SubMenusOpenStatusCache = Record<string, React.Dispatch<React.SetStateAction<boolean>>>;
 let subMenusOpenStatusCache: SubMenusOpenStatusCache = {};
 
-const MenuGroupItems = ({ autoFocus, id, onClick, itemTitle, icon, enabled, subMenus }: HeadCellMenuItem) => {
+const MenuGroupItems = ({
+  autoFocus,
+  id,
+  onClick,
+  itemTitle,
+  icon,
+  enabled,
+  subMenus,
+  isSubMenu,
+  handleHeadCellMenuKeyDown,
+}: ExtendedHeadCellMenuItem) => {
   const [openMenu, setOpenMenu] = useState(false);
   const anchorRef = useRef<HTMLDivElement | null>(null);
 
@@ -53,8 +63,9 @@ const MenuGroupItems = ({ autoFocus, id, onClick, itemTitle, icon, enabled, subM
         onClick={handleOnClick}
         disabled={!enabled}
         autoFocus={autoFocus}
-        // onKeyDown={handleHeadCellMenuKeyDown}
-        onKeyDown={() => console.log('keyDown')}
+        onKeyDown={handleHeadCellMenuKeyDown}
+        // onKeyDown={() => console.log('keyDown')}
+        isSubMenu={isSubMenu}
       >
         <StyledMenuItemLabel>
           <StyledListItemIcon>{icon}</StyledListItemIcon>
@@ -71,14 +82,26 @@ const MenuGroupItems = ({ autoFocus, id, onClick, itemTitle, icon, enabled, subM
           menuGroups={interceptClickOnMenuItems(subMenus, subMenusOpenStatusCache)}
           transformOrigin={{ horizontal: 'left', vertical: 'top' }}
           anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
+          isSubMenu={true}
+          handleHeadCellMenuKeyDown={handleHeadCellMenuKeyDown}
         />
       )}
     </>
   );
 };
 
-const MenuGroup = ({ menuGroup }: { menuGroup: HeadCellMenuItem[] }) => {
-  return menuGroup.map((groupItem) => <MenuGroupItems key={groupItem.id} {...groupItem} />);
+const MenuGroup = ({
+  menuGroup,
+  isSubMenu,
+  handleHeadCellMenuKeyDown,
+}: {
+  menuGroup: HeadCellMenuItem[];
+  isSubMenu?: boolean;
+  handleHeadCellMenuKeyDown: (evt: React.KeyboardEvent<HTMLLIElement>) => void;
+}) => {
+  return menuGroup.map((groupItem) => (
+    <MenuGroupItems key={groupItem.id} {...{ ...groupItem, isSubMenu, handleHeadCellMenuKeyDown }} />
+  ));
 };
 
 export default MenuGroup;
