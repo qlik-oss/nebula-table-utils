@@ -16,29 +16,52 @@ import useFieldSelection from './use-field-selection';
 import RecursiveMenuList from './MenuList/RecursiveMenuList';
 import { Button } from '@mui/material';
 import { HeadCellMenuWrapper } from './styles';
-import { ExtendedLayout, HeadCellMenuProps, MenuItemGroup } from './types';
+import {
+  AdjustColumnSizeRelatedArgs,
+  ExtendedLayout,
+  FlagsArgs,
+  HeadCellMenuProps,
+  SearchRelatedArgs,
+  MenuAvailabilityFlags,
+  MenuItemGroup,
+  SelectionRelatedArgs,
+  SortingRelatedArgs,
+} from './types';
 
-const HeadCellMenu = ({
+const HeadCellMenu = <T extends HeadCellMenuProps>({
   column,
   tabIndex,
   anchorRef,
-  listboxRef,
-  embed,
-  app,
-  model,
   translator,
+  handleHeadCellMenuKeyDown,
+  menuAvailabilityFlags,
+
+  // sorting
   isColumnSorted,
   sortFromMenu,
-  setFocusOnClosetColumnAdjuster,
+  // search
+  embed,
+  listboxRef,
   interactions,
-  handleHeadCellMenuKeyDown,
-}: HeadCellMenuProps) => {
+  // selection
+  app,
+  model,
+  // adjust col size
+  setFocusOnClosetColumnAdjuster,
+}: T &
+  FlagsArgs<T['menuAvailabilityFlags']> &
+  SortingRelatedArgs &
+  SearchRelatedArgs &
+  SelectionRelatedArgs &
+  AdjustColumnSizeRelatedArgs) => {
   const { headTextAlign, qLibraryId, fieldId } = column;
 
   const [openMenuDropdown, setOpenMenuDropdown] = useState(false);
   // TODO;
   // probably dont need this
   const [openListboxDropdown, setOpenListboxDropdown] = useState(false);
+
+  console.log({ menuAvailabilityFlags });
 
   const {
     fieldInstance,
@@ -74,9 +97,12 @@ const HeadCellMenu = ({
     if (!openMenuDropdown) resetSelectionActionsEnabledStatus();
   }, [openMenuDropdown, resetSelectionActionsEnabledStatus]);
 
-  const menuItemGroups = useMemo<MenuItemGroup[]>(
-    () => [
-      [
+  const menuItemGroups = useMemo<MenuItemGroup[]>(() => {
+    const mGrps: MenuItemGroup[] = [];
+
+    // check sorting flag
+    if (menuAvailabilityFlags[MenuAvailabilityFlags.SORTING]) {
+      mGrps.push([
         {
           id: 1,
           itemTitle: translator.get('SNTable.MenuItem.SortAscending'),
@@ -97,94 +123,105 @@ const HeadCellMenu = ({
           icon: <Descending />,
           enabled: !isColumnSorted || column.sortDirection !== 'D',
         },
-      ],
-      ...(column.isDim && interactions.select
-        ? [
-            // Listbox
-            [
-              {
-                id: 1,
+      ]);
+    }
 
-                itemTitle: translator.get('SNTable.MenuItem.Search'),
-                onClick: (evt: React.MouseEvent<HTMLLIElement>) => {
-                  evt.stopPropagation();
-                  setOpenMenuDropdown(false);
-                  setOpenListboxDropdown(true);
-                  embedListbox();
+    // distinguish between measure and dim menu items
+    if (column.isDim && interactions?.select) {
+      const grp = [];
+      // check searching flag
+      if (menuAvailabilityFlags[MenuAvailabilityFlags.SEARCHING]) {
+        grp.push([
+          {
+            id: 1,
+
+            itemTitle: translator.get('SNTable.MenuItem.Search'),
+            onClick: (evt: React.MouseEvent<HTMLLIElement>) => {
+              evt.stopPropagation();
+              setOpenMenuDropdown(false);
+              setOpenListboxDropdown(true);
+              embedListbox();
+            },
+            icon: <Search />,
+            enabled: true,
+          },
+        ]);
+      }
+
+      // check selections flag
+      if (menuAvailabilityFlags[MenuAvailabilityFlags.SELECTIONS]) {
+        grp.push([
+          {
+            id: 1,
+            itemTitle: translator.get('SNTable.MenuItem.Selections'),
+            icon: <Selection />,
+            enabled: true,
+            subMenus: [
+              [
+                {
+                  id: 1,
+                  itemTitle: translator.get('SNTable.MenuItem.SelectAll'),
+                  onClick: async () => {
+                    setOpenMenuDropdown(false);
+                    await fieldInstance?.selectAll();
+                  },
+                  icon: <SelectAll />,
+                  enabled: selectionActionsEnabledStatus.canSelectAll,
                 },
-                icon: <Search />,
-                enabled: true,
-              },
+                {
+                  id: 2,
+                  itemTitle: translator.get('SNTable.MenuItem.SelectPossible'),
+                  onClick: async () => {
+                    setOpenMenuDropdown(false);
+                    await fieldInstance?.selectPossible();
+                  },
+                  icon: <SelectPossible />,
+                  enabled: selectionActionsEnabledStatus.canSelectPossible,
+                },
+                {
+                  id: 3,
+                  itemTitle: translator.get('SNTable.MenuItem.SelectAlternative'),
+                  onClick: async () => {
+                    setOpenMenuDropdown(false);
+                    await fieldInstance?.selectAlternative();
+                  },
+                  icon: <SelectAlternative />,
+                  enabled: selectionActionsEnabledStatus.canSelectAlternative,
+                },
+                {
+                  id: 4,
+                  itemTitle: translator.get('SNTable.MenuItem.SelectExcluded'),
+                  onClick: async () => {
+                    setOpenMenuDropdown(false);
+                    await fieldInstance?.selectExcluded();
+                  },
+                  icon: <SelectExcluded />,
+                  enabled: selectionActionsEnabledStatus.canSelectExcluded,
+                },
+              ],
+              [
+                {
+                  id: 1,
+                  itemTitle: translator.get('SNTable.MenuItem.ClearSelections'),
+                  onClick: async () => {
+                    setOpenMenuDropdown(false);
+                    await fieldInstance?.clear();
+                  },
+                  icon: <ClearSelections />,
+                  enabled: selectionActionsEnabledStatus.canClearSelections,
+                },
+              ],
             ],
-            // selections
-            [
-              {
-                id: 1,
-                itemTitle: translator.get('SNTable.MenuItem.Selections'),
-                icon: <Selection />,
-                enabled: true,
-                subMenus: [
-                  [
-                    {
-                      id: 1,
-                      itemTitle: translator.get('SNTable.MenuItem.SelectAll'),
-                      onClick: async () => {
-                        setOpenMenuDropdown(false);
-                        await fieldInstance?.selectAll();
-                      },
-                      icon: <SelectAll />,
-                      enabled: selectionActionsEnabledStatus.canSelectAll,
-                    },
-                    {
-                      id: 2,
-                      itemTitle: translator.get('SNTable.MenuItem.SelectPossible'),
-                      onClick: async () => {
-                        setOpenMenuDropdown(false);
-                        await fieldInstance?.selectPossible();
-                      },
-                      icon: <SelectPossible />,
-                      enabled: selectionActionsEnabledStatus.canSelectPossible,
-                    },
-                    {
-                      id: 3,
-                      itemTitle: translator.get('SNTable.MenuItem.SelectAlternative'),
-                      onClick: async () => {
-                        setOpenMenuDropdown(false);
-                        await fieldInstance?.selectAlternative();
-                      },
-                      icon: <SelectAlternative />,
-                      enabled: selectionActionsEnabledStatus.canSelectAlternative,
-                    },
-                    {
-                      id: 4,
-                      itemTitle: translator.get('SNTable.MenuItem.SelectExcluded'),
-                      onClick: async () => {
-                        setOpenMenuDropdown(false);
-                        await fieldInstance?.selectExcluded();
-                      },
-                      icon: <SelectExcluded />,
-                      enabled: selectionActionsEnabledStatus.canSelectExcluded,
-                    },
-                  ],
-                  [
-                    {
-                      id: 1,
-                      itemTitle: translator.get('SNTable.MenuItem.ClearSelections'),
-                      onClick: async () => {
-                        setOpenMenuDropdown(false);
-                        await fieldInstance?.clear();
-                      },
-                      icon: <ClearSelections />,
-                      enabled: selectionActionsEnabledStatus.canClearSelections,
-                    },
-                  ],
-                ],
-              },
-            ],
-          ]
-        : []),
-      // Adjust col size
-      [
+          },
+        ]);
+      }
+
+      if (grp.length > 0) mGrps.push(...grp);
+    }
+
+    // check adjustColumnSize flag
+    if (menuAvailabilityFlags[MenuAvailabilityFlags.ADJUST_COLUMN_SIZE]) {
+      mGrps.push([
         {
           id: 1,
           itemTitle: translator.get('SNTable.MenuItem.AdjustColumnSize'),
@@ -197,14 +234,24 @@ const HeadCellMenu = ({
           icon: <ColumnSize />,
           enabled: true,
         },
-      ],
-    ],
-    [translator, isColumnSorted, column.sortDirection, column.isDim, interactions, selectionActionsEnabledStatus]
-  );
+      ]);
+    }
+
+    return mGrps;
+  }, [
+    translator,
+    isColumnSorted,
+    column.sortDirection,
+    column.isDim,
+    interactions?.select,
+    selectionActionsEnabledStatus,
+    menuAvailabilityFlags,
+  ]);
 
   return (
     <HeadCellMenuWrapper rightAligned={headTextAlign === 'right'}>
       <Button
+        style={{ minWidth: 'unset' }}
         isVisible={true}
         size="small"
         tabIndex={tabIndex}

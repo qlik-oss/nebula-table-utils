@@ -12,6 +12,8 @@ export const HeadCellMenuWrapper = styled(Box)(({ rightAligned }: { rightAligned
   fontWeight: 'bold',
   border: '1px dashed pink',
   width: '100%',
+  alignItems: 'center',
+  justifyContent: 'center',
 }));
 
 // ---------- DropdownMenu ----------
@@ -41,6 +43,8 @@ export const StyledMenuItemLabel = styled('div')(() => ({
 }));
 
 export const StyledListItemIcon = styled(ListItemIcon)(({ theme }: DefaultTheme) => ({
+  width: 16,
+  minWidth: 'unset !important',
   marginRight: theme.spacing(1.5),
   lineHeight: 0,
 }));
