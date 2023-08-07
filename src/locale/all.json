@@ -1,0 +1,14 @@
+{
+  "NebulaTableUtils_Test": {
+    "id": "NebulaTableUtils.Test",
+    "locale": {
+      "en-US": "test val"
+    }
+  },
+  "NebulaTableUtils_Test2": {
+    "id": "NebulaTableUtils.Test2",
+    "locale": {
+      "en-US": "test val number 2"
+    }
+  }
+}

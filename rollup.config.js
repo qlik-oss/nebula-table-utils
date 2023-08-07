@@ -15,6 +15,36 @@ import pkg from './package.json' assert { type: 'json' };
 const EXCLUDED_FILES = [/node_modules/, 'src/**/__tests__', 'src/test'];
 const ENABLE_SOURCE_MAP = process.env.BUILD_SOURCE_MAPS === 'true' || process.env.NODE_ENV === 'development';
 
+// /**
+//  *
+//  * @param {object} translations
+//  * @param {boolean} [pseudo] Optional. Whether to pseudoize the values.
+//  * @returns
+//  */
+// function optimiseTranslations(translations, pseudo) {
+//   if (!translations) return {};
+//   return Object.keys(translations).reduce((acc, key) => {
+//     const translation = translations[key];
+//     const { value } = translation;
+//     if ((typeof value === 'string' || typeof value === 'object') && key.startsWith('QCS.Common.')) {
+//       if (pseudo) {
+//         if (typeof value === 'string') {
+//           acc[key] = pseudolize(value);
+//         }
+//         if (typeof value === 'object') {
+//           acc[key] = Object.keys(value).reduce((acc, key) => {
+//             acc[key] = pseudolize(value[key]);
+//             return acc;
+//           }, {});
+//         }
+//       } else {
+//         acc[key] = value;
+//       }
+//     }
+//     return acc;
+//   }, {});
+// }
+
 const baseConfig = defineConfig({
   external: ['react', 'react-dom', '@nebula.js/stardust'],
   plugins: [
@@ -47,6 +77,15 @@ const baseConfig = defineConfig({
     }),
     copy({
       targets: [
+        {
+          src: 'src/translations/*.json',
+          dest: 'lib/translations',
+          // transform: (src) => {
+          //   const translations = JSON.parse(src);
+          //   const optimisedTranslations = optimiseTranslations(translations);
+          //   return JSON.stringify(optimisedTranslations);
+          // },
+        },
         { src: 'package.json', dest: 'lib' },
         { src: 'README.md', dest: 'lib' },
         { src: 'LICENSE', dest: 'lib' },
@@ -64,18 +103,18 @@ export default defineConfig([
   {
     input: 'src/index.ts',
     output: [
-      { file: pkg.main, file: "lib/index.js", format: 'cjs', sourcemap: ENABLE_SOURCE_MAP },
-      { file: pkg.module, file: "lib/index.es.js", format: 'es', sourcemap: ENABLE_SOURCE_MAP },
+      { file: pkg.main, file: 'lib/index.js', format: 'cjs', sourcemap: ENABLE_SOURCE_MAP },
+      { file: pkg.module, file: 'lib/index.es.js', format: 'es', sourcemap: ENABLE_SOURCE_MAP },
     ],
     ...baseConfig,
   },
   {
     input: [
-      'src/**/*.(ts|tsx)', 
-      '!src/index.ts', 
-      '!src/**/__tests__', 
-      '!src/**/*.(test|spec).(ts|tsx)', 
-      '!src/__storybook__'
+      'src/**/*.(ts|tsx)',
+      '!src/index.ts',
+      '!src/**/__tests__',
+      '!src/**/*.(test|spec).(ts|tsx)',
+      '!src/__storybook__',
     ],
     output: {
       dir: 'lib',

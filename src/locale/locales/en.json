@@ -1,0 +1,10 @@
+{
+  "NebulaTableUtils.Test": {
+    "value": "test val",
+    "comment": "Test value for translation"
+  },
+  "NebulaTableUtils.Test2": {
+    "value": "test val number 2",
+    "comment": "Test value for translation"
+  }
+}
