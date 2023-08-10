@@ -61,8 +61,6 @@ const HeadCellMenu = <T extends HeadCellMenuProps>({
   // probably dont need this
   const [openListboxDropdown, setOpenListboxDropdown] = useState(false);
 
-  console.log({ menuAvailabilityFlags });
-
   const {
     fieldInstance,
     selectionActionsEnabledStatus,
