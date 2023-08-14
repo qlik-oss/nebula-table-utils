@@ -23,18 +23,23 @@ export const StyledDivider = styled(Divider)(({ theme }: DefaultTheme) => ({
   },
 }));
 
-export const StyledMenuItem = styled(MenuItem)(({ theme, isSubMenu }: DefaultTheme & { isSubMenu: boolean }) => ({
-  // menu dropdown width - item margins to add up to 220px as per design - if is submenu -> it might shrink by 10 px
-  width: `calc(${HEAD_CELL_MENU_WIDTH}px - ${theme.spacing(1)} - ${isSubMenu ? 10 : 0}px)`,
-  borderRadius: '4px',
-  margin: theme.spacing(0, 0.5),
-  padding: theme.spacing(1, 1.5),
-  display: 'flex',
-  justifyContent: 'space-between',
-  '&&:focus': {
-    boxShadow: 'rgb(23, 127, 230) 0px 0px 0px 2px',
-  },
-}));
+export const StyledMenuItem = styled(MenuItem)(
+  ({ theme, isSubMenu, isActive }: DefaultTheme & { isSubMenu: boolean; isActive: boolean }) => ({
+    // menu dropdown width - item margins to add up to 220px as per design - if is submenu -> it might shrink by 10 px
+    width: `calc(${HEAD_CELL_MENU_WIDTH}px - ${theme.spacing(1)} - ${isSubMenu ? 10 : 0}px)`,
+    borderRadius: '4px',
+    margin: theme.spacing(0, 0.5),
+    padding: theme.spacing(1, 1.5),
+    display: 'flex',
+    justifyContent: 'space-between',
+    '&&:focus': {
+      boxShadow: 'rgb(23, 127, 230) 0px 0px 0px 2px',
+    },
+    borderLeft: `4px solid ${isActive ? '#01873d' : 'transparent'}`, // TODO: use color from theme
+    boxSizing: 'border-box',
+    overflow: 'hidden',
+  })
+);
 
 export const StyledMenuItemLabel = styled('div')(() => ({
   display: 'flex',

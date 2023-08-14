@@ -39,6 +39,7 @@ const HeadCellMenu = <T extends HeadCellMenuProps>({
   // sorting
   isColumnSorted,
   sortFromMenu,
+  changeActivelySortedColumn = () => {},
   // search
   embed,
   listboxRef,
@@ -57,8 +58,9 @@ const HeadCellMenu = <T extends HeadCellMenuProps>({
   const { headTextAlign, qLibraryId, fieldId } = column;
 
   const [openMenuDropdown, setOpenMenuDropdown] = useState(false);
-  // TODO;
-  // probably dont need this
+
+  // TODO:
+  // maybe not needed!
   const [openListboxDropdown, setOpenListboxDropdown] = useState(false);
 
   const {
@@ -107,9 +109,11 @@ const HeadCellMenu = <T extends HeadCellMenuProps>({
           onClick: (evt: React.MouseEvent<HTMLLIElement>) => {
             sortFromMenu(evt, 'A');
             setOpenMenuDropdown(false);
+            changeActivelySortedColumn?.(column);
           },
           icon: <Ascending />,
-          enabled: !isColumnSorted || column.sortDirection !== 'A',
+          enabled: true, //!isColumnSorted || column.sortDirection !== 'A',
+          isActive: column.activelySortedColumnIndex && column.sortDirection == 'A',
         },
         {
           id: 2,
@@ -117,9 +121,11 @@ const HeadCellMenu = <T extends HeadCellMenuProps>({
           onClick: (evt: React.MouseEvent<HTMLLIElement>) => {
             sortFromMenu(evt, 'D');
             setOpenMenuDropdown(false);
+            changeActivelySortedColumn?.(column);
           },
           icon: <Descending />,
-          enabled: !isColumnSorted || column.sortDirection !== 'D',
+          enabled: true, //!isColumnSorted || column.sortDirection !== 'D',
+          isActive: column.activelySortedColumnIndex && column.sortDirection == 'D',
         },
       ]);
     }
@@ -132,7 +138,6 @@ const HeadCellMenu = <T extends HeadCellMenuProps>({
         grp.push([
           {
             id: 1,
-
             itemTitle: translator.get('SNTable.MenuItem.Search'),
             onClick: (evt: React.MouseEvent<HTMLLIElement>) => {
               evt.stopPropagation();
@@ -239,8 +244,10 @@ const HeadCellMenu = <T extends HeadCellMenuProps>({
   }, [
     translator,
     isColumnSorted,
+    column,
     column.sortDirection,
     column.isDim,
+    column.activelySortedColumnIndex,
     interactions?.select,
     selectionActionsEnabledStatus,
     menuAvailabilityFlags,
@@ -250,7 +257,6 @@ const HeadCellMenu = <T extends HeadCellMenuProps>({
     <HeadCellMenuWrapper rightAligned={headTextAlign === 'right'}>
       <Button
         style={{ minWidth: 'unset' }}
-        isVisible={true}
         size="small"
         tabIndex={tabIndex}
         id="sn-table-head-menu-button"

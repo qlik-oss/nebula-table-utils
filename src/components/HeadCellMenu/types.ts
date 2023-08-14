@@ -11,6 +11,7 @@ export enum MenuAvailabilityFlags {
 export interface SortingRelatedArgs {
   isColumnSorted: boolean;
   sortFromMenu: (evt: React.MouseEvent, newSortDirection: SortDirection) => void;
+  changeActivelySortedColumn?: (column: Column) => void;
 }
 
 export interface SearchRelatedArgs {
@@ -81,7 +82,8 @@ export interface HeadCellMenuItem {
   autoFocus?: boolean;
   icon: React.ReactElement;
   itemTitle: string;
-  enabled: boolean;
+  enabled: boolean; // for selections
+  isActive?: boolean; // for active sorted col
   onClick?: (evt: React.MouseEvent<HTMLLIElement>) => void;
   subMenus?: MenuItemGroup[];
   isSubMenu?: boolean;
@@ -112,19 +114,12 @@ export interface Column {
   id: string;
   isDim: boolean;
   qLibraryId?: string;
-  fieldId: string;
-  isLocked: boolean;
   colIdx: number;
-  pageColIdx: number;
-  selectionColIdx: number;
+  fieldId: string;
   label: string;
   headTextAlign: Align;
-  totalsTextAlign: Align;
-  bodyTextAlign: 'auto' | Align;
-  stylingIDs: string[];
   sortDirection: SortDirection;
-  qReverseSort: boolean;
-  totalInfo: string;
-  qApprMaxGlyphCount: number;
-  columnWidth: any;
+  // TODO:
+  // convert it to activelySortedColumn BOOLEAN
+  activelySortedColumnIndex?: boolean;
 }

@@ -37,6 +37,7 @@ const MenuGroupItems = ({
   enabled,
   subMenus,
   isSubMenu,
+  isActive,
   handleHeadCellMenuKeyDown,
 }: ExtendedHeadCellMenuItem) => {
   const [openMenu, setOpenMenu] = useState(false);
@@ -66,6 +67,7 @@ const MenuGroupItems = ({
         onKeyDown={handleHeadCellMenuKeyDown}
         // onKeyDown={() => console.log('keyDown')}
         isSubMenu={isSubMenu}
+        isActive={isActive}
       >
         <StyledMenuItemLabel>
           <StyledListItemIcon>{icon}</StyledListItemIcon>
