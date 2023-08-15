@@ -37,9 +37,8 @@ const HeadCellMenu = <T extends HeadCellMenuProps>({
   menuAvailabilityFlags,
 
   // sorting
-  isColumnSorted,
   sortFromMenu,
-  changeActivelySortedColumn = () => {},
+  changeActivelySortedColumn,
   // search
   embed,
   listboxRef,
@@ -112,8 +111,8 @@ const HeadCellMenu = <T extends HeadCellMenuProps>({
             changeActivelySortedColumn?.(column);
           },
           icon: <Ascending />,
-          enabled: true, //!isColumnSorted || column.sortDirection !== 'A',
-          isActive: column.activelySortedColumnIndex && column.sortDirection == 'A',
+          enabled: true,
+          isActive: column.isActivelySorted && column.sortDirection == 'A',
         },
         {
           id: 2,
@@ -124,8 +123,8 @@ const HeadCellMenu = <T extends HeadCellMenuProps>({
             changeActivelySortedColumn?.(column);
           },
           icon: <Descending />,
-          enabled: true, //!isColumnSorted || column.sortDirection !== 'D',
-          isActive: column.activelySortedColumnIndex && column.sortDirection == 'D',
+          enabled: true,
+          isActive: column.isActivelySorted && column.sortDirection == 'D',
         },
       ]);
     }
@@ -241,17 +240,7 @@ const HeadCellMenu = <T extends HeadCellMenuProps>({
     }
 
     return mGrps;
-  }, [
-    translator,
-    isColumnSorted,
-    column,
-    column.sortDirection,
-    column.isDim,
-    column.activelySortedColumnIndex,
-    interactions?.select,
-    selectionActionsEnabledStatus,
-    menuAvailabilityFlags,
-  ]);
+  }, [translator, column, interactions?.select, selectionActionsEnabledStatus, menuAvailabilityFlags]);
 
   return (
     <HeadCellMenuWrapper rightAligned={headTextAlign === 'right'}>

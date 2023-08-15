@@ -9,7 +9,6 @@ export enum MenuAvailabilityFlags {
 }
 
 export interface SortingRelatedArgs {
-  isColumnSorted: boolean;
   sortFromMenu: (evt: React.MouseEvent, newSortDirection: SortDirection) => void;
   changeActivelySortedColumn?: (column: Column) => void;
 }
@@ -58,7 +57,6 @@ export interface HeadCellMenuProps {
   menuAvailabilityFlags: Partial<Record<MenuAvailabilityFlags, boolean>>;
 
   // // sorting
-  // isColumnSorted: boolean;
   // sortFromMenu: (evt: React.MouseEvent, newSortDirection: SortDirection) => void;
 
   // // listbox
@@ -119,7 +117,5 @@ export interface Column {
   label: string;
   headTextAlign: Align;
   sortDirection: SortDirection;
-  // TODO:
-  // convert it to activelySortedColumn BOOLEAN
-  activelySortedColumnIndex?: boolean;
+  isActivelySorted?: boolean;
 }
