@@ -43,7 +43,7 @@
     "@jest/globals": "^29.6.1",
     "@qlik/eslint-config": "^0.4.8",
     "@qlik/eslint-config-react": "^0.1.0",
-    "@qlik/prettier-config": "^0.2.0",
+    "@qlik/prettier-config": "^0.3.0",
     "@qlik/tsconfig": "^0.1.4",
     "@rollup/plugin-commonjs": "^25.0.2",
     "@rollup/plugin-json": "^6.0.0",
@@ -80,7 +80,7 @@
     "semantic-release": "^21.0.7",
     "typescript": "^5.1.6"
   },
-  "packageManager": "pnpm@8.6.9",
+  "packageManager": "pnpm@8.6.12",
   "peerDependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
