@@ -1,6 +1,5 @@
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Menu from '@qlik-trial/sprout/icons/Menu';
 
 import { HEAD_CELL_MENU_WIDTH, HEAD_ICON_WRAPPER_SIZE } from '../../constants';

@@ -12,4 +12,6 @@ test/rendering/artifacts
 test/rendering/test-report
 test/rendering/state.json
 
+rollup.config-*.cjs
+
 .env*
