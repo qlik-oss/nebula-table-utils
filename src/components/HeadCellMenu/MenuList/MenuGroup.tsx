@@ -2,26 +2,35 @@
 import React, { useState, useRef } from 'react';
 import Typography from '@mui/material/Typography';
 import ArrowRight from '@qlik-trial/sprout/icons/react/ArrowRight';
-import { ExtendedHeadCellMenuItem, HeadCellMenuItem, MenuItemGroup } from '../types';
-import { StyledMenuItem, StyledListItemIcon, StyledMenuItemLabel } from '../styles';
+import { ExtendedHeadCellMenuItem, MenuItemGroup } from '../types';
+import {
+  StyledMenuItem,
+  StyledListItemIcon,
+  StyledMenuItemLabel,
+  StyledGroupLabel,
+  StyledGreenBorder,
+} from '../styles';
 import RecursiveMenuList from './RecursiveMenuList';
 // import { handleHeadCellMenuKeyDown } from '../../../utils/handle-keyboard';
 
 export const interceptClickOnMenuItems = (menuGroups: MenuItemGroup[], cache: SubMenusOpenStatusCache) => {
-  const result = menuGroups.map((grp) => {
-    return grp.map(({ onClick, ...restProps }) => ({
-      ...restProps,
-      ...(onClick
-        ? {
-            onClick: (evt: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
-              // reset all opened submenu levels here!
-              Object.entries(cache).map(([, setter]) => setter(false));
-              onClick(evt);
-            },
-          }
-        : {}),
-    }));
-  });
+  const result = menuGroups.map((group) =>
+    group.map((grp) => ({
+      groupHeading: grp.groupHeading,
+      items: grp.items?.map(({ onClick, ...restProps }) => ({
+        ...restProps,
+        ...(onClick
+          ? {
+              onClick: (evt: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
+                // reset all opened submenu levels here!
+                Object.entries(cache).map(([, setter]) => setter(false));
+                onClick(evt);
+              },
+            }
+          : {}),
+      })),
+    }))
+  );
   return result;
 };
 
@@ -33,7 +42,7 @@ const MenuGroupItems = ({
   id,
   onClick,
   itemTitle,
-  icon,
+  icon: Icon,
   enabled,
   subMenus,
   isSubMenu,
@@ -69,8 +78,11 @@ const MenuGroupItems = ({
         isSubMenu={isSubMenu}
         isActive={isActive}
       >
+        {isActive && <StyledGreenBorder />}
         <StyledMenuItemLabel>
-          <StyledListItemIcon>{icon}</StyledListItemIcon>
+          <StyledListItemIcon>
+            <Icon />
+          </StyledListItemIcon>
           <Typography variant="body2">{itemTitle}</Typography>
         </StyledMenuItemLabel>
         {subMenus?.length ? <ArrowRight /> : null}
@@ -97,13 +109,18 @@ const MenuGroup = ({
   isSubMenu,
   handleHeadCellMenuKeyDown,
 }: {
-  menuGroup: HeadCellMenuItem[];
+  menuGroup: MenuItemGroup;
   isSubMenu?: boolean;
   handleHeadCellMenuKeyDown: (evt: React.KeyboardEvent<HTMLLIElement>) => void;
 }) => {
-  return menuGroup.map((groupItem) => (
-    <MenuGroupItems key={groupItem.id} {...{ ...groupItem, isSubMenu, handleHeadCellMenuKeyDown }} />
-  ));
+  return menuGroup.map((grp) => [
+    <>
+      {grp.groupHeading && <StyledGroupLabel>Sorting</StyledGroupLabel>}
+      {grp.items?.map((groupItem) => (
+        <MenuGroupItems key={groupItem.id} {...{ ...groupItem, isSubMenu, handleHeadCellMenuKeyDown }} />
+      ))}
+    </>,
+  ]);
 };
 
 export default MenuGroup;

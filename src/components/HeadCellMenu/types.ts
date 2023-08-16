@@ -1,5 +1,6 @@
 import { stardust } from '@nebula.js/stardust';
 import { SortDirection } from '../../types';
+import { SVGProps } from 'react';
 
 export enum MenuAvailabilityFlags {
   SORTING = 'sorting',
@@ -72,13 +73,15 @@ export interface HeadCellMenuProps {
   // setFocusOnClosetColumnAdjuster: (anchorRef: React.RefObject<HTMLDivElement>) => void;
 }
 
-export type MenuItemGroup = HeadCellMenuItem[];
+export type MenuItemGroup = {
+  groupHeading?: string;
+  items: HeadCellMenuItem[];
+}[];
 
 export interface HeadCellMenuItem {
   id: number;
-  // menuType: MenuTypes;
   autoFocus?: boolean;
-  icon: React.ReactElement;
+  icon: (props: SVGProps<SVGSVGElement>) => JSX.Element;
   itemTitle: string;
   enabled: boolean; // for selections
   isActive?: boolean; // for active sorted col
