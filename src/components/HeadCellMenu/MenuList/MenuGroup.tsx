@@ -114,12 +114,12 @@ const MenuGroup = ({
   handleHeadCellMenuKeyDown: (evt: React.KeyboardEvent<HTMLLIElement>) => void;
 }) => {
   return menuGroup.map((grp) => [
-    <>
-      {grp.groupHeading && <StyledGroupLabel>Sorting</StyledGroupLabel>}
-      {grp.items?.map((groupItem) => (
+    [
+      grp.groupHeading && <StyledGroupLabel>Sorting</StyledGroupLabel>,
+      grp.items?.map((groupItem) => (
         <MenuGroupItems key={groupItem.id} {...{ ...groupItem, isSubMenu, handleHeadCellMenuKeyDown }} />
-      ))}
-    </>,
+      )),
+    ].filter(Boolean),
   ]);
 };
 
