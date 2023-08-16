@@ -1,9 +1,9 @@
 /* eslint-disable import/no-cycle */
 import React from 'react';
-import Menu from '@mui/material/Menu';
 import { PopoverOrigin } from '@mui/material';
 import { MenuItemGroup } from '../types';
 import MenuGroupWrapper from './MenuGroupWrapper';
+import { StyledMenu } from '../styles';
 
 interface RecursiveMenuListProps {
   open: boolean;
@@ -30,7 +30,7 @@ const RecursiveMenuList = ({
 }: RecursiveMenuListProps) => {
   if (!menuGroups.length) return null;
   return (
-    <Menu
+    <StyledMenu
       className="sn-table-head-menu"
       open={open}
       anchorEl={anchorEl}
@@ -40,7 +40,7 @@ const RecursiveMenuList = ({
       {...(transformOrigin ? { transformOrigin } : {})}
     >
       {MenuGroupWrapper({ itemGroups: menuGroups, isSubMenu, handleHeadCellMenuKeyDown })}
-    </Menu>
+    </StyledMenu>
   );
 };
 
