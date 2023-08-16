@@ -1,18 +1,18 @@
 /* eslint-disable import/no-cycle */
 import React from 'react';
-import Menu from '@mui/material/Menu';
 import { PopoverOrigin } from '@mui/material';
 import { MenuItemGroup } from '../types';
 import MenuGroupWrapper from './MenuGroupWrapper';
+import { StyledMenu } from '../styles';
 
 interface RecursiveMenuListProps {
   open: boolean;
   anchorEl: HTMLDivElement | null;
   onClose: () => void;
   menuGroups: MenuItemGroup[];
-  transformOrigin?: PopoverOrigin; // eslint-disable-line react/require-default-props
-  anchorOrigin?: PopoverOrigin; // eslint-disable-line react/require-default-props
-  ariaLabel?: string; // eslint-disable-line react/require-default-props
+  transformOrigin?: PopoverOrigin;
+  anchorOrigin?: PopoverOrigin;
+  ariaLabel?: string;
   isSubMenu?: boolean;
   handleHeadCellMenuKeyDown: (evt: React.KeyboardEvent<HTMLLIElement>) => void;
 }
@@ -30,7 +30,7 @@ const RecursiveMenuList = ({
 }: RecursiveMenuListProps) => {
   if (!menuGroups.length) return null;
   return (
-    <Menu
+    <StyledMenu
       className="sn-table-head-menu"
       open={open}
       anchorEl={anchorEl}
@@ -40,7 +40,7 @@ const RecursiveMenuList = ({
       {...(transformOrigin ? { transformOrigin } : {})}
     >
       {MenuGroupWrapper({ itemGroups: menuGroups, isSubMenu, handleHeadCellMenuKeyDown })}
-    </Menu>
+    </StyledMenu>
   );
 };
 

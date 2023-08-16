@@ -57,10 +57,10 @@ export interface HeadCellMenuProps {
   menuAvailabilityFlags: Partial<Record<MenuAvailabilityFlags, boolean>>;
 }
 
-export type MenuItemGroup = {
+export type MenuItemGroup = Array<{
   groupHeading?: string;
   items: HeadCellMenuItem[];
-}[];
+}>;
 
 export interface HeadCellMenuItem {
   id: number;
