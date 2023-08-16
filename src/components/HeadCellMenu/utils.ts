@@ -1,5 +1,4 @@
 import { stardust } from '@nebula.js/stardust';
-import { Column, MenuAvailabilityFlags, MenuItemGroup, SortingRelatedArgs } from './types';
 import Descending from '@qlik-trial/sprout/icons/react/Descending';
 import Ascending from '@qlik-trial/sprout/icons/react/Ascending';
 import Search from '@qlik-trial/sprout/icons/react/Search';
@@ -10,6 +9,7 @@ import SelectPossible from '@qlik-trial/sprout/icons/react/SelectPossible';
 import SelectAlternative from '@qlik-trial/sprout/icons/react/SelectAlternative';
 import SelectExcluded from '@qlik-trial/sprout/icons/react/SelectExcluded';
 import ColumnSize from '@qlik-trial/sprout/icons/react/ColumnSize';
+import { Column, MenuAvailabilityFlags, MenuItemGroup, SortingRelatedArgs } from './types';
 
 type GetMenuItemGroupsArgs = SortingRelatedArgs & {
   column: Column;
@@ -70,7 +70,7 @@ export const getMenuItemGroups = ({
             },
             icon: Ascending,
             enabled: true,
-            isActive: column.isActivelySorted && column.sortDirection == 'A',
+            isActive: column.isActivelySorted && column.sortDirection === 'A',
           },
           {
             id: 2,
@@ -82,7 +82,7 @@ export const getMenuItemGroups = ({
             },
             icon: Descending,
             enabled: true,
-            isActive: column.isActivelySorted && column.sortDirection == 'D',
+            isActive: column.isActivelySorted && column.sortDirection === 'D',
           },
         ],
       },

@@ -1,12 +1,11 @@
 import React, { useState, useCallback, useEffect } from 'react';
+import Menu from '@qlik-trial/sprout/icons/Menu';
 import useFieldSelection from './use-field-selection';
 import RecursiveMenuList from './MenuList/RecursiveMenuList';
 import { getMenuItemGroups } from './utils';
-import Menu from '@qlik-trial/sprout/icons/Menu';
 import { HeadCellMenuWrapper, StyledMenuButton } from './styles';
 import {
   AdjustColumnSizeRelatedArgs,
-  ExtendedLayout,
   FlagsArgs,
   HeadCellMenuProps,
   SearchRelatedArgs,
@@ -52,20 +51,19 @@ const HeadCellMenu = <T extends HeadCellMenuProps>({
   const handleOpenDropdown = async () => {
     if (!openMenuDropdown && model) {
       const layout = await model.getLayout();
-      updateSelectionActionsEnabledStatus(layout as ExtendedLayout);
+      updateSelectionActionsEnabledStatus(layout as EngineAPI.IGenericHyperCubeLayout);
     }
     setOpenMenuDropdown(!openMenuDropdown);
   };
 
   const embedListbox = useCallback(() => {
     const id = qLibraryId ? { qLibraryId, type: 'dimension' } : fieldId;
-    // TODO:
-    // @ts-ignore TODO: no types for `__DO_NOT_USE__`, it will improve when it becomes stable
+    // @ts-expect-error TODO: no types for `__DO_NOT_USE__`, it will improve when it becomes stable
     embed.__DO_NOT_USE__.popover(listboxRef.current, id, {
       anchorOrigin: { vertical: 'bottom', horizontal: 'left' },
       transformOrigin: { vertical: 'top', horizontal: 'left' },
     });
-  }, [embed, fieldId, qLibraryId]);
+  }, [embed, fieldId, qLibraryId, listboxRef]);
 
   useEffect(() => {
     if (!openMenuDropdown) resetSelectionActionsEnabledStatus();

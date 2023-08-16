@@ -1,10 +1,9 @@
 import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
 import Menu from '@qlik-trial/sprout/icons/Menu';
+import { Divider, ListItemIcon, MenuItem, ListItem, Box } from '@mui/material';
 
 import { HEAD_CELL_MENU_WIDTH, HEAD_ICON_WRAPPER_SIZE } from '../../constants';
 import { DefaultTheme } from '../../types';
-import { Divider, ListItemIcon, MenuItem, ListItem } from '@mui/material';
 
 // ---------- HeadCellMenu ----------
 export const HeadCellMenuWrapper = styled(Box)(({ rightAligned }: { rightAligned: boolean }) => ({
@@ -40,8 +39,8 @@ export const StyledGroupLabel = styled(ListItem)(({ theme }: DefaultTheme) => ({
 
 export const StyledMenuItem = styled(MenuItem)(
   ({ theme, isSubMenu, isActive }: DefaultTheme & { isSubMenu: boolean; isActive: boolean }) => ({
-    // menu dropdown width - item margins to add up to 220px as per design - if is submenu -> it might shrink by 10 px
-    width: `calc(${HEAD_CELL_MENU_WIDTH}px - ${theme.spacing(1)} - ${isSubMenu ? 10 : 0}px)`,
+    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+    width: `calc(${HEAD_CELL_MENU_WIDTH}px - ${theme.spacing(1)}px - ${isSubMenu ? 10 : 0}px)`, // menu dropdown width - item margins to add up to 220px as per design - if is submenu -> it might shrink by 10 px
     maxHeight: '32px',
     borderRadius: '4px',
     margin: theme.spacing(0.25, 0.5),

@@ -1,6 +1,6 @@
+import { SVGProps } from 'react';
 import { stardust } from '@nebula.js/stardust';
 import { SortDirection } from '../../types';
-import { SVGProps } from 'react';
 
 export enum MenuAvailabilityFlags {
   SORTING = 'sorting',
@@ -56,21 +56,6 @@ export interface HeadCellMenuProps {
   anchorRef: React.RefObject<HTMLDivElement>;
   handleHeadCellMenuKeyDown: (evt: React.KeyboardEvent<HTMLLIElement>) => void;
   menuAvailabilityFlags: Partial<Record<MenuAvailabilityFlags, boolean>>;
-
-  // // sorting
-  // sortFromMenu: (evt: React.MouseEvent, newSortDirection: SortDirection) => void;
-
-  // // listbox
-  // embed: stardust.Embed;
-  // listboxRef: React.RefObject<HTMLDivElement>;
-  // interactions: stardust.Interactions;
-
-  // // selection
-  // app: EngineAPI.IApp | undefined;
-  // model: EngineAPI.IGenericObject | undefined;
-
-  // // adjustColSize
-  // setFocusOnClosetColumnAdjuster: (anchorRef: React.RefObject<HTMLDivElement>) => void;
 }
 
 export type MenuItemGroup = {
@@ -94,13 +79,11 @@ export interface ExtendedHeadCellMenuItem extends HeadCellMenuItem {
   handleHeadCellMenuKeyDown: (evt: React.KeyboardEvent<HTMLLIElement>) => void;
 }
 
-export interface ExtendedLayout extends EngineAPI.IGenericHyperCubeLayout {}
-
 export interface UseFieldSelectionOutput {
   fieldInstance: EngineAPI.IField | null;
   selectionActionsEnabledStatus: Record<string, boolean>;
   resetSelectionActionsEnabledStatus: () => void;
-  updateSelectionActionsEnabledStatus: (layout: ExtendedLayout) => void;
+  updateSelectionActionsEnabledStatus: (layout: EngineAPI.IGenericHyperCubeLayout) => void;
 }
 
 export interface UseFieldSelectionProps {

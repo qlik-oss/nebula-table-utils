@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { ExtendedLayout, UseFieldSelectionOutput, UseFieldSelectionProps } from './types';
+import { UseFieldSelectionOutput, UseFieldSelectionProps } from './types';
 
 const SELECTION_ACTIONS_ENABLED_DEFAULT_STATUS: Record<string, boolean> = {
   canSelectAll: false,
@@ -21,14 +21,14 @@ const useFieldSelection = ({ column, app }: UseFieldSelectionProps): UseFieldSel
 
   useEffect(() => {
     if (!app || !app.getField || !column || !column.isDim) return;
-    app.getField(column.fieldId).then(setFieldInstance);
+    app.getField(column.fieldId).then(setFieldInstance).catch(console.error);
   }, [app, column]);
 
   const resetSelectionActionsEnabledStatus = useCallback(
     () => setSelectionActionsEnabledStatus(SELECTION_ACTIONS_ENABLED_DEFAULT_STATUS),
     []
   );
-  const updateSelectionActionsEnabledStatus = (layout: ExtendedLayout) => {
+  const updateSelectionActionsEnabledStatus = (layout: EngineAPI.IGenericHyperCubeLayout) => {
     const dimInfo = layout.qHyperCube.qDimensionInfo.find((dim) => dim.qFallbackTitle === column.label);
     if (!dimInfo) return;
     setSelectionActionsEnabledStatus({

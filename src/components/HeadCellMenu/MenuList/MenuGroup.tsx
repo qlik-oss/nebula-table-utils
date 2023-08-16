@@ -11,7 +11,6 @@ import {
   StyledGreenBorder,
 } from '../styles';
 import RecursiveMenuList from './RecursiveMenuList';
-// import { handleHeadCellMenuKeyDown } from '../../../utils/handle-keyboard';
 
 export const interceptClickOnMenuItems = (menuGroups: MenuItemGroup[], cache: SubMenusOpenStatusCache) => {
   const result = menuGroups.map((group) =>
@@ -74,7 +73,8 @@ const MenuGroupItems = ({
         disabled={!enabled}
         autoFocus={autoFocus}
         onKeyDown={handleHeadCellMenuKeyDown}
-        // onKeyDown={() => console.log('keyDown')}
+        // TODO:
+        // implement onKeyDown with handleHeadCellMenuKeyDown for sn-table
         isSubMenu={isSubMenu}
         isActive={isActive}
       >
@@ -90,13 +90,13 @@ const MenuGroupItems = ({
 
       {subMenus?.length && (
         <RecursiveMenuList
-          anchorEl={anchorRef.current}
+          isSubMenu
           open={openMenu}
+          anchorEl={anchorRef.current}
           onClose={() => setOpenMenu(false)}
           menuGroups={interceptClickOnMenuItems(subMenus, subMenusOpenStatusCache)}
           transformOrigin={{ horizontal: 'left', vertical: 'top' }}
           anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
-          isSubMenu={true}
           handleHeadCellMenuKeyDown={handleHeadCellMenuKeyDown}
         />
       )}
