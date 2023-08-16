@@ -1,6 +1,5 @@
 import { SVGProps } from 'react';
 import { stardust } from '@nebula.js/stardust';
-import { SortDirection } from '../../types';
 
 export enum MenuAvailabilityFlags {
   SORTING = 'sorting',
@@ -92,6 +91,7 @@ export interface UseFieldSelectionProps {
 }
 
 // --------------- GENRAL TYPES
+export type SortDirection = 'A' | 'D';
 export type Align = 'left' | 'center' | 'right';
 
 export interface Column {
