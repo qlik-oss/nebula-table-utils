@@ -136,6 +136,7 @@ export const getMenuItemGroups = ({
                         },
                         icon: SelectAll,
                         enabled: selectionActionsEnabledStatus.canSelectAll,
+                        isActive: true,
                       },
                       {
                         id: 2,
@@ -146,6 +147,7 @@ export const getMenuItemGroups = ({
                         },
                         icon: SelectPossible,
                         enabled: selectionActionsEnabledStatus.canSelectPossible,
+                        isActive: true,
                       },
                       {
                         id: 3,
@@ -156,6 +158,7 @@ export const getMenuItemGroups = ({
                         },
                         icon: SelectAlternative,
                         enabled: selectionActionsEnabledStatus.canSelectAlternative,
+                        isActive: true,
                       },
                       {
                         id: 4,
@@ -166,6 +169,7 @@ export const getMenuItemGroups = ({
                         },
                         icon: SelectExcluded,
                         enabled: selectionActionsEnabledStatus.canSelectExcluded,
+                        isActive: true,
                       },
                     ],
                   },
@@ -182,6 +186,7 @@ export const getMenuItemGroups = ({
                         },
                         icon: ClearSelections,
                         enabled: selectionActionsEnabledStatus.canClearSelections,
+                        isActive: true,
                       },
                     ],
                   },

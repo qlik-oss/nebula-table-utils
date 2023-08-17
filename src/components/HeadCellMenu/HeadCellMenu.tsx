@@ -80,6 +80,7 @@ const HeadCellMenu = <T extends HeadCellMenuProps>({
         aria-haspopup="true"
         onClick={handleOpenDropdown}
         aria-label={translator.get('SNTable.Accessibility.ColumnOptions')}
+        data-testid="sn-table-head-menu-button"
       >
         <Menu />
       </StyledMenuButton>

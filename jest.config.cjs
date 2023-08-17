@@ -10,6 +10,6 @@ module.exports = {
   moduleNameMapper: {
     '@qlik-trial/sprout/icons/.*': '<rootDir>/test-utils/sprout-icons-mock.tsx',
   },
-  coveragePathIgnorePatterns: ['dist', 'lib', 'build-utils'],
+  coveragePathIgnorePatterns: ['dist', 'lib', 'build-utils', './src/constants'],
   transformIgnorePatterns: ['<rootDir>/node_modules/(?!(cliui|wrap-ansi)/*)'],
 };
