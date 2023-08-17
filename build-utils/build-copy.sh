@@ -1,4 +1,4 @@
-#!/bin/sh 
+#!/bin/sh
 
 
 pnpm build:prod
@@ -6,7 +6,7 @@ pnpm build:prod
 
 export $(grep -v '^#' .env.local | xargs)
 
-PKG_PLACEMENT_DIR="node_modules/@qlik-oss/nebula-table-utils";
+PKG_PLACEMENT_DIR="node_modules/@qlik/nebula-table-utils";
 
 BOLD="\033[1m";
 NO_BOLD="\033[0m";
@@ -18,7 +18,7 @@ handleCopy() {
   local NAME=${1};
   local DIR=${2};
 
-  if [ -n "$DIR" ]; 
+  if [ -n "$DIR" ];
   then
     echo "=========================================================";
     echo "${BOLD}${NAME}${NO_BOLD}";
@@ -27,11 +27,11 @@ handleCopy() {
     PKG_PATH="${DIR}/${PKG_PLACEMENT_DIR}";
 
     if [ -d "$PKG_PATH" ];
-    then 
+    then
       echo "- pkg exists -> try to remove and replace! (check)";
       rm -rf $PKG_PATH;
     fi
-    
+
     mkdir -p $PKG_PATH;
     mkdir -p ${PKG_PATH}/lib;
 
@@ -40,7 +40,7 @@ handleCopy() {
     cp ./LICENSE $PKG_PATH;
     cp ./README.md $PKG_PATH;
 
-    
+
     echo "${GREEN}${BOLD}✅ UPDATED ${NAME} WITH LATES CHANGES IN 'nebula-table-utils'${NO_BOLD}${NO_COLOR}";
     echo "=========================================================";
   fi
