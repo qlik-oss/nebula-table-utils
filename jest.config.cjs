@@ -7,6 +7,9 @@ module.exports = {
   transform: {
     '^.+\\.(t|j)sx?$': '@swc/jest',
   },
+  moduleNameMapper: {
+    '@qlik-trial/sprout/icons/.*': '<rootDir>/test-utils/sprout-icons-mock.tsx',
+  },
   coveragePathIgnorePatterns: ['dist', 'lib', 'build-utils'],
   transformIgnorePatterns: ['<rootDir>/node_modules/(?!(cliui|wrap-ansi)/*)'],
 };
