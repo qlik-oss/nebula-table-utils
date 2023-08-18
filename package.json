@@ -41,6 +41,7 @@
   },
   "devDependencies": {
     "@jest/globals": "^29.6.1",
+    "@qlik-trial/sprout": "^3.4.0",
     "@qlik/eslint-config": "^0.4.8",
     "@qlik/eslint-config-react": "^0.1.0",
     "@qlik/prettier-config": "^0.3.0",
@@ -81,6 +82,7 @@
   },
   "packageManager": "pnpm@8.6.12",
   "peerDependencies": {
+    "@qlik-trial/sprout": "^3.4.0",
     "react": "^18.2.0"
   }
 }
