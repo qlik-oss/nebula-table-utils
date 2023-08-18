@@ -57,8 +57,7 @@ describe('MenuGroup', () => {
     });
 
     const renderer = (group: MenuItemGroup) => {
-      // @ts-ignore
-      render(<MenuGroup menuGroup={group} handleHeadCellMenuKeyDown={mockHandleHeadCellMenuKeyDown} />);
+      return render(<MenuGroup menuGroup={group} handleHeadCellMenuKeyDown={mockHandleHeadCellMenuKeyDown} />);
     };
 
     test('should render menu items', () => {
