@@ -1,6 +1,6 @@
 import { styled } from '@mui/material/styles';
 import Menu from '@qlik-trial/sprout/icons/Menu';
-import { Divider, ListItemIcon, MenuItem, ListItem, Box, Menu as MuiMenu } from '@mui/material';
+import { Divider, ListItemIcon, MenuItem, ListItem, Box, Menu as MuiMenu, Typography } from '@mui/material';
 import {
   HEAD_CELL_MENU_ACTIVE_ITEM_GREEN_BORDER_HEIGHT,
   HEAD_CELL_MENU_GROUP_LABEL_HEIGHT,
@@ -84,6 +84,12 @@ export const StyledMenuItemLabel = styled('div')(() => ({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
+}));
+
+export const StyledListItemLabel = styled(Typography)(() => ({
+  // TODO: get these from theme
+  fontFamily: '"Source Sans Pro", HelveticaNeue, "Helvetica Neue", Helvetica, Arial, sans-serif',
+  fontSize: '14px',
 }));
 
 export const StyledListItemIcon = styled(ListItemIcon)(({ theme }: DefaultTheme) => ({

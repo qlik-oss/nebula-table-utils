@@ -12,6 +12,7 @@ import {
   SelectionRelatedArgs,
   SortingRelatedArgs,
 } from './types';
+import { useTranslations } from '../../hooks';
 
 const HeadCellMenu = <T extends HeadCellMenuProps>({
   column,
@@ -39,6 +40,7 @@ const HeadCellMenu = <T extends HeadCellMenuProps>({
   SearchRelatedArgs &
   SelectionRelatedArgs &
   AdjustColumnSizeRelatedArgs) => {
+  const t = useTranslations({ translator });
   const { headTextAlign, qLibraryId, fieldId } = column;
   const [openMenuDropdown, setOpenMenuDropdown] = useState(false);
   const {
@@ -79,7 +81,7 @@ const HeadCellMenu = <T extends HeadCellMenuProps>({
         aria-expanded={openMenuDropdown ? 'true' : undefined}
         aria-haspopup="true"
         onClick={handleOpenDropdown}
-        aria-label={translator.get('SNTable.Accessibility.ColumnOptions')}
+        aria-label={translator.get('NebulaTableUtils.MenuItemLabel.ColumnOptions')}
       >
         <Menu />
       </StyledMenuButton>
@@ -90,7 +92,7 @@ const HeadCellMenu = <T extends HeadCellMenuProps>({
         onClose={() => setOpenMenuDropdown(false)}
         menuGroups={getMenuItemGroups({
           column,
-          translator,
+          translator: t,
           menuAvailabilityFlags,
           setOpenMenuDropdown,
 
