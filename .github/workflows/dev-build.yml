@@ -54,7 +54,7 @@ jobs:
         run: bash ${GITHUB_WORKSPACE}/.github/scripts/create-npmrc.sh
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_CI_TOKEN: ${{ secrets.NPM_CI_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_CI_TOKEN }}
 
       - name: Version Info
         shell: bash

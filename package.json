@@ -41,6 +41,7 @@
   },
   "devDependencies": {
     "@jest/globals": "^29.6.1",
+    "@qlik-trial/sprout": "^3.4.0",
     "@qlik/eslint-config": "^0.4.8",
     "@qlik/eslint-config-react": "^0.1.0",
     "@qlik/prettier-config": "^0.3.0",
@@ -89,6 +90,6 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "@nebula.js/stardust": "4.2.4",
-    "@qlik-trial/sprout": "^3.2.0"
+    "@qlik-trial/sprout": "^3.4.0"
   }
 }
