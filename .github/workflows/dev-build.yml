@@ -52,8 +52,9 @@ jobs:
       - name: Setup access to qlik npm registry
         shell: bash
         run: bash ${GITHUB_WORKSPACE}/.github/scripts/create-npmrc.sh
-        env: 
+        env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_CI_TOKEN }}
 
       - name: Version Info
         shell: bash
@@ -62,9 +63,8 @@ jobs:
       - name: Generate package version value
         shell: bash
         run: bash ${GITHUB_WORKSPACE}/.github/scripts/generate-pkg-version.sh
-        env: 
+        env:
           BRANCH_NAME: ${{ steps.comment-branch.outputs.head_ref }}
-        
 
       - name: Publish
         run: bash ${GITHUB_WORKSPACE}/.github/scripts/publish-script.sh
