@@ -8,45 +8,25 @@ export enum MenuAvailabilityFlags {
   ADJUST_HEADER_SIZE = 'adjustHeaderSize',
 }
 
-export interface SortingRelatedArgs {
+export type SortingRelatedArgs = {
   sortFromMenu: (evt: React.MouseEvent, newSortDirection: SortDirection) => void;
   changeActivelySortedHeader?: (headerData: HeaderData) => void;
-}
+};
 
-export interface SearchRelatedArgs {
+export type SearchRelatedArgs = {
   embed: stardust.Embed;
   listboxRef: React.RefObject<HTMLDivElement>;
   interactions: stardust.Interactions;
-}
-
-export interface SelectionRelatedArgs {
-  app: EngineAPI.IApp | undefined;
-  model: EngineAPI.IGenericObject | undefined;
-}
-
-export interface AdjustHeaderSizeRelatedArgs {
-  setFocusOnClosetHeaderAdjuster: (anchorRef: React.RefObject<HTMLDivElement>) => void;
-}
-
-type TypeMap = {
-  [K in MenuAvailabilityFlags.SORTING]: SortingRelatedArgs;
-} & {
-  [K in MenuAvailabilityFlags.SEARCHING]: SearchRelatedArgs;
-} & {
-  [K in MenuAvailabilityFlags.SELECTIONS]: SelectionRelatedArgs;
-} & {
-  [K in MenuAvailabilityFlags.ADJUST_HEADER_SIZE]: AdjustHeaderSizeRelatedArgs;
 };
-type Prettify<T> = T extends infer R ? { [K in keyof R]: R[K] } : never;
-type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends (k: infer I) => void ? I : never;
-type ValueOf<T> = T[keyof T];
-export type FlagsArgs<T extends HeadCellMenuProps['menuAvailabilityFlags']> = Prettify<
-  UnionToIntersection<
-    ValueOf<{
-      [K in keyof T & keyof TypeMap as T[K] extends true ? K : never]: TypeMap[K];
-    }>
-  >
->;
+
+export type SelectionRelatedArgs = Partial<{
+  app: EngineAPI.IApp;
+  model: EngineAPI.IGenericObject;
+}>;
+
+export type AdjustHeaderSizeRelatedArgs = {
+  setFocusOnClosetHeaderAdjuster: (anchorRef: React.RefObject<HTMLDivElement>) => void;
+};
 
 export interface HeadCellMenuProps {
   headerData: HeaderData;
@@ -55,6 +35,11 @@ export interface HeadCellMenuProps {
   anchorRef: React.RefObject<HTMLDivElement>;
   handleHeadCellMenuKeyDown: (evt: React.KeyboardEvent<HTMLLIElement>) => void;
   menuAvailabilityFlags: Partial<Record<MenuAvailabilityFlags, boolean>>;
+
+  sortRelatedArgs?: SortingRelatedArgs;
+  searchRelatedArgs?: SearchRelatedArgs;
+  selectionRelatedArgs?: SelectionRelatedArgs;
+  adjustHeaderSizeRelatedArgs?: AdjustHeaderSizeRelatedArgs;
 }
 
 export type MenuItemGroup = Array<{
@@ -87,7 +72,7 @@ export interface UseFieldSelectionOutput {
 
 export interface UseFieldSelectionProps {
   headerData: HeaderData;
-  app: EngineAPI.IApp | undefined;
+  app?: EngineAPI.IApp;
 }
 
 // --------------- GENRAL TYPES

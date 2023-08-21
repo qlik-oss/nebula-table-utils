@@ -4,41 +4,20 @@ import useFieldSelection from './use-field-selection';
 import RecursiveMenuList from './MenuList/RecursiveMenuList';
 import { getMenuItemGroups } from './utils';
 import { HeadCellMenuWrapper, StyledMenuButton } from './styles';
-import {
-  AdjustHeaderSizeRelatedArgs,
-  FlagsArgs,
-  HeadCellMenuProps,
-  SearchRelatedArgs,
-  SelectionRelatedArgs,
-  SortingRelatedArgs,
-} from './types';
+import { HeadCellMenuProps } from './types';
 
-const HeadCellMenu = <T extends HeadCellMenuProps>({
+const HeadCellMenu = ({
   headerData,
   tabIndex,
   anchorRef,
   translator,
   handleHeadCellMenuKeyDown,
   menuAvailabilityFlags,
-
-  // sorting
-  sortFromMenu,
-  changeActivelySortedHeader,
-  // search
-  embed,
-  listboxRef,
-  interactions,
-  // selection
-  app,
-  model,
-  // adjust col size
-  setFocusOnClosetHeaderAdjuster,
-}: T &
-  FlagsArgs<T['menuAvailabilityFlags']> &
-  SortingRelatedArgs &
-  SearchRelatedArgs &
-  SelectionRelatedArgs &
-  AdjustHeaderSizeRelatedArgs) => {
+  sortRelatedArgs,
+  searchRelatedArgs,
+  selectionRelatedArgs,
+  adjustHeaderSizeRelatedArgs,
+}: HeadCellMenuProps) => {
   const { headTextAlign, qLibraryId, fieldId } = headerData;
   const [openMenuDropdown, setOpenMenuDropdown] = useState(false);
   const {
@@ -46,11 +25,11 @@ const HeadCellMenu = <T extends HeadCellMenuProps>({
     selectionActionsEnabledStatus,
     resetSelectionActionsEnabledStatus,
     updateSelectionActionsEnabledStatus,
-  } = useFieldSelection({ headerData, app });
+  } = useFieldSelection({ headerData, app: selectionRelatedArgs?.app });
 
   const handleOpenDropdown = async () => {
-    if (!openMenuDropdown && model) {
-      const layout = await model.getLayout();
+    if (!openMenuDropdown && selectionRelatedArgs?.model) {
+      const layout = await selectionRelatedArgs?.model.getLayout();
       updateSelectionActionsEnabledStatus(layout as EngineAPI.IGenericHyperCubeLayout);
     }
     setOpenMenuDropdown(!openMenuDropdown);
@@ -58,12 +37,15 @@ const HeadCellMenu = <T extends HeadCellMenuProps>({
 
   const embedListbox = useCallback(() => {
     const id = qLibraryId ? { qLibraryId, type: 'dimension' } : fieldId;
-    // @ts-expect-error TODO: no types for `__DO_NOT_USE__`, it will improve when it becomes stable
-    embed.__DO_NOT_USE__.popover(listboxRef.current, id, {
-      anchorOrigin: { vertical: 'bottom', horizontal: 'left' },
-      transformOrigin: { vertical: 'top', horizontal: 'left' },
-    });
-  }, [embed, fieldId, qLibraryId, listboxRef]);
+    if (searchRelatedArgs?.embed && searchRelatedArgs.listboxRef) {
+      const { embed, listboxRef } = searchRelatedArgs;
+      // @ts-expect-error TODO: no types for `__DO_NOT_USE__`, it will improve when it becomes stable
+      embed.__DO_NOT_USE__.popover(listboxRef.current, id, {
+        anchorOrigin: { vertical: 'bottom', horizontal: 'left' },
+        transformOrigin: { vertical: 'top', horizontal: 'left' },
+      });
+    }
+  }, [searchRelatedArgs, fieldId, qLibraryId]);
 
   useEffect(() => {
     if (!openMenuDropdown) resetSelectionActionsEnabledStatus();
@@ -92,22 +74,17 @@ const HeadCellMenu = <T extends HeadCellMenuProps>({
           translator,
           menuAvailabilityFlags,
           setOpenMenuDropdown,
-
           // sort
-          sortFromMenu,
-          changeActivelySortedHeader,
-
+          ...sortRelatedArgs,
           // search
-          interactions,
           embedListbox,
-
+          interactions: searchRelatedArgs?.interactions,
           // selection
           fieldInstance,
           selectionActionsEnabledStatus,
-
           // Adjust col size
           anchorRef,
-          setFocusOnClosetHeaderAdjuster,
+          setFocusOnClosetHeaderAdjuster: adjustHeaderSizeRelatedArgs?.setFocusOnClosetHeaderAdjuster,
         })}
         ariaLabel="nebula-table-utils-head-menu-button"
         handleHeadCellMenuKeyDown={handleHeadCellMenuKeyDown}

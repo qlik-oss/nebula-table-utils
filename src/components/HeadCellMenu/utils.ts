@@ -11,15 +11,15 @@ import SelectExcluded from '@qlik-trial/sprout/icons/react/SelectExcluded';
 import ColumnSize from '@qlik-trial/sprout/icons/react/ColumnSize';
 import { HeaderData, MenuAvailabilityFlags, MenuItemGroup, SortingRelatedArgs } from './types';
 
-type GetMenuItemGroupsArgs = SortingRelatedArgs & {
+type GetMenuItemGroupsArgs = Partial<SortingRelatedArgs> & {
   headerData: HeaderData;
   translator: stardust.Translator;
   menuAvailabilityFlags: Partial<Record<MenuAvailabilityFlags, boolean>>;
   setOpenMenuDropdown: React.Dispatch<React.SetStateAction<boolean>>;
 
   // search
-  interactions: stardust.Interactions;
   embedListbox: () => void;
+  interactions?: stardust.Interactions;
 
   // selection
   fieldInstance: EngineAPI.IField | null;
@@ -27,7 +27,7 @@ type GetMenuItemGroupsArgs = SortingRelatedArgs & {
 
   // adjust col size
   anchorRef: React.RefObject<HTMLDivElement>;
-  setFocusOnClosetHeaderAdjuster: (anchorRef: React.RefObject<HTMLDivElement>) => void;
+  setFocusOnClosetHeaderAdjuster?: (anchorRef: React.RefObject<HTMLDivElement>) => void;
 };
 
 export const getMenuItemGroups = ({
@@ -64,7 +64,7 @@ export const getMenuItemGroups = ({
             id: 1,
             itemTitle: translator.get('SNTable.MenuItem.SortAscending'),
             onClick: (evt: React.MouseEvent<HTMLLIElement>) => {
-              sortFromMenu(evt, 'A');
+              sortFromMenu?.(evt, 'A');
               setOpenMenuDropdown(false);
               changeActivelySortedHeader?.(headerData);
             },
@@ -76,7 +76,7 @@ export const getMenuItemGroups = ({
             id: 2,
             itemTitle: translator.get('SNTable.MenuItem.SortDescending'),
             onClick: (evt: React.MouseEvent<HTMLLIElement>) => {
-              sortFromMenu(evt, 'D');
+              sortFromMenu?.(evt, 'D');
               setOpenMenuDropdown(false);
               changeActivelySortedHeader?.(headerData);
             },
@@ -208,7 +208,7 @@ export const getMenuItemGroups = ({
               evt.stopPropagation();
               evt.preventDefault();
               setOpenMenuDropdown(false);
-              setFocusOnClosetHeaderAdjuster(anchorRef);
+              setFocusOnClosetHeaderAdjuster?.(anchorRef);
             },
             icon: ColumnSize,
             enabled: true,
