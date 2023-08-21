@@ -71,7 +71,7 @@ describe('<HeadCellMenu />', () => {
     );
 
   const openMenu = async () => {
-    fireEvent.click(screen.getByTestId('sn-table-head-menu-button'));
+    fireEvent.click(screen.getByTestId('nebula-table-utils-head-menu-button'));
     await waitFor(() => {
       expect(screen.queryByRole('menu')).toBeVisible();
     });
@@ -184,7 +184,7 @@ describe('<HeadCellMenu />', () => {
   test('should close the menu by clicking the menu button when the context menu is open', async () => {
     renderTableHeadCellMenu();
 
-    const button = screen.getByTestId('sn-table-head-menu-button');
+    const button = screen.getByTestId('nebula-table-utils-head-menu-button');
     fireEvent.click(button);
     await waitFor(() => {
       expect(screen.queryByRole('menu')).toBeInTheDocument();

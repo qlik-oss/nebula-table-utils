@@ -187,7 +187,11 @@ packages:
       '@babel/helpers': 7.22.10
       '@babel/parser': 7.22.10
       '@babel/template': 7.22.5
+<<<<<<< HEAD
       '@babel/traverse': 7.22.10
+=======
+      '@babel/traverse': 7.22.10(supports-color@5.5.0)
+>>>>>>> feat/head-cell-menu
       '@babel/types': 7.22.10
       convert-source-map: 1.9.0
       debug: 4.3.4
@@ -292,7 +296,11 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       '@babel/template': 7.22.5
+<<<<<<< HEAD
       '@babel/traverse': 7.22.10
+=======
+      '@babel/traverse': 7.22.10(supports-color@5.5.0)
+>>>>>>> feat/head-cell-menu
       '@babel/types': 7.22.10
     transitivePeerDependencies:
       - supports-color
@@ -454,7 +462,11 @@ packages:
       '@babel/parser': 7.22.10
       '@babel/types': 7.22.10
 
+<<<<<<< HEAD
   /@babel/traverse@7.22.10:
+=======
+  /@babel/traverse@7.22.10(supports-color@5.5.0):
+>>>>>>> feat/head-cell-menu
     resolution: {integrity: sha512-Q/urqV4pRByiNNpb/f5OSv28ZlGJiFiiTh+GAHktbIrkPhPbl90+uW6SmpoLyZqutrg9AEaEf3Q/ZBRHBXgxig==}
     engines: {node: '>=6.9.0'}
     dependencies:
@@ -466,11 +478,16 @@ packages:
       '@babel/helper-split-export-declaration': 7.22.6
       '@babel/parser': 7.22.10
       '@babel/types': 7.22.10
+<<<<<<< HEAD
       debug: 4.3.4
+=======
+      debug: 4.3.4(supports-color@5.5.0)
+>>>>>>> feat/head-cell-menu
       globals: 11.12.0
     transitivePeerDependencies:
       - supports-color
 
+<<<<<<< HEAD
   /@babel/traverse@7.22.10(supports-color@5.5.0):
     resolution: {integrity: sha512-Q/urqV4pRByiNNpb/f5OSv28ZlGJiFiiTh+GAHktbIrkPhPbl90+uW6SmpoLyZqutrg9AEaEf3Q/ZBRHBXgxig==}
     engines: {node: '>=6.9.0'}
@@ -489,6 +506,8 @@ packages:
       - supports-color
     dev: false
 
+=======
+>>>>>>> feat/head-cell-menu
   /@babel/types@7.22.10:
     resolution: {integrity: sha512-obaoigiLrlDZ7TUQln/8m4mSqIW2QFeOrCQc9r+xsaHGNoplVNYlRVpsfE8Vj35GEm2ZH4ZhrNYogs/3fj85kg==}
     engines: {node: '>=6.9.0'}

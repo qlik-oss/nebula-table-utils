@@ -12,11 +12,11 @@ import {
 } from '../styles';
 import RecursiveMenuList from './RecursiveMenuList';
 
-export const interceptClickOnMenuItems = (menuGroups: MenuItemGroup[], cache: SubMenusOpenStatusCache) => {
-  const result = menuGroups.map((group) =>
-    group.map((grp) => ({
-      groupHeading: grp.groupHeading,
-      items: grp.items?.map(({ onClick, ...restProps }) => ({
+export const interceptClickOnMenuItems = (menuSections: MenuItemGroup[], cache: SubMenusOpenStatusCache) =>
+  menuSections.map((menuGroups) =>
+    menuGroups.map((group) => ({
+      groupHeading: group.groupHeading,
+      items: group.items?.map(({ onClick, ...restProps }) => ({
         ...restProps,
         ...(onClick
           ? {
@@ -30,8 +30,6 @@ export const interceptClickOnMenuItems = (menuGroups: MenuItemGroup[], cache: Su
       })),
     }))
   );
-  return result;
-};
 
 type SubMenusOpenStatusCache = Record<string, React.Dispatch<React.SetStateAction<boolean>>>;
 let subMenusOpenStatusCache: SubMenusOpenStatusCache = {};
@@ -68,7 +66,7 @@ const MenuGroupItems = ({
         ref={subMenus ? anchorRef : null}
         key={id}
         data-testid={`menu-item-${id}`}
-        className="sn-table-head-menu-item"
+        className="nebula-table-utils-head-menu-item"
         onClick={handleOnClick}
         disabled={!enabled}
         autoFocus={autoFocus}

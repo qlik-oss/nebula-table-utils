@@ -17,15 +17,14 @@ const ENABLE_SOURCE_MAP = process.env.BUILD_SOURCE_MAPS === 'true' || process.en
 
 const baseConfig = defineConfig({
   external: [
-    "react", 
-    "react-dom", 
-    "@nebula.js/stardust", 
-    "@mui/material",
-    "@mui/styled-engine-sc",
-    "@emotion/react",
-    "@emotion/styled",
-    "@nebula.js/stardust",
-    "@qlik-trial/sprout"
+    'react',
+    'react-dom',
+    '@nebula.js/stardust',
+    '@mui/material',
+    '@mui/styled-engine-sc',
+    '@emotion/react',
+    '@emotion/styled',
+    '@qlik-trial/sprout',
   ],
   plugins: [
     ...(ENABLE_SOURCE_MAP ? [sourcemaps()] : []),
@@ -74,18 +73,18 @@ export default defineConfig([
   {
     input: 'src/index.ts',
     output: [
-      { file: pkg.main, file: "lib/index.js", format: 'cjs', sourcemap: ENABLE_SOURCE_MAP },
-      { file: pkg.module, file: "lib/index.es.js", format: 'es', sourcemap: ENABLE_SOURCE_MAP },
+      { file: pkg.main, file: 'lib/index.js', format: 'cjs', sourcemap: ENABLE_SOURCE_MAP },
+      { file: pkg.module, file: 'lib/index.es.js', format: 'es', sourcemap: ENABLE_SOURCE_MAP },
     ],
     ...baseConfig,
   },
   {
     input: [
-      'src/**/*.(ts|tsx)', 
-      '!src/index.ts', 
-      '!src/**/__tests__', 
-      '!src/**/*.(test|spec).(ts|tsx)', 
-      '!src/__storybook__'
+      'src/**/*.(ts|tsx)',
+      '!src/index.ts',
+      '!src/**/__tests__',
+      '!src/**/*.(test|spec).(ts|tsx)',
+      '!src/__storybook__',
     ],
     output: {
       dir: 'lib',
