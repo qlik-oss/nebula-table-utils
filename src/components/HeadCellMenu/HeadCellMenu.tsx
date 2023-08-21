@@ -74,12 +74,11 @@ const HeadCellMenu = <T extends HeadCellMenuProps>({
       <StyledMenuButton
         size="small"
         tabIndex={tabIndex}
-        id="sn-table-head-menu-button"
-        aria-controls={openMenuDropdown ? 'sn-table-head-menu' : undefined}
+        id="nebula-table-utils-head-menu-button"
+        aria-controls={openMenuDropdown ? 'nebula-table-utils-head-menu' : undefined}
         aria-expanded={openMenuDropdown ? 'true' : undefined}
         aria-haspopup="true"
         onClick={handleOpenDropdown}
-        aria-label={translator.get('SNTable.Accessibility.ColumnOptions')}
       >
         <Menu />
       </StyledMenuButton>
@@ -110,7 +109,7 @@ const HeadCellMenu = <T extends HeadCellMenuProps>({
           anchorRef,
           setFocusOnClosetColumnAdjuster,
         })}
-        ariaLabel="sn-table-head-menu-button"
+        ariaLabel="nebula-table-utils-head-menu-button"
         handleHeadCellMenuKeyDown={handleHeadCellMenuKeyDown}
       />
     </HeadCellMenuWrapper>
