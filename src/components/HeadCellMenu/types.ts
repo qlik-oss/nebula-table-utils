@@ -5,12 +5,12 @@ export enum MenuAvailabilityFlags {
   SORTING = 'sorting',
   SEARCHING = 'searching',
   SELECTIONS = 'selections',
-  ADJUST_COLUMN_SIZE = 'adjustColumnSize',
+  ADJUST_HEADER_SIZE = 'adjustHeaderSize',
 }
 
 export interface SortingRelatedArgs {
   sortFromMenu: (evt: React.MouseEvent, newSortDirection: SortDirection) => void;
-  changeActivelySortedColumn?: (column: Column) => void;
+  changeActivelySortedHeader?: (headerData: HeaderData) => void;
 }
 
 export interface SearchRelatedArgs {
@@ -24,8 +24,8 @@ export interface SelectionRelatedArgs {
   model: EngineAPI.IGenericObject | undefined;
 }
 
-export interface AdjustColumnSizeRelatedArgs {
-  setFocusOnClosetColumnAdjuster: (anchorRef: React.RefObject<HTMLDivElement>) => void;
+export interface AdjustHeaderSizeRelatedArgs {
+  setFocusOnClosetHeaderAdjuster: (anchorRef: React.RefObject<HTMLDivElement>) => void;
 }
 
 type TypeMap = {
@@ -35,7 +35,7 @@ type TypeMap = {
 } & {
   [K in MenuAvailabilityFlags.SELECTIONS]: SelectionRelatedArgs;
 } & {
-  [K in MenuAvailabilityFlags.ADJUST_COLUMN_SIZE]: AdjustColumnSizeRelatedArgs;
+  [K in MenuAvailabilityFlags.ADJUST_HEADER_SIZE]: AdjustHeaderSizeRelatedArgs;
 };
 type Prettify<T> = T extends infer R ? { [K in keyof R]: R[K] } : never;
 type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends (k: infer I) => void ? I : never;
@@ -49,7 +49,7 @@ export type FlagsArgs<T extends HeadCellMenuProps['menuAvailabilityFlags']> = Pr
 >;
 
 export interface HeadCellMenuProps {
-  column: Column;
+  headerData: HeaderData;
   translator: stardust.Translator;
   tabIndex: number;
   anchorRef: React.RefObject<HTMLDivElement>;
@@ -86,7 +86,7 @@ export interface UseFieldSelectionOutput {
 }
 
 export interface UseFieldSelectionProps {
-  column: Column;
+  headerData: HeaderData;
   app: EngineAPI.IApp | undefined;
 }
 
@@ -94,11 +94,11 @@ export interface UseFieldSelectionProps {
 export type SortDirection = 'A' | 'D';
 export type Align = 'left' | 'center' | 'right';
 
-export interface Column {
+export interface HeaderData {
   id: string;
   isDim: boolean;
   qLibraryId?: string;
-  colIdx: number;
+  colIdx: number; // TODO: headerIdx
   fieldId: string;
   label: string;
   headTextAlign: Align;

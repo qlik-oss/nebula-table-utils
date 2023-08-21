@@ -9,10 +9,10 @@ import SelectPossible from '@qlik-trial/sprout/icons/react/SelectPossible';
 import SelectAlternative from '@qlik-trial/sprout/icons/react/SelectAlternative';
 import SelectExcluded from '@qlik-trial/sprout/icons/react/SelectExcluded';
 import ColumnSize from '@qlik-trial/sprout/icons/react/ColumnSize';
-import { Column, MenuAvailabilityFlags, MenuItemGroup, SortingRelatedArgs } from './types';
+import { HeaderData, MenuAvailabilityFlags, MenuItemGroup, SortingRelatedArgs } from './types';
 
 type GetMenuItemGroupsArgs = SortingRelatedArgs & {
-  column: Column;
+  headerData: HeaderData;
   translator: stardust.Translator;
   menuAvailabilityFlags: Partial<Record<MenuAvailabilityFlags, boolean>>;
   setOpenMenuDropdown: React.Dispatch<React.SetStateAction<boolean>>;
@@ -27,18 +27,18 @@ type GetMenuItemGroupsArgs = SortingRelatedArgs & {
 
   // adjust col size
   anchorRef: React.RefObject<HTMLDivElement>;
-  setFocusOnClosetColumnAdjuster: (anchorRef: React.RefObject<HTMLDivElement>) => void;
+  setFocusOnClosetHeaderAdjuster: (anchorRef: React.RefObject<HTMLDivElement>) => void;
 };
 
 export const getMenuItemGroups = ({
-  column,
+  headerData,
   translator,
   menuAvailabilityFlags,
   setOpenMenuDropdown,
 
   // sort
   sortFromMenu,
-  changeActivelySortedColumn,
+  changeActivelySortedHeader,
 
   // search
   interactions,
@@ -50,7 +50,7 @@ export const getMenuItemGroups = ({
 
   // Adjust col size
   anchorRef,
-  setFocusOnClosetColumnAdjuster,
+  setFocusOnClosetHeaderAdjuster,
 }: GetMenuItemGroupsArgs): MenuItemGroup[] => {
   const mGrps: MenuItemGroup[] = [];
 
@@ -66,11 +66,11 @@ export const getMenuItemGroups = ({
             onClick: (evt: React.MouseEvent<HTMLLIElement>) => {
               sortFromMenu(evt, 'A');
               setOpenMenuDropdown(false);
-              changeActivelySortedColumn?.(column);
+              changeActivelySortedHeader?.(headerData);
             },
             icon: Ascending,
             enabled: true,
-            isActive: column.isActivelySorted && column.sortDirection === 'A',
+            isActive: headerData.isActivelySorted && headerData.sortDirection === 'A',
           },
           {
             id: 2,
@@ -78,11 +78,11 @@ export const getMenuItemGroups = ({
             onClick: (evt: React.MouseEvent<HTMLLIElement>) => {
               sortFromMenu(evt, 'D');
               setOpenMenuDropdown(false);
-              changeActivelySortedColumn?.(column);
+              changeActivelySortedHeader?.(headerData);
             },
             icon: Descending,
             enabled: true,
-            isActive: column.isActivelySorted && column.sortDirection === 'D',
+            isActive: headerData.isActivelySorted && headerData.sortDirection === 'D',
           },
         ],
       },
@@ -90,7 +90,7 @@ export const getMenuItemGroups = ({
   }
 
   // distinguish between measure and dim menu items
-  if (column.isDim && interactions?.select) {
+  if (headerData.isDim && interactions?.select) {
     const grp = [];
     // check searching flag
     if (menuAvailabilityFlags[MenuAvailabilityFlags.SEARCHING]) {
@@ -196,8 +196,8 @@ export const getMenuItemGroups = ({
     if (grp.length > 0) mGrps.push(...grp);
   }
 
-  // check adjustColumnSize flag
-  if (menuAvailabilityFlags[MenuAvailabilityFlags.ADJUST_COLUMN_SIZE]) {
+  // check adjustHeaderSize flag
+  if (menuAvailabilityFlags[MenuAvailabilityFlags.ADJUST_HEADER_SIZE]) {
     mGrps.push([
       {
         items: [
@@ -208,7 +208,7 @@ export const getMenuItemGroups = ({
               evt.stopPropagation();
               evt.preventDefault();
               setOpenMenuDropdown(false);
-              setFocusOnClosetColumnAdjuster(anchorRef);
+              setFocusOnClosetHeaderAdjuster(anchorRef);
             },
             icon: ColumnSize,
             enabled: true,

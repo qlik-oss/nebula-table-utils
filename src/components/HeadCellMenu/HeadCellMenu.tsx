@@ -5,7 +5,7 @@ import RecursiveMenuList from './MenuList/RecursiveMenuList';
 import { getMenuItemGroups } from './utils';
 import { HeadCellMenuWrapper, StyledMenuButton } from './styles';
 import {
-  AdjustColumnSizeRelatedArgs,
+  AdjustHeaderSizeRelatedArgs,
   FlagsArgs,
   HeadCellMenuProps,
   SearchRelatedArgs,
@@ -14,7 +14,7 @@ import {
 } from './types';
 
 const HeadCellMenu = <T extends HeadCellMenuProps>({
-  column,
+  headerData,
   tabIndex,
   anchorRef,
   translator,
@@ -23,7 +23,7 @@ const HeadCellMenu = <T extends HeadCellMenuProps>({
 
   // sorting
   sortFromMenu,
-  changeActivelySortedColumn,
+  changeActivelySortedHeader,
   // search
   embed,
   listboxRef,
@@ -32,21 +32,21 @@ const HeadCellMenu = <T extends HeadCellMenuProps>({
   app,
   model,
   // adjust col size
-  setFocusOnClosetColumnAdjuster,
+  setFocusOnClosetHeaderAdjuster,
 }: T &
   FlagsArgs<T['menuAvailabilityFlags']> &
   SortingRelatedArgs &
   SearchRelatedArgs &
   SelectionRelatedArgs &
-  AdjustColumnSizeRelatedArgs) => {
-  const { headTextAlign, qLibraryId, fieldId } = column;
+  AdjustHeaderSizeRelatedArgs) => {
+  const { headTextAlign, qLibraryId, fieldId } = headerData;
   const [openMenuDropdown, setOpenMenuDropdown] = useState(false);
   const {
     fieldInstance,
     selectionActionsEnabledStatus,
     resetSelectionActionsEnabledStatus,
     updateSelectionActionsEnabledStatus,
-  } = useFieldSelection({ column, app });
+  } = useFieldSelection({ headerData, app });
 
   const handleOpenDropdown = async () => {
     if (!openMenuDropdown && model) {
@@ -88,14 +88,14 @@ const HeadCellMenu = <T extends HeadCellMenuProps>({
         anchorEl={anchorRef.current}
         onClose={() => setOpenMenuDropdown(false)}
         menuGroups={getMenuItemGroups({
-          column,
+          headerData,
           translator,
           menuAvailabilityFlags,
           setOpenMenuDropdown,
 
           // sort
           sortFromMenu,
-          changeActivelySortedColumn,
+          changeActivelySortedHeader,
 
           // search
           interactions,
@@ -107,7 +107,7 @@ const HeadCellMenu = <T extends HeadCellMenuProps>({
 
           // Adjust col size
           anchorRef,
-          setFocusOnClosetColumnAdjuster,
+          setFocusOnClosetHeaderAdjuster,
         })}
         ariaLabel="nebula-table-utils-head-menu-button"
         handleHeadCellMenuKeyDown={handleHeadCellMenuKeyDown}

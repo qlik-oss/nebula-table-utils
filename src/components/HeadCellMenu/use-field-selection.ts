@@ -13,23 +13,23 @@ export const checkStateCountByKey = <T>(keys: (keyof T)[], obj: T): boolean => {
   return keys.some((key) => (obj[key] as number) > 0);
 };
 
-const useFieldSelection = ({ column, app }: UseFieldSelectionProps): UseFieldSelectionOutput => {
+const useFieldSelection = ({ headerData, app }: UseFieldSelectionProps): UseFieldSelectionOutput => {
   const [fieldInstance, setFieldInstance] = useState<EngineAPI.IField | null>(null);
   const [selectionActionsEnabledStatus, setSelectionActionsEnabledStatus] = useState(
     SELECTION_ACTIONS_ENABLED_DEFAULT_STATUS
   );
 
   useEffect(() => {
-    if (!app || !app.getField || !column || !column.isDim) return;
-    app.getField(column.fieldId).then(setFieldInstance).catch(console.error);
-  }, [app, column]);
+    if (!app || !app.getField || !headerData || !headerData.isDim) return;
+    app.getField(headerData.fieldId).then(setFieldInstance).catch(console.error);
+  }, [app, headerData]);
 
   const resetSelectionActionsEnabledStatus = useCallback(
     () => setSelectionActionsEnabledStatus(SELECTION_ACTIONS_ENABLED_DEFAULT_STATUS),
     []
   );
   const updateSelectionActionsEnabledStatus = (layout: EngineAPI.IGenericHyperCubeLayout) => {
-    const dimInfo = layout.qHyperCube.qDimensionInfo.find((dim) => dim.qFallbackTitle === column.label);
+    const dimInfo = layout.qHyperCube.qDimensionInfo.find((dim) => dim.qFallbackTitle === headerData.label);
     if (!dimInfo) return;
     setSelectionActionsEnabledStatus({
       canSelectAll: checkStateCountByKey(['qOption', 'qAlternative', 'qExcluded', 'qDeselected'], dimInfo.qStateCounts),
