@@ -1,11 +1,11 @@
 /* eslint jest/no-standalone-expect: 0, array-callback-return: 0 */
 import { stardust } from '@nebula.js/stardust';
 import { fireEvent } from '@testing-library/react';
-import { Column, MenuAvailabilityFlags } from '../types';
+import { HeaderData, MenuAvailabilityFlags } from '../types';
 import { GetMenuItemGroupsArgs, getMenuItemGroups } from '../utils';
 
 describe('Utils', () => {
-  let column: Column;
+  let headerData: HeaderData;
   let translator: stardust.Translator;
   let translatorGetMock: jest.Mock<() => string>;
   let menuAvailabilityFlags: Partial<Record<MenuAvailabilityFlags, boolean>>;
@@ -13,7 +13,7 @@ describe('Utils', () => {
 
   // sort
   let sortFromMenu: jest.Mock<() => void>;
-  let changeActivelySortedColumn: jest.Mock<() => void>;
+  let changeActivelySortedHeader: jest.Mock<() => void>;
 
   // search
   let interactions: stardust.Interactions;
@@ -25,16 +25,16 @@ describe('Utils', () => {
 
   // adjust col size
   let anchorRef: React.RefObject<HTMLDivElement>;
-  let setFocusOnClosetColumnAdjuster: jest.Mock<() => void>;
+  let setFocusOnClosetHeaderAdjuster: jest.Mock<() => void>;
 
   let getMenuItemArgs = {} as GetMenuItemGroupsArgs;
 
   beforeEach(() => {
-    column = {
+    headerData = {
       isActivelySorted: false,
       sortDirection: 'A',
       isDim: false,
-    } as Column;
+    } as HeaderData;
     translatorGetMock = jest.fn().mockImplementation((s) => s);
     translator = {
       get: translatorGetMock,
@@ -42,7 +42,7 @@ describe('Utils', () => {
     menuAvailabilityFlags = {};
     setOpenMenuDropdown = jest.fn();
     sortFromMenu = jest.fn();
-    changeActivelySortedColumn = jest.fn();
+    changeActivelySortedHeader = jest.fn();
     interactions = { select: false };
     embedListbox = jest.fn();
     fieldInstance = {
@@ -62,17 +62,17 @@ describe('Utils', () => {
     anchorRef = {
       anchorName: 'anchor-from-test',
     } as unknown as React.RefObject<HTMLDivElement>;
-    setFocusOnClosetColumnAdjuster = jest.fn();
+    setFocusOnClosetHeaderAdjuster = jest.fn();
 
     getMenuItemArgs = {
-      column,
+      headerData,
       translator,
       menuAvailabilityFlags,
       setOpenMenuDropdown,
 
       // sort
       sortFromMenu,
-      changeActivelySortedColumn,
+      changeActivelySortedHeader,
 
       // search
       interactions,
@@ -84,7 +84,7 @@ describe('Utils', () => {
 
       // Adjust col size
       anchorRef,
-      setFocusOnClosetColumnAdjuster,
+      setFocusOnClosetHeaderAdjuster,
     };
   });
 
@@ -127,7 +127,7 @@ describe('Utils', () => {
     test('should include subMenus if provided', () => {
       getMenuItemArgs = {
         ...getMenuItemArgs,
-        column: { ...getMenuItemArgs.column, isDim: true },
+        headerData: { ...getMenuItemArgs.headerData, isDim: true },
         interactions: { select: true },
         menuAvailabilityFlags: { ...getMenuItemArgs.menuAvailabilityFlags, selections: true },
       };
@@ -140,14 +140,14 @@ describe('Utils', () => {
     test('should include all items based on provided flags', () => {
       getMenuItemArgs = {
         ...getMenuItemArgs,
-        column: { ...getMenuItemArgs.column, isDim: true },
+        headerData: { ...getMenuItemArgs.headerData, isDim: true },
         interactions: { select: true },
         menuAvailabilityFlags: {
           ...getMenuItemArgs.menuAvailabilityFlags,
           sorting: true,
           searching: true,
           selections: true,
-          adjustColumnSize: true,
+          adjustHeaderSize: true,
         },
       };
       const result = getMenuItemGroups(getMenuItemArgs);
@@ -181,9 +181,9 @@ describe('Utils', () => {
 
         callback?.(evt);
         expect(sortFromMenu).toHaveBeenCalledTimes(1);
-        expect(changeActivelySortedColumn).toHaveBeenCalledTimes(1);
+        expect(changeActivelySortedHeader).toHaveBeenCalledTimes(1);
         expect(sortFromMenu).toHaveBeenCalledWith(evt, 'A');
-        expect(changeActivelySortedColumn).toHaveBeenCalledWith(column);
+        expect(changeActivelySortedHeader).toHaveBeenCalledWith(headerData);
       });
 
       test('should call expected functions on sort DESC callback', () => {
@@ -199,9 +199,9 @@ describe('Utils', () => {
 
         callback?.(evt);
         expect(sortFromMenu).toHaveBeenCalledTimes(1);
-        expect(changeActivelySortedColumn).toHaveBeenCalledTimes(1);
+        expect(changeActivelySortedHeader).toHaveBeenCalledTimes(1);
         expect(sortFromMenu).toHaveBeenCalledWith(evt, 'D');
-        expect(changeActivelySortedColumn).toHaveBeenCalledWith(column);
+        expect(changeActivelySortedHeader).toHaveBeenCalledWith(headerData);
       });
     });
 
@@ -216,7 +216,7 @@ describe('Utils', () => {
         const mockedEvt = { ...evt, stopPropagation: stopPropagationMock };
         getMenuItemArgs = {
           ...getMenuItemArgs,
-          column: { ...getMenuItemArgs.column, isDim: true },
+          headerData: { ...getMenuItemArgs.headerData, isDim: true },
           interactions: { select: true },
           menuAvailabilityFlags: {
             ...getMenuItemArgs.menuAvailabilityFlags,
@@ -242,7 +242,7 @@ describe('Utils', () => {
       test('should call expected functions on Selections callback', () => {
         getMenuItemArgs = {
           ...getMenuItemArgs,
-          column: { ...getMenuItemArgs.column, isDim: true },
+          headerData: { ...getMenuItemArgs.headerData, isDim: true },
           interactions: { select: true },
           menuAvailabilityFlags: {
             ...getMenuItemArgs.menuAvailabilityFlags,
@@ -283,7 +283,7 @@ describe('Utils', () => {
           ...getMenuItemArgs,
           menuAvailabilityFlags: {
             ...getMenuItemArgs.menuAvailabilityFlags,
-            adjustColumnSize: true,
+            adjustHeaderSize: true,
           },
         };
         const result = getMenuItemGroups(getMenuItemArgs);
@@ -293,8 +293,8 @@ describe('Utils', () => {
 
         expect(stopPropagationMock).toHaveBeenCalledTimes(1);
         expect(preventDefaultMock).toHaveBeenCalledTimes(1);
-        expect(setFocusOnClosetColumnAdjuster).toHaveBeenCalledTimes(1);
-        expect(setFocusOnClosetColumnAdjuster).toHaveBeenCalledWith(anchorRef);
+        expect(setFocusOnClosetHeaderAdjuster).toHaveBeenCalledTimes(1);
+        expect(setFocusOnClosetHeaderAdjuster).toHaveBeenCalledWith(anchorRef);
       });
     });
   });

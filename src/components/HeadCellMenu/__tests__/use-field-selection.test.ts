@@ -1,19 +1,19 @@
 import { renderHook, act, waitFor } from '@testing-library/react';
 import useFieldSelection from '../use-field-selection';
-import { Column } from '../types';
+import { HeaderData } from '../types';
 
 describe('useFieldSelection()', () => {
-  let column: Column;
+  let headerData: HeaderData;
   let appMock: EngineAPI.IApp;
 
-  const getFieldSelectionResult = () => renderHook(() => useFieldSelection({ column, app: appMock }));
+  const getFieldSelectionResult = () => renderHook(() => useFieldSelection({ headerData, app: appMock }));
 
   beforeEach(() => {
-    column = {
+    headerData = {
       isDim: true,
       fieldId: 'dim#01',
       label: 'dim#01',
-    } as Column;
+    } as HeaderData;
     appMock = {
       getField: jest.fn().mockResolvedValue(null),
       createSessionObject: jest.fn().mockResolvedValue({}),

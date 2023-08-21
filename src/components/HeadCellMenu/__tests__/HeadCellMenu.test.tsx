@@ -5,7 +5,7 @@ import { stardust } from '@nebula.js/stardust';
 import { render, fireEvent, screen, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
 import HeadCellMenu from '../HeadCellMenu';
 import * as useFieldSelectionHook from '../use-field-selection';
-import { Column, MenuAvailabilityFlags, UseFieldSelectionOutput } from '../types';
+import { HeaderData, MenuAvailabilityFlags, UseFieldSelectionOutput } from '../types';
 
 jest.mock('../use-field-selection', () => ({
   __esModule: true,
@@ -21,15 +21,15 @@ type ExtendedEmbed = stardust.Embed & {
 
 describe('<HeadCellMenu />', () => {
   let app: EngineAPI.IApp;
-  let column: Column;
+  let headerData: HeaderData;
   let translator: stardust.Translator;
   let translatorGetMock: jest.Mock<() => string>;
   let menuAvailabilityFlags: Partial<Record<MenuAvailabilityFlags, boolean>>;
   let sortFromMenu: jest.Mock<() => void>;
-  let changeActivelySortedColumn: jest.Mock<() => void>;
+  let changeActivelySortedHeader: jest.Mock<() => void>;
   let interactions: stardust.Interactions;
   let anchorRef: React.RefObject<HTMLDivElement>;
-  let setFocusOnClosetColumnAdjuster: jest.Mock<() => void>;
+  let setFocusOnClosetHeaderAdjuster: jest.Mock<() => void>;
   let listboxRef: React.RefObject<HTMLDivElement>;
   let handleHeadCellMenuKeyDown: jest.Mock<() => void>;
 
@@ -53,20 +53,16 @@ describe('<HeadCellMenu />', () => {
   const renderTableHeadCellMenu = () =>
     render(
       <HeadCellMenu
-        app={app}
-        model={model}
-        embed={embed}
         translator={translator}
         anchorRef={anchorRef}
-        listboxRef={listboxRef}
-        column={column}
+        headerData={headerData}
         tabIndex={0}
-        interactions={interactions}
-        sortFromMenu={sortFromMenu}
         menuAvailabilityFlags={menuAvailabilityFlags}
         handleHeadCellMenuKeyDown={handleHeadCellMenuKeyDown}
-        changeActivelySortedColumn={changeActivelySortedColumn}
-        setFocusOnClosetColumnAdjuster={setFocusOnClosetColumnAdjuster}
+        sortRelatedArgs={{ sortFromMenu, changeActivelySortedHeader }}
+        searchRelatedArgs={{ embed, listboxRef, interactions }}
+        selectionRelatedArgs={{ app, model }}
+        adjustHeaderSizeRelatedArgs={{ setFocusOnClosetHeaderAdjuster }}
       />
     );
 
@@ -91,12 +87,12 @@ describe('<HeadCellMenu />', () => {
       },
       on: jest.fn(),
     };
-    column = {
+    headerData = {
       colIdx: 0,
       isDim: true,
       label: 'dim#01',
       fieldId: 'someFieldId',
-    } as Column;
+    } as HeaderData;
     defaultListboxAnchorOpts = {
       anchorOrigin: { horizontal: 'left', vertical: 'bottom' },
       transformOrigin: { horizontal: 'left', vertical: 'top' },
@@ -140,7 +136,7 @@ describe('<HeadCellMenu />', () => {
       sorting: true,
       searching: true,
       selections: true,
-      adjustColumnSize: true,
+      adjustHeaderSize: true,
     };
   });
 
@@ -210,14 +206,14 @@ describe('<HeadCellMenu />', () => {
     expect(embed.__DO_NOT_USE__.popover).toHaveBeenCalledTimes(1);
     expect(embed.__DO_NOT_USE__.popover).toHaveBeenCalledWith(
       expect.any(HTMLDivElement),
-      column.fieldId,
+      headerData.fieldId,
       defaultListboxAnchorOpts
     );
   });
 
   test('should call `embed.__DO_NOT_USE__.popover()` once while trying to open listbox filter for a master dimension', async () => {
-    column = {
-      ...column,
+    headerData = {
+      ...headerData,
       qLibraryId: 'someLibId',
     };
     renderTableHeadCellMenu();
@@ -231,7 +227,7 @@ describe('<HeadCellMenu />', () => {
     expect(embed.__DO_NOT_USE__.popover).toHaveBeenCalledTimes(1);
     expect(embed.__DO_NOT_USE__.popover).toHaveBeenCalledWith(
       expect.any(HTMLDivElement),
-      { qLibraryId: column.qLibraryId, type: 'dimension' },
+      { qLibraryId: headerData.qLibraryId, type: 'dimension' },
       defaultListboxAnchorOpts
     );
   });

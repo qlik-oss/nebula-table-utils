@@ -11,7 +11,7 @@ import SelectExcluded from '@qlik-trial/sprout/icons/react/SelectExcluded';
 import ColumnSize from '@qlik-trial/sprout/icons/react/ColumnSize';
 import { HeaderData, MenuAvailabilityFlags, MenuItemGroup, SortingRelatedArgs } from './types';
 
-type GetMenuItemGroupsArgs = Partial<SortingRelatedArgs> & {
+export type GetMenuItemGroupsArgs = Partial<SortingRelatedArgs> & {
   headerData: HeaderData;
   translator: stardust.Translator;
   menuAvailabilityFlags: Partial<Record<MenuAvailabilityFlags, boolean>>;

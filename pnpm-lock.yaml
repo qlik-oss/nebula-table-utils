@@ -187,14 +187,10 @@ packages:
       '@babel/helpers': 7.22.10
       '@babel/parser': 7.22.10
       '@babel/template': 7.22.5
-<<<<<<< HEAD
-      '@babel/traverse': 7.22.10
-=======
       '@babel/traverse': 7.22.10(supports-color@5.5.0)
->>>>>>> feat/head-cell-menu
       '@babel/types': 7.22.10
       convert-source-map: 1.9.0
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@5.5.0)
       gensync: 1.0.0-beta.2
       json5: 2.2.3
       semver: 6.3.1
@@ -296,11 +292,7 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       '@babel/template': 7.22.5
-<<<<<<< HEAD
-      '@babel/traverse': 7.22.10
-=======
       '@babel/traverse': 7.22.10(supports-color@5.5.0)
->>>>>>> feat/head-cell-menu
       '@babel/types': 7.22.10
     transitivePeerDependencies:
       - supports-color
@@ -462,32 +454,6 @@ packages:
       '@babel/parser': 7.22.10
       '@babel/types': 7.22.10
 
-<<<<<<< HEAD
-  /@babel/traverse@7.22.10:
-=======
-  /@babel/traverse@7.22.10(supports-color@5.5.0):
->>>>>>> feat/head-cell-menu
-    resolution: {integrity: sha512-Q/urqV4pRByiNNpb/f5OSv28ZlGJiFiiTh+GAHktbIrkPhPbl90+uW6SmpoLyZqutrg9AEaEf3Q/ZBRHBXgxig==}
-    engines: {node: '>=6.9.0'}
-    dependencies:
-      '@babel/code-frame': 7.22.10
-      '@babel/generator': 7.22.10
-      '@babel/helper-environment-visitor': 7.22.5
-      '@babel/helper-function-name': 7.22.5
-      '@babel/helper-hoist-variables': 7.22.5
-      '@babel/helper-split-export-declaration': 7.22.6
-      '@babel/parser': 7.22.10
-      '@babel/types': 7.22.10
-<<<<<<< HEAD
-      debug: 4.3.4
-=======
-      debug: 4.3.4(supports-color@5.5.0)
->>>>>>> feat/head-cell-menu
-      globals: 11.12.0
-    transitivePeerDependencies:
-      - supports-color
-
-<<<<<<< HEAD
   /@babel/traverse@7.22.10(supports-color@5.5.0):
     resolution: {integrity: sha512-Q/urqV4pRByiNNpb/f5OSv28ZlGJiFiiTh+GAHktbIrkPhPbl90+uW6SmpoLyZqutrg9AEaEf3Q/ZBRHBXgxig==}
     engines: {node: '>=6.9.0'}
@@ -504,10 +470,7 @@ packages:
       globals: 11.12.0
     transitivePeerDependencies:
       - supports-color
-    dev: false
 
-=======
->>>>>>> feat/head-cell-menu
   /@babel/types@7.22.10:
     resolution: {integrity: sha512-obaoigiLrlDZ7TUQln/8m4mSqIW2QFeOrCQc9r+xsaHGNoplVNYlRVpsfE8Vj35GEm2ZH4ZhrNYogs/3fj85kg==}
     engines: {node: '>=6.9.0'}
@@ -710,7 +673,7 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dependencies:
       ajv: 6.12.6
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@5.5.0)
       espree: 9.6.1
       globals: 13.21.0
       ignore: 5.2.4
@@ -736,7 +699,7 @@ packages:
     engines: {node: '>=10.10.0'}
     dependencies:
       '@humanwhocodes/object-schema': 1.2.1
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@5.5.0)
       minimatch: 3.1.2
     transitivePeerDependencies:
       - supports-color
@@ -1998,7 +1961,7 @@ packages:
       conventional-changelog-angular: 6.0.0
       conventional-commits-filter: 3.0.0
       conventional-commits-parser: 4.0.0
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@5.5.0)
       import-from: 4.0.0
       lodash-es: 4.17.21
       micromatch: 4.0.5
@@ -2025,7 +1988,7 @@ packages:
     dependencies:
       '@semantic-release/error': 3.0.0
       aggregate-error: 3.1.0
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@5.5.0)
       dir-glob: 3.0.1
       execa: 5.1.1
       lodash: 4.17.21
@@ -2048,7 +2011,7 @@ packages:
       '@octokit/plugin-throttling': 7.0.0(@octokit/core@5.0.0)
       '@semantic-release/error': 4.0.0
       aggregate-error: 4.0.1
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@5.5.0)
       dir-glob: 3.0.1
       globby: 13.2.2
       http-proxy-agent: 7.0.0
@@ -2095,7 +2058,7 @@ packages:
       conventional-changelog-writer: 6.0.1
       conventional-commits-filter: 3.0.0
       conventional-commits-parser: 4.0.0
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@5.5.0)
       get-stream: 7.0.1
       import-from: 4.0.0
       into-stream: 7.0.0
@@ -2536,7 +2499,7 @@ packages:
       '@typescript-eslint/scope-manager': 5.59.5
       '@typescript-eslint/type-utils': 5.59.5(eslint@8.44.0)(typescript@5.1.6)
       '@typescript-eslint/utils': 5.59.5(eslint@8.44.0)(typescript@5.1.6)
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@5.5.0)
       eslint: 8.44.0
       grapheme-splitter: 1.0.4
       ignore: 5.2.4
@@ -2564,7 +2527,7 @@ packages:
       '@typescript-eslint/scope-manager': 5.60.1
       '@typescript-eslint/type-utils': 5.60.1(eslint@8.44.0)(typescript@5.1.6)
       '@typescript-eslint/utils': 5.60.1(eslint@8.44.0)(typescript@5.1.6)
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@5.5.0)
       eslint: 8.44.0
       grapheme-splitter: 1.0.4
       ignore: 5.2.4
@@ -2589,7 +2552,7 @@ packages:
       '@typescript-eslint/scope-manager': 5.59.5
       '@typescript-eslint/types': 5.59.5
       '@typescript-eslint/typescript-estree': 5.59.5(typescript@5.1.6)
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@5.5.0)
       eslint: 8.44.0
       typescript: 5.1.6
     transitivePeerDependencies:
@@ -2609,7 +2572,7 @@ packages:
       '@typescript-eslint/scope-manager': 5.60.1
       '@typescript-eslint/types': 5.60.1
       '@typescript-eslint/typescript-estree': 5.60.1(typescript@5.1.6)
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@5.5.0)
       eslint: 8.44.0
       typescript: 5.1.6
     transitivePeerDependencies:
@@ -2652,7 +2615,7 @@ packages:
     dependencies:
       '@typescript-eslint/typescript-estree': 5.59.5(typescript@5.1.6)
       '@typescript-eslint/utils': 5.59.5(eslint@8.44.0)(typescript@5.1.6)
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@5.5.0)
       eslint: 8.44.0
       tsutils: 3.21.0(typescript@5.1.6)
       typescript: 5.1.6
@@ -2672,7 +2635,7 @@ packages:
     dependencies:
       '@typescript-eslint/typescript-estree': 5.60.1(typescript@5.1.6)
       '@typescript-eslint/utils': 5.60.1(eslint@8.44.0)(typescript@5.1.6)
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@5.5.0)
       eslint: 8.44.0
       tsutils: 3.21.0(typescript@5.1.6)
       typescript: 5.1.6
@@ -2706,7 +2669,7 @@ packages:
     dependencies:
       '@typescript-eslint/types': 5.59.5
       '@typescript-eslint/visitor-keys': 5.59.5
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@5.5.0)
       globby: 11.1.0
       is-glob: 4.0.3
       semver: 7.5.4
@@ -2727,7 +2690,7 @@ packages:
     dependencies:
       '@typescript-eslint/types': 5.60.1
       '@typescript-eslint/visitor-keys': 5.60.1
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@5.5.0)
       globby: 11.1.0
       is-glob: 4.0.3
       semver: 7.5.4
@@ -2748,7 +2711,7 @@ packages:
     dependencies:
       '@typescript-eslint/types': 5.62.0
       '@typescript-eslint/visitor-keys': 5.62.0
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@5.5.0)
       globby: 11.1.0
       is-glob: 4.0.3
       semver: 7.5.4
@@ -2888,7 +2851,7 @@ packages:
     resolution: {integrity: sha512-RZNwNclF7+MS/8bDg70amg32dyeZGZxiDuQmZxKLAlQjr3jGyLx+4Kkk58UO7D2QdgFIQCovuSuZESne6RG6XQ==}
     engines: {node: '>= 6.0.0'}
     dependencies:
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@5.5.0)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -2897,7 +2860,7 @@ packages:
     resolution: {integrity: sha512-o/zjMZRhJxny7OyEF+Op8X+efiELC7k7yOjMzgfzVqOzXqkBkWI79YoTdOtsuWd5BWhAGAuOY/Xa6xpiaWXiNg==}
     engines: {node: '>= 14'}
     dependencies:
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@5.5.0)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -3800,17 +3763,6 @@ packages:
       supports-color: 5.5.0
     dev: true
 
-  /debug@4.3.4:
-    resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
-    engines: {node: '>=6.0'}
-    peerDependencies:
-      supports-color: '*'
-    peerDependenciesMeta:
-      supports-color:
-        optional: true
-    dependencies:
-      ms: 2.1.2
-
   /debug@4.3.4(supports-color@5.5.0):
     resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
     engines: {node: '>=6.0'}
@@ -3822,7 +3774,6 @@ packages:
     dependencies:
       ms: 2.1.2
       supports-color: 5.5.0
-    dev: false
 
   /decamelize-keys@1.1.1:
     resolution: {integrity: sha512-WiPxgEirIV0/eIOMcnFBA3/IJZAZqKnwAwWyvvdi4lsr1WCN22nhdf/3db3DoZcUjTV2SqfzIwNyp6y2xs3nmg==}
@@ -4563,7 +4514,7 @@ packages:
     dependencies:
       '@eslint-community/eslint-utils': 4.4.0(eslint@8.44.0)
       '@jridgewell/sourcemap-codec': 1.4.15
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@5.5.0)
       eslint: 8.44.0
       esutils: 2.0.3
       known-css-properties: 0.27.0
@@ -4654,7 +4605,7 @@ packages:
       ajv: 6.12.6
       chalk: 4.1.2
       cross-spawn: 7.0.3
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@5.5.0)
       doctrine: 3.0.0
       escape-string-regexp: 4.0.0
       eslint-scope: 7.2.2
@@ -5292,7 +5243,7 @@ packages:
     dependencies:
       '@tootallnate/once': 2.0.0
       agent-base: 6.0.2
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@5.5.0)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -5302,7 +5253,7 @@ packages:
     engines: {node: '>= 14'}
     dependencies:
       agent-base: 7.1.0
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@5.5.0)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -5312,7 +5263,7 @@ packages:
     engines: {node: '>= 6'}
     dependencies:
       agent-base: 6.0.2
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@5.5.0)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -5322,7 +5273,7 @@ packages:
     engines: {node: '>= 14'}
     dependencies:
       agent-base: 7.1.0
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@5.5.0)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -5778,7 +5729,7 @@ packages:
     resolution: {integrity: sha512-n3s8EwkdFIJCG3BPKBYvskgXGoy88ARzvegkitk60NxRdwltLOTaH7CUiMRXvwYorl0Q712iEjcWB+fK/MrWVw==}
     engines: {node: '>=10'}
     dependencies:
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@5.5.0)
       istanbul-lib-coverage: 3.2.0
       source-map: 0.6.1
     transitivePeerDependencies:
@@ -8262,7 +8213,7 @@ packages:
       '@semantic-release/release-notes-generator': 11.0.4(semantic-release@21.0.7)
       aggregate-error: 4.0.1
       cosmiconfig: 8.2.0
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@5.5.0)
       env-ci: 9.1.1
       execa: 7.2.0
       figures: 5.0.0
