@@ -1,5 +1,6 @@
 /* eslint-disable import/no-cycle */
 import React, { useState, useRef } from 'react';
+import Typography from '@mui/material/Typography';
 import ArrowRight from '@qlik-trial/sprout/icons/react/ArrowRight';
 import { ExtendedHeadCellMenuItem, MenuItemGroup } from '../types';
 import {
@@ -12,26 +13,24 @@ import {
 } from '../styles';
 import RecursiveMenuList from './RecursiveMenuList';
 
-export const interceptClickOnMenuItems = (menuGroups: MenuItemGroup[], cache: SubMenusOpenStatusCache) => {
-  const result = menuGroups.map((group) =>
-    group.map((grp) => ({
-      groupHeading: grp.groupHeading,
-      items: grp.items?.map(({ onClick, ...restProps }) => ({
+export const interceptClickOnMenuItems = (menuSections: MenuItemGroup[], cache: SubMenusOpenStatusCache) =>
+  menuSections.map((menuGroups) =>
+    menuGroups.map((group) => ({
+      groupHeading: group.groupHeading,
+      items: group.items?.map(({ onClick, ...restProps }) => ({
         ...restProps,
         ...(onClick
           ? {
-              onClick: (evt: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
+              onClick: async (evt: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
                 // reset all opened submenu levels here!
                 Object.entries(cache).map(([, setter]) => setter(false));
-                onClick(evt);
+                await onClick(evt);
               },
             }
           : {}),
       })),
     }))
   );
-  return result;
-};
 
 type SubMenusOpenStatusCache = Record<string, React.Dispatch<React.SetStateAction<boolean>>>;
 let subMenusOpenStatusCache: SubMenusOpenStatusCache = {};
@@ -51,9 +50,9 @@ const MenuGroupItems = ({
   const [openMenu, setOpenMenu] = useState(false);
   const anchorRef = useRef<HTMLDivElement | null>(null);
 
-  const handleOnClick = (evt: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
+  const handleOnClick = async (evt: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
     if (onClick) {
-      onClick(evt);
+      await onClick(evt);
       subMenusOpenStatusCache = {};
     }
     if (subMenus?.length) {
@@ -68,7 +67,7 @@ const MenuGroupItems = ({
         ref={subMenus ? anchorRef : null}
         key={id}
         data-testid={`menu-item-${id}`}
-        className="sn-table-head-menu-item"
+        className="nebula-table-utils-head-menu-item"
         onClick={handleOnClick}
         disabled={!enabled}
         autoFocus={autoFocus}
@@ -83,7 +82,7 @@ const MenuGroupItems = ({
           <StyledListItemIcon>
             <Icon />
           </StyledListItemIcon>
-          <StyledListItemLabel>{itemTitle}</StyledListItemLabel>
+          <Typography variant="body2">{itemTitle}</Typography>
         </StyledMenuItemLabel>
         {subMenus?.length ? <ArrowRight /> : null}
       </StyledMenuItem>

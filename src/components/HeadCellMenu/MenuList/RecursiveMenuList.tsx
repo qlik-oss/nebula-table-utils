@@ -31,7 +31,7 @@ const RecursiveMenuList = ({
   if (!menuGroups.length) return null;
   return (
     <StyledMenu
-      className="sn-table-head-menu"
+      className="nebula-table-utils-head-menu"
       open={open}
       anchorEl={anchorEl}
       onClose={onClose}
