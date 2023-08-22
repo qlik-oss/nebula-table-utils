@@ -58,6 +58,7 @@
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
     "@types/jest": "^29.5.3",
+    "@types/qlik-engineapi": "^12.67.13",
     "@types/react": "^18.2.14",
     "@types/testing-library__jest-dom": "^5.14.8",
     "eslint": "^8.44.0",
@@ -82,7 +83,13 @@
   },
   "packageManager": "pnpm@8.6.12",
   "peerDependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.14.1",
+    "@mui/styled-engine-sc": "^5.12.0",
+    "@nebula.js/stardust": "4.2.4",
     "@qlik-trial/sprout": "^3.4.0",
-    "react": "^18.2.0"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }

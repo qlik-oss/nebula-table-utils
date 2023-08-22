@@ -1,0 +1,96 @@
+import React, { useState, useCallback, useEffect } from 'react';
+import Menu from '@qlik-trial/sprout/icons/Menu';
+import useFieldSelection from './use-field-selection';
+import RecursiveMenuList from './MenuList/RecursiveMenuList';
+import { getMenuItemGroups } from './utils';
+import { HeadCellMenuWrapper, StyledMenuButton } from './styles';
+import { HeadCellMenuProps } from './types';
+
+const HeadCellMenu = ({
+  headerData,
+  tabIndex,
+  anchorRef,
+  translator,
+  handleHeadCellMenuKeyDown,
+  menuAvailabilityFlags,
+  sortRelatedArgs,
+  searchRelatedArgs,
+  selectionRelatedArgs,
+  adjustHeaderSizeRelatedArgs,
+}: HeadCellMenuProps) => {
+  const { headTextAlign, qLibraryId, fieldId } = headerData;
+  const [openMenuDropdown, setOpenMenuDropdown] = useState(false);
+  const {
+    fieldInstance,
+    selectionActionsEnabledStatus,
+    resetSelectionActionsEnabledStatus,
+    updateSelectionActionsEnabledStatus,
+  } = useFieldSelection({ headerData, app: selectionRelatedArgs?.app });
+
+  const handleOpenDropdown = async () => {
+    if (!openMenuDropdown && selectionRelatedArgs?.model) {
+      const layout = await selectionRelatedArgs?.model.getLayout();
+      updateSelectionActionsEnabledStatus(layout as EngineAPI.IGenericHyperCubeLayout);
+    }
+    setOpenMenuDropdown(!openMenuDropdown);
+  };
+
+  const embedListbox = useCallback(() => {
+    const id = qLibraryId ? { qLibraryId, type: 'dimension' } : fieldId;
+    if (searchRelatedArgs?.embed && searchRelatedArgs.listboxRef) {
+      const { embed, listboxRef } = searchRelatedArgs;
+      // @ts-expect-error TODO: no types for `__DO_NOT_USE__`, it will improve when it becomes stable
+      embed.__DO_NOT_USE__.popover(listboxRef.current, id, {
+        anchorOrigin: { vertical: 'bottom', horizontal: 'left' },
+        transformOrigin: { vertical: 'top', horizontal: 'left' },
+      });
+    }
+  }, [searchRelatedArgs, fieldId, qLibraryId]);
+
+  useEffect(() => {
+    if (!openMenuDropdown) resetSelectionActionsEnabledStatus();
+  }, [openMenuDropdown, resetSelectionActionsEnabledStatus]);
+
+  return (
+    <HeadCellMenuWrapper rightAligned={headTextAlign === 'right'}>
+      <StyledMenuButton
+        size="small"
+        tabIndex={tabIndex}
+        id="nebula-table-utils-head-menu-button"
+        aria-controls={openMenuDropdown ? 'nebula-table-utils-head-menu' : undefined}
+        aria-expanded={openMenuDropdown ? 'true' : undefined}
+        aria-haspopup="true"
+        onClick={handleOpenDropdown}
+      >
+        <Menu />
+      </StyledMenuButton>
+
+      <RecursiveMenuList
+        open={openMenuDropdown}
+        anchorEl={anchorRef.current}
+        onClose={() => setOpenMenuDropdown(false)}
+        menuGroups={getMenuItemGroups({
+          headerData,
+          translator,
+          menuAvailabilityFlags,
+          setOpenMenuDropdown,
+          // sort
+          ...sortRelatedArgs,
+          // search
+          embedListbox,
+          interactions: searchRelatedArgs?.interactions,
+          // selection
+          fieldInstance,
+          selectionActionsEnabledStatus,
+          // Adjust col size
+          anchorRef,
+          setFocusOnClosetHeaderAdjuster: adjustHeaderSizeRelatedArgs?.setFocusOnClosetHeaderAdjuster,
+        })}
+        ariaLabel="nebula-table-utils-head-menu-button"
+        handleHeadCellMenuKeyDown={handleHeadCellMenuKeyDown}
+      />
+    </HeadCellMenuWrapper>
+  );
+};
+
+export default HeadCellMenu;
