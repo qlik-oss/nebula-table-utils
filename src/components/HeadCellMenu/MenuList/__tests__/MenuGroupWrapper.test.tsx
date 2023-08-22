@@ -16,7 +16,7 @@ describe('<MenuGroupWrapper />', () => {
     expect(screen.queryByTestId('group-divider')).not.toBeInTheDocument();
   });
 
-  test('should render menu group without divider2', () => {
+  test('should render menu group with divider', () => {
     renderer([
       [{ items: [{ id: 1, icon: () => <i />, itemTitle: 'Menu#01', enabled: true }] }],
       [{ items: [{ id: 2, icon: () => <i />, itemTitle: 'Menu#02', enabled: true }] }],
