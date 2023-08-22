@@ -20,10 +20,10 @@ export const interceptClickOnMenuItems = (menuSections: MenuItemGroup[], cache: 
         ...restProps,
         ...(onClick
           ? {
-              onClick: (evt: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
+              onClick: async (evt: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
                 // reset all opened submenu levels here!
                 Object.entries(cache).map(([, setter]) => setter(false));
-                onClick(evt);
+                await onClick(evt);
               },
             }
           : {}),
@@ -49,9 +49,9 @@ const MenuGroupItems = ({
   const [openMenu, setOpenMenu] = useState(false);
   const anchorRef = useRef<HTMLDivElement | null>(null);
 
-  const handleOnClick = (evt: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
+  const handleOnClick = async (evt: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
     if (onClick) {
-      onClick(evt);
+      await onClick(evt);
       subMenusOpenStatusCache = {};
     }
     if (subMenus?.length) {

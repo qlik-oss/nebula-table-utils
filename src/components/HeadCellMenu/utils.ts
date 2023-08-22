@@ -63,10 +63,10 @@ export const getMenuItemGroups = ({
           {
             id: 1,
             itemTitle: translator.get('SNTable.MenuItem.SortAscending'),
-            onClick: (evt: React.MouseEvent<HTMLLIElement>) => {
-              sortFromMenu?.(evt, 'A');
+            onClick: async (evt: React.MouseEvent<HTMLLIElement>) => {
+              await sortFromMenu?.(evt, 'A');
               setOpenMenuDropdown(false);
-              changeActivelySortedHeader?.(headerData);
+              await changeActivelySortedHeader?.(headerData);
             },
             icon: Ascending,
             enabled: true,
@@ -75,10 +75,10 @@ export const getMenuItemGroups = ({
           {
             id: 2,
             itemTitle: translator.get('SNTable.MenuItem.SortDescending'),
-            onClick: (evt: React.MouseEvent<HTMLLIElement>) => {
-              sortFromMenu?.(evt, 'D');
+            onClick: async (evt: React.MouseEvent<HTMLLIElement>) => {
+              await sortFromMenu?.(evt, 'D');
               setOpenMenuDropdown(false);
-              changeActivelySortedHeader?.(headerData);
+              await changeActivelySortedHeader?.(headerData);
             },
             icon: Descending,
             enabled: true,
