@@ -9,8 +9,8 @@ export enum MenuAvailabilityFlags {
 }
 
 export type SortingRelatedArgs = {
-  sortFromMenu: (evt: React.MouseEvent, newSortDirection: SortDirection) => void;
-  changeActivelySortedHeader?: (headerData: HeaderData) => void;
+  sortFromMenu: (evt: React.MouseEvent, newSortDirection: SortDirection) => Promise<void>;
+  changeActivelySortedHeader?: (headerData: HeaderData) => Promise<boolean>;
 };
 
 export type SearchRelatedArgs = {
@@ -54,7 +54,7 @@ export interface HeadCellMenuItem {
   itemTitle: string;
   enabled: boolean; // for selections
   isActive?: boolean; // for active sorted col
-  onClick?: (evt: React.MouseEvent<HTMLLIElement>) => void;
+  onClick?: (evt: React.MouseEvent<HTMLLIElement>) => Promise<void> | void;
   subMenus?: MenuItemGroup[];
   isSubMenu?: boolean;
 }
