@@ -1,5 +1,5 @@
 import { renderHook, waitFor } from '@testing-library/react';
-import useFetch from './useFetch';
+import useFetch from './use-fetch';
 
 describe('useFetch', () => {
   test('should return is loading state while fetch is in progress', async () => {
