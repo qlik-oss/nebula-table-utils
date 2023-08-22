@@ -62,6 +62,7 @@ const HeadCellMenu = ({
         aria-expanded={openMenuDropdown ? 'true' : undefined}
         aria-haspopup="true"
         onClick={handleOpenDropdown}
+        data-testid="nebula-table-utils-head-menu-button"
       >
         <Menu />
       </StyledMenuButton>

@@ -16,7 +16,7 @@ import RecursiveMenuList from './RecursiveMenuList';
 export const interceptClickOnMenuItems = (menuSections: MenuItemGroup[], cache: SubMenusOpenStatusCache) =>
   menuSections.map((menuGroups) =>
     menuGroups.map((group) => ({
-      groupHeading: group.groupHeading,
+      ...(group.groupHeading ? { groupHeading: group.groupHeading } : {}),
       items: group.items?.map(({ onClick, ...restProps }) => ({
         ...restProps,
         ...(onClick
