@@ -89,7 +89,7 @@ describe('Utils', () => {
   });
 
   describe('Structure check', () => {
-    const getMenuExpactation = (hasTitle = true) =>
+    const getMenuExpactation = (hasTitle = true, isSubMenu = false) =>
       expect.arrayContaining([
         expect.arrayContaining([
           expect.objectContaining({
@@ -101,7 +101,7 @@ describe('Utils', () => {
                 onClick: expect.any(Function),
                 icon: expect.any(Function),
                 enabled: expect.any(Boolean),
-                isActive: expect.any(Boolean),
+                ...(!isSubMenu ? { isActive: expect.any(Boolean) } : {}),
               }),
             ]),
           }),
@@ -132,7 +132,7 @@ describe('Utils', () => {
         menuAvailabilityFlags: { ...getMenuItemArgs.menuAvailabilityFlags, selections: true },
       };
       const result = getMenuItemGroups(getMenuItemArgs);
-      expect(result[0][0].items[0].subMenus).toMatchObject(getMenuExpactation(false));
+      expect(result[0][0].items[0].subMenus).toMatchObject(getMenuExpactation(false, true));
     });
   });
 

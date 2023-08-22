@@ -197,10 +197,6 @@ describe('<HeadCellMenu />', () => {
     renderTableHeadCellMenu();
     await openMenu();
 
-    // fireEvent.click(screen.getByRole('button'));
-    // await waitFor(() => {
-    //   expect(screen.queryByRole('menu')).toBeVisible();
-    // });
     fireEvent.click(screen.getByText('SNTable.MenuItem.Search'));
     expect(screen.queryByRole('menu')).not.toBeInTheDocument();
     expect(embed.__DO_NOT_USE__.popover).toHaveBeenCalledTimes(1);

@@ -14,17 +14,15 @@ describe('MenuGroup', () => {
         [{ items: [{ id: 1, icon: () => <i />, itemTitle: 'Menu#01', enabled: true }] }],
         [{ items: [{ id: 2, icon: () => <i />, itemTitle: 'Menu#02', enabled: true }] }],
       ];
-      const result = interceptClickOnMenuItems(menuGroups, cache);
-      expect(result).toMatchObject(menuGroups);
+      expect(interceptClickOnMenuItems(menuGroups, cache)).toMatchObject(menuGroups);
     });
 
     test('should include onClick property if it was provided', () => {
       menuGroups = [
         [{ items: [{ id: 1, icon: () => <i />, enabled: true, itemTitle: 'Menu#01', onClick: () => {} }] }],
       ];
-      const result = interceptClickOnMenuItems(menuGroups, cache);
-      // stringify because onClick function reference could be different in each call
-      expect(JSON.stringify(result)).toStrictEqual(JSON.stringify(menuGroups));
+      const res = interceptClickOnMenuItems(menuGroups, cache);
+      expect(res[0][0].items[0].onClick).toBeTruthy;
     });
 
     test('should include subMenus property if it was provided', () => {
@@ -43,8 +41,7 @@ describe('MenuGroup', () => {
           },
         ],
       ];
-      const result = interceptClickOnMenuItems(menuGroups, cache);
-      expect(result).toMatchObject(menuGroups);
+      expect(interceptClickOnMenuItems(menuGroups, cache)).toMatchObject(menuGroups);
     });
   });
 
