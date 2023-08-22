@@ -25,8 +25,8 @@ describe('<HeadCellMenu />', () => {
   let translator: stardust.Translator;
   let translatorGetMock: jest.Mock<() => string>;
   let menuAvailabilityFlags: Partial<Record<MenuAvailabilityFlags, boolean>>;
-  let sortFromMenu: jest.Mock<() => void>;
-  let changeActivelySortedHeader: jest.Mock<() => void>;
+  let sortFromMenu: jest.Mock<Promise<void>>;
+  let changeActivelySortedHeader: jest.Mock<Promise<boolean>>;
   let interactions: stardust.Interactions;
   let anchorRef: React.RefObject<HTMLDivElement>;
   let setFocusOnClosetHeaderAdjuster: jest.Mock<() => void>;

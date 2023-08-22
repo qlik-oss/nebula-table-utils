@@ -12,8 +12,8 @@ describe('Utils', () => {
   let setOpenMenuDropdown: jest.Mock<() => void>;
 
   // sort
-  let sortFromMenu: jest.Mock<() => void>;
-  let changeActivelySortedHeader: jest.Mock<() => void>;
+  let sortFromMenu: jest.Mock<Promise<void>>;
+  let changeActivelySortedHeader: jest.Mock<Promise<boolean>>;
 
   // search
   let interactions: stardust.Interactions;
@@ -167,7 +167,7 @@ describe('Utils', () => {
         expect(setOpenMenuDropdown).toHaveBeenCalledWith(false);
       });
 
-      test('should call expected functions on sort ASC callback', () => {
+      test('should call expected functions on sort ASC callback', async () => {
         getMenuItemArgs = {
           ...getMenuItemArgs,
           menuAvailabilityFlags: {
@@ -179,14 +179,14 @@ describe('Utils', () => {
 
         const callback = result[0][0].items[0].onClick;
 
-        callback?.(evt);
+        await callback?.(evt);
         expect(sortFromMenu).toHaveBeenCalledTimes(1);
         expect(changeActivelySortedHeader).toHaveBeenCalledTimes(1);
         expect(sortFromMenu).toHaveBeenCalledWith(evt, 'A');
         expect(changeActivelySortedHeader).toHaveBeenCalledWith(headerData);
       });
 
-      test('should call expected functions on sort DESC callback', () => {
+      test('should call expected functions on sort DESC callback', async () => {
         getMenuItemArgs = {
           ...getMenuItemArgs,
           menuAvailabilityFlags: {
@@ -197,7 +197,7 @@ describe('Utils', () => {
         const result = getMenuItemGroups(getMenuItemArgs);
         const callback = result[0][0].items[1].onClick;
 
-        callback?.(evt);
+        await callback?.(evt);
         expect(sortFromMenu).toHaveBeenCalledTimes(1);
         expect(changeActivelySortedHeader).toHaveBeenCalledTimes(1);
         expect(sortFromMenu).toHaveBeenCalledWith(evt, 'D');
@@ -211,7 +211,7 @@ describe('Utils', () => {
         expect(setOpenMenuDropdown).toHaveBeenCalledWith(false);
       });
 
-      test('should call expected functions on Search callback', () => {
+      test('should call expected functions on Search callback', async () => {
         const stopPropagationMock = jest.fn();
         const mockedEvt = { ...evt, stopPropagation: stopPropagationMock };
         getMenuItemArgs = {
@@ -226,7 +226,7 @@ describe('Utils', () => {
         const result = getMenuItemGroups(getMenuItemArgs);
 
         const callback = result[0][0].items[0].onClick;
-        callback?.(mockedEvt);
+        await callback?.(mockedEvt);
 
         expect(stopPropagationMock).toHaveBeenCalledTimes(1);
         expect(embedListbox).toHaveBeenCalledTimes(1);
@@ -253,14 +253,14 @@ describe('Utils', () => {
 
         result[0][0].items[0].subMenus?.forEach((menuGroup) => {
           menuGroup.map((grp) => {
-            grp.items.map((selectionItemData) => {
+            grp.items.map(async (selectionItemData) => {
               // pluck out callback name from it's translation
               let callbackFnName = selectionItemData.itemTitle.split('.').at(-1) || '';
               callbackFnName = callbackFnName[0].toLocaleLowerCase() + callbackFnName.slice(1);
               if (callbackFnName?.includes('clear')) callbackFnName = 'clear';
 
               const callback = selectionItemData.onClick;
-              callback?.(evt);
+              await callback?.(evt);
               // @ts-expect-error no need to check as we are getting the functiin name dynamically in string format
               expect(fieldInstance?.[callbackFnName]).toHaveBeenCalledTimes(1);
             });
@@ -275,7 +275,7 @@ describe('Utils', () => {
         expect(setOpenMenuDropdown).toHaveBeenCalledWith(false);
       });
 
-      test('should call expected functions on Adjust Col Size callback', () => {
+      test('should call expected functions on Adjust Col Size callback', async () => {
         const stopPropagationMock = jest.fn();
         const preventDefaultMock = jest.fn();
         const mockedEvt = { ...evt, stopPropagation: stopPropagationMock, preventDefault: preventDefaultMock };
@@ -289,7 +289,7 @@ describe('Utils', () => {
         const result = getMenuItemGroups(getMenuItemArgs);
 
         const callback = result[0][0].items[0].onClick;
-        callback?.(mockedEvt);
+        await callback?.(mockedEvt);
 
         expect(stopPropagationMock).toHaveBeenCalledTimes(1);
         expect(preventDefaultMock).toHaveBeenCalledTimes(1);
