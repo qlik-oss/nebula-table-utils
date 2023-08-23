@@ -9,7 +9,7 @@ import SelectPossible from '@qlik-trial/sprout/icons/react/SelectPossible';
 import SelectAlternative from '@qlik-trial/sprout/icons/react/SelectAlternative';
 import SelectExcluded from '@qlik-trial/sprout/icons/react/SelectExcluded';
 import ColumnSize from '@qlik-trial/sprout/icons/react/ColumnSize';
-import { HeaderData, MenuAvailabilityFlags, MenuItemGroup, SortingRelatedArgs } from './types';
+import { type HeaderData, MenuAvailabilityFlags, type MenuItemGroup, type SortingRelatedArgs } from './types';
 
 export type GetMenuItemGroupsArgs = Partial<SortingRelatedArgs> & {
   headerData: HeaderData;

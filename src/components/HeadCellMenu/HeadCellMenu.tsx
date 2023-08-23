@@ -4,7 +4,7 @@ import useFieldSelection from './use-field-selection';
 import RecursiveMenuList from './MenuList/RecursiveMenuList';
 import { getMenuItemGroups } from './utils';
 import { HeadCellMenuWrapper, StyledMenuButton } from './styles';
-import { HeadCellMenuProps } from './types';
+import type { HeadCellMenuProps } from './types';
 
 const HeadCellMenu = ({
   headerData,
@@ -60,6 +60,7 @@ const HeadCellMenu = ({
         aria-controls={openMenuDropdown ? 'nebula-table-utils-head-menu' : undefined}
         aria-expanded={openMenuDropdown ? 'true' : undefined}
         aria-haspopup="true"
+        // eslint-disable-next-line @typescript-eslint/no-misused-promises
         onClick={handleOpenDropdown}
         data-testid="nebula-table-utils-head-menu-button"
       >

@@ -9,7 +9,7 @@ import {
   HEAD_CELL_MENU_WIDTH,
   HEAD_ICON_WRAPPER_SIZE,
 } from '../../constants';
-import { DefaultTheme } from '../../types';
+import { type DefaultTheme } from '../../types';
 
 // ---------- HeadCellMenu ----------
 export const HeadCellMenuWrapper = styled(Box)(({ rightAligned }: { rightAligned: boolean }) => ({
@@ -50,7 +50,14 @@ export const StyledGroupLabel = styled(ListItem)(({ theme }: DefaultTheme) => ({
 }));
 
 export const StyledMenuItem = styled(MenuItem)(
-  ({ theme, isSubMenu, isActive }: DefaultTheme & { isSubMenu: boolean; isActive: boolean }) => ({
+  ({
+    theme,
+    isSubMenu,
+    isActive,
+  }: DefaultTheme & {
+    isSubMenu: boolean;
+    isActive: boolean;
+  }) => ({
     // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
     width: `calc(${HEAD_CELL_MENU_WIDTH}px - ${theme.spacing(1)} - ${isSubMenu ? 10 : 0}px)`, // menu dropdown width - item margins to add up to 220px as per design - if is submenu -> it might shrink by 10 px
     maxHeight: HEAD_CELL_MENU_ITEM_HEIGHT,

@@ -2,7 +2,7 @@ import React from 'react';
 import '@testing-library/jest-dom';
 import { screen, render } from '@testing-library/react';
 import MenuGroupWrapper from '../MenuGroupWrapper';
-import { MenuItemGroup } from '../../types';
+import type { MenuItemGroup } from '../../types';
 
 describe('<MenuGroupWrapper />', () => {
   const renderer = (itemGroups: MenuItemGroup[]) => {

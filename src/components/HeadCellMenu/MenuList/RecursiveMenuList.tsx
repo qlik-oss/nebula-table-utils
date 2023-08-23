@@ -1,7 +1,7 @@
 /* eslint-disable import/no-cycle */
 import React from 'react';
-import { PopoverOrigin } from '@mui/material';
-import { MenuItemGroup } from '../types';
+import type { PopoverOrigin } from '@mui/material';
+import type { MenuItemGroup } from '../types';
 import MenuGroupWrapper from './MenuGroupWrapper';
 import { StyledMenu } from '../styles';
 
