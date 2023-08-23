@@ -7,7 +7,10 @@ module.exports = {
   transform: {
     '^.+\\.(t|j)sx?$': '@swc/jest',
   },
-  coveragePathIgnorePatterns: ['dist', 'lib', 'build-utils'],
+  moduleNameMapper: {
+    '@qlik-trial/sprout/icons/.*': '<rootDir>/test-utils/sprout-icons-mock.tsx',
+  },
+  coveragePathIgnorePatterns: ['dist', 'lib', 'build-utils', './src/constants'],
   transformIgnorePatterns: ['<rootDir>/node_modules/(?!(cliui|wrap-ansi)/*)'],
   setupFilesAfterEnv: ['<rootDir>/jest/setup.js'],
 };
