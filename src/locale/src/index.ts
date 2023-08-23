@@ -7,7 +7,6 @@ export default function registerLocale(translator: stardust.Translator) {
     const t = 'NebulaTableUtils.MenuGroupLabel.Sorting';
     const g = translator.get(t);
 
-    // TODO: no duplicate translations
     // if the translated string is different from its id,
     // the translations are assumed to already exist for the current locale
     if (g !== t) return;
