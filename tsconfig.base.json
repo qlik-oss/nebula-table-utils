@@ -1,8 +1,9 @@
 {
   "extends": "@qlik/tsconfig/react.json",
   "compilerOptions": {
-    "jsx": "react"
-    // "noUncheckedIndexedAccess": true
+    "jsx": "react",
+    "declaration": true,
+    "outDir": "lib"
   },
   "exclude": ["node_modules", "lib", "dist"]
 }
