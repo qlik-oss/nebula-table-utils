@@ -13,7 +13,6 @@ export default function registerLocale(translator: stardust.Translator) {
     if (g !== t) return;
 
     Object.keys(all).forEach((key): void => {
-      console.log({ key });
       translator.add(all[key as keyof typeof all]);
     });
   }

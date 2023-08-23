@@ -1,8 +1,7 @@
 /* eslint-disable import/no-cycle */
 import React, { useState, useRef } from 'react';
-import Typography from '@mui/material/Typography';
 import ArrowRight from '@qlik-trial/sprout/icons/react/ArrowRight';
-import { ExtendedHeadCellMenuItem, MenuItemGroup } from '../types';
+import type { ExtendedHeadCellMenuItem, MenuItemGroup } from '../types';
 import {
   StyledMenuItem,
   StyledListItemIcon,
@@ -82,7 +81,7 @@ const MenuGroupItems = ({
           <StyledListItemIcon>
             <Icon />
           </StyledListItemIcon>
-          <Typography variant="body2">{itemTitle}</Typography>
+          <StyledListItemLabel variant="body2">{itemTitle}</StyledListItemLabel>
         </StyledMenuItemLabel>
         {subMenus?.length ? <ArrowRight /> : null}
       </StyledMenuItem>
