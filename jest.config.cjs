@@ -12,4 +12,5 @@ module.exports = {
   },
   coveragePathIgnorePatterns: ['dist', 'lib', 'build-utils', './src/constants'],
   transformIgnorePatterns: ['<rootDir>/node_modules/(?!(cliui|wrap-ansi)/*)'],
+  setupFilesAfterEnv: ['<rootDir>/jest/setup.js'],
 };
