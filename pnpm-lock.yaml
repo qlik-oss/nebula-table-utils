@@ -100,6 +100,9 @@ devDependencies:
   eslint-plugin-prettier:
     specifier: 5.0.0-alpha.2
     version: 5.0.0-alpha.2(eslint@8.44.0)(prettier@3.0.0)
+  globby:
+    specifier: 13.2.2
+    version: 13.2.2
   husky:
     specifier: 8.0.3
     version: 8.0.3

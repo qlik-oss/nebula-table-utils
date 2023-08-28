@@ -4,7 +4,8 @@ import useFieldSelection from './use-field-selection';
 import RecursiveMenuList from './MenuList/RecursiveMenuList';
 import { getMenuItemGroups } from './utils';
 import { HeadCellMenuWrapper, StyledMenuButton } from './styles';
-import { HeadCellMenuProps } from './types';
+import type { HeadCellMenuProps } from './types';
+import { useTranslations } from '../../hooks';
 
 const HeadCellMenu = ({
   headerData,
@@ -18,6 +19,7 @@ const HeadCellMenu = ({
   selectionRelatedArgs,
   adjustHeaderSizeRelatedArgs,
 }: HeadCellMenuProps) => {
+  const t = useTranslations({ translator });
   const { headTextAlign, qLibraryId, fieldId } = headerData;
   const [openMenuDropdown, setOpenMenuDropdown] = useState(false);
   const {
@@ -72,7 +74,7 @@ const HeadCellMenu = ({
         onClose={() => setOpenMenuDropdown(false)}
         menuGroups={getMenuItemGroups({
           headerData,
-          translator,
+          translator: t,
           menuAvailabilityFlags,
           setOpenMenuDropdown,
           // sort

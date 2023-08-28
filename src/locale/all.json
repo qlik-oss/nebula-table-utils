@@ -1,0 +1,74 @@
+{
+  "NebulaTableUtils_MenuGroupLabel_Sorting": {
+    "id": "NebulaTableUtils.MenuGroupLabel.Sorting",
+    "locale": {
+      "en-US": "Sorting"
+    }
+  },
+  "NebulaTableUtils_MenuItemLabel_SortAscending": {
+    "id": "NebulaTableUtils.MenuItemLabel.SortAscending",
+    "locale": {
+      "en-US": "Sort ascending"
+    }
+  },
+  "NebulaTableUtils_MenuItemLabel_SortDescending": {
+    "id": "NebulaTableUtils.MenuItemLabel.SortDescending",
+    "locale": {
+      "en-US": "Sort descending"
+    }
+  },
+  "NebulaTableUtils_MenuItemLabel_Search": {
+    "id": "NebulaTableUtils.MenuItemLabel.Search",
+    "locale": {
+      "en-US": "Search"
+    }
+  },
+  "NebulaTableUtils_MenuItemLabel_Selections": {
+    "id": "NebulaTableUtils.MenuItemLabel.Selections",
+    "locale": {
+      "en-US": "Selections"
+    }
+  },
+  "NebulaTableUtils_MenuItemLabel_SelectAll": {
+    "id": "NebulaTableUtils.MenuItemLabel.SelectAll",
+    "locale": {
+      "en-US": "Select all"
+    }
+  },
+  "NebulaTableUtils_MenuItemLabel_SelectPossible": {
+    "id": "NebulaTableUtils.MenuItemLabel.SelectPossible",
+    "locale": {
+      "en-US": "Select possible"
+    }
+  },
+  "NebulaTableUtils_MenuItemLabel_SelectAlternative": {
+    "id": "NebulaTableUtils.MenuItemLabel.SelectAlternative",
+    "locale": {
+      "en-US": "Select alternative"
+    }
+  },
+  "NebulaTableUtils_MenuItemLabel_SelectExcluded": {
+    "id": "NebulaTableUtils.MenuItemLabel.SelectExcluded",
+    "locale": {
+      "en-US": "Select excluded"
+    }
+  },
+  "NebulaTableUtils_MenuItemLabel_ClearSelections": {
+    "id": "NebulaTableUtils.MenuItemLabel.ClearSelections",
+    "locale": {
+      "en-US": "Clear selections"
+    }
+  },
+  "NebulaTableUtils_MenuItemLabel_AdjustColumnSize": {
+    "id": "NebulaTableUtils.MenuItemLabel.AdjustColumnSize",
+    "locale": {
+      "en-US": "Adjust column size"
+    }
+  },
+  "NebulaTableUtils_MenuItemLabel_ColumnOptions": {
+    "id": "NebulaTableUtils.MenuItemLabel.ColumnOptions",
+    "locale": {
+      "en-US": "Column options"
+    }
+  }
+}
