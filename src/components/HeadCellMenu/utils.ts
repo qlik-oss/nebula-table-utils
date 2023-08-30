@@ -69,7 +69,7 @@ export const getMenuItemGroups = ({
               await changeActivelySortedHeader?.(headerData);
             },
             icon: Ascending,
-            enabled: true,
+            enabled: headerData.isActivelySorted ? true : headerData.sortDirection === 'D',
             isActive: headerData.isActivelySorted && headerData.sortDirection === 'A',
           },
           {
@@ -81,7 +81,7 @@ export const getMenuItemGroups = ({
               await changeActivelySortedHeader?.(headerData);
             },
             icon: Descending,
-            enabled: true,
+            enabled: headerData.isActivelySorted ? true : headerData.sortDirection === 'A',
             isActive: headerData.isActivelySorted && headerData.sortDirection === 'D',
           },
         ],
