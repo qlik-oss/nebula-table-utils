@@ -1,6 +1,6 @@
 import { renderHook, act, waitFor } from '@testing-library/react';
 import useFieldSelection from '../use-field-selection';
-import { HeaderData } from '../types';
+import type { HeaderData } from '../types';
 
 describe('useFieldSelection()', () => {
   let headerData: HeaderData;

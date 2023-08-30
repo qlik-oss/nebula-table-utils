@@ -1,4 +1,4 @@
-import { SVGProps } from 'react';
+import type { SVGProps } from 'react';
 import { stardust } from '@nebula.js/stardust';
 
 export enum MenuAvailabilityFlags {

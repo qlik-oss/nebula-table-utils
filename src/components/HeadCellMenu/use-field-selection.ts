@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { UseFieldSelectionOutput, UseFieldSelectionProps } from './types';
+import type { UseFieldSelectionOutput, UseFieldSelectionProps } from './types';
 
 const SELECTION_ACTIONS_ENABLED_DEFAULT_STATUS: Record<string, boolean> = {
   canSelectAll: false,
@@ -21,6 +21,7 @@ const useFieldSelection = ({ headerData, app }: UseFieldSelectionProps): UseFiel
 
   useEffect(() => {
     if (!app || !app.getField || !headerData || !headerData.isDim) return;
+    // eslint-disable-next-line no-console
     app.getField(headerData.fieldId).then(setFieldInstance).catch(console.error);
   }, [app, headerData]);
 

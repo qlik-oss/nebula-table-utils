@@ -5,7 +5,7 @@ import { stardust } from '@nebula.js/stardust';
 import { render, fireEvent, screen, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
 import HeadCellMenu from '../HeadCellMenu';
 import * as useFieldSelectionHook from '../use-field-selection';
-import { HeaderData, MenuAvailabilityFlags, UseFieldSelectionOutput } from '../types';
+import { type HeaderData, MenuAvailabilityFlags, type UseFieldSelectionOutput } from '../types';
 
 jest.mock('../use-field-selection', () => ({
   __esModule: true,

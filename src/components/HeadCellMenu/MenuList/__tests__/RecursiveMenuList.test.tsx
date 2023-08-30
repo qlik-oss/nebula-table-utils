@@ -3,7 +3,7 @@ import '@testing-library/jest-dom';
 import { render } from '@testing-library/react';
 import RecursiveMenuList from '../RecursiveMenuList';
 import * as MenuGroupWrapper from '../MenuGroupWrapper';
-import { MenuItemGroup } from '../../types';
+import { type MenuItemGroup } from '../../types';
 
 jest.mock('../MenuGroupWrapper', () => ({
   __esModule: true,

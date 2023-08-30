@@ -62,6 +62,7 @@ const HeadCellMenu = ({
         aria-controls={openMenuDropdown ? 'nebula-table-utils-head-menu' : undefined}
         aria-expanded={openMenuDropdown ? 'true' : undefined}
         aria-haspopup="true"
+        // eslint-disable-next-line @typescript-eslint/no-misused-promises
         onClick={handleOpenDropdown}
         data-testid="nebula-table-utils-head-menu-button"
       >
