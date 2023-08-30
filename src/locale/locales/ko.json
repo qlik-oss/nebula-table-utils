@@ -1,1 +1,62 @@
-{}
+{
+  "NebulaTableUtils.MenuGroupLabel.Sorting": {
+    "value": "정렬",
+    "comment": "Label for sorting menu group. (ftz 230824)",
+    "version": "8QSV4jyU+gZBy0GTXgAU1g=="
+  },
+  "NebulaTableUtils.MenuItemLabel.AdjustColumnSize": {
+    "value": "열 크기 조정",
+    "comment": "Label for adjusting column size menu in field. (ftz 230824)",
+    "version": "BS5c/G3ym1gj8EcZdBrMKg=="
+  },
+  "NebulaTableUtils.MenuItemLabel.ClearSelections": {
+    "value": "선택 지우기",
+    "comment": "Label for clearing all selected items in field. (ftz 230824)",
+    "version": "7pz1Hj7rJDTgZJKXsNb3jg=="
+  },
+  "NebulaTableUtils.MenuItemLabel.ColumnOptions": {
+    "value": "열 옵션",
+    "comment": "Aria label for the button in the header that opens the column menu. (ftz 230824)",
+    "version": "Jabt0wHeVgrl9/oU+NUx1Q=="
+  },
+  "NebulaTableUtils.MenuItemLabel.Search": {
+    "value": "검색",
+    "comment": "Label for menu item to search in field. 'Search' is a verb.(ftz 230824)",
+    "version": "dkq2bDdNz1GBoBnbKiuoKQ=="
+  },
+  "NebulaTableUtils.MenuItemLabel.SelectAll": {
+    "value": "모두 선택",
+    "comment": "Label for selecting all items in field. (ftz 230824)",
+    "version": "x/ou2CTZuilv8Iv3NJu6Bw=="
+  },
+  "NebulaTableUtils.MenuItemLabel.SelectAlternative": {
+    "value": "대체 가능 값 선택",
+    "comment": "Label for selecting alternative items in field. (ftz 230824)",
+    "version": "mENFIH1Byndv2T08FCAvlQ=="
+  },
+  "NebulaTableUtils.MenuItemLabel.SelectExcluded": {
+    "value": "제외 항목 선택",
+    "comment": "Label for selecting excluded items in field. (ftz 230824)",
+    "version": "0uSzOTS8C1kwLPNG4ptTYg=="
+  },
+  "NebulaTableUtils.MenuItemLabel.SelectPossible": {
+    "value": "사용 가능 항목 선택",
+    "comment": "Label for selecting possible items in field. (ftz 230824)",
+    "version": "52YZwdIr4SDL3DHEmFAKiw=="
+  },
+  "NebulaTableUtils.MenuItemLabel.Selections": {
+    "value": "선택 내용",
+    "comment": "Label for selections menu in field. (ftz 230824)",
+    "version": "LnMZ3OWrTLy6ZnWVaYgKAg=="
+  },
+  "NebulaTableUtils.MenuItemLabel.SortAscending": {
+    "value": "오름차순으로 정렬",
+    "comment": "Label for menu item to sort ascending. 'Sort' is a verb. (ftz 230824)",
+    "version": "anguwfsvD04V1vKB4R4A7A=="
+  },
+  "NebulaTableUtils.MenuItemLabel.SortDescending": {
+    "value": "내림차순으로 정렬",
+    "comment": "Label for menu item to sort descending. 'Sort' is a verb.(ftz 230824)",
+    "version": "HSN/Dheg5PrLBn6ShV4pZw=="
+  }
+}
