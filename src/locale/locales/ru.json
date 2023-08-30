@@ -1,0 +1,62 @@
+{
+  "NebulaTableUtils.MenuGroupLabel.Sorting": {
+    "value": "Сортировка",
+    "comment": "Label for sorting menu group. (ftz 230824)",
+    "version": "8QSV4jyU+gZBy0GTXgAU1g=="
+  },
+  "NebulaTableUtils.MenuItemLabel.AdjustColumnSize": {
+    "value": "Настроить размер столбца",
+    "comment": "Label for adjusting column size menu in field. (ftz 230824)",
+    "version": "BS5c/G3ym1gj8EcZdBrMKg=="
+  },
+  "NebulaTableUtils.MenuItemLabel.ClearSelections": {
+    "value": "Очистить выбранные",
+    "comment": "Label for clearing all selected items in field. (ftz 230824)",
+    "version": "7pz1Hj7rJDTgZJKXsNb3jg=="
+  },
+  "NebulaTableUtils.MenuItemLabel.ColumnOptions": {
+    "value": "Параметры столбца",
+    "comment": "Aria label for the button in the header that opens the column menu. (ftz 230824)",
+    "version": "Jabt0wHeVgrl9/oU+NUx1Q=="
+  },
+  "NebulaTableUtils.MenuItemLabel.Search": {
+    "value": "Поиск",
+    "comment": "Label for menu item to search in field. 'Search' is a verb.(ftz 230824)",
+    "version": "dkq2bDdNz1GBoBnbKiuoKQ=="
+  },
+  "NebulaTableUtils.MenuItemLabel.SelectAll": {
+    "value": "Выбрать все",
+    "comment": "Label for selecting all items in field. (ftz 230824)",
+    "version": "x/ou2CTZuilv8Iv3NJu6Bw=="
+  },
+  "NebulaTableUtils.MenuItemLabel.SelectAlternative": {
+    "value": "Выбрать альтернативные",
+    "comment": "Label for selecting alternative items in field. (ftz 230824)",
+    "version": "mENFIH1Byndv2T08FCAvlQ=="
+  },
+  "NebulaTableUtils.MenuItemLabel.SelectExcluded": {
+    "value": "Выбрать исключенные",
+    "comment": "Label for selecting excluded items in field. (ftz 230824)",
+    "version": "0uSzOTS8C1kwLPNG4ptTYg=="
+  },
+  "NebulaTableUtils.MenuItemLabel.SelectPossible": {
+    "value": "Выбрать возможные",
+    "comment": "Label for selecting possible items in field. (ftz 230824)",
+    "version": "52YZwdIr4SDL3DHEmFAKiw=="
+  },
+  "NebulaTableUtils.MenuItemLabel.Selections": {
+    "value": "Выборки",
+    "comment": "Label for selections menu in field. (ftz 230824)",
+    "version": "LnMZ3OWrTLy6ZnWVaYgKAg=="
+  },
+  "NebulaTableUtils.MenuItemLabel.SortAscending": {
+    "value": "Сортировка по возрастанию",
+    "comment": "Label for menu item to sort ascending. 'Sort' is a verb. (ftz 230824)",
+    "version": "anguwfsvD04V1vKB4R4A7A=="
+  },
+  "NebulaTableUtils.MenuItemLabel.SortDescending": {
+    "value": "Сортировка по убыванию",
+    "comment": "Label for menu item to sort descending. 'Sort' is a verb.(ftz 230824)",
+    "version": "HSN/Dheg5PrLBn6ShV4pZw=="
+  }
+}

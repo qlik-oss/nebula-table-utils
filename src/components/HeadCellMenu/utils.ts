@@ -58,11 +58,11 @@ export const getMenuItemGroups = ({
   if (menuAvailabilityFlags[MenuAvailabilityFlags.SORTING]) {
     mGrps.push([
       {
-        groupHeading: 'Sorting',
+        groupHeading: translator.get('NebulaTableUtils.MenuGroupLabel.Sorting'),
         items: [
           {
             id: 1,
-            itemTitle: translator.get('SNTable.MenuItem.SortAscending'),
+            itemTitle: translator.get('NebulaTableUtils.MenuItemLabel.SortAscending'),
             onClick: async (evt: React.MouseEvent<HTMLLIElement>) => {
               await sortFromMenu?.(evt, 'A');
               setOpenMenuDropdown(false);
@@ -74,7 +74,7 @@ export const getMenuItemGroups = ({
           },
           {
             id: 2,
-            itemTitle: translator.get('SNTable.MenuItem.SortDescending'),
+            itemTitle: translator.get('NebulaTableUtils.MenuItemLabel.SortDescending'),
             onClick: async (evt: React.MouseEvent<HTMLLIElement>) => {
               await sortFromMenu?.(evt, 'D');
               setOpenMenuDropdown(false);
@@ -99,7 +99,7 @@ export const getMenuItemGroups = ({
           items: [
             {
               id: 1,
-              itemTitle: translator.get('SNTable.MenuItem.Search'),
+              itemTitle: translator.get('NebulaTableUtils.MenuItemLabel.Search'),
               onClick: (evt: React.MouseEvent<HTMLLIElement>) => {
                 evt.stopPropagation();
                 setOpenMenuDropdown(false);
@@ -120,7 +120,7 @@ export const getMenuItemGroups = ({
           items: [
             {
               id: 1,
-              itemTitle: translator.get('SNTable.MenuItem.Selections'),
+              itemTitle: translator.get('NebulaTableUtils.MenuItemLabel.Selections'),
               icon: Selection,
               enabled: true,
               subMenus: [
@@ -129,7 +129,7 @@ export const getMenuItemGroups = ({
                     items: [
                       {
                         id: 1,
-                        itemTitle: translator.get('SNTable.MenuItem.SelectAll'),
+                        itemTitle: translator.get('NebulaTableUtils.MenuItemLabel.SelectAll'),
                         onClick: async () => {
                           setOpenMenuDropdown(false);
                           await fieldInstance?.selectAll();
@@ -139,7 +139,7 @@ export const getMenuItemGroups = ({
                       },
                       {
                         id: 2,
-                        itemTitle: translator.get('SNTable.MenuItem.SelectPossible'),
+                        itemTitle: translator.get('NebulaTableUtils.MenuItemLabel.SelectPossible'),
                         onClick: async () => {
                           setOpenMenuDropdown(false);
                           await fieldInstance?.selectPossible();
@@ -149,7 +149,7 @@ export const getMenuItemGroups = ({
                       },
                       {
                         id: 3,
-                        itemTitle: translator.get('SNTable.MenuItem.SelectAlternative'),
+                        itemTitle: translator.get('NebulaTableUtils.MenuItemLabel.SelectAlternative'),
                         onClick: async () => {
                           setOpenMenuDropdown(false);
                           await fieldInstance?.selectAlternative();
@@ -159,7 +159,7 @@ export const getMenuItemGroups = ({
                       },
                       {
                         id: 4,
-                        itemTitle: translator.get('SNTable.MenuItem.SelectExcluded'),
+                        itemTitle: translator.get('NebulaTableUtils.MenuItemLabel.SelectExcluded'),
                         onClick: async () => {
                           setOpenMenuDropdown(false);
                           await fieldInstance?.selectExcluded();
@@ -175,7 +175,7 @@ export const getMenuItemGroups = ({
                     items: [
                       {
                         id: 1,
-                        itemTitle: translator.get('SNTable.MenuItem.ClearSelections'),
+                        itemTitle: translator.get('NebulaTableUtils.MenuItemLabel.ClearSelections'),
                         onClick: async () => {
                           setOpenMenuDropdown(false);
                           await fieldInstance?.clear();
@@ -203,7 +203,7 @@ export const getMenuItemGroups = ({
         items: [
           {
             id: 1,
-            itemTitle: translator.get('SNTable.MenuItem.AdjustColumnSize'),
+            itemTitle: translator.get('NebulaTableUtils.MenuItemLabel.AdjustColumnSize'),
             onClick: (evt: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
               evt.stopPropagation();
               evt.preventDefault();

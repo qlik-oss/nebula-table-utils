@@ -1,6 +1,5 @@
 /* eslint-disable import/no-cycle */
 import React, { useState, useRef } from 'react';
-import Typography from '@mui/material/Typography';
 import ArrowRight from '@qlik-trial/sprout/icons/react/ArrowRight';
 import type { ExtendedHeadCellMenuItem, MenuItemGroup } from '../types';
 import {
@@ -9,6 +8,7 @@ import {
   StyledMenuItemLabel,
   StyledGroupLabel,
   StyledGreenBorder,
+  StyledListItemLabel,
 } from '../styles';
 import RecursiveMenuList from './RecursiveMenuList';
 
@@ -82,7 +82,7 @@ const MenuGroupItems = ({
           <StyledListItemIcon>
             <Icon />
           </StyledListItemIcon>
-          <Typography variant="body2">{itemTitle}</Typography>
+          <StyledListItemLabel variant="body2">{itemTitle}</StyledListItemLabel>
         </StyledMenuItemLabel>
         {subMenus?.length ? <ArrowRight /> : null}
       </StyledMenuItem>
@@ -114,7 +114,7 @@ const MenuGroup = ({
 }) => {
   return menuGroup.map((grp) => [
     [
-      grp.groupHeading && <StyledGroupLabel>Sorting</StyledGroupLabel>,
+      grp.groupHeading && <StyledGroupLabel>{grp.groupHeading}</StyledGroupLabel>,
       grp.items?.map((groupItem) => (
         <MenuGroupItems key={groupItem.id} {...{ ...groupItem, isSubMenu, handleHeadCellMenuKeyDown }} />
       )),

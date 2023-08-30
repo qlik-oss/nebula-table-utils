@@ -1,0 +1,50 @@
+{
+  "NebulaTableUtils.MenuGroupLabel.Sorting": {
+    "value": "Sorting",
+    "comment": "Label for sorting menu group. (ftz 230824)"
+  },
+  "NebulaTableUtils.MenuItemLabel.SortAscending": {
+    "value": "Sort ascending",
+    "comment": "Label for menu item to sort ascending. 'Sort' is a verb. (ftz 230824)"
+  },
+  "NebulaTableUtils.MenuItemLabel.SortDescending": {
+    "value": "Sort descending",
+    "comment": "Label for menu item to sort descending. 'Sort' is a verb.(ftz 230824)"
+  },
+  "NebulaTableUtils.MenuItemLabel.Search": {
+    "value": "Search",
+    "comment": "Label for menu item to search in field. 'Search' is a verb.(ftz 230824)"
+  },
+  "NebulaTableUtils.MenuItemLabel.Selections": {
+    "value": "Selections",
+    "comment": "Label for selections menu in field. (ftz 230824)"
+  },
+  "NebulaTableUtils.MenuItemLabel.SelectAll": {
+    "value": "Select all",
+    "comment": "Label for selecting all items in field. (ftz 230824)"
+  },
+  "NebulaTableUtils.MenuItemLabel.SelectPossible": {
+    "value": "Select possible",
+    "comment": "Label for selecting possible items in field. (ftz 230824)"
+  },
+  "NebulaTableUtils.MenuItemLabel.SelectAlternative": {
+    "value": "Select alternative",
+    "comment": "Label for selecting alternative items in field. (ftz 230824)"
+  },
+  "NebulaTableUtils.MenuItemLabel.SelectExcluded": {
+    "value": "Select excluded",
+    "comment": "Label for selecting excluded items in field. (ftz 230824)"
+  },
+  "NebulaTableUtils.MenuItemLabel.ClearSelections": {
+    "value": "Clear selections",
+    "comment": "Label for clearing all selected items in field. (ftz 230824)"
+  },
+  "NebulaTableUtils.MenuItemLabel.AdjustColumnSize": {
+    "value": "Adjust column size",
+    "comment": "Label for adjusting column size menu in field. (ftz 230824)"
+  },
+  "NebulaTableUtils.MenuItemLabel.ColumnOptions": {
+    "value": "Column options",
+    "comment": "Aria label for the button in the header that opens the column menu. (ftz 230824)"
+  }
+}

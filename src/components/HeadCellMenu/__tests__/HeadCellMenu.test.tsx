@@ -42,12 +42,12 @@ describe('<HeadCellMenu />', () => {
   let model: EngineAPI.IGenericObject;
   let useFieldSelectionHookResult: UseFieldSelectionOutput;
   const menuLabels = [
-    'SNTable.MenuItem.Search',
-    'SNTable.MenuItem.SelectAll',
-    'SNTable.MenuItem.SelectPossible',
-    'SNTable.MenuItem.SelectAlternative',
-    'SNTable.MenuItem.SelectExcluded',
-    'SNTable.MenuItem.ClearSelections',
+    'NebulaTableUtils.MenuItemLabel.Search',
+    'NebulaTableUtils.MenuItemLabel.SelectAll',
+    'NebulaTableUtils.MenuItemLabel.SelectPossible',
+    'NebulaTableUtils.MenuItemLabel.SelectAlternative',
+    'NebulaTableUtils.MenuItemLabel.SelectExcluded',
+    'NebulaTableUtils.MenuItemLabel.ClearSelections',
   ];
 
   const renderTableHeadCellMenu = () =>
@@ -149,12 +149,12 @@ describe('<HeadCellMenu />', () => {
     await openMenu();
 
     [
-      'Sorting',
-      'SNTable.MenuItem.SortAscending',
-      'SNTable.MenuItem.SortDescending',
-      'SNTable.MenuItem.Search',
-      'SNTable.MenuItem.Selections',
-      'SNTable.MenuItem.AdjustColumnSize',
+      'NebulaTableUtils.MenuGroupLabel.Sorting',
+      'NebulaTableUtils.MenuItemLabel.SortAscending',
+      'NebulaTableUtils.MenuItemLabel.SortDescending',
+      'NebulaTableUtils.MenuItemLabel.Search',
+      'NebulaTableUtils.MenuItemLabel.Selections',
+      'NebulaTableUtils.MenuItemLabel.AdjustColumnSize',
     ].forEach((actionLabel) => {
       expect(screen.queryByText(actionLabel)).toBeInTheDocument();
     });
@@ -165,15 +165,15 @@ describe('<HeadCellMenu />', () => {
     renderTableHeadCellMenu();
     await openMenu();
 
-    expect(screen.queryByText('SNTable.MenuItem.Search')).toBeNull();
-    expect(screen.queryByText('SNTable.MenuItem.Selections')).toBeNull();
+    expect(screen.queryByText('NebulaTableUtils.MenuItemLabel.Search')).toBeNull();
+    expect(screen.queryByText('NebulaTableUtils.MenuItemLabel.Selections')).toBeNull();
   });
 
   test('should close the menu when listbox is about to mount', async () => {
     renderTableHeadCellMenu();
     await openMenu();
 
-    fireEvent.click(screen.getByText('SNTable.MenuItem.Search'));
+    fireEvent.click(screen.getByText('NebulaTableUtils.MenuItemLabel.Search'));
     expect(screen.queryByRole('menu')).not.toBeInTheDocument();
   });
 
@@ -197,7 +197,7 @@ describe('<HeadCellMenu />', () => {
     renderTableHeadCellMenu();
     await openMenu();
 
-    fireEvent.click(screen.getByText('SNTable.MenuItem.Search'));
+    fireEvent.click(screen.getByText('NebulaTableUtils.MenuItemLabel.Search'));
     expect(screen.queryByRole('menu')).not.toBeInTheDocument();
     expect(embed.__DO_NOT_USE__.popover).toHaveBeenCalledTimes(1);
     expect(embed.__DO_NOT_USE__.popover).toHaveBeenCalledWith(
@@ -218,7 +218,7 @@ describe('<HeadCellMenu />', () => {
     await waitFor(() => {
       expect(screen.queryByRole('menu')).toBeVisible();
     });
-    fireEvent.click(screen.getByText('SNTable.MenuItem.Search'));
+    fireEvent.click(screen.getByText('NebulaTableUtils.MenuItemLabel.Search'));
     expect(screen.queryByRole('menu')).not.toBeInTheDocument();
     expect(embed.__DO_NOT_USE__.popover).toHaveBeenCalledTimes(1);
     expect(embed.__DO_NOT_USE__.popover).toHaveBeenCalledWith(
@@ -235,21 +235,23 @@ describe('<HeadCellMenu />', () => {
     await waitFor(() => {
       expect(screen.queryByRole('menu')).toBeVisible();
     });
-    fireEvent.click(screen.getByText('SNTable.MenuItem.Selections'));
+    fireEvent.click(screen.getByText('NebulaTableUtils.MenuItemLabel.Selections'));
     menuLabels.forEach((label) => {
       expect(screen.getByText(label)).toBeVisible();
     });
 
     // enabled actions based on mocked values
-    ['SNTable.MenuItem.SelectAll', 'SNTable.MenuItem.SelectPossible'].forEach((actionLabel) => {
-      expect(screen.queryByText(actionLabel)?.closest('li')).not.toHaveAttribute('aria-disabled');
-    });
+    ['NebulaTableUtils.MenuItemLabel.SelectAll', 'NebulaTableUtils.MenuItemLabel.SelectPossible'].forEach(
+      (actionLabel) => {
+        expect(screen.queryByText(actionLabel)?.closest('li')).not.toHaveAttribute('aria-disabled');
+      }
+    );
 
     // disabled actions based on mocked values
     [
-      'SNTable.MenuItem.SelectAlternative',
-      'SNTable.MenuItem.SelectExcluded',
-      'SNTable.MenuItem.ClearSelections',
+      'NebulaTableUtils.MenuItemLabel.SelectAlternative',
+      'NebulaTableUtils.MenuItemLabel.SelectExcluded',
+      'NebulaTableUtils.MenuItemLabel.ClearSelections',
     ].forEach((actionLabel) => {
       expect(screen.queryByText(actionLabel)?.closest('li')).toHaveAttribute('aria-disabled', 'true');
     });
@@ -269,8 +271,8 @@ describe('<HeadCellMenu />', () => {
       await waitFor(() => {
         expect(screen.queryByRole('menu')).toBeVisible();
       });
-      fireEvent.click(screen.getByText('SNTable.MenuItem.Selections'));
-      fireEvent.click(screen.getByText(`SNTable.MenuItem.${targetAction}`));
+      fireEvent.click(screen.getByText('NebulaTableUtils.MenuItemLabel.Selections'));
+      fireEvent.click(screen.getByText(`NebulaTableUtils.MenuItemLabel.${targetAction}`));
     };
 
     const testEnd = async () => {

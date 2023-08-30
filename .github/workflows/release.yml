@@ -10,6 +10,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+
+      - name: Setup access to qlik npm registry
+        shell: bash
+        run: bash ${GITHUB_WORKSPACE}/.github/scripts/create-npmrc.sh
+        env:
+          GH_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_CI_TOKEN }}
 
       - uses: pnpm/action-setup@v2
         with:
@@ -26,7 +35,7 @@ jobs:
         id: semantic
         uses: cycjimmy/semantic-release-action@v3
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_CI_TOKEN }}
         with:
           branches: main
