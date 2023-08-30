@@ -49,6 +49,41 @@ jobs:
       - name: Type check
         run: pnpm types:check
 
+  locale:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Setup access to qlik npm registry
+        shell: bash
+        run: bash ${GITHUB_WORKSPACE}/.github/scripts/create-npmrc.sh
+        env:
+          GH_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_CI_TOKEN }}
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8.6.8
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        shell: bash
+        run: pnpm install
+
+      - name: Generate locale
+        run: pnpm locale:generate
+
+      - name: Verify locale
+        run: pnpm locale:verify
+
   unit-test:
     runs-on: ubuntu-latest
     steps:
