@@ -37,7 +37,7 @@
     "test:unit": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "locale:verify": "node src/locale/tools/verify-translations.js",
+    "locale:verify": "node src/locale/tools/verify-translations.mjs",
     "locale:generate": "node src/locale/scripts/generate-all.mjs",
     "prepare": "node -e \"try { require('husky').install() } catch (e) {if (e.code !== 'MODULE_NOT_FOUND') console.log(e);}\""
   },
