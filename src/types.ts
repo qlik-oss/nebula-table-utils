@@ -1,5 +1,5 @@
-import { ThemeOptions } from '@mui/material';
+import type { Theme } from '@mui/material';
 
 export interface DefaultTheme {
-  theme: ThemeOptions;
+  theme: Theme;
 }

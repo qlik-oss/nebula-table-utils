@@ -97,5 +97,10 @@
     "@qlik-trial/sprout": "^3.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "@mui/styled-engine": "npm:@mui/styled-engine-sc@latest"
+    }
   }
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
 import MenuGroup, { interceptClickOnMenuItems } from '../MenuGroup';
-import { MenuItemGroup } from '../../types';
+import type { MenuItemGroup } from '../../types';
 
 describe('MenuGroup', () => {
   describe('interceptClickOnMenuItems', () => {

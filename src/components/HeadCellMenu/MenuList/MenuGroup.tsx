@@ -63,18 +63,19 @@ const MenuGroupItems = ({
   return (
     <>
       <StyledMenuItem
-        ref={subMenus ? anchorRef : null}
+        ref={subMenus ? (anchorRef as React.RefObject<HTMLLIElement>) : null}
         key={id}
         data-testid={`menu-item-${id}`}
         className="nebula-table-utils-head-menu-item"
+        // eslint-disable-next-line @typescript-eslint/no-misused-promises
         onClick={handleOnClick}
         disabled={!enabled}
         autoFocus={autoFocus}
         onKeyDown={handleHeadCellMenuKeyDown}
         // TODO:
         // implement onKeyDown with handleHeadCellMenuKeyDown for sn-table
-        isSubMenu={isSubMenu}
-        isActive={isActive}
+        isSubMenu={!!isSubMenu}
+        isActive={!!isActive}
       >
         {isActive && <StyledGreenBorder />}
         <StyledMenuItemLabel>
