@@ -1,6 +1,19 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "local>qlik-oss/renovate-config"
+  "extends": ["qlik-oss", ":dependencyDashboard"],
+  "semanticCommits": true,
+  "rangeStrategy": "pin",
+  "packageRules": [
+    {
+      "depTypeList": ["engines"],
+      "enabled": false
+    },
+    {
+      "matchPackageNames": ["@qlik-trial/sprout"],
+      "enabled": false
+    },
+    {
+      "rangeStrategy": "bump",
+      "matchDepTypes": ["peerDependencies"]
+    }
   ]
 }
