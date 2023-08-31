@@ -2,3 +2,7 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 pnpm lint
+pnpm format:check
+pnpm types:check
+pnpm locale:generate
+pnpm locale:verify

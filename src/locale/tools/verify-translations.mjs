@@ -1,5 +1,5 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const all = require('../all.json');
+// eslint-disable-next-line
+import all from '../all.json' assert { type: 'json' };
 
 const languages = [
   'en-US',
