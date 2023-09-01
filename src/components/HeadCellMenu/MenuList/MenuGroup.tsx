@@ -73,7 +73,7 @@ const MenuGroupItems = ({
         autoFocus={autoFocus}
         isSubMenu={!!isSubMenu}
         isActive={!!isActive}
-        {...(handleHeadCellMenuKeyDown ? { onKeyDown: handleHeadCellMenuKeyDown } : {})}
+        onKeyDown={handleHeadCellMenuKeyDown}
       >
         {isActive && <StyledGreenBorder />}
         <StyledMenuItemLabel>
