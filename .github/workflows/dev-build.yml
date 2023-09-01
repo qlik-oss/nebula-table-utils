@@ -46,6 +46,9 @@ jobs:
         shell: bash
         run: pnpm install
 
+      - name: Verify locale
+        run: pnpm locale:verify
+
       - name: Build
         run: pnpm build:prod
 
