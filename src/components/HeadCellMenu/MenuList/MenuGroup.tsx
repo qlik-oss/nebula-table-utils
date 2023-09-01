@@ -71,11 +71,9 @@ const MenuGroupItems = ({
         onClick={handleOnClick}
         disabled={!enabled}
         autoFocus={autoFocus}
-        onKeyDown={handleHeadCellMenuKeyDown}
-        // TODO:
-        // implement onKeyDown with handleHeadCellMenuKeyDown for sn-table
         isSubMenu={!!isSubMenu}
         isActive={!!isActive}
+        {...(handleHeadCellMenuKeyDown ? { onKeyDown: handleHeadCellMenuKeyDown } : {})}
       >
         {isActive && <StyledGreenBorder />}
         <StyledMenuItemLabel>
@@ -110,7 +108,7 @@ const MenuGroup = ({
 }: {
   menuGroup: MenuItemGroup;
   isSubMenu?: boolean;
-  handleHeadCellMenuKeyDown: (evt: React.KeyboardEvent<HTMLLIElement>) => void;
+  handleHeadCellMenuKeyDown?: (evt: React.KeyboardEvent<HTMLLIElement>) => void;
 }) => {
   return menuGroup.map((grp) => [
     [
