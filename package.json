@@ -39,6 +39,7 @@
     "test:coverage": "jest --coverage",
     "locale:verify": "node src/locale/tools/verify-translations.mjs",
     "locale:generate": "node src/locale/scripts/generate-all.mjs",
+    "postinstall": "pnpm locale:generate",
     "prepare": "node -e \"try { require('husky').install() } catch (e) {if (e.code !== 'MODULE_NOT_FOUND') console.log(e);}\""
   },
   "devDependencies": {

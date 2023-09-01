@@ -28,9 +28,6 @@ jobs:
         shell: bash
         run: pnpm install
 
-      - name: Generate locale
-        run: pnpm locale:generate
-
       - name: Verify locale
         run: pnpm locale:verify
 
