@@ -4,3 +4,4 @@
 pnpm lint
 pnpm format:check
 pnpm types:check
+pnpm locale:verify
