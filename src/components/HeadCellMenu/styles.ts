@@ -24,7 +24,6 @@ export const HeadCellMenuWrapper = styled(Box)(({ rightAligned }: { rightAligned
 
 export const StyledMenuButton = styled(Menu)(() => ({
   minWidth: 'unset',
-  color: '#404040',
   cursor: 'pointer',
 }));
 
