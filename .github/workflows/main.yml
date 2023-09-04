@@ -40,6 +40,9 @@ jobs:
         shell: bash
         run: pnpm install
 
+      - name: Generate locale
+        run: pnpm locale:generate
+
       - name: Prettier Format
         run: pnpm format:check
 
@@ -78,8 +81,10 @@ jobs:
         shell: bash
         run: pnpm install
 
-      - name: Verify locale
-        run: pnpm locale:verify
+      # `locale:generate` step happens before running build
+      # if it fails in generation or verification step then this job will fail
+      - name: Build
+        run: pnpm build:prod
 
   unit-test:
     runs-on: ubuntu-latest
@@ -109,6 +114,9 @@ jobs:
       - name: Install dependencies
         shell: bash
         run: pnpm install
+
+      - name: Generate locale
+        run: pnpm locale:generate
 
       - name: Run unit test
         run: pnpm test:coverage
