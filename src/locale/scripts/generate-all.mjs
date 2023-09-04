@@ -30,8 +30,8 @@ const LOCALES = {
   es: 'es-ES',
 };
 
+// Generate step
 const merged = {};
-
 LOCALES_FILES.forEach((file) => {
   const short = path.parse(file).name;
   const locale = LOCALES[short];
@@ -53,3 +53,18 @@ LOCALES_FILES.forEach((file) => {
 });
 
 fs.writeFileSync(ALL, JSON.stringify(merged, ' ', 2));
+
+// Verify Step
+const languages = Object.values(LOCALES);
+Object.keys(merged).forEach((key) => {
+  const supportLanguagesForString = Object.keys(merged[key].locale);
+  if (supportLanguagesForString.indexOf('en-US') === -1)
+    // en-US must exist
+    throw new Error(`String '${merged[key].id}' is missing value for 'en-US'`);
+
+  for (let i = 0; i < languages.length; i++) {
+    if (supportLanguagesForString.indexOf(languages[i]) === -1)
+      // eslint-disable-next-line no-console
+      console.warn(`String '${merged[key].id}' is missing value for '${languages[i]}'`);
+  }
+});
