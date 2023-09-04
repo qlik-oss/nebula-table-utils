@@ -1,0 +1,242 @@
+{
+  "NebulaTableUtils_MenuGroupLabel_Sorting": {
+    "id": "NebulaTableUtils.MenuGroupLabel.Sorting",
+    "locale": {
+      "de-DE": "Sortieren",
+      "en-US": "Sorting",
+      "es-ES": "Ordenar",
+      "fr-FR": "Tri",
+      "it-IT": "Ordinamento",
+      "ja-JP": "ソート",
+      "ko-KR": "정렬",
+      "nl-NL": "Sorteren",
+      "pl-PL": "Sortowanie",
+      "pt-BR": "Classificação",
+      "ru-RU": "Сортировка",
+      "sv-SE": "Sortering",
+      "tr-TR": "Sıralama",
+      "zh-CN": "排序",
+      "zh-TW": "排序"
+    }
+  },
+  "NebulaTableUtils_MenuItemLabel_AdjustColumnSize": {
+    "id": "NebulaTableUtils.MenuItemLabel.AdjustColumnSize",
+    "locale": {
+      "de-DE": "Spaltengröße anpassen",
+      "en-US": "Adjust column size",
+      "es-ES": "Ajustar el tamaño de columna",
+      "fr-FR": "Ajuster la taille de colonne",
+      "it-IT": "Regola dimensioni colonna",
+      "ja-JP": "列サイズを調整",
+      "ko-KR": "열 크기 조정",
+      "nl-NL": "Kolomgrootte aanpassen",
+      "pl-PL": "Dostosuj rozmiar kolumny",
+      "pt-BR": "Ajustar tamanho da coluna",
+      "ru-RU": "Настроить размер столбца",
+      "sv-SE": "Justera kolumnens storlek",
+      "tr-TR": "Sütun boyutunu ayarla",
+      "zh-CN": "调节列大小",
+      "zh-TW": "調整欄大小"
+    }
+  },
+  "NebulaTableUtils_MenuItemLabel_ClearSelections": {
+    "id": "NebulaTableUtils.MenuItemLabel.ClearSelections",
+    "locale": {
+      "de-DE": "Auswahlen löschen",
+      "en-US": "Clear selections",
+      "es-ES": "Borrar selecciones",
+      "fr-FR": "Effacer les sélections",
+      "it-IT": "Cancella selezioni",
+      "ja-JP": "選択をクリア",
+      "ko-KR": "선택 지우기",
+      "nl-NL": "Geselecteerde waarden wissen",
+      "pl-PL": "Wyczyść wybory",
+      "pt-BR": "Limpar seleções",
+      "ru-RU": "Очистить выбранные",
+      "sv-SE": "Radera urval",
+      "tr-TR": "Seçimleri temizle",
+      "zh-CN": "清除选择项",
+      "zh-TW": "清除選項"
+    }
+  },
+  "NebulaTableUtils_MenuItemLabel_ColumnOptions": {
+    "id": "NebulaTableUtils.MenuItemLabel.ColumnOptions",
+    "locale": {
+      "de-DE": "Spaltenoptionen",
+      "en-US": "Column options",
+      "es-ES": "Opciones de columna",
+      "fr-FR": "Options de colonne",
+      "it-IT": "Opzioni colonna",
+      "ja-JP": "列オプション",
+      "ko-KR": "열 옵션",
+      "nl-NL": "Kolomopties",
+      "pl-PL": "Opcje kolumny",
+      "pt-BR": "Opções da coluna",
+      "ru-RU": "Параметры столбца",
+      "sv-SE": "Alternativ för kolumn",
+      "tr-TR": "Sütun seçenekleri",
+      "zh-CN": "列选项",
+      "zh-TW": "欄選項"
+    }
+  },
+  "NebulaTableUtils_MenuItemLabel_Search": {
+    "id": "NebulaTableUtils.MenuItemLabel.Search",
+    "locale": {
+      "de-DE": "Suchen",
+      "en-US": "Search",
+      "es-ES": "Buscar",
+      "fr-FR": "Rechercher",
+      "it-IT": "Cerca",
+      "ja-JP": "検索",
+      "ko-KR": "검색",
+      "nl-NL": "Zoeken",
+      "pl-PL": "Wyszukaj",
+      "pt-BR": "Pesquisar",
+      "ru-RU": "Поиск",
+      "sv-SE": "Sök",
+      "tr-TR": "Ara",
+      "zh-CN": "搜索",
+      "zh-TW": "搜尋"
+    }
+  },
+  "NebulaTableUtils_MenuItemLabel_SelectAll": {
+    "id": "NebulaTableUtils.MenuItemLabel.SelectAll",
+    "locale": {
+      "de-DE": "Alle auswählen",
+      "en-US": "Select all",
+      "es-ES": "Seleccionar todo",
+      "fr-FR": "Sélectionner tout",
+      "it-IT": "Seleziona tutti",
+      "ja-JP": "すべて選択",
+      "ko-KR": "모두 선택",
+      "nl-NL": "Alles selecteren",
+      "pl-PL": "Wybierz wszystko",
+      "pt-BR": "Selecionar tudo",
+      "ru-RU": "Выбрать все",
+      "sv-SE": "Välj alla",
+      "tr-TR": "Tümünü seç",
+      "zh-CN": "全选",
+      "zh-TW": "全選"
+    }
+  },
+  "NebulaTableUtils_MenuItemLabel_SelectAlternative": {
+    "id": "NebulaTableUtils.MenuItemLabel.SelectAlternative",
+    "locale": {
+      "de-DE": "Alternative Werte auswählen",
+      "en-US": "Select alternative",
+      "es-ES": "Seleccionar alternativos",
+      "fr-FR": "Sélectionner des valeurs alternatives",
+      "it-IT": "Seleziona alternativi",
+      "ja-JP": "代替項目を選択",
+      "ko-KR": "대체 가능 값 선택",
+      "nl-NL": "Alternatief selecteren",
+      "pl-PL": "Wybierz alternatywę",
+      "pt-BR": "Selecionar alternativa",
+      "ru-RU": "Выбрать альтернативные",
+      "sv-SE": "Välj alternativ",
+      "tr-TR": "Alternatifi seç",
+      "zh-CN": "选择替代项",
+      "zh-TW": "選取替代選項"
+    }
+  },
+  "NebulaTableUtils_MenuItemLabel_SelectExcluded": {
+    "id": "NebulaTableUtils.MenuItemLabel.SelectExcluded",
+    "locale": {
+      "de-DE": "Ausgeschlossene Werte auswählen",
+      "en-US": "Select excluded",
+      "es-ES": "Seleccionar excluidos",
+      "fr-FR": "Sélectionner les valeurs exclues",
+      "it-IT": "Seleziona esclusi",
+      "ja-JP": "除外項目を選択",
+      "ko-KR": "제외 항목 선택",
+      "nl-NL": "Uitgesloten waarden selecteren",
+      "pl-PL": "Wybierz wykluczone",
+      "pt-BR": "Selecionar excluídos",
+      "ru-RU": "Выбрать исключенные",
+      "sv-SE": "Välj uteslutna",
+      "tr-TR": "Hariç tutulanı seç",
+      "zh-CN": "选择排除项",
+      "zh-TW": "選取排除值"
+    }
+  },
+  "NebulaTableUtils_MenuItemLabel_SelectPossible": {
+    "id": "NebulaTableUtils.MenuItemLabel.SelectPossible",
+    "locale": {
+      "de-DE": "Wählbare Werte auswählen",
+      "en-US": "Select possible",
+      "es-ES": "Seleccionar posibles",
+      "fr-FR": "Sélectionner les valeurs possibles",
+      "it-IT": "Seleziona possibili",
+      "ja-JP": "絞込項目を選択",
+      "ko-KR": "사용 가능 항목 선택",
+      "nl-NL": "Mogelijke waarden selecteren",
+      "pl-PL": "Wybierz możliwe",
+      "pt-BR": "Selecionar possíveis",
+      "ru-RU": "Выбрать возможные",
+      "sv-SE": "Välj möjliga",
+      "tr-TR": "Olası olanı seç",
+      "zh-CN": "选择可能值",
+      "zh-TW": "選取可能值"
+    }
+  },
+  "NebulaTableUtils_MenuItemLabel_Selections": {
+    "id": "NebulaTableUtils.MenuItemLabel.Selections",
+    "locale": {
+      "de-DE": "Auswahlen",
+      "en-US": "Selections",
+      "es-ES": "Selecciones",
+      "fr-FR": "Sélections",
+      "it-IT": "Selezioni",
+      "ja-JP": "選択",
+      "ko-KR": "선택 내용",
+      "nl-NL": "Selecties",
+      "pl-PL": "Wybory",
+      "pt-BR": "Seleções",
+      "ru-RU": "Выборки",
+      "sv-SE": "Urval",
+      "tr-TR": "Seçimler",
+      "zh-CN": "选择项",
+      "zh-TW": "選項"
+    }
+  },
+  "NebulaTableUtils_MenuItemLabel_SortAscending": {
+    "id": "NebulaTableUtils.MenuItemLabel.SortAscending",
+    "locale": {
+      "de-DE": "In aufsteigender Reihenfolge sortieren",
+      "en-US": "Sort ascending",
+      "es-ES": "Orden ascendente",
+      "fr-FR": "Trier par ordre croissant",
+      "it-IT": "Ordinamento crescente",
+      "ja-JP": "昇順でソート",
+      "ko-KR": "오름차순으로 정렬",
+      "nl-NL": "Oplopend sorteren",
+      "pl-PL": "Sortuj rosnąco",
+      "pt-BR": "Classificar em ordem crescente",
+      "ru-RU": "Сортировка по возрастанию",
+      "sv-SE": "Sortera stigande",
+      "tr-TR": "Artan sıralama",
+      "zh-CN": "升序排序",
+      "zh-TW": "以遞增方式排序"
+    }
+  },
+  "NebulaTableUtils_MenuItemLabel_SortDescending": {
+    "id": "NebulaTableUtils.MenuItemLabel.SortDescending",
+    "locale": {
+      "de-DE": "In absteigender Reihenfolge sortieren",
+      "en-US": "Sort descending",
+      "es-ES": "Orden descendente",
+      "fr-FR": "Trier par ordre décroissant",
+      "it-IT": "Ordinamento decrescente",
+      "ja-JP": "降順でソート",
+      "ko-KR": "내림차순으로 정렬",
+      "nl-NL": "Aflopend sorteren",
+      "pl-PL": "Sortuj malejąco",
+      "pt-BR": "Classificar em ordem decrescente",
+      "ru-RU": "Сортировка по убыванию",
+      "sv-SE": "Sortera fallande",
+      "tr-TR": "Azalan sıralama",
+      "zh-CN": "降序排序",
+      "zh-TW": "以遞減方式排序"
+    }
+  }
+}
