@@ -78,8 +78,10 @@ jobs:
         shell: bash
         run: pnpm install
 
-      - name: Verify locale
-        run: pnpm locale:verify
+      # `locale:generate` step happens before running build
+      # if it fails in generation or verification step then this job will fail
+      - name: Build
+        run: pnpm build:prod
 
   unit-test:
     runs-on: ubuntu-latest
