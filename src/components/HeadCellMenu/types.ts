@@ -33,7 +33,7 @@ export interface HeadCellMenuProps {
   translator: stardust.Translator;
   tabIndex: number;
   anchorRef: React.RefObject<HTMLDivElement>;
-  handleHeadCellMenuKeyDown: (evt: React.KeyboardEvent<HTMLLIElement>) => void;
+  handleHeadCellMenuKeyDown?: (evt: React.KeyboardEvent<HTMLLIElement>) => void;
   menuAvailabilityFlags: Partial<Record<MenuAvailabilityFlags, boolean>>;
 
   sortRelatedArgs?: SortingRelatedArgs;
@@ -60,7 +60,7 @@ export interface HeadCellMenuItem {
 }
 
 export interface ExtendedHeadCellMenuItem extends HeadCellMenuItem {
-  handleHeadCellMenuKeyDown: (evt: React.KeyboardEvent<HTMLLIElement>) => void;
+  handleHeadCellMenuKeyDown?: (evt: React.KeyboardEvent<HTMLLIElement>) => void;
 }
 
 export interface UseFieldSelectionOutput {

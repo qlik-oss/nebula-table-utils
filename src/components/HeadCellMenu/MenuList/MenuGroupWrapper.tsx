@@ -7,7 +7,7 @@ import MenuGroup from './MenuGroup';
 interface MenuItemsProps {
   itemGroups: MenuItemGroup[];
   isSubMenu?: boolean;
-  handleHeadCellMenuKeyDown: (evt: React.KeyboardEvent<HTMLLIElement>) => void;
+  handleHeadCellMenuKeyDown?: (evt: React.KeyboardEvent<HTMLLIElement>) => void;
 }
 
 const MenuGroupWrapper = ({ itemGroups, isSubMenu, handleHeadCellMenuKeyDown }: MenuItemsProps) => {

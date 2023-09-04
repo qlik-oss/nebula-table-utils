@@ -14,7 +14,7 @@ interface RecursiveMenuListProps {
   anchorOrigin?: PopoverOrigin;
   ariaLabel?: string;
   isSubMenu?: boolean;
-  handleHeadCellMenuKeyDown: (evt: React.KeyboardEvent<HTMLLIElement>) => void;
+  handleHeadCellMenuKeyDown?: (evt: React.KeyboardEvent<HTMLLIElement>) => void;
 }
 
 const RecursiveMenuList = ({
