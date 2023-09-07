@@ -12,7 +12,9 @@ import {
 import { type DefaultTheme } from '../../types';
 
 // ---------- HeadCellMenu ----------
-export const HeadCellMenuWrapper = styled(Box)(({ rightAligned }: { rightAligned: boolean }) => ({
+export const HeadCellMenuWrapper = styled(Box, {
+  shouldForwardProp: (prop: string) => prop !== 'rightAligned',
+})(({ rightAligned }: { rightAligned: boolean }) => ({
   ...(rightAligned ? { marginRight: 'auto' } : { marginLeft: 'auto' }),
   height: HEAD_ICON_WRAPPER_SIZE,
   display: 'flex',
@@ -48,7 +50,9 @@ export const StyledGroupLabel = styled(ListItem)(({ theme }: DefaultTheme) => ({
   marginBottom: theme.spacing(0.5),
 }));
 
-export const StyledMenuItem = styled(MenuItem)(
+export const StyledMenuItem = styled(MenuItem, {
+  shouldForwardProp: (prop: string) => prop !== 'isSubMenu' && prop !== 'isActive',
+})(
   ({
     theme,
     isSubMenu,
