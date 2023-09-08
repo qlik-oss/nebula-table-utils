@@ -18,10 +18,13 @@ const HeadCellMenu = ({
   searchRelatedArgs,
   selectionRelatedArgs,
   adjustHeaderSizeRelatedArgs,
+
+  openMenuDropdown,
+  setOpenMenuDropdown,
 }: HeadCellMenuProps) => {
   const t = useTranslations({ translator });
   const { headTextAlign, qLibraryId, fieldId } = headerData;
-  const [openMenuDropdown, setOpenMenuDropdown] = useState(false);
+  // const [openMenuDropdown, setOpenMenuDropdown] = useState(false);
   const {
     fieldInstance,
     selectionActionsEnabledStatus,
@@ -29,13 +32,13 @@ const HeadCellMenu = ({
     updateSelectionActionsEnabledStatus,
   } = useFieldSelection({ headerData, app: selectionRelatedArgs?.app });
 
-  const handleOpenDropdown = async () => {
-    if (!openMenuDropdown && selectionRelatedArgs?.model) {
-      const layout = await selectionRelatedArgs?.model.getLayout();
-      updateSelectionActionsEnabledStatus(layout as EngineAPI.IGenericHyperCubeLayout);
-    }
-    setOpenMenuDropdown(!openMenuDropdown);
-  };
+  // const handleOpenDropdown = async () => {
+  // if (!openMenuDropdown && selectionRelatedArgs?.model) {
+  //   const layout = await selectionRelatedArgs?.model.getLayout();
+  //   updateSelectionActionsEnabledStatus(layout as EngineAPI.IGenericHyperCubeLayout);
+  // }
+  // setOpenMenuDropdown(!openMenuDropdown);
+  // };
 
   const embedListbox = useCallback(() => {
     const id = qLibraryId ? { qLibraryId, type: 'dimension' } : fieldId;
@@ -50,8 +53,16 @@ const HeadCellMenu = ({
   }, [searchRelatedArgs, fieldId, qLibraryId]);
 
   useEffect(() => {
-    if (!openMenuDropdown) resetSelectionActionsEnabledStatus();
-  }, [openMenuDropdown, resetSelectionActionsEnabledStatus]);
+    if (!openMenuDropdown) {
+      resetSelectionActionsEnabledStatus();
+
+      if (selectionRelatedArgs?.model) {
+        selectionRelatedArgs.model.getLayout().then((layout) => {
+          updateSelectionActionsEnabledStatus(layout as EngineAPI.IGenericHyperCubeLayout);
+        });
+      }
+    }
+  }, [openMenuDropdown, resetSelectionActionsEnabledStatus, updateSelectionActionsEnabledStatus]);
 
   return (
     <HeadCellMenuWrapper rightAligned={headTextAlign === 'right'}>
@@ -63,7 +74,7 @@ const HeadCellMenu = ({
         aria-expanded={openMenuDropdown ? 'true' : undefined}
         aria-haspopup="true"
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
-        onClick={handleOpenDropdown}
+        // onClick={handleOpenDropdown}
         data-testid="nebula-table-utils-head-menu-button"
       >
         <Menu />
@@ -72,7 +83,7 @@ const HeadCellMenu = ({
       <RecursiveMenuList
         open={openMenuDropdown}
         anchorEl={anchorRef.current}
-        onClose={() => setOpenMenuDropdown(false)}
+        onClose={(evt: React.MouseEvent) => setOpenMenuDropdown(evt, false)}
         menuGroups={getMenuItemGroups({
           headerData,
           translator: t,
