@@ -15,7 +15,7 @@ export type GetMenuItemGroupsArgs = Partial<SortingRelatedArgs> & {
   headerData: HeaderData;
   translator: stardust.Translator;
   menuAvailabilityFlags: Partial<Record<MenuAvailabilityFlags, boolean>>;
-  setOpenMenuDropdown: (state: boolean) => void;
+  setOpen: (state: boolean) => void;
 
   // search
   embedListbox: () => void;
@@ -34,7 +34,7 @@ export const getMenuItemGroups = ({
   headerData,
   translator,
   menuAvailabilityFlags,
-  setOpenMenuDropdown,
+  setOpen,
 
   // sort
   sortFromMenu,
@@ -66,7 +66,7 @@ export const getMenuItemGroups = ({
             onClick: async (evt: React.MouseEvent<HTMLLIElement>) => {
               evt.stopPropagation();
               await sortFromMenu?.(evt, 'A');
-              setOpenMenuDropdown(false);
+              setOpen(false);
               await changeActivelySortedHeader?.(headerData);
             },
             icon: Ascending,
@@ -79,7 +79,7 @@ export const getMenuItemGroups = ({
             onClick: async (evt: React.MouseEvent<HTMLLIElement>) => {
               evt.stopPropagation();
               await sortFromMenu?.(evt, 'D');
-              setOpenMenuDropdown(false);
+              setOpen(false);
               await changeActivelySortedHeader?.(headerData);
             },
             icon: Descending,
@@ -104,7 +104,7 @@ export const getMenuItemGroups = ({
               itemTitle: translator.get('NebulaTableUtils.MenuItemLabel.Search'),
               onClick: (evt: React.MouseEvent<HTMLLIElement>) => {
                 evt.stopPropagation();
-                setOpenMenuDropdown(false);
+                setOpen(false);
                 embedListbox();
               },
               icon: Search,
@@ -134,7 +134,7 @@ export const getMenuItemGroups = ({
                         itemTitle: translator.get('NebulaTableUtils.MenuItemLabel.SelectAll'),
                         onClick: async (evt: React.MouseEvent) => {
                           evt.stopPropagation();
-                          setOpenMenuDropdown(false);
+                          setOpen(false);
                           await fieldInstance?.selectAll();
                         },
                         icon: SelectAll,
@@ -145,7 +145,7 @@ export const getMenuItemGroups = ({
                         itemTitle: translator.get('NebulaTableUtils.MenuItemLabel.SelectPossible'),
                         onClick: async (evt: React.MouseEvent) => {
                           evt.stopPropagation();
-                          setOpenMenuDropdown(false);
+                          setOpen(false);
                           await fieldInstance?.selectPossible();
                         },
                         icon: SelectPossible,
@@ -156,7 +156,7 @@ export const getMenuItemGroups = ({
                         itemTitle: translator.get('NebulaTableUtils.MenuItemLabel.SelectAlternative'),
                         onClick: async (evt: React.MouseEvent) => {
                           evt.stopPropagation();
-                          setOpenMenuDropdown(false);
+                          setOpen(false);
                           await fieldInstance?.selectAlternative();
                         },
                         icon: SelectAlternative,
@@ -167,7 +167,7 @@ export const getMenuItemGroups = ({
                         itemTitle: translator.get('NebulaTableUtils.MenuItemLabel.SelectExcluded'),
                         onClick: async (evt: React.MouseEvent) => {
                           evt.stopPropagation();
-                          setOpenMenuDropdown(false);
+                          setOpen(false);
                           await fieldInstance?.selectExcluded();
                         },
                         icon: SelectExcluded,
@@ -184,7 +184,7 @@ export const getMenuItemGroups = ({
                         itemTitle: translator.get('NebulaTableUtils.MenuItemLabel.ClearSelections'),
                         onClick: async (evt: React.MouseEvent) => {
                           evt.stopPropagation();
-                          setOpenMenuDropdown(false);
+                          setOpen(false);
                           await fieldInstance?.clear();
                         },
                         icon: ClearSelections,
@@ -214,7 +214,7 @@ export const getMenuItemGroups = ({
             onClick: (evt: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
               evt.stopPropagation();
               evt.preventDefault();
-              setOpenMenuDropdown(false);
+              setOpen(false);
               setFocusOnClosetHeaderAdjuster?.(anchorRef);
             },
             icon: ColumnSize,

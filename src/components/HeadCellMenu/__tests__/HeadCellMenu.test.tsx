@@ -32,8 +32,8 @@ describe('<HeadCellMenu />', () => {
   let setFocusOnClosetHeaderAdjuster: jest.Mock<() => void>;
   let listboxRef: React.RefObject<HTMLDivElement>;
   let handleHeadCellMenuKeyDown: jest.Mock<() => void>;
-  let openMenuDropdown: boolean;
-  let setOpenMenuDropdownMock: jest.Mock<() => void>;
+  let open: boolean;
+  let setOpenMock: jest.Mock<() => void>;
 
   let embed: ExtendedEmbed;
   let defaultListboxAnchorOpts: any;
@@ -65,8 +65,8 @@ describe('<HeadCellMenu />', () => {
         searchRelatedArgs={{ embed, listboxRef, interactions }}
         selectionRelatedArgs={{ app, model }}
         adjustHeaderSizeRelatedArgs={{ setFocusOnClosetHeaderAdjuster }}
-        openMenuDropdown={openMenuDropdown}
-        setOpenMenuDropdown={setOpenMenuDropdownMock}
+        open={open}
+        setOpen={setOpenMock}
       />
     );
 
@@ -135,8 +135,8 @@ describe('<HeadCellMenu />', () => {
       selections: true,
       adjustHeaderSize: true,
     };
-    openMenuDropdown = true;
-    setOpenMenuDropdownMock = jest.fn();
+    open = true;
+    setOpenMock = jest.fn();
   });
 
   afterEach(() => {
@@ -170,8 +170,8 @@ describe('<HeadCellMenu />', () => {
     renderTableHeadCellMenu();
 
     fireEvent.click(screen.getByText('NebulaTableUtils.MenuItemLabel.Search'));
-    expect(setOpenMenuDropdownMock).toHaveBeenCalledTimes(1);
-    expect(setOpenMenuDropdownMock).toHaveBeenCalledWith(false);
+    expect(setOpenMock).toHaveBeenCalledTimes(1);
+    expect(setOpenMock).toHaveBeenCalledWith(false);
   });
 
   test('should call `embed.__DO_NOT_USE__.popover()` once while trying to open listbox filter for a dimension', () => {

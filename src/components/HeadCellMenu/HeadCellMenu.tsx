@@ -19,8 +19,8 @@ const HeadCellMenu = ({
   selectionRelatedArgs,
   adjustHeaderSizeRelatedArgs,
 
-  openMenuDropdown,
-  setOpenMenuDropdown,
+  open,
+  setOpen,
 }: HeadCellMenuProps) => {
   const t = useTranslations({ translator });
   const { headTextAlign, qLibraryId, fieldId } = headerData;
@@ -44,7 +44,7 @@ const HeadCellMenu = ({
   }, [searchRelatedArgs, fieldId, qLibraryId]);
 
   useEffect(() => {
-    if (!openMenuDropdown) {
+    if (!open) {
       resetSelectionActionsEnabledStatus();
 
       if (selectionRelatedArgs?.model) {
@@ -56,19 +56,14 @@ const HeadCellMenu = ({
           .catch((e) => console.error(e));
       }
     }
-  }, [
-    openMenuDropdown,
-    resetSelectionActionsEnabledStatus,
-    updateSelectionActionsEnabledStatus,
-    selectionRelatedArgs?.model,
-  ]);
+  }, [open, resetSelectionActionsEnabledStatus, updateSelectionActionsEnabledStatus, selectionRelatedArgs?.model]);
 
   const handleOnClose = useCallback(
     (evt: React.MouseEvent) => {
       evt.stopPropagation();
-      setOpenMenuDropdown(false);
+      setOpen(false);
     },
-    [setOpenMenuDropdown]
+    [setOpen]
   );
 
   return (
@@ -77,8 +72,8 @@ const HeadCellMenu = ({
         size="small"
         tabIndex={tabIndex}
         id="nebula-table-utils-head-menu-button"
-        aria-controls={openMenuDropdown ? 'nebula-table-utils-head-menu' : undefined}
-        aria-expanded={openMenuDropdown ? 'true' : undefined}
+        aria-controls={open ? 'nebula-table-utils-head-menu' : undefined}
+        aria-expanded={open ? 'true' : undefined}
         aria-haspopup="true"
         data-testid="nebula-table-utils-head-menu-button"
       >
@@ -86,14 +81,14 @@ const HeadCellMenu = ({
       </StyledMenuButton>
 
       <RecursiveMenuList
-        open={openMenuDropdown}
+        open={open}
         anchorEl={anchorRef.current}
         onClose={handleOnClose}
         menuGroups={getMenuItemGroups({
           headerData,
           translator: t,
           menuAvailabilityFlags,
-          setOpenMenuDropdown,
+          setOpen,
           // sort
           ...sortRelatedArgs,
           // search
