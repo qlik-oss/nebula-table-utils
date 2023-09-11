@@ -2,7 +2,7 @@
 import React from 'react';
 import '@testing-library/jest-dom';
 import { stardust } from '@nebula.js/stardust';
-import { render, fireEvent, screen, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
+import { render, fireEvent, screen } from '@testing-library/react';
 import HeadCellMenu from '../HeadCellMenu';
 import * as useFieldSelectionHook from '../use-field-selection';
 import { type HeaderData, MenuAvailabilityFlags, type UseFieldSelectionOutput } from '../types';
@@ -32,6 +32,8 @@ describe('<HeadCellMenu />', () => {
   let setFocusOnClosetHeaderAdjuster: jest.Mock<() => void>;
   let listboxRef: React.RefObject<HTMLDivElement>;
   let handleHeadCellMenuKeyDown: jest.Mock<() => void>;
+  let openMenuDropdown: boolean;
+  let setOpenMenuDropdownMock: jest.Mock<() => void>;
 
   let embed: ExtendedEmbed;
   let defaultListboxAnchorOpts: any;
@@ -63,15 +65,10 @@ describe('<HeadCellMenu />', () => {
         searchRelatedArgs={{ embed, listboxRef, interactions }}
         selectionRelatedArgs={{ app, model }}
         adjustHeaderSizeRelatedArgs={{ setFocusOnClosetHeaderAdjuster }}
+        openMenuDropdown={openMenuDropdown}
+        setOpenMenuDropdown={setOpenMenuDropdownMock}
       />
     );
-
-  const openMenu = async () => {
-    fireEvent.click(screen.getByTestId('nebula-table-utils-head-menu-button'));
-    await waitFor(() => {
-      expect(screen.queryByRole('menu')).toBeVisible();
-    });
-  };
 
   beforeEach(() => {
     embed = {
@@ -138,15 +135,16 @@ describe('<HeadCellMenu />', () => {
       selections: true,
       adjustHeaderSize: true,
     };
+    openMenuDropdown = true;
+    setOpenMenuDropdownMock = jest.fn();
   });
 
   afterEach(() => {
     jest.resetAllMocks();
   });
 
-  test('should open menu and render all menu items', async () => {
+  test('should render all menu items', () => {
     renderTableHeadCellMenu();
-    await openMenu();
 
     [
       'NebulaTableUtils.MenuGroupLabel.Sorting',
@@ -160,45 +158,26 @@ describe('<HeadCellMenu />', () => {
     });
   });
 
-  test('should not render Search and selections when interactions are false', async () => {
+  test('should not render Search and selections when interactions are false', () => {
     interactions.select = false;
     renderTableHeadCellMenu();
-    await openMenu();
 
     expect(screen.queryByText('NebulaTableUtils.MenuItemLabel.Search')).toBeNull();
     expect(screen.queryByText('NebulaTableUtils.MenuItemLabel.Selections')).toBeNull();
   });
 
-  test('should close the menu when listbox is about to mount', async () => {
+  test('should close the menu when listbox is about to mount', () => {
     renderTableHeadCellMenu();
-    await openMenu();
 
     fireEvent.click(screen.getByText('NebulaTableUtils.MenuItemLabel.Search'));
-    expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+    expect(setOpenMenuDropdownMock).toHaveBeenCalledTimes(1);
+    expect(setOpenMenuDropdownMock).toHaveBeenCalledWith(false);
   });
 
-  test('should close the menu by clicking the menu button when the context menu is open', async () => {
+  test('should call `embed.__DO_NOT_USE__.popover()` once while trying to open listbox filter for a dimension', () => {
     renderTableHeadCellMenu();
-
-    const button = screen.getByTestId('nebula-table-utils-head-menu-button');
-    fireEvent.click(button);
-    await waitFor(() => {
-      expect(screen.queryByRole('menu')).toBeInTheDocument();
-    });
-    fireEvent.click(button);
-    expect(screen.queryByRole('menu')).not.toBeInTheDocument();
-    // it's called 2 times:
-    // 1. default state is false
-    // 2. when we actually close the dropdown
-    expect(resetSelectionActionsEnabledStatusMock).toHaveBeenCalledTimes(2);
-  });
-
-  test('should call `embed.__DO_NOT_USE__.popover()` once while trying to open listbox filter for a dimension', async () => {
-    renderTableHeadCellMenu();
-    await openMenu();
 
     fireEvent.click(screen.getByText('NebulaTableUtils.MenuItemLabel.Search'));
-    expect(screen.queryByRole('menu')).not.toBeInTheDocument();
     expect(embed.__DO_NOT_USE__.popover).toHaveBeenCalledTimes(1);
     expect(embed.__DO_NOT_USE__.popover).toHaveBeenCalledWith(
       expect.any(HTMLDivElement),
@@ -207,19 +186,14 @@ describe('<HeadCellMenu />', () => {
     );
   });
 
-  test('should call `embed.__DO_NOT_USE__.popover()` once while trying to open listbox filter for a master dimension', async () => {
+  test('should call `embed.__DO_NOT_USE__.popover()` once while trying to open listbox filter for a master dimension', () => {
     headerData = {
       ...headerData,
       qLibraryId: 'someLibId',
     };
     renderTableHeadCellMenu();
-    await openMenu();
 
-    await waitFor(() => {
-      expect(screen.queryByRole('menu')).toBeVisible();
-    });
     fireEvent.click(screen.getByText('NebulaTableUtils.MenuItemLabel.Search'));
-    expect(screen.queryByRole('menu')).not.toBeInTheDocument();
     expect(embed.__DO_NOT_USE__.popover).toHaveBeenCalledTimes(1);
     expect(embed.__DO_NOT_USE__.popover).toHaveBeenCalledWith(
       expect.any(HTMLDivElement),
@@ -228,13 +202,9 @@ describe('<HeadCellMenu />', () => {
     );
   });
 
-  test('should reflect correct `enabled` status of selection actions based', async () => {
+  test('should reflect correct `enabled` status of selection actions based', () => {
     renderTableHeadCellMenu();
-    await openMenu();
 
-    await waitFor(() => {
-      expect(screen.queryByRole('menu')).toBeVisible();
-    });
     fireEvent.click(screen.getByText('NebulaTableUtils.MenuItemLabel.Selections'));
     menuLabels.forEach((label) => {
       expect(screen.getByText(label)).toBeVisible();
@@ -258,7 +228,7 @@ describe('<HeadCellMenu />', () => {
   });
 
   describe('Selection actions', () => {
-    const handleBeforeEachAction = async (targetAction: string) => {
+    const handleBeforeEachAction = (targetAction: string) => {
       jest.spyOn(useFieldSelectionHook, 'default').mockReturnValue({
         ...useFieldSelectionHookResult,
         selectionActionsEnabledStatus: {
@@ -267,49 +237,33 @@ describe('<HeadCellMenu />', () => {
         },
       });
       renderTableHeadCellMenu();
-      await openMenu();
-      await waitFor(() => {
-        expect(screen.queryByRole('menu')).toBeVisible();
-      });
       fireEvent.click(screen.getByText('NebulaTableUtils.MenuItemLabel.Selections'));
       fireEvent.click(screen.getByText(`NebulaTableUtils.MenuItemLabel.${targetAction}`));
     };
 
-    const testEnd = async () => {
-      expect(updateSelectionActionsEnabledStatusMock).toHaveBeenCalledTimes(1);
-      fireEvent.click(document);
-      await waitForElementToBeRemoved(() => screen.queryByRole('menu'));
-      expect(screen.queryByRole('menu')).not.toBeInTheDocument();
-    };
-
-    test('should be able to call "Select All" once when it is enabled', async () => {
-      await handleBeforeEachAction('SelectAll');
+    test('should be able to call "Select All" once when it is enabled', () => {
+      handleBeforeEachAction('SelectAll');
       expect(fieldInstanceMock.selectAll).toHaveBeenCalledTimes(1);
-      await testEnd();
     });
 
-    test('should be able to call "Clear Selection" all once when it is enabled', async () => {
-      await handleBeforeEachAction('ClearSelections');
+    test('should be able to call "Clear Selection" all once when it is enabled', () => {
+      handleBeforeEachAction('ClearSelections');
       expect(fieldInstanceMock.clear).toHaveBeenCalledTimes(1);
-      await testEnd();
     });
 
-    test('should be able to call "Select Possible" all once when it is enabled', async () => {
-      await handleBeforeEachAction('SelectPossible');
+    test('should be able to call "Select Possible" all once when it is enabled', () => {
+      handleBeforeEachAction('SelectPossible');
       expect(fieldInstanceMock.selectPossible).toHaveBeenCalledTimes(1);
-      await testEnd();
     });
 
-    test('should be able to call "Select Alternative" all once when it is enabled', async () => {
-      await handleBeforeEachAction('SelectAlternative');
+    test('should be able to call "Select Alternative" all once when it is enabled', () => {
+      handleBeforeEachAction('SelectAlternative');
       expect(fieldInstanceMock.selectAlternative).toHaveBeenCalledTimes(1);
-      await testEnd();
     });
 
-    test('should be able to call "Select Excluded" all once when it is enabled', async () => {
-      await handleBeforeEachAction('SelectExcluded');
+    test('should be able to call "Select Excluded" all once when it is enabled', () => {
+      handleBeforeEachAction('SelectExcluded');
       expect(fieldInstanceMock.selectExcluded).toHaveBeenCalledTimes(1);
-      await testEnd();
     });
   });
 });

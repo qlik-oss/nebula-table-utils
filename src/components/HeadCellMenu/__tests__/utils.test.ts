@@ -88,6 +88,10 @@ describe('Utils', () => {
     };
   });
 
+  afterEach(() => {
+    jest.resetAllMocks();
+  });
+
   describe('Structure check', () => {
     const getMenuExpactation = (hasTitle = true, isSubMenu = false) =>
       expect.arrayContaining([
@@ -156,10 +160,7 @@ describe('Utils', () => {
   });
 
   describe('Callbacks', () => {
-    const evt = fireEvent.click(document.createElement('DIV')) as unknown as React.MouseEvent<
-      HTMLLIElement,
-      MouseEvent
-    >;
+    const evt = new MouseEvent('click') as unknown as React.MouseEvent<HTMLLIElement>;
 
     describe('Sorting', () => {
       afterEach(() => {
