@@ -48,12 +48,20 @@ const HeadCellMenu = ({
       resetSelectionActionsEnabledStatus();
 
       if (selectionRelatedArgs?.model) {
-        selectionRelatedArgs.model.getLayout().then((layout) => {
-          updateSelectionActionsEnabledStatus(layout as EngineAPI.IGenericHyperCubeLayout);
-        });
+        selectionRelatedArgs.model
+          .getLayout()
+          .then((layout) => {
+            updateSelectionActionsEnabledStatus(layout as EngineAPI.IGenericHyperCubeLayout);
+          })
+          .catch((e) => console.error(e));
       }
     }
-  }, [openMenuDropdown, resetSelectionActionsEnabledStatus, updateSelectionActionsEnabledStatus]);
+  }, [
+    openMenuDropdown,
+    resetSelectionActionsEnabledStatus,
+    updateSelectionActionsEnabledStatus,
+    selectionRelatedArgs?.model,
+  ]);
 
   const handleOnClose = useCallback(
     (evt: React.MouseEvent) => {
