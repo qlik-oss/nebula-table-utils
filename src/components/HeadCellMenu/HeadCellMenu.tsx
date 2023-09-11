@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import Menu from '@qlik-trial/sprout/icons/Menu';
 import useFieldSelection from './use-field-selection';
 import RecursiveMenuList from './MenuList/RecursiveMenuList';
@@ -24,21 +24,12 @@ const HeadCellMenu = ({
 }: HeadCellMenuProps) => {
   const t = useTranslations({ translator });
   const { headTextAlign, qLibraryId, fieldId } = headerData;
-  // const [openMenuDropdown, setOpenMenuDropdown] = useState(false);
   const {
     fieldInstance,
     selectionActionsEnabledStatus,
     resetSelectionActionsEnabledStatus,
     updateSelectionActionsEnabledStatus,
   } = useFieldSelection({ headerData, app: selectionRelatedArgs?.app });
-
-  // const handleOpenDropdown = async () => {
-  // if (!openMenuDropdown && selectionRelatedArgs?.model) {
-  //   const layout = await selectionRelatedArgs?.model.getLayout();
-  //   updateSelectionActionsEnabledStatus(layout as EngineAPI.IGenericHyperCubeLayout);
-  // }
-  // setOpenMenuDropdown(!openMenuDropdown);
-  // };
 
   const embedListbox = useCallback(() => {
     const id = qLibraryId ? { qLibraryId, type: 'dimension' } : fieldId;
@@ -64,6 +55,14 @@ const HeadCellMenu = ({
     }
   }, [openMenuDropdown, resetSelectionActionsEnabledStatus, updateSelectionActionsEnabledStatus]);
 
+  const handleOnClose = useCallback(
+    (evt: React.MouseEvent) => {
+      evt.stopPropagation();
+      setOpenMenuDropdown(false);
+    },
+    [setOpenMenuDropdown]
+  );
+
   return (
     <HeadCellMenuWrapper rightAligned={headTextAlign === 'right'}>
       <StyledMenuButton
@@ -73,8 +72,6 @@ const HeadCellMenu = ({
         aria-controls={openMenuDropdown ? 'nebula-table-utils-head-menu' : undefined}
         aria-expanded={openMenuDropdown ? 'true' : undefined}
         aria-haspopup="true"
-        // eslint-disable-next-line @typescript-eslint/no-misused-promises
-        // onClick={handleOpenDropdown}
         data-testid="nebula-table-utils-head-menu-button"
       >
         <Menu />
@@ -83,7 +80,7 @@ const HeadCellMenu = ({
       <RecursiveMenuList
         open={openMenuDropdown}
         anchorEl={anchorRef.current}
-        onClose={(evt: React.MouseEvent) => setOpenMenuDropdown(evt, false)}
+        onClose={handleOnClose}
         menuGroups={getMenuItemGroups({
           headerData,
           translator: t,

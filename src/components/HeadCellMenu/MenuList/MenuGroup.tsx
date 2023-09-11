@@ -1,5 +1,5 @@
 /* eslint-disable import/no-cycle */
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import ArrowRight from '@qlik-trial/sprout/icons/react/ArrowRight';
 import type { ExtendedHeadCellMenuItem, MenuItemGroup } from '../types';
 import {
@@ -60,6 +60,14 @@ const MenuGroupItems = ({
     }
   };
 
+  const handleRecursiveMenuOnClose = useCallback(
+    (evt: React.MouseEvent) => {
+      evt.stopPropagation();
+      setOpenMenu(false);
+    },
+    [setOpenMenu]
+  );
+
   return (
     <>
       <StyledMenuItem
@@ -90,7 +98,7 @@ const MenuGroupItems = ({
           isSubMenu
           open={openMenu}
           anchorEl={anchorRef.current}
-          onClose={() => setOpenMenu(false)}
+          onClose={handleRecursiveMenuOnClose}
           menuGroups={interceptClickOnMenuItems(subMenus, subMenusOpenStatusCache)}
           transformOrigin={{ horizontal: 'left', vertical: 'top' }}
           anchorOrigin={{ horizontal: 'right', vertical: 'top' }}

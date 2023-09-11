@@ -36,7 +36,7 @@ export interface HeadCellMenuProps {
   handleHeadCellMenuKeyDown?: (evt: React.KeyboardEvent<HTMLLIElement>) => void;
   menuAvailabilityFlags: Partial<Record<MenuAvailabilityFlags, boolean>>;
   openMenuDropdown: boolean;
-  setOpenMenuDropdown: (evt: React.MouseEvent, state: boolean) => void;
+  setOpenMenuDropdown: React.Dispatch<React.SetStateAction<boolean>>;
 
   sortRelatedArgs?: SortingRelatedArgs;
   searchRelatedArgs?: SearchRelatedArgs;
