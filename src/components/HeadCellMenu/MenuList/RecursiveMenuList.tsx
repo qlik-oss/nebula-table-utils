@@ -8,7 +8,7 @@ import { StyledMenu } from '../styles';
 interface RecursiveMenuListProps {
   open: boolean;
   anchorEl: HTMLDivElement | null;
-  onClose: () => void;
+  onClose: (evt: React.MouseEvent) => void;
   menuGroups: MenuItemGroup[];
   transformOrigin?: PopoverOrigin;
   anchorOrigin?: PopoverOrigin;

@@ -29,17 +29,23 @@ const useFieldSelection = ({ headerData, app }: UseFieldSelectionProps): UseFiel
     () => setSelectionActionsEnabledStatus(SELECTION_ACTIONS_ENABLED_DEFAULT_STATUS),
     []
   );
-  const updateSelectionActionsEnabledStatus = (layout: EngineAPI.IGenericHyperCubeLayout) => {
-    const dimInfo = layout.qHyperCube.qDimensionInfo.find((dim) => dim.qFallbackTitle === headerData.label);
-    if (!dimInfo) return;
-    setSelectionActionsEnabledStatus({
-      canSelectAll: checkStateCountByKey(['qOption', 'qAlternative', 'qExcluded', 'qDeselected'], dimInfo.qStateCounts),
-      canClearSelections: checkStateCountByKey(['qSelected'], dimInfo.qStateCounts),
-      canSelectPossible: checkStateCountByKey(['qOption'], dimInfo.qStateCounts),
-      canSelectAlternative: checkStateCountByKey(['qAlternative'], dimInfo.qStateCounts),
-      canSelectExcluded: checkStateCountByKey(['qAlternative', 'qExcluded'], dimInfo.qStateCounts),
-    });
-  };
+  const updateSelectionActionsEnabledStatus = useCallback(
+    (layout: EngineAPI.IGenericHyperCubeLayout) => {
+      const dimInfo = layout.qHyperCube.qDimensionInfo.find((dim) => dim.qFallbackTitle === headerData.label);
+      if (!dimInfo) return;
+      setSelectionActionsEnabledStatus({
+        canSelectAll: checkStateCountByKey(
+          ['qOption', 'qAlternative', 'qExcluded', 'qDeselected'],
+          dimInfo.qStateCounts
+        ),
+        canClearSelections: checkStateCountByKey(['qSelected'], dimInfo.qStateCounts),
+        canSelectPossible: checkStateCountByKey(['qOption'], dimInfo.qStateCounts),
+        canSelectAlternative: checkStateCountByKey(['qAlternative'], dimInfo.qStateCounts),
+        canSelectExcluded: checkStateCountByKey(['qAlternative', 'qExcluded'], dimInfo.qStateCounts),
+      });
+    },
+    [headerData.label, setSelectionActionsEnabledStatus]
+  );
 
   return {
     fieldInstance,

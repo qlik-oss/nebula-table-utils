@@ -27,6 +27,7 @@ export const HeadCellMenuWrapper = styled(Box, {
 export const StyledMenuButton = styled(Menu)(() => ({
   minWidth: 'unset',
   cursor: 'pointer',
+  position: 'relative',
 }));
 
 // ---------- DropdownMenu ----------

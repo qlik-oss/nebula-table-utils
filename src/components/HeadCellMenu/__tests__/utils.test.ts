@@ -1,6 +1,5 @@
 /* eslint jest/no-standalone-expect: 0, array-callback-return: 0 */
 import { stardust } from '@nebula.js/stardust';
-import { fireEvent } from '@testing-library/react';
 import type { HeaderData, MenuAvailabilityFlags } from '../types';
 import { type GetMenuItemGroupsArgs, getMenuItemGroups } from '../utils';
 
@@ -9,7 +8,7 @@ describe('Utils', () => {
   let translator: stardust.Translator;
   let translatorGetMock: jest.Mock<() => string>;
   let menuAvailabilityFlags: Partial<Record<MenuAvailabilityFlags, boolean>>;
-  let setOpenMenuDropdown: jest.Mock<() => void>;
+  let setOpen: jest.Mock<() => void>;
 
   // sort
   let sortFromMenu: jest.Mock<Promise<void>>;
@@ -40,7 +39,7 @@ describe('Utils', () => {
       get: translatorGetMock,
     } as unknown as stardust.Translator;
     menuAvailabilityFlags = {};
-    setOpenMenuDropdown = jest.fn();
+    setOpen = jest.fn();
     sortFromMenu = jest.fn();
     changeActivelySortedHeader = jest.fn();
     interactions = { select: false };
@@ -68,7 +67,7 @@ describe('Utils', () => {
       headerData,
       translator,
       menuAvailabilityFlags,
-      setOpenMenuDropdown,
+      setOpen,
 
       // sort
       sortFromMenu,
@@ -86,6 +85,10 @@ describe('Utils', () => {
       anchorRef,
       setFocusOnClosetHeaderAdjuster,
     };
+  });
+
+  afterEach(() => {
+    jest.resetAllMocks();
   });
 
   describe('Structure check', () => {
@@ -156,15 +159,12 @@ describe('Utils', () => {
   });
 
   describe('Callbacks', () => {
-    const evt = fireEvent.click(document.createElement('DIV')) as unknown as React.MouseEvent<
-      HTMLLIElement,
-      MouseEvent
-    >;
+    const evt = new MouseEvent('click') as unknown as React.MouseEvent<HTMLLIElement>;
 
     describe('Sorting', () => {
       afterEach(() => {
-        expect(setOpenMenuDropdown).toHaveBeenCalledTimes(1);
-        expect(setOpenMenuDropdown).toHaveBeenCalledWith(false);
+        expect(setOpen).toHaveBeenCalledTimes(1);
+        expect(setOpen).toHaveBeenCalledWith(false);
       });
 
       test('should call expected functions on sort ASC callback', async () => {
@@ -207,8 +207,8 @@ describe('Utils', () => {
 
     describe('Searching', () => {
       afterEach(() => {
-        expect(setOpenMenuDropdown).toHaveBeenCalledTimes(1);
-        expect(setOpenMenuDropdown).toHaveBeenCalledWith(false);
+        expect(setOpen).toHaveBeenCalledTimes(1);
+        expect(setOpen).toHaveBeenCalledWith(false);
       });
 
       test('should call expected functions on Search callback', async () => {
@@ -236,8 +236,8 @@ describe('Utils', () => {
 
     describe('Selections', () => {
       afterEach(() => {
-        expect(setOpenMenuDropdown).toHaveBeenCalledTimes(5);
-        expect(setOpenMenuDropdown).toHaveBeenCalledWith(false);
+        expect(setOpen).toHaveBeenCalledTimes(5);
+        expect(setOpen).toHaveBeenCalledWith(false);
       });
       test('should call expected functions on Selections callback', () => {
         getMenuItemArgs = {
@@ -271,8 +271,8 @@ describe('Utils', () => {
 
     describe('Adjust Col Size', () => {
       afterEach(() => {
-        expect(setOpenMenuDropdown).toHaveBeenCalledTimes(1);
-        expect(setOpenMenuDropdown).toHaveBeenCalledWith(false);
+        expect(setOpen).toHaveBeenCalledTimes(1);
+        expect(setOpen).toHaveBeenCalledWith(false);
       });
 
       test('should call expected functions on Adjust Col Size callback', async () => {
