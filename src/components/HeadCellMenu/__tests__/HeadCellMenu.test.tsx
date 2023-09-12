@@ -129,6 +129,7 @@ describe('<HeadCellMenu />', () => {
     } as unknown as EngineAPI.IGenericObject;
     interactions = {
       select: true,
+      active: true,
     };
     menuAvailabilityFlags = {
       sorting: true,
@@ -156,6 +157,22 @@ describe('<HeadCellMenu />', () => {
       'NebulaTableUtils.MenuItemLabel.AdjustColumnSize',
     ].forEach((actionLabel) => {
       expect(screen.queryByText(actionLabel)).toBeInTheDocument();
+    });
+  });
+
+  test('should not render if interactions.active is false', () => {
+    interactions = { ...interactions, active: false };
+    renderTableHeadCellMenu();
+
+    [
+      'NebulaTableUtils.MenuGroupLabel.Sorting',
+      'NebulaTableUtils.MenuItemLabel.SortAscending',
+      'NebulaTableUtils.MenuItemLabel.SortDescending',
+      'NebulaTableUtils.MenuItemLabel.Search',
+      'NebulaTableUtils.MenuItemLabel.Selections',
+      'NebulaTableUtils.MenuItemLabel.AdjustColumnSize',
+    ].forEach((actionLabel) => {
+      expect(screen.queryByText(actionLabel)).not.toBeInTheDocument();
     });
   });
 
