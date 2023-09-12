@@ -24,10 +24,12 @@ export const HeadCellMenuWrapper = styled(Box, {
   justifyContent: 'center',
 }));
 
-export const StyledMenuButton = styled(Menu)(() => ({
+export const StyledMenuButton = styled(Menu, {
+  shouldForwardProp: (prop: string) => prop !== 'isInteractionsActive',
+})(({ isInteractionsActive }: { isInteractionsActive: boolean }) => ({
   minWidth: 'unset',
-  cursor: 'pointer',
   position: 'relative',
+  cursor: isInteractionsActive ? 'pointer' : 'default',
 }));
 
 // ---------- DropdownMenu ----------
