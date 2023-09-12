@@ -66,6 +66,8 @@ const HeadCellMenu = ({
     [setOpen]
   );
 
+  if (!interactions.active) return null;
+
   return (
     <HeadCellMenuWrapper rightAligned={headTextAlign === 'right'}>
       <StyledMenuButton
