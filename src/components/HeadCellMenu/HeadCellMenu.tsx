@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import Menu from '@qlik-trial/sprout/icons/Menu';
 import useFieldSelection from './use-field-selection';
 import RecursiveMenuList from './MenuList/RecursiveMenuList';
@@ -18,24 +18,18 @@ const HeadCellMenu = ({
   searchRelatedArgs,
   selectionRelatedArgs,
   adjustHeaderSizeRelatedArgs,
+
+  open,
+  setOpen,
 }: HeadCellMenuProps) => {
   const t = useTranslations({ translator });
   const { headTextAlign, qLibraryId, fieldId } = headerData;
-  const [openMenuDropdown, setOpenMenuDropdown] = useState(false);
   const {
     fieldInstance,
     selectionActionsEnabledStatus,
     resetSelectionActionsEnabledStatus,
     updateSelectionActionsEnabledStatus,
   } = useFieldSelection({ headerData, app: selectionRelatedArgs?.app });
-
-  const handleOpenDropdown = async () => {
-    if (!openMenuDropdown && selectionRelatedArgs?.model) {
-      const layout = await selectionRelatedArgs?.model.getLayout();
-      updateSelectionActionsEnabledStatus(layout as EngineAPI.IGenericHyperCubeLayout);
-    }
-    setOpenMenuDropdown(!openMenuDropdown);
-  };
 
   const embedListbox = useCallback(() => {
     const id = qLibraryId ? { qLibraryId, type: 'dimension' } : fieldId;
@@ -50,8 +44,27 @@ const HeadCellMenu = ({
   }, [searchRelatedArgs, fieldId, qLibraryId]);
 
   useEffect(() => {
-    if (!openMenuDropdown) resetSelectionActionsEnabledStatus();
-  }, [openMenuDropdown, resetSelectionActionsEnabledStatus]);
+    if (!open) {
+      resetSelectionActionsEnabledStatus();
+
+      if (selectionRelatedArgs?.model) {
+        selectionRelatedArgs.model
+          .getLayout()
+          .then((layout) => {
+            updateSelectionActionsEnabledStatus(layout as EngineAPI.IGenericHyperCubeLayout);
+          })
+          .catch((e) => console.error(e));
+      }
+    }
+  }, [open, resetSelectionActionsEnabledStatus, updateSelectionActionsEnabledStatus, selectionRelatedArgs?.model]);
+
+  const handleOnClose = useCallback(
+    (evt: React.MouseEvent) => {
+      evt.stopPropagation();
+      setOpen(false);
+    },
+    [setOpen]
+  );
 
   return (
     <HeadCellMenuWrapper rightAligned={headTextAlign === 'right'}>
@@ -59,25 +72,23 @@ const HeadCellMenu = ({
         size="small"
         tabIndex={tabIndex}
         id="nebula-table-utils-head-menu-button"
-        aria-controls={openMenuDropdown ? 'nebula-table-utils-head-menu' : undefined}
-        aria-expanded={openMenuDropdown ? 'true' : undefined}
+        aria-controls={open ? 'nebula-table-utils-head-menu' : undefined}
+        aria-expanded={open ? 'true' : undefined}
         aria-haspopup="true"
-        // eslint-disable-next-line @typescript-eslint/no-misused-promises
-        onClick={handleOpenDropdown}
         data-testid="nebula-table-utils-head-menu-button"
       >
         <Menu />
       </StyledMenuButton>
 
       <RecursiveMenuList
-        open={openMenuDropdown}
+        open={open}
         anchorEl={anchorRef.current}
-        onClose={() => setOpenMenuDropdown(false)}
+        onClose={handleOnClose}
         menuGroups={getMenuItemGroups({
           headerData,
           translator: t,
           menuAvailabilityFlags,
-          setOpenMenuDropdown,
+          setOpen,
           // sort
           ...sortRelatedArgs,
           // search
