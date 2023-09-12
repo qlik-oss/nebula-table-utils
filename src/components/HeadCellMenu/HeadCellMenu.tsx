@@ -76,6 +76,7 @@ const HeadCellMenu = ({
         aria-expanded={open ? 'true' : undefined}
         aria-haspopup="true"
         data-testid="nebula-table-utils-head-menu-button"
+        isInteractionsActive={searchRelatedArgs?.interactions.active ?? false}
       >
         <Menu />
       </StyledMenuButton>
