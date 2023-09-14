@@ -8,19 +8,19 @@ import type { HeadCellMenuProps } from './types';
 import { useTranslations } from '../../hooks';
 
 const HeadCellMenu = ({
-  headerData,
+  open,
+  setOpen,
   tabIndex,
   anchorRef,
+  headerData,
   translator,
+  interactions,
   handleHeadCellMenuKeyDown,
   menuAvailabilityFlags,
   sortRelatedArgs,
   searchRelatedArgs,
   selectionRelatedArgs,
   adjustHeaderSizeRelatedArgs,
-
-  open,
-  setOpen,
 }: HeadCellMenuProps) => {
   const t = useTranslations({ translator });
   const { headTextAlign, qLibraryId, fieldId } = headerData;
@@ -66,6 +66,8 @@ const HeadCellMenu = ({
     [setOpen]
   );
 
+  if (!interactions.active) return null;
+
   return (
     <HeadCellMenuWrapper rightAligned={headTextAlign === 'right'}>
       <StyledMenuButton
@@ -76,6 +78,7 @@ const HeadCellMenu = ({
         aria-expanded={open ? 'true' : undefined}
         aria-haspopup="true"
         data-testid="nebula-table-utils-head-menu-button"
+        isInteractionsActive={interactions.active ?? false}
       >
         <Menu />
       </StyledMenuButton>
@@ -93,7 +96,7 @@ const HeadCellMenu = ({
           ...sortRelatedArgs,
           // search
           embedListbox,
-          interactions: searchRelatedArgs?.interactions,
+          interactions,
           // selection
           fieldInstance,
           selectionActionsEnabledStatus,

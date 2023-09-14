@@ -16,7 +16,6 @@ export type SortingRelatedArgs = {
 export type SearchRelatedArgs = {
   embed: stardust.Embed;
   listboxRef: React.RefObject<HTMLDivElement>;
-  interactions: stardust.Interactions;
 };
 
 export type SelectionRelatedArgs = Partial<{
@@ -37,6 +36,7 @@ export interface HeadCellMenuProps {
   menuAvailabilityFlags: Partial<Record<MenuAvailabilityFlags, boolean>>;
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  interactions: stardust.Interactions;
 
   sortRelatedArgs?: SortingRelatedArgs;
   searchRelatedArgs?: SearchRelatedArgs;
