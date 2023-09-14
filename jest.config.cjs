@@ -5,7 +5,7 @@ module.exports = {
   testEnvironment: 'jsdom',
   testRegex: 'src/.+\\.(test|spec)\\.[jt]sx?$',
   transform: {
-    '\\.js$': 'babel-jest',
+    // '\\.js$': 'babel-jest',
     '^.+\\.(t|j)sx?$': '@swc/jest',
   },
   moduleNameMapper: {
