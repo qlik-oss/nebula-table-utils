@@ -1,0 +1,3 @@
+const PAGINATION_HEIGHT = 40;
+
+export { PAGINATION_HEIGHT };
