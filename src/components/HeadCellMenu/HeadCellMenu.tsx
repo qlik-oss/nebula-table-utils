@@ -17,6 +17,8 @@ const HeadCellMenu = ({
   interactions,
   handleHeadCellMenuKeyDown,
   menuAvailabilityFlags,
+  shouldShowMenuIcon = true,
+
   sortRelatedArgs,
   searchRelatedArgs,
   selectionRelatedArgs,
@@ -69,19 +71,21 @@ const HeadCellMenu = ({
   if (!interactions.active) return null;
 
   return (
-    <HeadCellMenuWrapper rightAligned={headTextAlign === 'right'}>
-      <StyledMenuButton
-        size="small"
-        tabIndex={tabIndex}
-        id="nebula-table-utils-head-menu-button"
-        aria-controls={open ? 'nebula-table-utils-head-menu' : undefined}
-        aria-expanded={open ? 'true' : undefined}
-        aria-haspopup="true"
-        data-testid="nebula-table-utils-head-menu-button"
-        isInteractionsActive={interactions.active ?? false}
-      >
-        <Menu />
-      </StyledMenuButton>
+    <HeadCellMenuWrapper rightAligned={headTextAlign === 'right'} shouldShowMenuIcon={shouldShowMenuIcon}>
+      {shouldShowMenuIcon && (
+        <StyledMenuButton
+          size="small"
+          tabIndex={tabIndex}
+          id="nebula-table-utils-head-menu-button"
+          aria-controls={open ? 'nebula-table-utils-head-menu' : undefined}
+          aria-expanded={open ? 'true' : undefined}
+          aria-haspopup="true"
+          data-testid="nebula-table-utils-head-menu-button"
+          isInteractionsActive={interactions.active ?? false}
+        >
+          <Menu />
+        </StyledMenuButton>
+      )}
 
       <RecursiveMenuList
         open={open}
