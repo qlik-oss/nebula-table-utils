@@ -5,7 +5,7 @@ import ArrowRight from '@qlik-trial/sprout/icons/react/ArrowRight';
 import ArrowRightStop from '@qlik-trial/sprout/icons/react/ArrowRightStop';
 import { StyledButton } from '../styles';
 import { DEFAULT_FONT_SIZE } from '../../../constants';
-import { usePaginationContext } from '../PaginationProvider';
+import { usePaginationContext } from '../context/PaginationProvider';
 
 interface Props {
   disabledCondition: boolean;
@@ -44,8 +44,8 @@ const Button = ({ disabledCondition, pageNumber, type, onKeyDown, show }: Props)
       data-testid="pagination-action-icon-button"
       onClick={!disabledCondition ? () => handleChangePage(pageNumber) : null}
       aria-disabled={disabledCondition}
-      aria-label={translator.get(`SNTable.Pagination.${type}`)}
-      title={interactions.passive ? translator.get(`SNTable.Pagination.${type}`) : undefined}
+      aria-label={translator.get(`NebulaTableUtils.Pagination.${type}`)}
+      title={interactions.passive ? translator.get(`NebulaTableUtils.Pagination.${type}`) : undefined}
       tabIndex={tabIndex}
       onKeyDown={onKeyDown}
     >

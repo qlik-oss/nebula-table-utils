@@ -1,6 +1,6 @@
 import React from 'react';
 import type { SelectChangeEvent } from '@mui/material/Select';
-import { usePaginationContext } from '../PaginationProvider';
+import { usePaginationContext } from '../context/PaginationProvider';
 import { StyledSelect, StyledTypography } from '../styles';
 
 interface Props {
@@ -13,7 +13,7 @@ interface Props {
 const DropDown = ({ name, value, options, handleChange }: Props) => {
   const { layout, footerStyle, translator, tabIndex } = usePaginationContext();
   const chartId = layout.qInfo.qId as string;
-  const label = translator.get(`SNTable.Pagination.${name}`);
+  const label = translator.get(`NebulaTableUtils.Pagination.${name}`);
   const id = `${name}-dropdown`;
   const labelId = `${id}-label-${chartId}`;
   const inputProps = {

@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import type { PaginationContentProps } from './types';
-import PaginationProvider from './PaginationProvider';
+import PaginationProvider from './context/PaginationProvider';
 import DisplayedRowsLabel from './DisplayedRowsLabel';
 import RowsPerPage from './Dropdowns/RowsPerPage';
 import SelectPage from './Dropdowns/SelectPage';

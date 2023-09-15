@@ -2,7 +2,7 @@ import React from 'react';
 import type { SelectChangeEvent } from '@mui/material/Select';
 import PageOptions from './PageOptions';
 import DropDown from './DropDown';
-import { usePaginationContext } from '../PaginationProvider';
+import { usePaginationContext } from '../context/PaginationProvider';
 
 const SelectPage = () => {
   const { pageInfo, width, totalPages, handleChangePage } = usePaginationContext();

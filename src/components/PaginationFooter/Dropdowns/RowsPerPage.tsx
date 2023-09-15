@@ -1,7 +1,7 @@
 import React from 'react';
 import type { SelectChangeEvent } from '@mui/material/Select';
 import DropDown from './DropDown';
-import { usePaginationContext } from '../PaginationProvider';
+import { usePaginationContext } from '../context/PaginationProvider';
 
 const RowsPerPage = () => {
   const { pageInfo, isSelectionMode, totalColumnCount, width, setPageInfo, announce } = usePaginationContext();
@@ -15,7 +15,7 @@ const RowsPerPage = () => {
   const handleChangeRowsPerPage = (event: SelectChangeEvent<number>) => {
     setPageInfo?.({ ...pageInfo, page: 0, rowsPerPage: +event.target.value });
     announce?.({
-      keys: [['SNTable.Pagination.RowsPerPageChange', event.target.value.toString()]],
+      keys: [['NebulaTableUtils.Pagination.RowsPerPageChange', event.target.value.toString()]],
       politeness: 'assertive',
     });
   };

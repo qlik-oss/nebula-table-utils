@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from './Button';
-import { usePaginationContext } from '../PaginationProvider';
+import { usePaginationContext } from '../context/PaginationProvider';
 
 const FirstPage = () => {
   const { pageInfo, width } = usePaginationContext();

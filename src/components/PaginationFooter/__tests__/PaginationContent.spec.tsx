@@ -38,10 +38,10 @@ describe('<PaginationContent />', () => {
   beforeEach(() => {
     direction = 'ltr';
     titles = [
-      'SNTable.Pagination.FirstPage',
-      'SNTable.Pagination.PreviousPage',
-      'SNTable.Pagination.NextPage',
-      'SNTable.Pagination.LastPage',
+      'NebulaTableUtils.Pagination.FirstPage',
+      'NebulaTableUtils.Pagination.PreviousPage',
+      'NebulaTableUtils.Pagination.NextPage',
+      'NebulaTableUtils.Pagination.LastPage',
     ];
     tableData = {
       totalRowCount: 200,
@@ -73,7 +73,7 @@ describe('<PaginationContent />', () => {
       expect(buttons).toHaveLength(4);
       expect(queryByTestId('SelectPage-dropdown')).toBeVisible();
       expect(queryByTestId('RowsPerPage-dropdown')).toBeVisible();
-      expect(queryByText('SNTable.Pagination.DisplayedRowsLabel')).toBeVisible();
+      expect(queryByText('NebulaTableUtils.Pagination.DisplayedRowsLabel')).toBeVisible();
     });
 
     it('should render all sub-components except page dropdown', () => {
@@ -85,7 +85,7 @@ describe('<PaginationContent />', () => {
       expect(buttons).toHaveLength(4);
       expect(queryByTestId('SelectPage-dropdown')).toBeNull();
       expect(queryByTestId('RowsPerPage-dropdown')).toBeVisible();
-      expect(queryByText('SNTable.Pagination.DisplayedRowsLabel')).toBeVisible();
+      expect(queryByText('NebulaTableUtils.Pagination.DisplayedRowsLabel')).toBeVisible();
     });
 
     it('should render all sub-components except rpp/page dropdown', () => {
@@ -97,7 +97,7 @@ describe('<PaginationContent />', () => {
       expect(buttons).toHaveLength(4);
       expect(queryByTestId('SelectPage-dropdown')).toBeNull();
       expect(queryByTestId('RowsPerPage-dropdown')).toBeNull();
-      expect(queryByText('SNTable.Pagination.DisplayedRowsLabel')).toBeVisible();
+      expect(queryByText('NebulaTableUtils.Pagination.DisplayedRowsLabel')).toBeVisible();
     });
 
     it('should only render previous/next buttons and current rows info', () => {
@@ -109,7 +109,7 @@ describe('<PaginationContent />', () => {
       expect(buttons).toHaveLength(2);
       expect(queryByTestId('SelectPage-dropdown')).toBeNull();
       expect(queryByTestId('RowsPerPage-dropdown')).toBeNull();
-      expect(queryByText('SNTable.Pagination.DisplayedRowsLabel')).toBeVisible();
+      expect(queryByText('NebulaTableUtils.Pagination.DisplayedRowsLabel')).toBeVisible();
     });
 
     it('should only render previous/next buttons', () => {
@@ -121,7 +121,7 @@ describe('<PaginationContent />', () => {
       expect(buttons).toHaveLength(2);
       expect(queryByTestId('SelectPage-dropdown')).toBeNull();
       expect(queryByTestId('RowsPerPage-dropdown')).toBeNull();
-      expect(queryByText('SNTable.Pagination.DisplayedRowsLabel')).toBeNull();
+      expect(queryByText('NebulaTableUtils.Pagination.DisplayedRowsLabel')).toBeNull();
     });
 
     it('should not render rpp/page dropdown when rowsPerPageOptions is empty', () => {
@@ -157,7 +157,7 @@ describe('<PaginationContent />', () => {
     it('should call handleChangePage when clicking next page', () => {
       const { getByTitle } = renderPagination();
 
-      fireEvent.click(getByTitle('SNTable.Pagination.NextPage'));
+      fireEvent.click(getByTitle('NebulaTableUtils.Pagination.NextPage'));
       expect(handleChangePage).toHaveBeenCalledWith(1);
     });
 
@@ -165,14 +165,14 @@ describe('<PaginationContent />', () => {
       pageInfo.page = 1;
       const { getByTitle } = renderPagination();
 
-      fireEvent.click(getByTitle('SNTable.Pagination.PreviousPage'));
+      fireEvent.click(getByTitle('NebulaTableUtils.Pagination.PreviousPage'));
       expect(handleChangePage).toHaveBeenCalledWith(0);
     });
 
     it('should call handleChangePage when clicking last page', () => {
       const { getByTitle } = renderPagination();
 
-      fireEvent.click(getByTitle('SNTable.Pagination.LastPage'));
+      fireEvent.click(getByTitle('NebulaTableUtils.Pagination.LastPage'));
       expect(handleChangePage).toHaveBeenCalledWith(2);
     });
 
@@ -180,13 +180,13 @@ describe('<PaginationContent />', () => {
       pageInfo.page = 2;
       const { getByTitle } = renderPagination();
 
-      fireEvent.click(getByTitle('SNTable.Pagination.FirstPage'));
+      fireEvent.click(getByTitle('NebulaTableUtils.Pagination.FirstPage'));
       expect(handleChangePage).toHaveBeenCalledWith(0);
     });
 
     it('should not call focusSelectionToolbar when pressing tab on last page button and isSelectionMode is false', () => {
       const { getByTitle } = renderPagination();
-      fireEvent.keyDown(getByTitle('SNTable.Pagination.LastPage'), { key: 'Tab' });
+      fireEvent.keyDown(getByTitle('NebulaTableUtils.Pagination.LastPage'), { key: 'Tab' });
       expect(handleAccessibility.focusSelectionToolbar).not.toHaveBeenCalled();
     });
 
@@ -194,7 +194,7 @@ describe('<PaginationContent />', () => {
       isSelectionMode = true;
 
       const { getByTitle } = renderPagination();
-      fireEvent.keyDown(getByTitle('SNTable.Pagination.LastPage'), { key: 'Tab', shiftKey: true });
+      fireEvent.keyDown(getByTitle('NebulaTableUtils.Pagination.LastPage'), { key: 'Tab', shiftKey: true });
       expect(handleAccessibility.focusSelectionToolbar).not.toHaveBeenCalled();
     });
 
@@ -202,7 +202,7 @@ describe('<PaginationContent />', () => {
       isSelectionMode = true;
 
       const { getByTitle } = renderPagination();
-      fireEvent.keyDown(getByTitle('SNTable.Pagination.LastPage'), { key: 'Tab' });
+      fireEvent.keyDown(getByTitle('NebulaTableUtils.Pagination.LastPage'), { key: 'Tab' });
       expect(handleAccessibility.focusSelectionToolbar).toHaveBeenCalledTimes(1);
     });
 
@@ -211,7 +211,7 @@ describe('<PaginationContent />', () => {
       rect.width = 300;
 
       const { getByTitle } = renderPagination();
-      fireEvent.keyDown(getByTitle('SNTable.Pagination.NextPage'), { key: 'Tab' });
+      fireEvent.keyDown(getByTitle('NebulaTableUtils.Pagination.NextPage'), { key: 'Tab' });
       expect(handleAccessibility.focusSelectionToolbar).toHaveBeenCalledTimes(1);
     });
 
@@ -230,7 +230,7 @@ describe('<PaginationContent />', () => {
       fireEvent.change(getByTestId('RowsPerPage-dropdown'), { target: { value: targetRowsPerPage } });
       expect(setPageInfo).toHaveBeenCalledWith({ ...pageInfo, rowsPerPage: targetRowsPerPage });
       expect(announce).toHaveBeenCalledWith({
-        keys: [['SNTable.Pagination.RowsPerPageChange', `${targetRowsPerPage}`]],
+        keys: [['NebulaTableUtils.Pagination.RowsPerPageChange', `${targetRowsPerPage}`]],
         politeness: 'assertive',
       });
     });

@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from './Button';
-import { usePaginationContext } from '../PaginationProvider';
+import { usePaginationContext } from '../context/PaginationProvider';
 import handleLastTab from '../../../utils/handle-last-tab';
 
 const LastPage = () => {

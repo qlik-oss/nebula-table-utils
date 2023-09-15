@@ -1,7 +1,8 @@
 import React, { createContext, useContext, useMemo } from 'react';
 import type { stardust } from '@nebula.js/stardust';
-import type { FooterStyle, PaginationContentProps } from './types';
-import { getFooterStyle } from './utils';
+import type { FooterStyle, PaginationContentProps } from '../types';
+import { getFooterStyle } from '../utils';
+import useTranslations from '../../../hooks/useTranslations';
 
 interface IPaginationProvider extends PaginationContentProps {
   footerStyle: FooterStyle;
@@ -47,6 +48,7 @@ const PaginationProvider = ({
   const tabIndex = areTabStopsEnabled(keyboard) ? 0 : -1;
   const footerStyle = useMemo(() => getFooterStyle(theme.background), [theme]);
   const width = footerContainer ? footerContainer.getBoundingClientRect().width : rect.width;
+  const t = useTranslations({ translator });
 
   const value = useMemo(
     () => ({
@@ -61,7 +63,7 @@ const PaginationProvider = ({
       totalColumnCount,
       totalPages,
       keyboard,
-      translator,
+      translator: t,
       theme,
       interactions,
       rect,
@@ -82,7 +84,7 @@ const PaginationProvider = ({
       totalColumnCount,
       totalPages,
       keyboard,
-      translator,
+      t,
       theme,
       interactions,
       rect,
