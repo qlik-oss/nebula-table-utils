@@ -19,13 +19,14 @@ jobs:
           trigger: '#deploy-me'
           reaction: rocket
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_CI_TOKEN }}
 
       - name: Extract branch name
         uses: xt0rted/pull-request-comment-branch@v1
         id: comment-branch
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          repo_token: ${{ secrets.GH_ACCESS_TOKEN }}
         if: steps.check-comment.outputs.triggered == 'true'
 
       - name: Checkout repository
@@ -34,9 +35,16 @@ jobs:
           fetch-depth: 0
           ref: ${{ steps.comment-branch.outputs.head_ref }}
 
+      - name: Setup access to qlik npm registry
+        shell: bash
+        run: bash ${GITHUB_WORKSPACE}/.github/scripts/create-npmrc.sh
+        env:
+          GH_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_CI_TOKEN }}
+
       - uses: pnpm/action-setup@v2
         with:
-          version: 6.0.2
+          version: 8.6.8
 
       - uses: actions/setup-node@v3
         with:
@@ -48,13 +56,6 @@ jobs:
 
       - name: Build
         run: pnpm build:prod
-
-      - name: Setup access to qlik npm registry
-        shell: bash
-        run: bash ${GITHUB_WORKSPACE}/.github/scripts/create-npmrc.sh
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_CI_TOKEN }}
 
       - name: Version Info
         shell: bash
@@ -77,6 +78,6 @@ jobs:
       - name: Comment on the PR with the package version
         uses: actions-ecosystem/action-create-comment@v1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GH_ACCESS_TOKEN }}
           body: |
             :package: Snapshot build is ready: `${{ steps.add-version.outputs.version }}`
