@@ -34,6 +34,7 @@ describe('<HeadCellMenu />', () => {
   let handleHeadCellMenuKeyDown: jest.Mock<() => void>;
   let open: boolean;
   let setOpenMock: jest.Mock<() => void>;
+  let shouldShowMenuIcon: boolean;
 
   let embed: ExtendedEmbed;
   let defaultListboxAnchorOpts: any;
@@ -68,6 +69,7 @@ describe('<HeadCellMenu />', () => {
         adjustHeaderSizeRelatedArgs={{ setFocusOnClosetHeaderAdjuster }}
         open={open}
         setOpen={setOpenMock}
+        shouldShowMenuIcon={shouldShowMenuIcon}
       />
     );
 
@@ -139,6 +141,7 @@ describe('<HeadCellMenu />', () => {
     };
     open = true;
     setOpenMock = jest.fn();
+    shouldShowMenuIcon = true;
   });
 
   afterEach(() => {
@@ -174,6 +177,19 @@ describe('<HeadCellMenu />', () => {
     ].forEach((actionLabel) => {
       expect(screen.queryByText(actionLabel)).not.toBeInTheDocument();
     });
+  });
+
+  test('should render Menu icon if `shouldShowMenuIcon` by default', () => {
+    renderTableHeadCellMenu();
+
+    expect(screen.queryByTestId('nebula-table-utils-head-menu-button')).toBeInTheDocument();
+  });
+
+  test('should not render Menu icon if `shouldShowMenuIcon` is false', () => {
+    shouldShowMenuIcon = false;
+    renderTableHeadCellMenu();
+
+    expect(screen.queryByTestId('nebula-table-utils-head-menu-button')).not.toBeInTheDocument();
   });
 
   test('should not render Search and selections when interactions are false', () => {
