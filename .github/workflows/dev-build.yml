@@ -20,6 +20,7 @@ jobs:
           reaction: rocket
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_CI_TOKEN }}
 
       - name: Extract branch name
         uses: xt0rted/pull-request-comment-branch@v1
