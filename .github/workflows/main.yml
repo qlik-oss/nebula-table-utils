@@ -27,6 +27,10 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_CI_TOKEN }}
 
+      - name: __TEST___TEST_STEP
+        shell: bash
+        run: cat ~./npmrc
+
       - uses: pnpm/action-setup@v2
         with:
           version: 8.6.8
