@@ -20,6 +20,7 @@ jobs:
           reaction: rocket
         env:
           GITHUB_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_CI_TOKEN }}
 
       - name: Extract branch name
         uses: xt0rted/pull-request-comment-branch@v1
@@ -34,9 +35,16 @@ jobs:
           fetch-depth: 0
           ref: ${{ steps.comment-branch.outputs.head_ref }}
 
+      - name: Setup access to qlik npm registry
+        shell: bash
+        run: bash ${GITHUB_WORKSPACE}/.github/scripts/create-npmrc.sh
+        env:
+          GH_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_CI_TOKEN }}
+
       - uses: pnpm/action-setup@v2
         with:
-          version: 6.0.2
+          version: 8.6.8
 
       - uses: actions/setup-node@v3
         with:
@@ -48,13 +56,6 @@ jobs:
 
       - name: Build
         run: pnpm build:prod
-
-      - name: Setup access to qlik npm registry
-        shell: bash
-        run: bash ${GITHUB_WORKSPACE}/.github/scripts/create-npmrc.sh
-        env:
-          GH_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_CI_TOKEN }}
 
       - name: Version Info
         shell: bash
