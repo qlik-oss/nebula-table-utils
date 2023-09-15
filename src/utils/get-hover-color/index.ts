@@ -6,26 +6,26 @@ interface ColorModifiers {
   opacity: number;
 }
 
-const getHoverColor = (color: string, colorModifies: ColorModifiers) => {
+const getHoverColor = (color: string, colorModifiers: ColorModifiers) => {
   const hclColor = hcl(color);
   const isDark = hclColor.l < 70;
   const isWhite = hclColor.l === 100;
   const isTransparent = hclColor.opacity === 0;
 
   if (isTransparent) {
-    hclColor.opacity = colorModifies.opacity;
+    hclColor.opacity = colorModifiers.opacity;
     return hclColor.toString();
   }
 
   if (isWhite) {
-    return rgb(`rgba(0, 0, 0, ${colorModifies.opacity})`).toString();
+    return rgb(`rgba(0, 0, 0, ${colorModifiers.opacity})`).toString();
   }
 
   if (isDark) {
-    return hclColor.brighter(colorModifies.brighter).toString();
+    return hclColor.brighter(colorModifiers.brighter).toString();
   }
 
-  return hclColor.darker(colorModifies.darker).toString();
+  return hclColor.darker(colorModifiers.darker).toString();
 };
 
 export default getHoverColor;
