@@ -3,6 +3,7 @@ name: Dev Build
 on:
   issue_comment:
     types: [created]
+  workflow_dispatch:
 
 jobs:
   dev-build:
@@ -41,10 +42,6 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_CI_TOKEN }}
-
-      - name: Check .npmrc file
-        shell: bash
-        run: cat ~/.npmrc
 
       - uses: pnpm/action-setup@v2
         with:
