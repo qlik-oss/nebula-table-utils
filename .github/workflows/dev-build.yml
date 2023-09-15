@@ -42,9 +42,13 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_CI_TOKEN }}
 
+      - name: Check .npmrc file
+        shell: bash
+        run: cat ~/.npmrc
+
       - uses: pnpm/action-setup@v2
         with:
-          version: 6.0.2
+          version: 8.6.8
 
       - uses: actions/setup-node@v3
         with:
