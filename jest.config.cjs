@@ -11,6 +11,6 @@ module.exports = {
     '@qlik-trial/sprout/icons/.*': '<rootDir>/test-utils/sprout-icons-mock.tsx',
   },
   coveragePathIgnorePatterns: ['dist', 'lib', 'build-utils', './src/constants'],
-  transformIgnorePatterns: ['<rootDir>/node_modules/(?!(cliui|wrap-ansi)/*)'],
+  transformIgnorePatterns: ['<rootDir>/node_modules/.pnpm/(?!(cliui|wrap-ansi|d3-color)@)'],
   setupFilesAfterEnv: ['<rootDir>/jest/setup.js'],
 };
