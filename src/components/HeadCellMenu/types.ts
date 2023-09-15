@@ -37,6 +37,7 @@ export interface HeadCellMenuProps {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   interactions: stardust.Interactions;
+  shouldShowMenuIcon: boolean;
 
   sortRelatedArgs?: SortingRelatedArgs;
   searchRelatedArgs?: SearchRelatedArgs;
