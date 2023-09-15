@@ -1,3 +1,2 @@
 export { default as HeadCellMenu } from './HeadCellMenu';
-export { FooterWrapper } from './Footer';
-export { PaginationContent } from './Footer';
+export { FooterWrapper, PaginationContent, PaginationFooter } from './PaginationFooter';

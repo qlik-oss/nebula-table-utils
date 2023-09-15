@@ -43,7 +43,7 @@ export interface ExtendedTranslator extends stardust.Translator {
 export interface PageInfo {
   page: number;
   rowsPerPage: number;
-  rowsPerPageOptions: number[];
+  rowsPerPageOptions?: number[];
 }
 
 export type SetPageInfo = stardust.SetStateFn<PageInfo>;
@@ -51,10 +51,10 @@ export type SetPageInfo = stardust.SetStateFn<PageInfo>;
 export interface PaginationContentProps {
   direction?: 'ltr' | 'rtl';
   pageInfo: PageInfo;
-  setPageInfo: SetPageInfo;
+  setPageInfo?: SetPageInfo;
   footerContainer?: HTMLElement;
-  announce: Announce;
-  isSelectionMode: boolean | undefined;
+  announce?: Announce;
+  isSelectionMode?: boolean;
   handleChangePage(pageIdx: number): void;
   totalRowCount: number;
   totalColumnCount: number;

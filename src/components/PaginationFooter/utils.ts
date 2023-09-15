@@ -1,9 +1,6 @@
-import React, { useMemo } from 'react';
-import ReactDOM from 'react-dom';
 import type { Palette } from '@mui/material';
 import { createV5ThemeOptions, COLORS } from '@qlik-trial/sprout/theme';
-import { StyledFooterWrapper } from './styles';
-import type { BackgroundColors, FooterStyle, FooterWrapperProps } from './types';
+import type { BackgroundColors, FooterStyle } from './types';
 
 const palette = createV5ThemeOptions().palette as Palette;
 
@@ -37,18 +34,3 @@ export const getFooterStyle = (background: BackgroundColors): FooterStyle =>
         color: COLORING.TEXT,
         disabledColor: COLORING.DISABLED,
       };
-
-export default function FooterWrapper({
-  children,
-  footerContainer,
-  paginationNeeded = true,
-  theme,
-}: FooterWrapperProps) {
-  const footerStyle = useMemo(() => getFooterStyle(theme.background), [theme]);
-
-  const pagination = paginationNeeded ? (
-    <StyledFooterWrapper footerStyle={footerStyle}>{children}</StyledFooterWrapper>
-  ) : null;
-
-  return footerContainer ? ReactDOM.createPortal(children, footerContainer) : pagination;
-}

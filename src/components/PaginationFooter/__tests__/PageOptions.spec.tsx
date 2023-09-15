@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
-import PageOptions, { ELLIPSIS, HALF_MAX_LENGTH } from '../PageOptions';
+import PageOptions, { ELLIPSIS, HALF_MAX_LENGTH } from '../Dropdowns/PageOptions';
 
 describe('PageOptions', () => {
   test('should render page options', () => {

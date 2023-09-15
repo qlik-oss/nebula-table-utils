@@ -13,10 +13,12 @@ export const focusSelectionToolbar = (element: HTMLElement, keyboard: stardust.K
   const clientConfirmButton =
     element.closest('.qv-object-wrapper')?.querySelector('.sel-toolbar-confirm')?.parentElement ??
     document.querySelector('#qv-selection-toolbar-popover .sel-toolbar-confirm')?.parentElement;
+
   if (clientConfirmButton) {
     clientConfirmButton.focus();
     return;
   }
+
   keyboard.focusSelection?.(last);
 };
 
