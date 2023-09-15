@@ -19,8 +19,7 @@ jobs:
           trigger: '#deploy-me'
           reaction: rocket
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_CI_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Extract branch name
         uses: xt0rted/pull-request-comment-branch@v1
