@@ -1,21 +1,31 @@
-import { hcl } from 'd3-color';
+import { hcl, rgb } from 'd3-color';
 
-const COLOR_SPACE_MODIFIER = 0.2;
+interface ColorModifiers {
+  brighter: number;
+  darker: number;
+  opacity: number;
+}
 
-const getHoverColor = (color: string) => {
+const getHoverColor = (color: string, colorModifies: ColorModifiers) => {
   const hclColor = hcl(color);
   const isDark = hclColor.l < 70;
+  const isWhite = hclColor.l === 100;
   const isTransparent = hclColor.opacity === 0;
 
   if (isTransparent) {
-    return 'rgba(0, 0, 0, 0.03)';
+    hclColor.opacity = colorModifies.opacity;
+    return hclColor.toString();
+  }
+
+  if (isWhite) {
+    return rgb(`rgba(0, 0, 0, ${colorModifies.opacity})`).toString();
   }
 
   if (isDark) {
-    return hclColor.brighter(COLOR_SPACE_MODIFIER).toString();
+    return hclColor.brighter(colorModifies.brighter).toString();
   }
 
-  return hclColor.darker(COLOR_SPACE_MODIFIER).toString();
+  return hclColor.darker(colorModifies.darker).toString();
 };
 
 export default getHoverColor;
