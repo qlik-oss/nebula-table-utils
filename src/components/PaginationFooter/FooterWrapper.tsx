@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import ReactDOM from 'react-dom';
 import { StyledFooterWrapper } from './styles';
 import type { FooterWrapperProps } from './types';
-import { getFooterStyle } from './utils';
+import getFooterStyle from './utils';
 
 export default function FooterWrapper({
   children,
