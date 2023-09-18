@@ -1,4 +1,5 @@
 import type { stardust } from '@nebula.js/stardust';
+import type { ExtendedTheme } from '../../hooks/use-extended-theme/types';
 
 export interface FooterWrapperProps {
   children: JSX.Element;
@@ -6,13 +7,6 @@ export interface FooterWrapperProps {
   withoutBorders?: boolean;
   paginationNeeded?: boolean;
   theme: ExtendedTheme;
-}
-
-export interface BackgroundColors {
-  tableColorFromTheme: string;
-  color?: string;
-  isDark: boolean;
-  isTransparent: boolean;
 }
 
 export interface FooterStyle {
@@ -30,11 +24,6 @@ export interface AnnounceArgs {
 }
 
 export type Announce = (arg0: AnnounceArgs) => void;
-
-export interface ExtendedTheme extends stardust.Theme {
-  name(): string;
-  background: BackgroundColors;
-}
 
 export interface ExtendedTranslator extends stardust.Translator {
   language(): string;
