@@ -5,12 +5,10 @@ import type { FooterWrapperProps, PaginationContentProps } from './types';
 
 interface Props extends Omit<FooterWrapperProps, 'children'>, PaginationContentProps {}
 
-const PaginationFooter = (props: Props) => {
-  return (
-    <FooterWrapper {...props}>
-      <PaginationContent {...props} />
-    </FooterWrapper>
-  );
-};
+const PaginationFooter = (props: Props) => (
+  <FooterWrapper {...props}>
+    <PaginationContent {...props} />
+  </FooterWrapper>
+);
 
 export default PaginationFooter;
