@@ -14,12 +14,13 @@ const DropDown = ({ name, value, options, handleChange }: Props) => {
   const { layout, footerStyle, translator, tabIndex } = usePaginationContext();
   const chartId = layout.qInfo.qId as string;
   const label = translator.get(`NebulaTableUtils.Pagination.${name}`);
-  const id = `${name}-dropdown`;
-  const labelId = `${id}-label-${chartId}`;
+  const baseId = `${name}-dropdown`;
+  const labelId = `${baseId}-label-${chartId}`;
+  const id = `${baseId}-${chartId}`;
   const inputProps = {
     tabIndex,
     id,
-    'data-testid': id,
+    'data-testid': baseId,
     'aria-labelledby': labelId,
   };
 
