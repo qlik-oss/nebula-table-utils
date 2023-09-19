@@ -12,7 +12,6 @@ interface Props {
   pageNumber: number;
   type: string;
   onKeyDown?: ((event: React.KeyboardEvent) => void) | null;
-  show?: boolean;
 }
 
 const ICONS: Record<string, typeof ArrowLeft> = {
@@ -26,13 +25,8 @@ const ICONS: Record<string, typeof ArrowLeft> = {
   LastPageRTL: ArrowLeftStop,
 };
 
-const Button = ({ disabledCondition, pageNumber, type, onKeyDown, show }: Props) => {
+const Button = ({ disabledCondition, pageNumber, type, onKeyDown }: Props) => {
   const { direction, footerStyle, handleChangePage, translator, interactions, tabIndex } = usePaginationContext();
-
-  if (show === false) {
-    return null;
-  }
-
   const iconType = `${type}${direction === 'rtl' ? 'RTL' : ''}`;
   const IconComponent = ICONS[iconType];
 

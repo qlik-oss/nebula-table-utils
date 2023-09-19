@@ -44,7 +44,7 @@ export interface PaginationContentProps {
   footerContainer?: HTMLElement;
   announce?: Announce;
   isSelectionMode?: boolean;
-  handleChangePage(pageIdx: number): void;
+  handleChangePage: (pageIdx: number) => void;
   totalRowCount: number;
   totalColumnCount: number;
   totalPages: number;

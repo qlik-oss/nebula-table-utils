@@ -1,16 +1,16 @@
-import { styled } from '@mui/material/styles';
+import { styled, type Theme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-
 import { PAGINATION_HEIGHT } from './constants';
+import type { FooterStyle } from './types';
 
 // ---------- FooterWrapper ----------
 
 export const StyledFooterWrapper = styled(Box, {
   shouldForwardProp: (prop: string) => prop !== 'footerStyle',
-})(({ footerStyle, theme }) => ({
+})(({ footerStyle, theme }: { footerStyle: FooterStyle; theme: Theme }) => ({
   height: PAGINATION_HEIGHT,
   display: 'flex',
   justifyContent: 'flex-end',

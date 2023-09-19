@@ -95,8 +95,6 @@ const PaginationProvider = ({
     ]
   );
 
-  console.log('%c Using provider', 'color: salmon', value);
-
   return <PaginationProviderContext.Provider value={value}>{children}</PaginationProviderContext.Provider>;
 };
 

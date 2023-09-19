@@ -3,14 +3,22 @@ import { render, fireEvent } from '@testing-library/react';
 import { stardust } from '@nebula.js/stardust';
 
 import PaginationContent from '../PaginationContent';
-import * as handleAccessibility from '../../../utils/accessibility-utils';
-import { Announce, PageInfo, SetPageInfo, TableData } from '../../../../types';
-import TestWithProviders from '../../../../__test__/test-with-providers';
+import focusSelectionToolbar from '../../../utils/focus-selection-toolbar';
+import type { Announce, PageInfo, SetPageInfo } from '../types';
+import type { ExtendedTheme } from '../../../hooks/use-extended-theme/types';
+
+jest.mock('../../../utils/focus-selection-toolbar', () => jest.fn());
 
 describe('<PaginationContent />', () => {
   const keyboard = { enabled: true, active: false };
+  const translator = { get: (s: string) => s } as stardust.Translator;
+  const interactions = { active: true, passive: true } as stardust.Interactions;
+  const layout = { qInfo: { qId: 'chartId' } } as EngineAPI.IGenericHyperCubeLayout;
+  const theme = {
+    getStyle: (s: string) => s,
+    background: { tableColorFromTheme: 'inherit', color: undefined, isDark: false, isTransparent: false },
+  } as unknown as ExtendedTheme;
   let direction: 'ltr' | 'rtl' | undefined;
-  let tableData: TableData;
   let pageInfo: PageInfo;
   let setPageInfo: SetPageInfo;
   let titles: string[];
@@ -19,20 +27,30 @@ describe('<PaginationContent />', () => {
   let isSelectionMode: boolean;
   let footerContainer: HTMLElement;
   let announce: Announce;
+  let totalColumnCount: number;
+  let totalRowCount: number;
+  let totalPages: number;
 
   const renderPagination = () =>
     render(
-      <TestWithProviders keyboard={keyboard} tableData={tableData} rect={rect}>
-        <PaginationContent
-          direction={direction}
-          pageInfo={pageInfo}
-          setPageInfo={setPageInfo}
-          footerContainer={footerContainer}
-          isSelectionMode={isSelectionMode}
-          handleChangePage={handleChangePage}
-          announce={announce}
-        />
-      </TestWithProviders>
+      <PaginationContent
+        keyboard={keyboard}
+        totalRowCount={totalRowCount}
+        totalColumnCount={totalColumnCount}
+        totalPages={totalPages}
+        rect={rect}
+        direction={direction}
+        pageInfo={pageInfo}
+        setPageInfo={setPageInfo}
+        footerContainer={footerContainer}
+        isSelectionMode={isSelectionMode}
+        handleChangePage={handleChangePage}
+        announce={announce}
+        translator={translator}
+        theme={theme}
+        interactions={interactions}
+        layout={layout}
+      />
     );
 
   beforeEach(() => {
@@ -43,13 +61,9 @@ describe('<PaginationContent />', () => {
       'NebulaTableUtils.Pagination.NextPage',
       'NebulaTableUtils.Pagination.LastPage',
     ];
-    tableData = {
-      totalRowCount: 200,
-      totalColumnCount: 5,
-      totalPages: 3,
-      totalsPosition: { atTop: false, atBottom: false },
-      rows: [{ qText: '1' }],
-    } as unknown as TableData;
+    totalRowCount = 200;
+    totalColumnCount = 5;
+    totalPages = 3;
     pageInfo = {
       page: 0,
       rowsPerPage: 25,
@@ -60,7 +74,7 @@ describe('<PaginationContent />', () => {
     rect = { width: 750 } as unknown as stardust.Rect;
     isSelectionMode = false;
     announce = jest.fn();
-    jest.spyOn(handleAccessibility, 'focusSelectionToolbar').mockImplementation(() => jest.fn());
+    // jest.spyOn(utils, 'focusSelectionToolbar').mockImplementation(() => jest.fn());
   });
 
   afterEach(() => jest.clearAllMocks());
@@ -152,7 +166,6 @@ describe('<PaginationContent />', () => {
       });
     });
   });
-
   describe('interaction', () => {
     it('should call handleChangePage when clicking next page', () => {
       const { getByTitle } = renderPagination();
@@ -187,7 +200,7 @@ describe('<PaginationContent />', () => {
     it('should not call focusSelectionToolbar when pressing tab on last page button and isSelectionMode is false', () => {
       const { getByTitle } = renderPagination();
       fireEvent.keyDown(getByTitle('NebulaTableUtils.Pagination.LastPage'), { key: 'Tab' });
-      expect(handleAccessibility.focusSelectionToolbar).not.toHaveBeenCalled();
+      expect(focusSelectionToolbar).not.toHaveBeenCalled();
     });
 
     it('should not call focusSelectionToolbar when pressing shift + tab on last page button and isSelectionMode is true', () => {
@@ -195,7 +208,7 @@ describe('<PaginationContent />', () => {
 
       const { getByTitle } = renderPagination();
       fireEvent.keyDown(getByTitle('NebulaTableUtils.Pagination.LastPage'), { key: 'Tab', shiftKey: true });
-      expect(handleAccessibility.focusSelectionToolbar).not.toHaveBeenCalled();
+      expect(focusSelectionToolbar).not.toHaveBeenCalled();
     });
 
     it('should call focusSelectionToolbar when pressing tab on last page button and isSelectionMode is true', () => {
@@ -203,7 +216,7 @@ describe('<PaginationContent />', () => {
 
       const { getByTitle } = renderPagination();
       fireEvent.keyDown(getByTitle('NebulaTableUtils.Pagination.LastPage'), { key: 'Tab' });
-      expect(handleAccessibility.focusSelectionToolbar).toHaveBeenCalledTimes(1);
+      expect(focusSelectionToolbar).toHaveBeenCalledTimes(1);
     });
 
     it('should call focusSelectionToolbar when pressing tab on next page button, isSelectionMode is true and tableWidth < 350', () => {
@@ -212,7 +225,7 @@ describe('<PaginationContent />', () => {
 
       const { getByTitle } = renderPagination();
       fireEvent.keyDown(getByTitle('NebulaTableUtils.Pagination.NextPage'), { key: 'Tab' });
-      expect(handleAccessibility.focusSelectionToolbar).toHaveBeenCalledTimes(1);
+      expect(focusSelectionToolbar).toHaveBeenCalledTimes(1);
     });
 
     it('should call handleChangePage when selecting page from dropdown', () => {
