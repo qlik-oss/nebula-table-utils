@@ -1,6 +1,6 @@
 import { hcl, rgb } from 'd3-color';
 
-interface ColorModifiers {
+export interface ColorModifiers {
   brighter: number;
   darker: number;
   opacity: number;
