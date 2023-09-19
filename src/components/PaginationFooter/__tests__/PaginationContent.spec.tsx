@@ -1,10 +1,9 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { stardust } from '@nebula.js/stardust';
-
 import PaginationContent from '../PaginationContent';
 import focusSelectionToolbar from '../../../utils/focus-selection-toolbar';
-import type { Announce, PageInfo, SetPageInfo } from '../types';
+import type { PageInfo } from '../types';
 import type { ExtendedTheme } from '../../../hooks/use-extended-theme/types';
 
 jest.mock('../../../utils/focus-selection-toolbar', () => jest.fn());
@@ -20,13 +19,12 @@ describe('<PaginationContent />', () => {
   } as unknown as ExtendedTheme;
   let direction: 'ltr' | 'rtl' | undefined;
   let pageInfo: PageInfo;
-  let setPageInfo: SetPageInfo;
   let titles: string[];
   let handleChangePage: () => void;
+  let handleChangeRowsPerPage: () => void;
   let rect: stardust.Rect;
   let isSelectionMode: boolean;
   let footerContainer: HTMLElement;
-  let announce: Announce;
   let totalColumnCount: number;
   let totalRowCount: number;
   let totalPages: number;
@@ -41,11 +39,10 @@ describe('<PaginationContent />', () => {
         rect={rect}
         direction={direction}
         pageInfo={pageInfo}
-        setPageInfo={setPageInfo}
         footerContainer={footerContainer}
         isSelectionMode={isSelectionMode}
         handleChangePage={handleChangePage}
-        announce={announce}
+        handleChangeRowsPerPage={handleChangeRowsPerPage}
         translator={translator}
         theme={theme}
         interactions={interactions}
@@ -69,12 +66,10 @@ describe('<PaginationContent />', () => {
       rowsPerPage: 25,
       rowsPerPageOptions: [10, 25, 100],
     };
-    setPageInfo = jest.fn();
+    handleChangeRowsPerPage = jest.fn();
     handleChangePage = jest.fn();
     rect = { width: 750 } as unknown as stardust.Rect;
     isSelectionMode = false;
-    announce = jest.fn();
-    // jest.spyOn(utils, 'focusSelectionToolbar').mockImplementation(() => jest.fn());
   });
 
   afterEach(() => jest.clearAllMocks());
@@ -236,16 +231,12 @@ describe('<PaginationContent />', () => {
       expect(handleChangePage).toHaveBeenCalledWith(1);
     });
 
-    it('should call setPageInfo when selecting rows per page from dropdown', () => {
+    it('should call handleChangeRowsPerPage when selecting rows per page from dropdown', () => {
       const targetRowsPerPage = 10;
       const { getByTestId } = renderPagination();
 
       fireEvent.change(getByTestId('RowsPerPage-dropdown'), { target: { value: targetRowsPerPage } });
-      expect(setPageInfo).toHaveBeenCalledWith({ ...pageInfo, rowsPerPage: targetRowsPerPage });
-      expect(announce).toHaveBeenCalledWith({
-        keys: [['NebulaTableUtils.Pagination.RowsPerPageChange', `${targetRowsPerPage}`]],
-        politeness: 'assertive',
-      });
+      expect(handleChangeRowsPerPage).toHaveBeenCalledWith(targetRowsPerPage);
     });
   });
 });

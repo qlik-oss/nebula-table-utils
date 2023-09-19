@@ -47,10 +47,6 @@
     "value": "Column options",
     "comment": "Aria label for the button in the header that opens the column menu. (ftz 230824)"
   },
-  "NebulaTableUtils.Pagination.RowsPerPage": {
-    "value": "Rows per page",
-    "comment": "label for the rows per page dropdown."
-  },
   "NebulaTableUtils.Pagination.DisplayedRowsLabel": {
     "value": "{0} of {1}",
     "comment": "label for the displayed rows, e.g. '1-100 of 234'"
@@ -74,13 +70,5 @@
   "NebulaTableUtils.Pagination.LastPage": {
     "value": "Go to the last page",
     "comment": "tooltip and aria-label for the last page button."
-  },
-  "NebulaTableUtils.Pagination.RowsPerPageChange": {
-    "value": "Rows per page has changed to {0}. Now showing the first page.",
-    "comment": "Read via screenreader when the number rows per page changes. {0} is replaced with the number of rows per page."
-  },
-  "NebulaTableUtils.Pagination.PageStatusReport": {
-    "value": "Page has changed. Showing page {0} of {1}.",
-    "comment": "Read via screenreader when the page has changed. {0} is replaced with the current page number. {1} is replaced with the total page number."
   }
 }

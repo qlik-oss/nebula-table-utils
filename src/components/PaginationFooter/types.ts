@@ -17,14 +17,6 @@ export interface FooterStyle {
   background?: string;
 }
 
-export interface AnnounceArgs {
-  keys: Array<string | Array<string>>;
-  shouldBeAtomic?: boolean;
-  politeness?: 'polite' | 'assertive' | 'off';
-}
-
-export type Announce = (arg0: AnnounceArgs) => void;
-
 export interface ExtendedTranslator extends stardust.Translator {
   language(): string;
 }
@@ -35,15 +27,12 @@ export interface PageInfo {
   rowsPerPageOptions?: number[];
 }
 
-export type SetPageInfo = stardust.SetStateFn<PageInfo>;
-
 export interface PaginationContentProps {
   direction?: 'ltr' | 'rtl';
   pageInfo: PageInfo;
-  setPageInfo?: SetPageInfo;
   footerContainer?: HTMLElement;
-  announce?: Announce;
   isSelectionMode?: boolean;
+  handleChangeRowsPerPage?: (rowsPerPage: number) => void;
   handleChangePage: (pageIdx: number) => void;
   totalRowCount: number;
   totalColumnCount: number;
