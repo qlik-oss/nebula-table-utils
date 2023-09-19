@@ -4,17 +4,25 @@ import { StyledFooterWrapper } from './styles';
 import type { FooterWrapperProps } from './types';
 import getFooterStyle from './utils';
 
-export default function FooterWrapper({
+const FooterWrapper = ({
   children,
   footerContainer,
-  paginationNeeded = true,
+  interactions,
   theme,
-}: FooterWrapperProps) {
+  paginationNeeded = true,
+}: FooterWrapperProps) => {
   const footerStyle = useMemo(() => getFooterStyle(theme.background), [theme]);
+
+  if (!interactions.active) {
+    return null;
+  }
 
   const pagination = paginationNeeded ? (
     <StyledFooterWrapper footerStyle={footerStyle}>{children}</StyledFooterWrapper>
   ) : null;
 
+  // footerContainer allows the paginationNeeded to be overriden
   return footerContainer ? ReactDOM.createPortal(children, footerContainer) : pagination;
-}
+};
+
+export default FooterWrapper;

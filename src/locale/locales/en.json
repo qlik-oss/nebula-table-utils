@@ -51,6 +51,10 @@
     "value": "{0} of {1}",
     "comment": "label for the displayed rows, e.g. '1-100 of 234'"
   },
+  "NebulaTableUtils.Pagination.RowsPerPage": {
+    "value": "Rows per page",
+    "comment": "label for the rows per page dropdown."
+  },
   "NebulaTableUtils.Pagination.SelectPage": {
     "value": "Select page",
     "comment": "Label for the dropdown to select a page."

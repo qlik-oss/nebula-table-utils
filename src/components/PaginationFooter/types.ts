@@ -4,9 +4,9 @@ import type { ExtendedTheme } from '../../hooks/use-extended-theme/types';
 export interface FooterWrapperProps {
   children: JSX.Element;
   footerContainer?: HTMLElement;
-  withoutBorders?: boolean;
   paginationNeeded?: boolean;
   theme: ExtendedTheme;
+  interactions: stardust.Interactions;
 }
 
 export interface FooterStyle {
