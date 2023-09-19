@@ -13,11 +13,11 @@ import { type DefaultTheme } from '../../types';
 
 // ---------- HeadCellMenu ----------
 export const HeadCellMenuWrapper = styled(Box, {
-  shouldForwardProp: (prop: string) => prop !== 'rightAligned',
-})(({ rightAligned }: { rightAligned: boolean }) => ({
+  shouldForwardProp: (prop: string) => prop !== 'rightAligned' && prop !== 'shouldShowMenuIcon',
+})(({ rightAligned, shouldShowMenuIcon }: { rightAligned: boolean; shouldShowMenuIcon: boolean }) => ({
   ...(rightAligned ? { marginRight: 'auto' } : { marginLeft: 'auto' }),
   height: HEAD_ICON_WRAPPER_SIZE,
-  display: 'flex',
+  display: shouldShowMenuIcon ? 'flex' : 'none',
   fontWeight: 'bold',
   width: '100%',
   alignItems: 'center',

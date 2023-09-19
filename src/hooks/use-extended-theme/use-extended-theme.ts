@@ -1,7 +1,7 @@
 import { stardust, useMemo, useTheme } from '@nebula.js/stardust';
 import type { ExtendedTheme, BackgroundColors } from './types';
-import isTransparentColor from '../../utils/is-transparent-color';
-import isDarkColor from '../../utils/is-dark-color';
+import isTransparentColor from '../../utils/color-utils/is-transparent-color';
+import isDarkColor from '../../utils/color-utils/is-dark-color';
 
 type ChartBackgroundResolver = (theme: stardust.Theme) => string | undefined;
 

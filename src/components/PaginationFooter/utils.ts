@@ -1,6 +1,6 @@
 import type { FooterStyle } from './types';
 import type { BackgroundColors } from '../../hooks/use-extended-theme/types';
-import COLORING from '../../utils/coloring';
+import { COLORING } from '../../utils/color-utils';
 
 const getFooterStyle = (background: BackgroundColors): FooterStyle =>
   background.isDark
