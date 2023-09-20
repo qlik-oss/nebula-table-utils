@@ -24,10 +24,6 @@ export interface FooterStyle {
   background?: string;
 }
 
-export interface ExtendedTranslator extends stardust.Translator {
-  language(): string;
-}
-
 export interface PageInfo {
   page: number;
   rowsPerPage: number;
@@ -45,7 +41,7 @@ export interface PaginationContentProps {
   totalColumnCount: number;
   totalPages: number;
   keyboard: stardust.Keyboard;
-  translator: ExtendedTranslator;
+  translator: stardust.Translator;
   theme: ExtendedTheme;
   interactions: stardust.Interactions;
   rect: stardust.Rect;

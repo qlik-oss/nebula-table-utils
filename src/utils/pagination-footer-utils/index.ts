@@ -1,6 +1,6 @@
-import type { FooterStyle } from './types';
+import type { FooterStyle } from '../../components/PaginationFooter/types';
 import type { BackgroundColors } from '../../hooks/use-extended-theme/types';
-import { COLORING } from '../../utils/color-utils';
+import { COLORING } from '../color-utils';
 
 const getFooterStyle = (background: BackgroundColors): FooterStyle =>
   background.isDark
