@@ -1,6 +1,13 @@
 import type { stardust } from '@nebula.js/stardust';
 import type { ExtendedTheme } from '../../hooks/use-extended-theme/types';
 
+export enum ButtonTypes {
+  FIRST_PAGE = 'FirstPage',
+  LAST_PAGE = 'LastPage',
+  NEXT_PAGE = 'NextPage',
+  PREVIOUS_PAGE = 'PreviousPage',
+}
+
 export interface FooterWrapperProps {
   children: JSX.Element;
   footerContainer?: HTMLElement;

@@ -2,6 +2,7 @@ import React from 'react';
 import Button from './Button';
 import { usePaginationContext } from '../context/PaginationProvider';
 import handleLastTab from '../../../utils/handle-last-tab';
+import { ButtonTypes } from '../types';
 
 const NextPage = () => {
   const { pageInfo, keyboard, totalPages, isSelectionMode, width } = usePaginationContext();
@@ -15,7 +16,7 @@ const NextPage = () => {
 
   return (
     <Button
-      type="NextPage"
+      type={ButtonTypes.NEXT_PAGE}
       disabledCondition={onLastPage}
       pageNumber={pageInfo.page + 1}
       onKeyDown={handleLastButtonTab}
