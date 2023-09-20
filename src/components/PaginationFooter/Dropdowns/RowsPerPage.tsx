@@ -2,11 +2,15 @@ import React from 'react';
 import type { SelectChangeEvent } from '@mui/material/Select';
 import DropDown from './DropDown';
 import { usePaginationContext } from '../context/PaginationProvider';
+import { VisibilityThresholds } from '../types';
 
 const RowsPerPage = () => {
   const { pageInfo, isSelectionMode, totalColumnCount, width, handleChangeRowsPerPage } = usePaginationContext();
   const showRowsPerPage =
-    !!pageInfo.rowsPerPageOptions?.length && !isSelectionMode && width > 550 && totalColumnCount <= 100;
+    !!pageInfo.rowsPerPageOptions?.length &&
+    !isSelectionMode &&
+    width > VisibilityThresholds.ROWS_PER_PAGE &&
+    totalColumnCount <= 100;
 
   if (!showRowsPerPage || pageInfo.rowsPerPageOptions === undefined) {
     return null;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { usePaginationContext } from '../context/PaginationProvider';
-import { ButtonTypes } from '../types';
+import { ButtonTypes, VisibilityThresholds } from '../types';
 import { StyledButton } from '../styles';
 import usePaginationButton from '../use-pagination-button';
 import { DEFAULT_FONT_SIZE } from '../../../constants';
@@ -14,7 +14,7 @@ const FirstPage = () => {
     pageNumber: 0,
   });
 
-  if (width <= 350) {
+  if (width <= VisibilityThresholds.FIRST_PAGE) {
     return null;
   }
 

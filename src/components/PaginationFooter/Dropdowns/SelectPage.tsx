@@ -3,12 +3,13 @@ import type { SelectChangeEvent } from '@mui/material/Select';
 import PageOptions from './PageOptions';
 import DropDown from './DropDown';
 import { usePaginationContext } from '../context/PaginationProvider';
+import { VisibilityThresholds } from '../types';
 
 const SelectPage = () => {
   const { pageInfo, width, totalPages, handleChangePage } = usePaginationContext();
   const { page } = pageInfo;
 
-  if (width <= 700) {
+  if (width <= VisibilityThresholds.SELECT_PAGE) {
     return null;
   }
 

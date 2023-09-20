@@ -8,6 +8,14 @@ export enum ButtonTypes {
   PREVIOUS_PAGE = 'PreviousPage',
 }
 
+export enum VisibilityThresholds {
+  DISPLAYED_ROWS_LABEL = 250,
+  FIRST_PAGE = 350,
+  LAST_PAGE = 350,
+  ROWS_PER_PAGE = 550,
+  SELECT_PAGE = 700,
+}
+
 export interface FooterWrapperProps {
   children: JSX.Element;
   footerContainer?: HTMLElement;

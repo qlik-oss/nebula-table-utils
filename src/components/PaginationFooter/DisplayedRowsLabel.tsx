@@ -1,12 +1,13 @@
 import React from 'react';
 import { StyledTypography } from './styles';
 import { usePaginationContext } from './context/PaginationProvider';
+import { VisibilityThresholds } from './types';
 
 const DisplayedRowsLabel = () => {
   const { translator, width, pageInfo, totalRowCount } = usePaginationContext();
   const { page, rowsPerPage } = pageInfo;
 
-  if (width <= 250) {
+  if (width <= VisibilityThresholds.DISPLAYED_ROWS_LABEL) {
     return null;
   }
 

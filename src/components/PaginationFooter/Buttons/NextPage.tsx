@@ -1,7 +1,7 @@
 import React from 'react';
 import { usePaginationContext } from '../context/PaginationProvider';
 import handleLastTab from '../../../utils/handle-last-tab';
-import { ButtonTypes } from '../types';
+import { ButtonTypes, VisibilityThresholds } from '../types';
 import usePaginationButton from '../use-pagination-button';
 import { StyledButton } from '../styles';
 import { DEFAULT_FONT_SIZE } from '../../../constants';
@@ -15,7 +15,7 @@ const NextPage = () => {
     pageNumber: pageInfo.page + 1,
   });
 
-  const showFirstAndLast = width > 350;
+  const showFirstAndLast = width > VisibilityThresholds.FIRST_PAGE && width > VisibilityThresholds.LAST_PAGE;
   const handleLastButtonTab =
     !showFirstAndLast && keyboard.enabled
       ? (event: React.KeyboardEvent) => handleLastTab(event, keyboard, isSelectionMode)
