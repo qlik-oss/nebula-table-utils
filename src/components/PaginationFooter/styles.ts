@@ -3,8 +3,8 @@ import Box from '@mui/material/Box';
 import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { PAGINATION_HEIGHT } from './constants';
 import type { FooterStyle } from './types';
+import { PAGINATION_HEIGHT } from '../../constants';
 
 // ---------- FooterWrapper ----------
 
