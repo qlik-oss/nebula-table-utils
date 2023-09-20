@@ -7,3 +7,16 @@ export const HEAD_CELL_MENU_WIDTH = 220;
 export const HEAD_CELL_MENU_ITEM_HEIGHT = 32;
 export const HEAD_CELL_MENU_ACTIVE_ITEM_GREEN_BORDER_HEIGHT = 16;
 export const HEAD_CELL_MENU_ITEM_ICON_WIDTH = 16;
+
+export enum KeyCodes {
+  ENTER = 'Enter',
+  SPACE = ' ',
+  ESC = 'Escape',
+  TAB = 'Tab',
+  SHIFT = 'Shift',
+  LEFT = 'ArrowLeft',
+  RIGHT = 'ArrowRight',
+  UP = 'ArrowUp',
+  DOWN = 'ArrowDown',
+  C = 'c',
+}
