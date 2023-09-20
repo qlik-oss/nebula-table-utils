@@ -3,9 +3,7 @@ import ArrowLeft from '@qlik-trial/sprout/icons/react/ArrowLeft';
 import ArrowLeftStop from '@qlik-trial/sprout/icons/react/ArrowLeftStop';
 import ArrowRight from '@qlik-trial/sprout/icons/react/ArrowRight';
 import ArrowRightStop from '@qlik-trial/sprout/icons/react/ArrowRightStop';
-import { StyledButton } from '../styles';
-import { DEFAULT_FONT_SIZE } from '../../../constants';
-import { usePaginationContext } from '../context/PaginationProvider';
+import { usePaginationContext } from './context/PaginationProvider';
 
 interface Props {
   disabledCondition: boolean;
@@ -25,27 +23,25 @@ const ICONS: Record<string, typeof ArrowLeft> = {
   LastPageRTL: ArrowLeftStop,
 };
 
-const Button = ({ disabledCondition, pageNumber, type, onKeyDown }: Props) => {
+const usePaginationButton = ({ disabledCondition, pageNumber, type }: Props) => {
   const { direction, footerStyle, handleChangePage, translator, interactions, tabIndex } = usePaginationContext();
   const iconType = `${type}${direction === 'rtl' ? 'RTL' : ''}`;
   const IconComponent = ICONS[iconType];
 
-  return (
-    <StyledButton
-      footerStyle={footerStyle}
-      disabledCondition={disabledCondition}
-      size="small"
-      data-testid="pagination-action-icon-button"
-      onClick={!disabledCondition ? () => handleChangePage(pageNumber) : null}
-      aria-disabled={disabledCondition}
-      aria-label={translator.get(`NebulaTableUtils.Pagination.${type}`)}
-      title={interactions.passive ? translator.get(`NebulaTableUtils.Pagination.${type}`) : undefined}
-      tabIndex={tabIndex}
-      onKeyDown={onKeyDown}
-    >
-      <IconComponent height={DEFAULT_FONT_SIZE} />
-    </StyledButton>
-  );
+  return {
+    styledProps: {
+      footerStyle,
+      disabledCondition,
+      size: 'small',
+      'data-testid': 'pagination-action-icon-button',
+      'aria-disabled': disabledCondition,
+      'aria-label': translator.get(`NebulaTableUtils.Pagination.${type}`),
+      title: interactions.passive ? translator.get(`NebulaTableUtils.Pagination.${type}`) : undefined,
+      tabIndex,
+      onClick: !disabledCondition ? () => handleChangePage(pageNumber) : null,
+    },
+    IconComponent,
+  };
 };
 
-export default Button;
+export default usePaginationButton;
