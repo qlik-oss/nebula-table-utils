@@ -9,7 +9,7 @@ const SelectPage = () => {
   const { pageInfo, width, totalPages, handleChangePage } = usePaginationContext();
   const { page } = pageInfo;
 
-  if (width <= VisibilityThresholds.SELECT_PAGE) {
+  if (width <= VisibilityThresholds.SelectPage) {
     return null;
   }
 

@@ -2,18 +2,18 @@ import type { stardust } from '@nebula.js/stardust';
 import type { ExtendedTheme } from '../../hooks/use-extended-theme/types';
 
 export enum ButtonTypes {
-  FIRST_PAGE = 'FirstPage',
-  LAST_PAGE = 'LastPage',
-  NEXT_PAGE = 'NextPage',
-  PREVIOUS_PAGE = 'PreviousPage',
+  FirstPage = 'FirstPage',
+  LastPage = 'LastPage',
+  NextPage = 'NextPage',
+  PreviousPage = 'PreviousPage',
 }
 
 export enum VisibilityThresholds {
-  DISPLAYED_ROWS_LABEL = 250,
-  FIRST_PAGE = 350,
-  LAST_PAGE = 350,
-  ROWS_PER_PAGE = 550,
-  SELECT_PAGE = 700,
+  DisplayedRowsLabel = 250,
+  FirstPage = 350,
+  LastPage = 350,
+  RowsPerPage = 550,
+  SelectPage = 700,
 }
 
 export interface FooterWrapperProps {

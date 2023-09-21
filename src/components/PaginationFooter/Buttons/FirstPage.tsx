@@ -9,12 +9,12 @@ const FirstPage = () => {
   const { pageInfo, width } = usePaginationContext();
   const onFirstPage = pageInfo.page === 0;
   const { IconComponent, styledProps } = usePaginationButton({
-    type: ButtonTypes.FIRST_PAGE,
+    type: ButtonTypes.FirstPage,
     disabledCondition: onFirstPage,
     pageNumber: 0,
   });
 
-  if (width <= VisibilityThresholds.FIRST_PAGE) {
+  if (width <= VisibilityThresholds.FirstPage) {
     return null;
   }
 

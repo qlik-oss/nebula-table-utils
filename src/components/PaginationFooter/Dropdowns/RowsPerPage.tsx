@@ -9,7 +9,7 @@ const RowsPerPage = () => {
   const showRowsPerPage =
     !!pageInfo.rowsPerPageOptions?.length &&
     !isSelectionMode &&
-    width > VisibilityThresholds.ROWS_PER_PAGE &&
+    width > VisibilityThresholds.RowsPerPage &&
     totalColumnCount <= 100;
 
   if (!showRowsPerPage || pageInfo.rowsPerPageOptions === undefined) {

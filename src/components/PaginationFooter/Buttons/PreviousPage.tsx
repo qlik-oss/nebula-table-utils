@@ -9,7 +9,7 @@ const PreviousPage = () => {
   const { pageInfo } = usePaginationContext();
   const onFirstPage = pageInfo.page === 0;
   const { IconComponent, styledProps } = usePaginationButton({
-    type: ButtonTypes.PREVIOUS_PAGE,
+    type: ButtonTypes.PreviousPage,
     disabledCondition: onFirstPage,
     pageNumber: pageInfo.page - 1,
   });

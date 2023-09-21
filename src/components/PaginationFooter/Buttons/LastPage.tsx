@@ -10,7 +10,7 @@ const LastPage = () => {
   const { pageInfo, keyboard, totalPages, isSelectionMode, width } = usePaginationContext();
   const onLastPage = pageInfo.page >= totalPages - 1;
   const { IconComponent, styledProps } = usePaginationButton({
-    type: ButtonTypes.LAST_PAGE,
+    type: ButtonTypes.LastPage,
     disabledCondition: onLastPage,
     pageNumber: totalPages - 1,
   });
@@ -19,7 +19,7 @@ const LastPage = () => {
     ? (event: React.KeyboardEvent) => handleLastTab(event, keyboard, isSelectionMode)
     : null;
 
-  if (width <= VisibilityThresholds.LAST_PAGE) {
+  if (width <= VisibilityThresholds.LastPage) {
     return null;
   }
 

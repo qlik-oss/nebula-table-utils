@@ -7,7 +7,7 @@ const DisplayedRowsLabel = () => {
   const { translator, width, pageInfo, totalRowCount } = usePaginationContext();
   const { page, rowsPerPage } = pageInfo;
 
-  if (width <= VisibilityThresholds.DISPLAYED_ROWS_LABEL) {
+  if (width <= VisibilityThresholds.DisplayedRowsLabel) {
     return null;
   }
 
