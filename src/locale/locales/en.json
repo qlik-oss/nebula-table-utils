@@ -46,5 +46,33 @@
   "NebulaTableUtils.MenuItemLabel.ColumnOptions": {
     "value": "Column options",
     "comment": "Aria label for the button in the header that opens the column menu. (ftz 230824)"
+  },
+  "NebulaTableUtils.Pagination.DisplayedRowsLabel": {
+    "value": "{0} of {1}",
+    "comment": "label for the displayed rows, e.g. '1-100 of 234'"
+  },
+  "NebulaTableUtils.Pagination.RowsPerPage": {
+    "value": "Rows per page",
+    "comment": "label for the rows per page dropdown."
+  },
+  "NebulaTableUtils.Pagination.SelectPage": {
+    "value": "Select page",
+    "comment": "Label for the dropdown to select a page."
+  },
+  "NebulaTableUtils.Pagination.FirstPage": {
+    "value": "Go to the first page",
+    "comment": "tooltip and aria-label for the first page button."
+  },
+  "NebulaTableUtils.Pagination.PreviousPage": {
+    "value": "Go to the previous page",
+    "comment": "tooltip and aria-label for the previous page button."
+  },
+  "NebulaTableUtils.Pagination.NextPage": {
+    "value": "Go to the next page",
+    "comment": "tooltip and aria-label for the next page button."
+  },
+  "NebulaTableUtils.Pagination.LastPage": {
+    "value": "Go to the last page",
+    "comment": "tooltip and aria-label for the last page button."
   }
 }

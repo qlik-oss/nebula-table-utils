@@ -8,6 +8,8 @@ export const HEAD_CELL_MENU_ITEM_HEIGHT = 32;
 export const HEAD_CELL_MENU_ACTIVE_ITEM_GREEN_BORDER_HEIGHT = 16;
 export const HEAD_CELL_MENU_ITEM_ICON_WIDTH = 16;
 
+export const PAGINATION_HEIGHT = 40;
+
 export enum KeyCodes {
   ENTER = 'Enter',
   SPACE = ' ',
