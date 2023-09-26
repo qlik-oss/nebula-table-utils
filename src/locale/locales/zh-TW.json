@@ -58,5 +58,40 @@
     "value": "以遞減方式排序",
     "comment": "Label for menu item to sort descending. 'Sort' is a verb.(ftz 230824)",
     "version": "HSN/Dheg5PrLBn6ShV4pZw=="
+  },
+  "NebulaTableUtils.Pagination.DisplayedRowsLabel": {
+    "value": "{0} / {1}",
+    "comment": "label for the displayed rows, e.g. '1-100 of 234'",
+    "version": "cgI63hdf+at5xRx9y9RsNA=="
+  },
+  "NebulaTableUtils.Pagination.FirstPage": {
+    "value": "移至第一頁",
+    "comment": "tooltip and aria-label for the first page button.",
+    "version": "WB1jSlHyHqxRYcUgWZFWDw=="
+  },
+  "NebulaTableUtils.Pagination.LastPage": {
+    "value": "移至最後一頁",
+    "comment": "tooltip and aria-label for the last page button.",
+    "version": "R7m6hn5P9SbnjU1UchFSNw=="
+  },
+  "NebulaTableUtils.Pagination.NextPage": {
+    "value": "移至下一頁",
+    "comment": "tooltip and aria-label for the next page button.",
+    "version": "FbGV0Q7FVzXlfNsDbyBIqQ=="
+  },
+  "NebulaTableUtils.Pagination.PreviousPage": {
+    "value": "移至上一頁",
+    "comment": "tooltip and aria-label for the previous page button.",
+    "version": "5uBlKPVCVhvSRTYIrzRTxw=="
+  },
+  "NebulaTableUtils.Pagination.RowsPerPage": {
+    "value": "每頁列數",
+    "comment": "label for the rows per page dropdown.",
+    "version": "B/uYugKSkb8zpvzKVGzawQ=="
+  },
+  "NebulaTableUtils.Pagination.SelectPage": {
+    "value": "選取頁面",
+    "comment": "Label for the dropdown to select a page.",
+    "version": "322LIzR5gwkUt/2uc7aphA=="
   }
 }

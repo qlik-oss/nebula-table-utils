@@ -58,5 +58,40 @@
     "value": "Trier par ordre décroissant",
     "comment": "Label for menu item to sort descending. 'Sort' is a verb.(ftz 230824)",
     "version": "HSN/Dheg5PrLBn6ShV4pZw=="
+  },
+  "NebulaTableUtils.Pagination.DisplayedRowsLabel": {
+    "value": "{0} sur {1}",
+    "comment": "label for the displayed rows, e.g. '1-100 of 234'",
+    "version": "cgI63hdf+at5xRx9y9RsNA=="
+  },
+  "NebulaTableUtils.Pagination.FirstPage": {
+    "value": "Accéder à la première page",
+    "comment": "tooltip and aria-label for the first page button.",
+    "version": "WB1jSlHyHqxRYcUgWZFWDw=="
+  },
+  "NebulaTableUtils.Pagination.LastPage": {
+    "value": "Accéder à la dernière page",
+    "comment": "tooltip and aria-label for the last page button.",
+    "version": "R7m6hn5P9SbnjU1UchFSNw=="
+  },
+  "NebulaTableUtils.Pagination.NextPage": {
+    "value": "Accéder à la page suivante",
+    "comment": "tooltip and aria-label for the next page button.",
+    "version": "FbGV0Q7FVzXlfNsDbyBIqQ=="
+  },
+  "NebulaTableUtils.Pagination.PreviousPage": {
+    "value": "Accéder à la page précédente",
+    "comment": "tooltip and aria-label for the previous page button.",
+    "version": "5uBlKPVCVhvSRTYIrzRTxw=="
+  },
+  "NebulaTableUtils.Pagination.RowsPerPage": {
+    "value": "Lignes par page",
+    "comment": "label for the rows per page dropdown.",
+    "version": "B/uYugKSkb8zpvzKVGzawQ=="
+  },
+  "NebulaTableUtils.Pagination.SelectPage": {
+    "value": "Sélectionner une page",
+    "comment": "Label for the dropdown to select a page.",
+    "version": "322LIzR5gwkUt/2uc7aphA=="
   }
 }
