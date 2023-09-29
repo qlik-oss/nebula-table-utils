@@ -97,6 +97,7 @@
     "@mui/styled-engine-sc": "^5.14.10",
     "@nebula.js/stardust": "4.4.0",
     "@qlik-trial/sprout": "^3.4.0",
+    "qlik-chart-modules": "^0.59.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

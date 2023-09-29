@@ -23,6 +23,9 @@ dependencies:
   '@nebula.js/stardust':
     specifier: 4.4.0
     version: 4.4.0
+  qlik-chart-modules:
+    specifier: ^0.59.0
+    version: 0.59.0
 
 devDependencies:
   '@jest/globals':
@@ -1519,6 +1522,22 @@ packages:
       csstype: 3.1.2
       prop-types: 15.8.1
       styled-components: 5.3.11(@babel/core@7.22.20)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
+    dev: false
+
+  /@mui/styled-engine-sc@5.14.11(styled-components@5.3.11):
+    resolution: {integrity: sha512-phUkkvirhuxLPQihgMACyDCUknpOM/4g3PbZmfmMbvkCL+UEePUnECzlOKRbKvk9uyI5Xpz0zECFOtYkJsPvBg==}
+    engines: {node: '>=12.0.0'}
+    peerDependencies:
+      '@types/styled-components': ^5.1.14
+      styled-components: ^5.3.1
+    peerDependenciesMeta:
+      '@types/styled-components':
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.22.15
+      csstype: 3.1.2
+      prop-types: 15.8.1
+      styled-components: 5.3.11(@babel/core@7.22.20)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
 
   /@mui/system@5.14.10(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@types/react@18.2.22)(react@18.2.0)(styled-components@5.3.11):
     resolution: {integrity: sha512-QQmtTG/R4gjmLiL5ECQ7kRxLKDm8aKKD7seGZfbINtRVJDyFhKChA1a+K2bfqIAaBo1EMDv+6FWNT1Q5cRKjFA==}
@@ -1540,7 +1559,7 @@ packages:
       '@emotion/react': 11.11.1(@types/react@18.2.22)(react@18.2.0)
       '@emotion/styled': 11.11.0(@emotion/react@11.11.1)(@types/react@18.2.22)(react@18.2.0)
       '@mui/private-theming': 5.14.10(@types/react@18.2.22)(react@18.2.0)
-      '@mui/styled-engine': /@mui/styled-engine-sc@5.14.10(styled-components@5.3.11)
+      '@mui/styled-engine': /@mui/styled-engine-sc@5.14.11(styled-components@5.3.11)
       '@mui/types': 7.2.4(@types/react@18.2.22)
       '@mui/utils': 5.14.10(@types/react@18.2.22)(react@18.2.0)
       '@types/react': 18.2.22
@@ -8628,6 +8647,10 @@ packages:
   /pure-rand@6.0.3:
     resolution: {integrity: sha512-KddyFewCsO0j3+np81IQ+SweXLDnDQTs5s67BOnrYmYe/yNmUhttQyGsYzy8yUnoljGAQ9sl38YB4vH8ur7Y+w==}
     dev: true
+
+  /qlik-chart-modules@0.59.0:
+    resolution: {integrity: sha512-ErnAjpIugAUzXPnRS4l+rxQghmMjd67Q3FeFyWVWT2WCZDMjsOw4a3hSUIN3h5OOwtzSBmw3jxdDqL8DmTMDjw==}
+    dev: false
 
   /querystringify@2.2.0:
     resolution: {integrity: sha512-FIqgj2EUvTa7R50u0rGsyTftzjYmv/a3hO345bZNrqabNqjtgiDMgmo4mkUjd+nzU5oF3dClKqFIPUKybUyqoQ==}
