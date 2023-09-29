@@ -8,7 +8,7 @@
       "enabled": false
     },
     {
-      "matchPackageNames": ["@qlik-trial/sprout"],
+      "matchPackageNames": ["@qlik-trial/sprout", "qlik-chart-modules"],
       "enabled": false
     },
     {
