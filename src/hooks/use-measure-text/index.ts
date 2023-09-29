@@ -15,6 +15,14 @@ export interface MeasureTextHook {
   estimateLineCount: EstimateLineCount;
 }
 
+interface UseMeasureTextProps {
+  fontSize?: string;
+  fontFamily?: string;
+  fontStyle?: string;
+  bold?: boolean;
+  maxNbrLinesOfText?: number;
+}
+
 const MAX_NBR_LINES_OF_TEXT = 3;
 
 const MAGIC_DEFAULT_CHAR = 'N';
@@ -58,15 +66,16 @@ function getNextLine(text: string, maxWidth: number, fixedMeasureText: (text: st
   return null;
 }
 
-export default function useMeasureText(
-  fontSize: string | undefined,
-  fontFamily: string | undefined,
-  boldText?: boolean,
-  maxNbrLinesOfText = MAX_NBR_LINES_OF_TEXT
-): MeasureTextHook {
+export default function useMeasureText({
+  fontSize = '12px',
+  fontFamily = 'Source Sans Pro, Arial, sans-serif',
+  fontStyle = '',
+  bold = false,
+  maxNbrLinesOfText = MAX_NBR_LINES_OF_TEXT,
+}: UseMeasureTextProps): MeasureTextHook {
   const { estimateWidth, measureText, estimateLineCount } = useMemo((): MeasureTextHook => {
     const context = document.createElement('canvas').getContext('2d') as CanvasRenderingContext2D;
-    context.font = `${boldText ? '600' : ''} ${fontSize ?? ''} ${fontFamily ?? ''}`;
+    context.font = `${fontStyle}${fontStyle ? ' ' : ''}${bold ? '600 ' : ''}${fontSize} ${fontFamily}`;
 
     const memoizedMeasureText = memoize(context.measureText.bind(context)) as (text: string) => TextMetrics;
 
@@ -96,7 +105,7 @@ export default function useMeasureText(
       estimateWidth: (length: number) => memoizedMeasureText(MAGIC_DEFAULT_CHAR).width * length,
       estimateLineCount: memoizedEstimateLineCount,
     };
-  }, [fontSize, fontFamily, boldText, maxNbrLinesOfText]);
+  }, [fontStyle, bold, fontSize, fontFamily, maxNbrLinesOfText]);
 
   return { estimateWidth, measureText, estimateLineCount };
 }
