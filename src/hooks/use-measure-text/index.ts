@@ -73,7 +73,7 @@ export default function useMeasureText({
   bold = false,
   maxNbrLinesOfText = MAX_NBR_LINES_OF_TEXT,
 }: UseMeasureTextProps): MeasureTextHook {
-  const { estimateWidth, measureText, estimateLineCount } = useMemo((): MeasureTextHook => {
+  const { estimateWidth, measureText, estimateLineCount } = useMemo<MeasureTextHook>(() => {
     const context = document.createElement('canvas').getContext('2d') as CanvasRenderingContext2D;
     context.font = `${fontStyle}${fontStyle ? ' ' : ''}${bold ? '600 ' : ''}${fontSize} ${fontFamily}`;
 
