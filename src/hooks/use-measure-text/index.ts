@@ -15,7 +15,7 @@ export interface MeasureTextHook {
   estimateLineCount: EstimateLineCount;
 }
 
-interface UseMeasureTextProps {
+export interface UseMeasureTextProps {
   fontSize?: string;
   fontFamily?: string;
   fontStyle?: string;
