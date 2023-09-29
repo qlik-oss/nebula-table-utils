@@ -23,6 +23,9 @@ dependencies:
   '@nebula.js/stardust':
     specifier: 4.4.0
     version: 4.4.0
+  qlik-chart-modules:
+    specifier: ^0.59.0
+    version: 0.59.0
 
 devDependencies:
   '@jest/globals':
@@ -127,9 +130,6 @@ devDependencies:
   prettier:
     specifier: 3.0.3
     version: 3.0.3
-  qlik-chart-modules:
-    specifier: 0.59.0
-    version: 0.59.0
   react:
     specifier: 18.2.0
     version: 18.2.0
@@ -8650,7 +8650,7 @@ packages:
 
   /qlik-chart-modules@0.59.0:
     resolution: {integrity: sha512-ErnAjpIugAUzXPnRS4l+rxQghmMjd67Q3FeFyWVWT2WCZDMjsOw4a3hSUIN3h5OOwtzSBmw3jxdDqL8DmTMDjw==}
-    dev: true
+    dev: false
 
   /querystringify@2.2.0:
     resolution: {integrity: sha512-FIqgj2EUvTa7R50u0rGsyTftzjYmv/a3hO345bZNrqabNqjtgiDMgmo4mkUjd+nzU5oF3dClKqFIPUKybUyqoQ==}

@@ -75,7 +75,6 @@
     "jest-environment-jsdom": "29.7.0",
     "nodemon": "3.0.1",
     "prettier": "3.0.3",
-    "qlik-chart-modules": "0.59.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "rimraf": "5.0.1",
@@ -98,6 +97,7 @@
     "@mui/styled-engine-sc": "^5.14.10",
     "@nebula.js/stardust": "4.4.0",
     "@qlik-trial/sprout": "^3.4.0",
+    "qlik-chart-modules": "^0.59.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
