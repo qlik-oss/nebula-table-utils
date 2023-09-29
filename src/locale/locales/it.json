@@ -58,5 +58,40 @@
     "value": "Ordinamento decrescente",
     "comment": "Label for menu item to sort descending. 'Sort' is a verb.(ftz 230824)",
     "version": "HSN/Dheg5PrLBn6ShV4pZw=="
+  },
+  "NebulaTableUtils.Pagination.DisplayedRowsLabel": {
+    "value": "{0} di {1}",
+    "comment": "label for the displayed rows, e.g. '1-100 of 234'",
+    "version": "cgI63hdf+at5xRx9y9RsNA=="
+  },
+  "NebulaTableUtils.Pagination.FirstPage": {
+    "value": "Vai alla prima pagina",
+    "comment": "tooltip and aria-label for the first page button.",
+    "version": "WB1jSlHyHqxRYcUgWZFWDw=="
+  },
+  "NebulaTableUtils.Pagination.LastPage": {
+    "value": "Vai all'ultima pagina",
+    "comment": "tooltip and aria-label for the last page button.",
+    "version": "R7m6hn5P9SbnjU1UchFSNw=="
+  },
+  "NebulaTableUtils.Pagination.NextPage": {
+    "value": "Vai alla pagina successiva",
+    "comment": "tooltip and aria-label for the next page button.",
+    "version": "FbGV0Q7FVzXlfNsDbyBIqQ=="
+  },
+  "NebulaTableUtils.Pagination.PreviousPage": {
+    "value": "Vai alla pagina precedente",
+    "comment": "tooltip and aria-label for the previous page button.",
+    "version": "5uBlKPVCVhvSRTYIrzRTxw=="
+  },
+  "NebulaTableUtils.Pagination.RowsPerPage": {
+    "value": "Righe per pagina",
+    "comment": "label for the rows per page dropdown.",
+    "version": "B/uYugKSkb8zpvzKVGzawQ=="
+  },
+  "NebulaTableUtils.Pagination.SelectPage": {
+    "value": "Seleziona pagina",
+    "comment": "Label for the dropdown to select a page.",
+    "version": "322LIzR5gwkUt/2uc7aphA=="
   }
 }
