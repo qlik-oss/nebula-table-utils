@@ -15,13 +15,16 @@ export interface MeasureTextHook {
   estimateLineCount: EstimateLineCount;
 }
 
-export interface UseMeasureTextProps {
+export interface FontProps {
   fontSize?: string;
   fontFamily?: string;
   fontStyle?: string;
-  bold?: boolean;
-  maxNbrLinesOfText?: number;
+  fontWeight?: string;
 }
+
+type OptionsProps = {
+  maxNbrLinesOfText?: number;
+};
 
 const MAX_NBR_LINES_OF_TEXT = 3;
 
@@ -66,16 +69,19 @@ function getNextLine(text: string, maxWidth: number, fixedMeasureText: (text: st
   return null;
 }
 
-export default function useMeasureText({
-  fontSize = '12px',
-  fontFamily = 'Source Sans Pro, Arial, sans-serif',
-  fontStyle = '',
-  bold = false,
-  maxNbrLinesOfText = MAX_NBR_LINES_OF_TEXT,
-}: UseMeasureTextProps): MeasureTextHook {
+export default function useMeasureText(
+  { fontSize = '12px', fontFamily = 'Source Sans Pro, Arial, sans-serif', fontStyle, fontWeight }: FontProps,
+  options?: OptionsProps
+): MeasureTextHook {
+  const { maxNbrLinesOfText = MAX_NBR_LINES_OF_TEXT } = options ?? {};
+
   const { estimateWidth, measureText, estimateLineCount } = useMemo<MeasureTextHook>(() => {
     const context = document.createElement('canvas').getContext('2d') as CanvasRenderingContext2D;
-    context.font = `${fontStyle}${fontStyle ? ' ' : ''}${bold ? '600 ' : ''}${fontSize} ${fontFamily}`;
+    let font = '';
+    font += fontStyle ? `${fontStyle} ` : '';
+    font += fontWeight ? `${fontWeight} ` : '';
+    font += `${fontSize} ${fontFamily}`;
+    context.font = font;
 
     const memoizedMeasureText = memoize(context.measureText.bind(context)) as (text: string) => TextMetrics;
 
@@ -105,7 +111,7 @@ export default function useMeasureText({
       estimateWidth: (length: number) => memoizedMeasureText(MAGIC_DEFAULT_CHAR).width * length,
       estimateLineCount: memoizedEstimateLineCount,
     };
-  }, [fontStyle, bold, fontSize, fontFamily, maxNbrLinesOfText]);
+  }, [fontStyle, fontWeight, fontSize, fontFamily, maxNbrLinesOfText]);
 
   return { estimateWidth, measureText, estimateLineCount };
 }

@@ -30,13 +30,13 @@ describe('useMeasureText', () => {
     jest.restoreAllMocks();
   });
 
-  test('should set font on context when fontSize, fontFamily, fontStyle and bold is set', () => {
+  test('should set font on context when fontSize, fontFamily, fontStyle and fontWeight is set', () => {
     renderHook(() =>
       useMeasureText({
         fontSize: '12px',
         fontFamily: 'Arial',
         fontStyle: 'underline',
-        bold: true,
+        fontWeight: '600',
       })
     );
 
@@ -49,7 +49,6 @@ describe('useMeasureText', () => {
         fontSize: '12px',
         fontFamily: 'Arial',
         fontStyle: 'underline',
-        bold: false,
       })
     );
 
