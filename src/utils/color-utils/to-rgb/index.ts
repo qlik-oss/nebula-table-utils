@@ -14,6 +14,14 @@ export const toRGB = (color: string) => {
   return rgb(color);
 };
 
-const toRGBString = (color: string) => toRGB(color).toString();
+const toRGBString = (color: string) => {
+  const RGBColor = toRGB(color);
+
+  if (Number.isNaN(RGBColor.r)) {
+    return null;
+  }
+
+  return RGBColor.toString();
+};
 
 export default toRGBString;
