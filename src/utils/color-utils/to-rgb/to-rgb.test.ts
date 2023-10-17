@@ -29,7 +29,7 @@ describe('toRGB', () => {
     expect(toRGBString('RGB(20,40,60)')).toEqual('rgb(20, 40, 60)');
   });
 
-  test('should convert 3 digit hex to rgba', () => {
+  test('should convert 3 digit hex to rgb', () => {
     expect(toRGBString('#f09')).toEqual('rgb(255, 0, 153)');
   });
 
