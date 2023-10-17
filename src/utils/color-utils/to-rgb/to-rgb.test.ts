@@ -5,6 +5,10 @@ describe('toRGB', () => {
     expect(toRGBString('ARGB(153, 20, 40, 60)')).toEqual('rgba(20, 40, 60, 0.6)');
   });
 
+  test('should convert ARGB without space to rgba', () => {
+    expect(toRGBString('ARGB(153,20,40,60)')).toEqual('rgba(20, 40, 60, 0.6)');
+  });
+
   test('should convert argb to rgba', () => {
     expect(toRGBString('argb(153, 20, 40, 60)')).toEqual('rgba(20, 40, 60, 0.6)');
   });
@@ -15,6 +19,10 @@ describe('toRGB', () => {
 
   test('should convert RGB to rgb', () => {
     expect(toRGBString('RGB(20, 40, 60)')).toEqual('rgb(20, 40, 60)');
+  });
+
+  test('should convert rgb without space to rgb', () => {
+    expect(toRGBString('RGB(20,40,60)')).toEqual('rgb(20, 40, 60)');
   });
 
   test('should convert hex to rgb', () => {
