@@ -16,6 +16,8 @@ export enum VisibilityThresholds {
   SelectPage = 700,
 }
 
+export type ShouldForwardProp = string | number | symbol;
+
 export interface FooterWrapperProps {
   children: JSX.Element;
   footerContainer?: HTMLElement;
