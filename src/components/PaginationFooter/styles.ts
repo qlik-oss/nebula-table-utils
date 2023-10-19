@@ -3,13 +3,13 @@ import Box from '@mui/material/Box';
 import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import type { FooterStyle } from './types';
+import type { FooterStyle, ShouldForwardProp } from './types';
 import { PAGINATION_HEIGHT } from '../../constants';
 
 // ---------- FooterWrapper ----------
 
 export const StyledFooterWrapper = styled(Box, {
-  shouldForwardProp: (prop: string) => prop !== 'footerStyle',
+  shouldForwardProp: (prop: ShouldForwardProp) => prop !== 'footerStyle',
 })(({ footerStyle, theme }: { footerStyle: FooterStyle; theme: Theme }) => ({
   height: PAGINATION_HEIGHT,
   display: 'flex',
@@ -23,18 +23,26 @@ export const StyledFooterWrapper = styled(Box, {
 
 // ---------- PaginationContent ----------
 
+type StyledSelectProps = { footerStyle: FooterStyle; theme: Theme };
+
 export const StyledSelect = styled(Select, {
-  shouldForwardProp: (prop: string) => prop !== 'footerStyle',
-})(({ footerStyle, theme }) => ({
+  shouldForwardProp: (prop: ShouldForwardProp) => prop !== 'footerStyle',
+})(({ footerStyle, theme }: StyledSelectProps) => ({
   background: 'inherit',
   marginRight: theme.spacing(1),
   color: footerStyle.color,
   '& .MuiNativeSelect-icon, .MuiNativeSelect-select': { color: footerStyle.iconColor },
 }));
 
+type StyledButtonProps = {
+  disabledCondition: boolean;
+  footerStyle: FooterStyle;
+  theme: Theme;
+};
+
 export const StyledButton = styled(Button, {
-  shouldForwardProp: (prop: string) => prop !== 'disabledCondition' && prop !== 'footerStyle',
-})(({ disabledCondition, footerStyle, theme }) => ({
+  shouldForwardProp: (prop: ShouldForwardProp) => prop !== 'disabledCondition' && prop !== 'footerStyle',
+})(({ disabledCondition, footerStyle, theme }: StyledButtonProps) => ({
   color: disabledCondition ? footerStyle.disabledColor : footerStyle.color,
   cursor: disabledCondition ? 'default' : 'pointer',
   marginLeft: theme.spacing(1),
