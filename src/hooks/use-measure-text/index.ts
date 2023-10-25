@@ -70,18 +70,19 @@ function getNextLine(text: string, maxWidth: number, fixedMeasureText: (text: st
 }
 
 export default function useMeasureText(
-  { fontSize = '12px', fontFamily = 'Source Sans Pro, Arial, sans-serif', fontStyle, fontWeight }: FontProps,
+  {
+    fontSize = '12px',
+    fontFamily = 'Source Sans Pro, Arial, sans-serif',
+    fontStyle = 'normal',
+    fontWeight = 'normal',
+  }: FontProps,
   options?: OptionsProps
 ): MeasureTextHook {
   const { maxNbrLinesOfText = MAX_NBR_LINES_OF_TEXT } = options ?? {};
 
   const { estimateWidth, measureText, estimateLineCount } = useMemo<MeasureTextHook>(() => {
     const context = document.createElement('canvas').getContext('2d') as CanvasRenderingContext2D;
-    let font = '';
-    font += fontStyle ? `${fontStyle} ` : '';
-    font += fontWeight ? `${fontWeight} ` : '';
-    font += `${fontSize} ${fontFamily}`;
-    context.font = font;
+    context.font = `${fontStyle} ${fontWeight} ${fontSize} ${fontFamily}`;
 
     const memoizedMeasureText = memoize(context.measureText.bind(context)) as (text: string) => TextMetrics;
 
