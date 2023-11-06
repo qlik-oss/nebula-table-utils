@@ -1,14 +1,12 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 import { KeyCodes } from '../../../constants';
-import ColumnAdjuster, { TempWidth } from '../ColumnAdjuster';
+import ColumnAdjuster, { type TempWidth } from '../ColumnAdjuster';
 import { ColumnWidthType } from '../types';
 import { ARROW_RESIZE_STEP, COLUMN_ADJUSTER_CLASS } from '../constants';
 
 describe('<ColumnAdjuster />', () => {
   const defaultWidth = 50;
-  const keyValue = 'adjuster-0';
-  const isLastColumn = true;
   let tempWidth: TempWidth;
   let updateWidthCallback: (pageColIdx: number) => void;
   let confirmWidthCallback: (newWidthData: { type: ColumnWidthType; pixels: number }) => void;
@@ -17,11 +15,11 @@ describe('<ColumnAdjuster />', () => {
     render(
       <ColumnAdjuster
         tempWidth={tempWidth}
-        isLastColumn={isLastColumn}
-        keyValue={keyValue}
+        isLastColumn
+        keyValue="adjuster-0"
         updateWidthCallback={updateWidthCallback}
         confirmWidthCallback={confirmWidthCallback}
-        additionalHandlers={{ onBlur: () => {} }}
+        handleBlur={() => {}}
       />
     );
     return screen.queryByTestId(COLUMN_ADJUSTER_CLASS) as HTMLElement;

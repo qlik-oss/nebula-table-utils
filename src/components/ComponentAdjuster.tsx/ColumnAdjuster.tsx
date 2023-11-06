@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import React, { CSSProperties } from 'react';
+import React, { type CSSProperties } from 'react';
 import { ColumnWidthType } from './types';
 import { preventDefaultBehavior } from '../../utils';
 import { AdjusterBorder, AdjusterHitArea } from './styles';
@@ -17,9 +17,9 @@ export interface ColumnAdjusterProps {
   keyValue: string;
   isLastColumn: boolean;
   style?: CSSProperties;
-  additionalHandlers?: Record<string, Function>;
   updateWidthCallback: (pageColIdx: number) => void;
   confirmWidthCallback: (newWidthData: { type: ColumnWidthType; pixels: number }) => void;
+  handleBlur?: (event: React.KeyboardEvent | React.FocusEvent<HTMLDivElement>) => void;
 }
 
 /**
@@ -36,7 +36,7 @@ const ColumnAdjuster = ({
   style,
   updateWidthCallback,
   confirmWidthCallback,
-  additionalHandlers,
+  handleBlur,
 }: ColumnAdjusterProps) => {
   const styling = style || { left: '100%' };
 
@@ -103,7 +103,7 @@ const ColumnAdjuster = ({
   };
 
   // ----- Keyboard -----
-  const KeyDownHandler = additionalHandlers?.onBlur
+  const KeyDownHandler = handleBlur
     ? (event: React.KeyboardEvent) => {
         if (event.key === KeyCodes.LEFT || event.key === KeyCodes.RIGHT) {
           preventDefaultBehavior(event);
@@ -113,12 +113,12 @@ const ColumnAdjuster = ({
           updateWidth(newDelta);
         } else if (event.key === KeyCodes.SPACE || event.key === KeyCodes.ENTER) {
           preventDefaultBehavior(event);
-          additionalHandlers.onBlur(event);
+          handleBlur(event);
 
           confirmWidth();
         } else if (event.key === KeyCodes.ESC) {
           preventDefaultBehavior(event);
-          additionalHandlers.onBlur(event);
+          handleBlur(event);
 
           updateWidth(tempWidth.initWidth); // reset width to the initial value
         }
@@ -134,8 +134,8 @@ const ColumnAdjuster = ({
       onMouseDown={mouseDownHandler}
       onTouchStart={touchStartHandler}
       onKeyDown={KeyDownHandler}
+      onBlur={handleBlur}
       data-testid={COLUMN_ADJUSTER_CLASS}
-      {...additionalHandlers}
     >
       <AdjusterBorder className={COLUMN_ADJUSTER_BORDER_CLASS} />
     </AdjusterHitArea>
