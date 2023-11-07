@@ -1,20 +1,19 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 import { KeyCodes } from '../../../constants';
-import ColumnAdjuster, { type TempWidth } from '../ColumnAdjuster';
-import { ColumnWidthType } from '../types';
+import ColumnAdjuster from '../ColumnAdjuster';
+import { type ColumnWidth, ColumnWidthType } from '../types';
 import { ARROW_RESIZE_STEP, COLUMN_ADJUSTER_CLASS } from '../constants';
 
 describe('<ColumnAdjuster />', () => {
   const defaultWidth = 50;
-  let tempWidth: TempWidth;
   let updateWidthCallback: (pageColIdx: number) => void;
-  let confirmWidthCallback: (newWidthData: { type: ColumnWidthType; pixels: number }) => void;
+  let confirmWidthCallback: (newWidthData: ColumnWidth) => void;
 
   const renderAdjuster = () => {
     render(
       <ColumnAdjuster
-        tempWidth={tempWidth}
+        columnWidth={defaultWidth}
         isLastColumn
         keyValue="adjuster-0"
         updateWidthCallback={updateWidthCallback}
@@ -26,12 +25,6 @@ describe('<ColumnAdjuster />', () => {
   };
 
   beforeEach(() => {
-    tempWidth = {
-      columnWidth: defaultWidth,
-      initWidth: defaultWidth,
-      initX: 0,
-    };
-
     updateWidthCallback = jest.fn();
     confirmWidthCallback = jest.fn();
   });
@@ -94,6 +87,15 @@ describe('<ColumnAdjuster />', () => {
     fireEvent.mouseUp(columnAdjuster);
     await waitFor(() => {
       expect(confirmWidthCallback).not.toHaveBeenCalled();
+    });
+  });
+
+  it('should change column width using mouse to fit to content when double clicking', async () => {
+    const columnAdjuster = renderAdjuster();
+
+    fireEvent.doubleClick(columnAdjuster);
+    await waitFor(() => {
+      expect(confirmWidthCallback).toHaveBeenCalledWith({ type: ColumnWidthType.FitToContent });
     });
   });
 

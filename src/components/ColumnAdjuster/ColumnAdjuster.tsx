@@ -1,24 +1,18 @@
 /* eslint-disable no-param-reassign */
-import React, { type CSSProperties } from 'react';
-import { ColumnWidthType } from './types';
+import React, { useMemo, type CSSProperties } from 'react';
+import { type ColumnWidth, ColumnWidthType } from './types';
 import { preventDefaultBehavior } from '../../utils';
 import { AdjusterBorder, AdjusterHitArea } from './styles';
 import { ColumnWidthValues, COLUMN_ADJUSTER_BORDER_CLASS, COLUMN_ADJUSTER_CLASS, ARROW_RESIZE_STEP } from './constants';
 import { KeyCodes } from '../../constants';
 
-export interface TempWidth {
-  columnWidth: number;
-  initX: number;
-  initWidth: number;
-}
-
 export interface ColumnAdjusterProps {
-  tempWidth: TempWidth;
+  columnWidth: number;
   keyValue: string;
   isLastColumn: boolean;
   style?: CSSProperties;
   updateWidthCallback: (pageColIdx: number) => void;
-  confirmWidthCallback: (newWidthData: { type: ColumnWidthType; pixels: number }) => void;
+  confirmWidthCallback: (newWidthData: ColumnWidth) => void;
   handleBlur?: (event: React.KeyboardEvent | React.FocusEvent<HTMLDivElement>) => void;
 }
 
@@ -30,7 +24,7 @@ export interface ColumnAdjusterProps {
  * By passing callbacks the behavior for updating and confirming width can be modified
  */
 const ColumnAdjuster = ({
-  tempWidth,
+  columnWidth,
   keyValue,
   isLastColumn,
   style,
@@ -38,6 +32,8 @@ const ColumnAdjuster = ({
   confirmWidthCallback,
   handleBlur,
 }: ColumnAdjusterProps) => {
+  const tempWidth = useMemo(() => ({ initWidth: columnWidth, columnWidth, initX: 0 }), [columnWidth]);
+
   const styling = style || { left: '100%' };
 
   // Note that deltaWidth is the change since you started the resize
@@ -76,6 +72,8 @@ const ColumnAdjuster = ({
 
     tempWidth.initX = evt.clientX;
   };
+
+  const doubleClickHandler = () => confirmWidthCallback({ type: ColumnWidthType.FitToContent });
 
   // ----- Touch -----
   const touchMoveHandler = (evt: TouchEvent) => {
@@ -132,6 +130,7 @@ const ColumnAdjuster = ({
       style={styling}
       key={keyValue}
       onMouseDown={mouseDownHandler}
+      onDoubleClick={doubleClickHandler}
       onTouchStart={touchStartHandler}
       onKeyDown={KeyDownHandler}
       onBlur={handleBlur}
