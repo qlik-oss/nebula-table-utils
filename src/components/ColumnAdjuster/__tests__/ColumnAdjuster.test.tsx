@@ -1,9 +1,8 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
-import { KeyCodes } from '../../../constants';
+import { COLUMN_ADJUSTER_CLASS, ColumnWidthType, KeyCodes } from '../../../constants';
 import ColumnAdjuster from '../ColumnAdjuster';
-import { type ColumnWidth, ColumnWidthType } from '../types';
-import { ARROW_RESIZE_STEP, COLUMN_ADJUSTER_CLASS } from '../constants';
+import { type ColumnWidth } from '../types';
 
 describe('<ColumnAdjuster />', () => {
   const defaultWidth = 50;
@@ -33,7 +32,7 @@ describe('<ColumnAdjuster />', () => {
 
   it('should change column width using keyboard', async () => {
     const columnAdjuster = renderAdjuster();
-    const adjustedWidth = defaultWidth + ARROW_RESIZE_STEP;
+    const adjustedWidth = defaultWidth + 5;
 
     fireEvent.keyDown(columnAdjuster, { key: KeyCodes.RIGHT });
     await waitFor(() => {

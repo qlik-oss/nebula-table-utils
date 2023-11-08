@@ -1,40 +1,31 @@
-/* eslint-disable no-param-reassign */
-import React, { useMemo, type CSSProperties } from 'react';
-import { type ColumnWidth, ColumnWidthType } from './types';
+import React, { useMemo } from 'react';
+import { type ColumnAdjusterProps } from './types';
 import { preventDefaultBehavior } from '../../utils';
 import { AdjusterBorder, AdjusterHitArea } from './styles';
-import { ColumnWidthValues, COLUMN_ADJUSTER_BORDER_CLASS, COLUMN_ADJUSTER_CLASS, ARROW_RESIZE_STEP } from './constants';
-import { KeyCodes } from '../../constants';
-
-export interface ColumnAdjusterProps {
-  columnWidth: number;
-  keyValue: string;
-  isLastColumn: boolean;
-  style?: CSSProperties;
-  updateWidthCallback: (pageColIdx: number) => void;
-  confirmWidthCallback: (newWidthData: ColumnWidth) => void;
-  handleBlur?: (event: React.KeyboardEvent | React.FocusEvent<HTMLDivElement>) => void;
-}
+import {
+  COLUMN_ADJUSTER_BORDER_CLASS,
+  COLUMN_ADJUSTER_CLASS,
+  ColumnWidthType,
+  ColumnWidthValues,
+  KeyCodes,
+} from '../../constants';
 
 /**
  * Component that is placed on top of column border.
  * The vertical borders in the header can be used to change the column width.
- * When you start dragging, mouse move and mouse up listeners are added.
- * While dragging the current column can updated, and on mouse up the width is confirmed
- * By passing callbacks the behavior for updating and confirming width can be modified
+ * When you start dragging, mouse move and mouse up listeners are added (as well as corresponding touch events).
+ * While dragging the current column can be updated, and on mouse up the width is confirmed.
+ * By passing callbacks the behavior for updating and confirming width can be modified.
  */
 const ColumnAdjuster = ({
   columnWidth,
   keyValue,
   isLastColumn,
-  style,
   updateWidthCallback,
   confirmWidthCallback,
   handleBlur,
 }: ColumnAdjusterProps) => {
   const tempWidth = useMemo(() => ({ initWidth: columnWidth, columnWidth, initX: 0 }), [columnWidth]);
-
-  const styling = style || { left: '100%' };
 
   // Note that deltaWidth is the change since you started the resize
   const updateWidth = (deltaWidth: number) => {
@@ -106,6 +97,7 @@ const ColumnAdjuster = ({
         if (event.key === KeyCodes.LEFT || event.key === KeyCodes.RIGHT) {
           preventDefaultBehavior(event);
           const prevDelta = tempWidth.columnWidth - tempWidth.initWidth;
+          const ARROW_RESIZE_STEP = 5;
           const newDelta = event.key === KeyCodes.LEFT ? prevDelta - ARROW_RESIZE_STEP : prevDelta + ARROW_RESIZE_STEP;
 
           updateWidth(newDelta);
@@ -127,7 +119,6 @@ const ColumnAdjuster = ({
     <AdjusterHitArea
       className={COLUMN_ADJUSTER_CLASS}
       isLastColumn={isLastColumn}
-      style={styling}
       key={keyValue}
       onMouseDown={mouseDownHandler}
       onDoubleClick={doubleClickHandler}

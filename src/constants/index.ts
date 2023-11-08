@@ -22,3 +22,23 @@ export enum KeyCodes {
   DOWN = 'ArrowDown',
   C = 'c',
 }
+
+export const COLUMN_ADJUSTER_CLASS = 'nebula-table-column-adjuster';
+export const COLUMN_ADJUSTER_BORDER_CLASS = `${COLUMN_ADJUSTER_CLASS}-border`;
+
+export enum ColumnWidthValues {
+  PixelsMin = 30,
+  PixelsMax = 7680,
+  PixelsDefault = 200,
+  PercentageMin = 1,
+  PercentageMax = 100,
+  PercentageDefault = 20,
+  AutoMin = 80,
+}
+
+export enum ColumnWidthType {
+  Auto = 'auto',
+  FitToContent = 'fitToContent',
+  Pixels = 'pixels',
+  Percentage = 'percentage',
+}

@@ -1,8 +1,11 @@
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import { CELL_PADDING, COLUMN_ADJUSTER_BORDER_CLASS, DOUBLE_CELL_PADDING, GRID_BORDER } from './constants';
+import { COLUMN_ADJUSTER_BORDER_CLASS } from '../../constants';
 
 type ShouldForwardProp = string | number | symbol;
+
+const CELL_PADDING = 4;
+const GRID_BORDER = 1;
 
 export const AdjusterHitArea = styled(Box, {
   shouldForwardProp: (prop: ShouldForwardProp) => prop !== 'isLastColumn',
@@ -12,10 +15,11 @@ export const AdjusterHitArea = styled(Box, {
   display: 'flex',
   position: 'absolute',
   height: '100%',
+  left: '100%',
   top: 0,
   cursor: 'col-resize',
   // last column padding, other double padding + border
-  width: `${isLastColumn ? CELL_PADDING : DOUBLE_CELL_PADDING + GRID_BORDER}px`,
+  width: `${isLastColumn ? CELL_PADDING : CELL_PADDING * 2 + GRID_BORDER}px`,
   justifyContent: isLastColumn ? 'flex-end' : 'center',
   marginLeft: '-4px',
   '&:hover:not(:focus, :active)': {
