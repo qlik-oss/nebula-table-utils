@@ -1,1 +1,4 @@
-export { default as ColumnAdjuster } from './ColumnAdjuster';
+import ColumnAdjuster from './ColumnAdjuster';
+
+export default ColumnAdjuster;
+export type { ColumnWidth } from './types';
