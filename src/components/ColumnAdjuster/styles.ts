@@ -15,7 +15,6 @@ export const AdjusterHitArea = styled(Box, {
   display: 'flex',
   position: 'absolute',
   height: '100%',
-  left: '100%',
   top: 0,
   cursor: 'col-resize',
   // last column padding, other double padding + border

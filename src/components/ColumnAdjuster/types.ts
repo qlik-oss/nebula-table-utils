@@ -10,6 +10,7 @@ export interface ColumnAdjusterProps {
   columnWidth: number;
   keyValue: string;
   isLastColumn: boolean;
+  isPivot?: boolean;
   updateWidthCallback: (pageColIdx: number) => void;
   confirmWidthCallback: (newWidthData: ColumnWidth) => void;
   handleBlur?: (event: React.KeyboardEvent | React.FocusEvent<HTMLDivElement>) => void;

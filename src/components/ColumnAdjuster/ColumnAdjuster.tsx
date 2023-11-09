@@ -21,6 +21,7 @@ const ColumnAdjuster = ({
   columnWidth,
   keyValue,
   isLastColumn,
+  isPivot,
   updateWidthCallback,
   confirmWidthCallback,
   handleBlur,
@@ -92,33 +93,39 @@ const ColumnAdjuster = ({
   };
 
   // ----- Keyboard -----
-  const KeyDownHandler = handleBlur
-    ? (event: React.KeyboardEvent) => {
-        if (event.key === KeyCodes.LEFT || event.key === KeyCodes.RIGHT) {
-          preventDefaultBehavior(event);
-          const prevDelta = tempWidth.columnWidth - tempWidth.initWidth;
-          const ARROW_RESIZE_STEP = 5;
-          const newDelta = event.key === KeyCodes.LEFT ? prevDelta - ARROW_RESIZE_STEP : prevDelta + ARROW_RESIZE_STEP;
+  const KeyDownHandler =
+    !isPivot && handleBlur
+      ? (event: React.KeyboardEvent) => {
+          if (event.key === KeyCodes.LEFT || event.key === KeyCodes.RIGHT) {
+            preventDefaultBehavior(event);
+            const prevDelta = tempWidth.columnWidth - tempWidth.initWidth;
+            const ARROW_RESIZE_STEP = 5;
+            const newDelta =
+              event.key === KeyCodes.LEFT ? prevDelta - ARROW_RESIZE_STEP : prevDelta + ARROW_RESIZE_STEP;
 
-          updateWidth(newDelta);
-        } else if (event.key === KeyCodes.SPACE || event.key === KeyCodes.ENTER) {
-          preventDefaultBehavior(event);
-          handleBlur(event);
+            updateWidth(newDelta);
+          } else if (event.key === KeyCodes.SPACE || event.key === KeyCodes.ENTER) {
+            preventDefaultBehavior(event);
+            handleBlur(event);
 
-          confirmWidth();
-        } else if (event.key === KeyCodes.ESC) {
-          preventDefaultBehavior(event);
-          handleBlur(event);
+            confirmWidth();
+          } else if (event.key === KeyCodes.ESC) {
+            preventDefaultBehavior(event);
+            handleBlur(event);
 
-          updateWidth(tempWidth.initWidth); // reset width to the initial value
+            updateWidth(tempWidth.initWidth); // reset width to the initial value
+          }
         }
-      }
-    : undefined;
+      : undefined;
+
+  const leftAdjustment = isLastColumn ? 0 : 1;
+  const style = { left: isPivot ? tempWidth.columnWidth - leftAdjustment : '100%' };
 
   return (
     <AdjusterHitArea
       className={COLUMN_ADJUSTER_CLASS}
       isLastColumn={isLastColumn}
+      style={style}
       key={keyValue}
       onMouseDown={mouseDownHandler}
       onDoubleClick={doubleClickHandler}
