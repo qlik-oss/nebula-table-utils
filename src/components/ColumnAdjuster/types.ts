@@ -13,5 +13,5 @@ export interface ColumnAdjusterProps {
   isPivot?: boolean;
   updateWidthCallback: (pageColIdx: number) => void;
   confirmWidthCallback: (newWidthData: ColumnWidth) => void;
-  handleBlur?: (event: React.KeyboardEvent | React.FocusEvent<HTMLDivElement>) => void;
+  handleBlur?: (event: React.KeyboardEvent | React.FocusEvent) => void;
 }
