@@ -22,13 +22,14 @@ const ColumnAdjuster = ({
   keyValue,
   isLastColumn,
   isPivot,
+  isNewHeadCellMenuEnabled,
   updateWidthCallback,
   confirmWidthCallback,
   handleBlur,
 }: ColumnAdjusterProps) => {
   const tempWidth = useMemo(() => ({ initWidth: columnWidth, columnWidth, initX: 0 }), [columnWidth]);
   // TODO: only use PixelsMin when we switch to the new header, needs to listen to the flag
-  const minWidth = isPivot ? ColumnWidthValues.PixelsMin : ColumnWidthValues.PixelsMinTable;
+  const minWidth = isPivot || isNewHeadCellMenuEnabled ? ColumnWidthValues.PixelsMin : ColumnWidthValues.PixelsMinTable;
   const leftAdjustment = isLastColumn ? 0 : 1;
   const style = { left: isPivot ? tempWidth.columnWidth - leftAdjustment : '100%' };
 

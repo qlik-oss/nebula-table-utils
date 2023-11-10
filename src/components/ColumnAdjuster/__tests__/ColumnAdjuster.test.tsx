@@ -5,7 +5,7 @@ import ColumnAdjuster from '../ColumnAdjuster';
 import { type ColumnWidth } from '../types';
 
 describe('<ColumnAdjuster />', () => {
-  const defaultWidth = 50;
+  const defaultWidth = 150;
   let updateWidthCallback: (pageColIdx: number) => void;
   let confirmWidthCallback: (newWidthData: ColumnWidth) => void;
 
@@ -64,7 +64,7 @@ describe('<ColumnAdjuster />', () => {
     const options = { clientX: defaultWidth };
 
     fireEvent.mouseDown(columnAdjuster, options);
-    options.clientX = 100;
+    options.clientX = 200;
     fireEvent.mouseMove(columnAdjuster, options);
     await waitFor(() => {
       expect(updateWidthCallback).toHaveBeenCalledWith(options.clientX);
@@ -109,7 +109,7 @@ describe('<ColumnAdjuster />', () => {
     };
 
     fireEvent.touchStart(columnAdjuster, options);
-    options.touches[0].clientX = 100;
+    options.touches[0].clientX = 200;
     fireEvent.touchMove(columnAdjuster, options);
     await waitFor(() => {
       expect(updateWidthCallback).toHaveBeenCalledWith(options.touches[0].clientX);
@@ -137,7 +137,7 @@ describe('<ColumnAdjuster />', () => {
     };
 
     fireEvent.touchStart(columnAdjuster, options);
-    options.touches[0].clientX = 100;
+    options.touches[0].clientX = 200;
     fireEvent.touchMove(columnAdjuster, options);
     await waitFor(() => {
       expect(updateWidthCallback).not.toHaveBeenCalled();
