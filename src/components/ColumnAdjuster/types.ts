@@ -15,4 +15,5 @@ export interface ColumnAdjusterProps {
   updateWidthCallback: (pageColIdx: number) => void;
   confirmWidthCallback: (newWidthData: ColumnWidth) => void;
   handleBlur?: (event: React.KeyboardEvent | React.FocusEvent) => void;
+  setIsAdjustingWidth?: (isAdjusting: boolean) => void;
 }

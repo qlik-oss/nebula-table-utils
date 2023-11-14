@@ -26,6 +26,7 @@ const ColumnAdjuster = ({
   updateWidthCallback,
   confirmWidthCallback,
   handleBlur,
+  setIsAdjustingWidth,
 }: ColumnAdjusterProps) => {
   const tempWidth = useMemo(() => ({ initWidth: columnWidth, columnWidth, initX: 0 }), [columnWidth]);
   // TODO: only use PixelsMin when we switch to the new header, needs to listen to the flag
@@ -44,6 +45,8 @@ const ColumnAdjuster = ({
     if (tempWidth.columnWidth !== tempWidth.initWidth) {
       const newWidthData = { type: ColumnWidthType.Pixels, pixels: tempWidth.columnWidth };
       confirmWidthCallback(newWidthData);
+    } else {
+      setIsAdjustingWidth?.(false);
     }
   };
 
@@ -66,6 +69,7 @@ const ColumnAdjuster = ({
     document.addEventListener('mousemove', mouseMoveHandler);
     document.addEventListener('mouseup', mouseUpHandler);
 
+    setIsAdjustingWidth?.(true);
     tempWidth.initX = evt.clientX;
   };
 
@@ -93,6 +97,7 @@ const ColumnAdjuster = ({
     document.addEventListener('touchmove', touchMoveHandler);
     document.addEventListener('touchend', touchEndHandler);
 
+    setIsAdjustingWidth?.(true);
     tempWidth.initX = evt.touches[0].clientX;
   };
 
