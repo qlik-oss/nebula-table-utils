@@ -6,6 +6,7 @@ import { getMenuItemGroups } from './utils';
 import { HeadCellMenuWrapper, StyledMenuButton } from './styles';
 import type { HeadCellMenuProps } from './types';
 import { useTranslations } from '../../hooks';
+import { HEAD_CELL_MENU_BUTTON_CLASS } from '../../constants';
 
 const HeadCellMenu = ({
   open,
@@ -71,16 +72,19 @@ const HeadCellMenu = ({
   if (!interactions.active) return null;
 
   return (
-    <HeadCellMenuWrapper rightAligned={headTextAlign === 'right'} shouldShowMenuIcon={shouldShowMenuIcon}>
+    <HeadCellMenuWrapper
+      tabIndex={tabIndex}
+      rightAligned={headTextAlign === 'right'}
+      shouldShowMenuIcon={shouldShowMenuIcon}
+    >
       {shouldShowMenuIcon && (
         <StyledMenuButton
           size="small"
-          tabIndex={tabIndex}
-          id="nebula-table-utils-head-menu-button"
+          className={HEAD_CELL_MENU_BUTTON_CLASS}
+          data-testid={HEAD_CELL_MENU_BUTTON_CLASS}
           aria-controls={open ? 'nebula-table-utils-head-menu' : undefined}
           aria-expanded={open ? 'true' : undefined}
           aria-haspopup="true"
-          data-testid="nebula-table-utils-head-menu-button"
           isInteractionsActive={interactions.active ?? false}
         >
           <Menu />
