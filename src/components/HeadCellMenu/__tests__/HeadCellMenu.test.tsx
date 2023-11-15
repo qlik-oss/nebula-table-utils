@@ -6,6 +6,7 @@ import { render, fireEvent, screen } from '@testing-library/react';
 import HeadCellMenu from '../HeadCellMenu';
 import * as useFieldSelectionHook from '../use-field-selection';
 import { type HeaderData, MenuAvailabilityFlags, type UseFieldSelectionOutput } from '../types';
+import { HEAD_CELL_MENU_BUTTON_CLASS } from '../../../constants';
 
 jest.mock('../use-field-selection', () => ({
   __esModule: true,
@@ -182,14 +183,14 @@ describe('<HeadCellMenu />', () => {
   test('should render Menu icon if `shouldShowMenuIcon` by default', () => {
     renderTableHeadCellMenu();
 
-    expect(screen.queryByTestId('nebula-table-utils-head-menu-button')).toBeInTheDocument();
+    expect(screen.queryByTestId(HEAD_CELL_MENU_BUTTON_CLASS)).toBeInTheDocument();
   });
 
   test('should not render Menu icon if `shouldShowMenuIcon` is false', () => {
     shouldShowMenuIcon = false;
     renderTableHeadCellMenu();
 
-    expect(screen.queryByTestId('nebula-table-utils-head-menu-button')).not.toBeInTheDocument();
+    expect(screen.queryByTestId(HEAD_CELL_MENU_BUTTON_CLASS)).not.toBeInTheDocument();
   });
 
   test('should not render Search and selections when interactions are false', () => {
