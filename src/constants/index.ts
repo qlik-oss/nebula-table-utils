@@ -24,7 +24,7 @@ export enum KeyCodes {
   C = 'c',
 }
 
-export const COLUMN_ADJUSTER_CLASS = 'nebula-table-column-adjuster';
+export const COLUMN_ADJUSTER_CLASS = 'nebula-table-utils-column-adjuster';
 export const COLUMN_ADJUSTER_BORDER_CLASS = `${COLUMN_ADJUSTER_CLASS}-border`;
 
 export enum ColumnWidthValues {
