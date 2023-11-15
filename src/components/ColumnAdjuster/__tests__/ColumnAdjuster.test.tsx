@@ -5,9 +5,10 @@ import ColumnAdjuster from '../ColumnAdjuster';
 import { type ColumnWidth } from '../types';
 
 describe('<ColumnAdjuster />', () => {
-  const defaultWidth = 50;
+  const defaultWidth = 150;
   let updateWidthCallback: (pageColIdx: number) => void;
   let confirmWidthCallback: (newWidthData: ColumnWidth) => void;
+  let setIsAdjustingWidth: (isAdjusting: boolean) => void;
 
   const renderAdjuster = () => {
     render(
@@ -18,6 +19,7 @@ describe('<ColumnAdjuster />', () => {
         updateWidthCallback={updateWidthCallback}
         confirmWidthCallback={confirmWidthCallback}
         handleBlur={() => {}}
+        setIsAdjustingWidth={setIsAdjustingWidth}
       />
     );
     return screen.queryByTestId(COLUMN_ADJUSTER_CLASS) as HTMLElement;
@@ -26,6 +28,7 @@ describe('<ColumnAdjuster />', () => {
   beforeEach(() => {
     updateWidthCallback = jest.fn();
     confirmWidthCallback = jest.fn();
+    setIsAdjustingWidth = jest.fn();
   });
 
   afterEach(() => jest.clearAllMocks());
@@ -51,6 +54,7 @@ describe('<ColumnAdjuster />', () => {
     fireEvent.keyDown(columnAdjuster, { key: KeyCodes.SPACE });
     await waitFor(() => {
       expect(confirmWidthCallback).toHaveBeenCalledTimes(0);
+      expect(setIsAdjustingWidth).toHaveBeenNthCalledWith(1, false);
     });
 
     fireEvent.keyDown(columnAdjuster, { key: KeyCodes.ESC });
@@ -64,10 +68,11 @@ describe('<ColumnAdjuster />', () => {
     const options = { clientX: defaultWidth };
 
     fireEvent.mouseDown(columnAdjuster, options);
-    options.clientX = 100;
+    options.clientX = 200;
     fireEvent.mouseMove(columnAdjuster, options);
     await waitFor(() => {
       expect(updateWidthCallback).toHaveBeenCalledWith(options.clientX);
+      expect(setIsAdjustingWidth).toHaveBeenNthCalledWith(1, true);
     });
 
     fireEvent.mouseUp(columnAdjuster, options);
@@ -76,6 +81,7 @@ describe('<ColumnAdjuster />', () => {
         type: ColumnWidthType.Pixels,
         pixels: options.clientX,
       });
+      expect(setIsAdjustingWidth).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -86,6 +92,8 @@ describe('<ColumnAdjuster />', () => {
     fireEvent.mouseUp(columnAdjuster);
     await waitFor(() => {
       expect(confirmWidthCallback).not.toHaveBeenCalled();
+      expect(setIsAdjustingWidth).toHaveBeenNthCalledWith(1, true);
+      expect(setIsAdjustingWidth).toHaveBeenNthCalledWith(2, false);
     });
   });
 
@@ -109,10 +117,11 @@ describe('<ColumnAdjuster />', () => {
     };
 
     fireEvent.touchStart(columnAdjuster, options);
-    options.touches[0].clientX = 100;
+    options.touches[0].clientX = 200;
     fireEvent.touchMove(columnAdjuster, options);
     await waitFor(() => {
       expect(updateWidthCallback).toHaveBeenCalledWith(options.touches[0].clientX);
+      expect(setIsAdjustingWidth).toHaveBeenNthCalledWith(1, true);
     });
 
     fireEvent.touchEnd(columnAdjuster, options);
@@ -121,6 +130,7 @@ describe('<ColumnAdjuster />', () => {
         type: ColumnWidthType.Pixels,
         pixels: options.touches[0].clientX,
       });
+      expect(setIsAdjustingWidth).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -137,7 +147,7 @@ describe('<ColumnAdjuster />', () => {
     };
 
     fireEvent.touchStart(columnAdjuster, options);
-    options.touches[0].clientX = 100;
+    options.touches[0].clientX = 200;
     fireEvent.touchMove(columnAdjuster, options);
     await waitFor(() => {
       expect(updateWidthCallback).not.toHaveBeenCalled();

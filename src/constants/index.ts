@@ -28,6 +28,7 @@ export const COLUMN_ADJUSTER_BORDER_CLASS = `${COLUMN_ADJUSTER_CLASS}-border`;
 
 export enum ColumnWidthValues {
   PixelsMin = 30,
+  PixelsMinTable = 120, // TODO: remove this value when we remove the new header flag
   PixelsMax = 7680,
   PixelsDefault = 200,
   PercentageMin = 1,

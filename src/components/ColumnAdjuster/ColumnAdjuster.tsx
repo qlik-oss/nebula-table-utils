@@ -22,16 +22,21 @@ const ColumnAdjuster = ({
   keyValue,
   isLastColumn,
   isPivot,
+  isNewHeadCellMenuEnabled,
   updateWidthCallback,
   confirmWidthCallback,
   handleBlur,
+  setIsAdjustingWidth,
 }: ColumnAdjusterProps) => {
   const tempWidth = useMemo(() => ({ initWidth: columnWidth, columnWidth, initX: 0 }), [columnWidth]);
+  // TODO: only use PixelsMin when we switch to the new header, needs to listen to the flag
+  const minWidth = isPivot || isNewHeadCellMenuEnabled ? ColumnWidthValues.PixelsMin : ColumnWidthValues.PixelsMinTable;
+  const leftAdjustment = isLastColumn ? 0 : 1;
+  const style = { left: isPivot ? tempWidth.columnWidth - leftAdjustment : '100%' };
 
   // Note that deltaWidth is the change since you started the resize
   const updateWidth = (deltaWidth: number) => {
-    // TODO: table and pivot table min widths are different at this point
-    const adjustedWidth = Math.max(tempWidth.initWidth + deltaWidth, ColumnWidthValues.PixelsMin);
+    const adjustedWidth = Math.max(tempWidth.initWidth + deltaWidth, minWidth);
     tempWidth.columnWidth = adjustedWidth;
     updateWidthCallback(adjustedWidth);
   };
@@ -40,6 +45,8 @@ const ColumnAdjuster = ({
     if (tempWidth.columnWidth !== tempWidth.initWidth) {
       const newWidthData = { type: ColumnWidthType.Pixels, pixels: tempWidth.columnWidth };
       confirmWidthCallback(newWidthData);
+    } else {
+      setIsAdjustingWidth?.(false);
     }
   };
 
@@ -62,6 +69,7 @@ const ColumnAdjuster = ({
     document.addEventListener('mousemove', mouseMoveHandler);
     document.addEventListener('mouseup', mouseUpHandler);
 
+    setIsAdjustingWidth?.(true);
     tempWidth.initX = evt.clientX;
   };
 
@@ -89,6 +97,7 @@ const ColumnAdjuster = ({
     document.addEventListener('touchmove', touchMoveHandler);
     document.addEventListener('touchend', touchEndHandler);
 
+    setIsAdjustingWidth?.(true);
     tempWidth.initX = evt.touches[0].clientX;
   };
 
@@ -117,9 +126,6 @@ const ColumnAdjuster = ({
           }
         }
       : undefined;
-
-  const leftAdjustment = isLastColumn ? 0 : 1;
-  const style = { left: isPivot ? tempWidth.columnWidth - leftAdjustment : '100%' };
 
   return (
     <AdjusterHitArea
