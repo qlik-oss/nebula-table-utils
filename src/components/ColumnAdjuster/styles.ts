@@ -10,7 +10,7 @@ const GRID_BORDER = 1;
 export const AdjusterHitArea = styled(Box, {
   shouldForwardProp: (prop: ShouldForwardProp) => prop !== 'isLastColumn',
 })(({ isLastColumn }) => ({
-  PointerEvent: 'all',
+  pointerEvents: 'auto',
   touchAction: 'none',
   display: 'flex',
   position: 'absolute',
