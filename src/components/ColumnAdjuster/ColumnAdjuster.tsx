@@ -23,7 +23,7 @@ const ColumnAdjuster = ({
   isLastColumn,
   isPivot,
   isNewHeadCellMenuEnabled,
-  borderColor,
+  hoverColor,
   updateWidthCallback,
   confirmWidthCallback,
   handleBlur,
@@ -132,7 +132,7 @@ const ColumnAdjuster = ({
     <AdjusterHitArea
       className={COLUMN_ADJUSTER_CLASS}
       isLastColumn={isLastColumn}
-      borderColor={borderColor}
+      hoverColor={hoverColor}
       style={style}
       key={keyValue}
       onMouseDown={mouseDownHandler}

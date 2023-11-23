@@ -12,7 +12,7 @@ export interface ColumnAdjusterProps {
   isLastColumn: boolean;
   isPivot?: boolean;
   isNewHeadCellMenuEnabled?: boolean;
-  borderColor?: string;
+  hoverColor?: string;
   updateWidthCallback: (pageColIdx: number) => void;
   confirmWidthCallback: (newWidthData: ColumnWidth) => void;
   handleBlur?: (event: React.KeyboardEvent | React.FocusEvent) => void;
