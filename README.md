@@ -6,7 +6,7 @@ This repo will hold shared Components, hooks and util functions between sn-table
 
 Since we have issues with setting up and linking this repo to work properly within nebula environment, here is the temporay solution in case if you want to develop locally, otherwise install the package and it should be fine.
 
-1. Make sure you run `chmod +x on ./build-utils/build-copy.sh` first
+1. Make sure you run `chmod +x ./build-utils/build-copy.sh` first
 2. Create a `.env.local` file in your pkg project root
 3. To Support and update `sn-pivot-table` and `sn-table` project with latest build, you will need two variables that points to the root directory of those project in your local machine called: `PV_TABLE_DIR` and `SN_TABLE_DIR`. Please note that the value of those variable **should be relative to the root directory of pkg repository**.
 
