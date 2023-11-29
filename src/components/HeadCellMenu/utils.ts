@@ -72,6 +72,9 @@ export const getMenuItemGroups = ({
             icon: Ascending,
             enabled: headerData.isActivelySorted ? true : headerData.sortDirection === 'D',
             isActive: headerData.isActivelySorted && headerData.sortDirection === 'A',
+            autoFocus: headerData.isActivelySorted
+              ? headerData.sortDirection === 'A'
+              : headerData.sortDirection === 'D',
           },
           {
             id: 2,
@@ -85,6 +88,9 @@ export const getMenuItemGroups = ({
             icon: Descending,
             enabled: headerData.isActivelySorted ? true : headerData.sortDirection === 'A',
             isActive: headerData.isActivelySorted && headerData.sortDirection === 'D',
+            autoFocus: headerData.isActivelySorted
+              ? headerData.sortDirection === 'D'
+              : headerData.sortDirection === 'A',
           },
         ],
       },

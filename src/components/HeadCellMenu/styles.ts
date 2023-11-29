@@ -52,12 +52,13 @@ export const StyledDivider = styled(Divider)(({ theme }: DefaultTheme) => ({
   },
 }));
 
-export const StyledGroupLabel = styled(ListItem)(({ theme }: DefaultTheme) => ({
+export const StyledGroupLabel = styled(MenuItem)(({ theme }: DefaultTheme) => ({
   fontSize: '12px',
   height: HEAD_CELL_MENU_GROUP_LABEL_HEIGHT,
   fontWeight: 'bold',
   padding: theme.spacing(0.25, 2),
   marginBottom: theme.spacing(0.5),
+  opacity: '1 !important',
 }));
 
 type StyledMenuItemProps = DefaultTheme & {
