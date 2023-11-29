@@ -120,7 +120,11 @@ const MenuGroup = ({
 }) => {
   return menuGroup.map((grp) => [
     [
-      grp.groupHeading && <StyledGroupLabel disabled>{grp.groupHeading}</StyledGroupLabel>,
+      grp.groupHeading && (
+        <StyledGroupLabel disabled style={{ opacity: 1 }}>
+          {grp.groupHeading}
+        </StyledGroupLabel>
+      ),
       grp.items?.map((groupItem) => (
         <MenuGroupItems key={groupItem.id} {...{ ...groupItem, isSubMenu, handleHeadCellMenuKeyDown }} />
       )),

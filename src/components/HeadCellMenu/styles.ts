@@ -58,7 +58,6 @@ export const StyledGroupLabel = styled(MenuItem)(({ theme }: DefaultTheme) => ({
   fontWeight: 'bold',
   padding: theme.spacing(0.25, 2),
   marginBottom: theme.spacing(0.5),
-  opacity: '1 !important',
 }));
 
 type StyledMenuItemProps = DefaultTheme & {
