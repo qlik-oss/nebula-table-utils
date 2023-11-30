@@ -60,7 +60,7 @@ export const getMenuItemGroups = ({
    * pass true to autoFocus prop for *the first list item that is enabled*. Currently, sorting
    * is the first item in list, so it takes case of `autoFocus: true` in it's own menu list items
    * (based on menu being sorted asc or desc and if menu item is Actively sorted). if this bahviour
-   * changes in future, again, what ever menu item is goinf to sit on top of the menu list,
+   * changes in future, again, what ever menu item is going to sit on top of the menu list,
    * has to have `autoFocus: true`!
    */
 
