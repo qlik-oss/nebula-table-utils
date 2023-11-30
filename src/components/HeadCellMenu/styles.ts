@@ -52,7 +52,7 @@ export const StyledDivider = styled(Divider)(({ theme }: DefaultTheme) => ({
   },
 }));
 
-export const StyledGroupLabel = styled(ListItem)(({ theme }: DefaultTheme) => ({
+export const StyledGroupLabel = styled(MenuItem)(({ theme }: DefaultTheme) => ({
   fontSize: '12px',
   height: HEAD_CELL_MENU_GROUP_LABEL_HEIGHT,
   fontWeight: 'bold',

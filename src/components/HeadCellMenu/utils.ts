@@ -54,6 +54,16 @@ export const getMenuItemGroups = ({
 }: GetMenuItemGroupsArgs): MenuItemGroup[] => {
   const mGrps: MenuItemGroup[] = [];
 
+  /**
+   * PLEASE KEEP THIS IN MIND:
+   * In order to handle the a11y requirements correctly through keyboard navigation, we need to
+   * pass true to autoFocus prop for *the first list item that is enabled*. Currently, sorting
+   * is the first item in list, so it takes case of `autoFocus: true` in it's own menu list items
+   * (based on menu being sorted asc or desc and if menu item is Actively sorted). if this bahviour
+   * changes in future, again, what ever menu item is going to sit on top of the menu list,
+   * has to have `autoFocus: true`!
+   */
+
   // check sorting flag
   if (menuAvailabilityFlags[MenuAvailabilityFlags.SORTING]) {
     mGrps.push([
@@ -72,6 +82,9 @@ export const getMenuItemGroups = ({
             icon: Ascending,
             enabled: headerData.isActivelySorted ? true : headerData.sortDirection === 'D',
             isActive: headerData.isActivelySorted && headerData.sortDirection === 'A',
+            autoFocus: headerData.isActivelySorted
+              ? headerData.sortDirection === 'A'
+              : headerData.sortDirection === 'D',
           },
           {
             id: 2,
@@ -85,6 +98,9 @@ export const getMenuItemGroups = ({
             icon: Descending,
             enabled: headerData.isActivelySorted ? true : headerData.sortDirection === 'A',
             isActive: headerData.isActivelySorted && headerData.sortDirection === 'D',
+            autoFocus: headerData.isActivelySorted
+              ? headerData.sortDirection === 'D'
+              : headerData.sortDirection === 'A',
           },
         ],
       },
