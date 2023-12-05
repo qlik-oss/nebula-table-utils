@@ -50,6 +50,7 @@ const MenuGroupItems = ({
   const anchorRef = useRef<HTMLDivElement | null>(null);
 
   const handleOnClick = async (evt: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
+    if (evt.type === 'keyup') return;
     if (onClick) {
       await onClick(evt);
       subMenusOpenStatusCache = {};
