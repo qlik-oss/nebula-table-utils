@@ -60,7 +60,6 @@ describe('<HeadCellMenu />', () => {
         translator={translator}
         anchorRef={anchorRef}
         headerData={headerData}
-        tabIndex={0}
         interactions={interactions}
         menuAvailabilityFlags={menuAvailabilityFlags}
         handleHeadCellMenuKeyDown={handleHeadCellMenuKeyDown}

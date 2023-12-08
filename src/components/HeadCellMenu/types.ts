@@ -30,7 +30,6 @@ export type AdjustHeaderSizeRelatedArgs = {
 export interface HeadCellMenuProps {
   headerData: HeaderData;
   translator: stardust.Translator;
-  tabIndex: number;
   anchorRef: React.RefObject<HTMLDivElement>;
   handleHeadCellMenuKeyDown?: (evt: React.KeyboardEvent<HTMLLIElement>) => void;
   menuAvailabilityFlags: Partial<Record<MenuAvailabilityFlags, boolean>>;
