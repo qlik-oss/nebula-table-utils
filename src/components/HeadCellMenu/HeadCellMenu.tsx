@@ -11,7 +11,6 @@ import { HEAD_CELL_MENU_BUTTON_CLASS } from '../../constants';
 const HeadCellMenu = ({
   open,
   setOpen,
-  tabIndex,
   anchorRef,
   headerData,
   translator,
@@ -72,11 +71,7 @@ const HeadCellMenu = ({
   if (!interactions.active) return null;
 
   return (
-    <HeadCellMenuWrapper
-      tabIndex={tabIndex}
-      rightAligned={headTextAlign === 'right'}
-      shouldShowMenuIcon={shouldShowMenuIcon}
-    >
+    <HeadCellMenuWrapper rightAligned={headTextAlign === 'right'} shouldShowMenuIcon={shouldShowMenuIcon}>
       {shouldShowMenuIcon && (
         <StyledMenuButton
           size="small"
