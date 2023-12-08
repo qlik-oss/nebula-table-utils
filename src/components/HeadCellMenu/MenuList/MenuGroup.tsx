@@ -50,6 +50,13 @@ const MenuGroupItems = ({
   const anchorRef = useRef<HTMLDivElement | null>(null);
 
   const handleOnClick = async (evt: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
+    /**
+     * while pressing space on head cell menu in sn-table, the event is end up here
+     * with key up type and it will act like confirming the first item in menu list
+     * so to avoid it, we are returning from this callback when we see a key up event
+     * ref: https://github.com/qlik-oss/sn-table/pull/1096#issuecomment-1838930991
+     */
+    if (evt.type === 'keyup') return;
     if (onClick) {
       await onClick(evt);
       subMenusOpenStatusCache = {};
