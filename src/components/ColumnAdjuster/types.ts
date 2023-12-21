@@ -17,4 +17,5 @@ export interface ColumnAdjusterProps {
   confirmWidthCallback: (newWidthData: ColumnWidth) => void;
   handleBlur?: (event: React.KeyboardEvent | React.FocusEvent) => void;
   setIsAdjustingWidth?: (isAdjusting: boolean) => void;
+  isLeftColumn?: boolean;
 }

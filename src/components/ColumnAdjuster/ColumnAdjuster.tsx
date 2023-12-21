@@ -28,12 +28,13 @@ const ColumnAdjuster = ({
   confirmWidthCallback,
   handleBlur,
   setIsAdjustingWidth,
+  isLeftColumn,
 }: ColumnAdjusterProps) => {
   const tempWidth = useMemo(() => ({ initWidth: columnWidth, columnWidth, initX: 0 }), [columnWidth]);
   // TODO: only use PixelsMin when we switch to the new header, needs to listen to the flag
   const minWidth = isPivot || isNewHeadCellMenuEnabled ? ColumnWidthValues.PixelsMin : ColumnWidthValues.PixelsMinTable;
   const leftAdjustment = isLastColumn ? 0 : 1;
-  const style = { left: isPivot ? tempWidth.columnWidth - leftAdjustment : '100%' };
+  const style = { left: isPivot && !isLeftColumn ? tempWidth.columnWidth - leftAdjustment : '100%' };
 
   // Note that deltaWidth is the change since you started the resize
   const updateWidth = (deltaWidth: number) => {
