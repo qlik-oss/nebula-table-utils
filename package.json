@@ -94,7 +94,7 @@
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.15.1",
-    "@mui/styled-engine-sc": "^5.14.12",
+    "@mui/styled-engine-sc": "^6.0.0-alpha",
     "@nebula.js/stardust": "4.9.0",
     "@qlik-trial/sprout": "^3.4.0",
     "qlik-chart-modules": "^0.59.0",
