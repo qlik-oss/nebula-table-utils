@@ -27,7 +27,7 @@ export type GetMenuItemGroupsArgs = Partial<SortingRelatedArgs> & {
 
   // adjust col size
   anchorRef: React.RefObject<HTMLDivElement>;
-  setFocusOnClosetHeaderAdjuster?: (anchorRef: React.RefObject<HTMLDivElement>) => void;
+  setFocusOnColumnAdjuster?: (anchorRef: React.RefObject<HTMLDivElement>) => void;
 };
 
 export const getMenuItemGroups = ({
@@ -50,7 +50,7 @@ export const getMenuItemGroups = ({
 
   // Adjust col size
   anchorRef,
-  setFocusOnClosetHeaderAdjuster,
+  setFocusOnColumnAdjuster,
 }: GetMenuItemGroupsArgs): MenuItemGroup[] => {
   const mGrps: MenuItemGroup[] = [];
 
@@ -231,7 +231,7 @@ export const getMenuItemGroups = ({
               evt.stopPropagation();
               evt.preventDefault();
               setOpen(false);
-              setFocusOnClosetHeaderAdjuster?.(anchorRef);
+              setFocusOnColumnAdjuster?.(anchorRef);
             },
             icon: ColumnSize,
             enabled: true,
