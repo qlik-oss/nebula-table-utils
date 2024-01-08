@@ -30,7 +30,7 @@ describe('<HeadCellMenu />', () => {
   let changeActivelySortedHeader: jest.Mock<Promise<boolean>>;
   let interactions: stardust.Interactions;
   let anchorRef: React.RefObject<HTMLDivElement>;
-  let setFocusOnClosetHeaderAdjuster: jest.Mock<() => void>;
+  let setFocusOnColumnAdjuster: jest.Mock<() => void>;
   let listboxRef: React.RefObject<HTMLDivElement>;
   let handleHeadCellMenuKeyDown: jest.Mock<() => void>;
   let open: boolean;
@@ -66,7 +66,7 @@ describe('<HeadCellMenu />', () => {
         sortRelatedArgs={{ sortFromMenu, changeActivelySortedHeader }}
         searchRelatedArgs={{ embed, listboxRef }}
         selectionRelatedArgs={{ app, model }}
-        adjustHeaderSizeRelatedArgs={{ setFocusOnClosetHeaderAdjuster }}
+        adjustHeaderSizeRelatedArgs={{ setFocusOnColumnAdjuster }}
         open={open}
         setOpen={setOpenMock}
         shouldShowMenuIcon={shouldShowMenuIcon}
