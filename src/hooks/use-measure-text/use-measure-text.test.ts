@@ -30,13 +30,13 @@ describe('useMeasureText', () => {
     jest.restoreAllMocks();
   });
 
-  test('should set font on context when fontSize, fontFamily, fontStyle and bold is set', () => {
+  test('should set font on context when fontSize, fontFamily, fontStyle and fontWeight is set', () => {
     renderHook(() =>
       useMeasureText({
         fontSize: '12px',
         fontFamily: 'Arial',
         fontStyle: 'underline',
-        bold: true,
+        fontWeight: '600',
       })
     );
 
@@ -49,11 +49,10 @@ describe('useMeasureText', () => {
         fontSize: '12px',
         fontFamily: 'Arial',
         fontStyle: 'underline',
-        bold: false,
       })
     );
 
-    expect(setFontMock).toHaveBeenCalledWith('underline 12px Arial');
+    expect(setFontMock).toHaveBeenCalledWith('underline normal 12px Arial');
   });
 
   test('should set font on context when fontSize and fontFamily', () => {
@@ -64,13 +63,13 @@ describe('useMeasureText', () => {
       })
     );
 
-    expect(setFontMock).toHaveBeenCalledWith('12px Arial');
+    expect(setFontMock).toHaveBeenCalledWith('normal normal 12px Arial');
   });
 
   test('should set font on context with default values', () => {
     renderHook(() => useMeasureText({}));
 
-    expect(setFontMock).toHaveBeenCalledWith('12px Source Sans Pro, Arial, sans-serif');
+    expect(setFontMock).toHaveBeenCalledWith('normal normal 12px Source Sans Pro, Arial, sans-serif');
   });
 
   describe('estimateWidth', () => {
