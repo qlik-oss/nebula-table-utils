@@ -105,7 +105,7 @@ const HeadCellMenu = ({
           selectionActionsEnabledStatus,
           // Adjust col size
           anchorRef,
-          setFocusOnColumnAdjuster: adjustHeaderSizeRelatedArgs?.setFocusOnColumnAdjuster,
+          setFocusOnClosetHeaderAdjuster: adjustHeaderSizeRelatedArgs?.setFocusOnClosetHeaderAdjuster,
         })}
         ariaLabel="nebula-table-utils-head-menu-button"
         handleHeadCellMenuKeyDown={handleHeadCellMenuKeyDown}

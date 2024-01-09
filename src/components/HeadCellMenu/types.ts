@@ -24,7 +24,7 @@ export type SelectionRelatedArgs = Partial<{
 }>;
 
 export type AdjustHeaderSizeRelatedArgs = {
-  setFocusOnColumnAdjuster: (anchorRef: React.RefObject<HTMLDivElement>) => void;
+  setFocusOnClosetHeaderAdjuster: (anchorRef: React.RefObject<HTMLDivElement>) => void;
 };
 
 export interface HeadCellMenuProps {

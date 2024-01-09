@@ -24,7 +24,7 @@ describe('Utils', () => {
 
   // adjust col size
   let anchorRef: React.RefObject<HTMLDivElement>;
-  let setFocusOnColumnAdjuster: jest.Mock<() => void>;
+  let setFocusOnClosetHeaderAdjuster: jest.Mock<() => void>;
 
   let getMenuItemArgs = {} as GetMenuItemGroupsArgs;
 
@@ -61,7 +61,7 @@ describe('Utils', () => {
     anchorRef = {
       anchorName: 'anchor-from-test',
     } as unknown as React.RefObject<HTMLDivElement>;
-    setFocusOnColumnAdjuster = jest.fn();
+    setFocusOnClosetHeaderAdjuster = jest.fn();
 
     getMenuItemArgs = {
       headerData,
@@ -83,7 +83,7 @@ describe('Utils', () => {
 
       // Adjust col size
       anchorRef,
-      setFocusOnColumnAdjuster,
+      setFocusOnClosetHeaderAdjuster,
     };
   });
 
@@ -293,8 +293,8 @@ describe('Utils', () => {
 
         expect(stopPropagationMock).toHaveBeenCalledTimes(1);
         expect(preventDefaultMock).toHaveBeenCalledTimes(1);
-        expect(setFocusOnColumnAdjuster).toHaveBeenCalledTimes(1);
-        expect(setFocusOnColumnAdjuster).toHaveBeenCalledWith(anchorRef);
+        expect(setFocusOnClosetHeaderAdjuster).toHaveBeenCalledTimes(1);
+        expect(setFocusOnClosetHeaderAdjuster).toHaveBeenCalledWith(anchorRef);
       });
     });
   });
