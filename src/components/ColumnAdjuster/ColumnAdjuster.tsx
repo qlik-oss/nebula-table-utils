@@ -84,8 +84,7 @@ const ColumnAdjuster = ({
   };
 
   const touchEndHandler = (evt: TouchEvent) => {
-    evt.preventDefault();
-    evt.stopPropagation();
+    preventDefaultBehavior(evt);
     document.removeEventListener('touchmove', touchMoveHandler);
     document.removeEventListener('touchend', touchEndHandler);
 
