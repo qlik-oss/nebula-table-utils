@@ -1,10 +1,4 @@
-/**
- * short hand for stopPropagation and preventingDefault
- * has a union of all possible event types
- */
-const preventDefaultBehavior = (
-  evt: React.KeyboardEvent | React.MouseEvent | MouseEvent | KeyboardEvent | TouchEvent
-) => {
+const preventDefaultBehavior = (evt: React.KeyboardEvent | MouseEvent | React.MouseEvent<HTMLLIElement>) => {
   evt.stopPropagation();
   evt.preventDefault();
 };
