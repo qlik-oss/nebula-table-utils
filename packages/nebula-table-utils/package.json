@@ -29,7 +29,7 @@
   ],
   "scripts": {
     "clear": "rimraf ./lib/*",
-    "build:prod": "pnpm run locale:generate && pnpm run clear & rollup -c --bundleConfigAsCjs",
+    "build": "pnpm run locale:generate && pnpm run clear & rollup -c --bundleConfigAsCjs",
     "build:watch": "pnpm run locale:generate && nodemon --exec ./build-utils/build-copy.sh",
     "lint": "eslint src/*",
     "format:check": "prettier --check './src/**/*.{ts,tsx}' --ignore-unknown",
@@ -100,10 +100,5 @@
     "qlik-chart-modules": "^0.59.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
-  },
-  "pnpm": {
-    "overrides": {
-      "@mui/styled-engine": "npm:@mui/styled-engine-sc@latest"
-    }
   }
 }
