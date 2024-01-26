@@ -1,3 +1,5 @@
+> **Warning** Archived: This repository is moved to our private org.
+
 # Nebula Table utils
 
 This repo will hold shared Components, hooks and util functions between sn-table and sn-pivot-table.
